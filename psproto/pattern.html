@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<!--
+.  .                 .  .                    .               
+|- |-. ,-.   ,-. ,-. |- |- ,-. ,-. ,-.   ,-. |-. ,-. ,-. ,-. 
+|  | | |-'   | | ,-| |  |  |-' |   | |   `-. | | ,-| |   |-' 
+`' ' ' `-'   |-' `-^ `' `' `-' '   ' '   `-' ' ' `-^ '   `-' 
+             |                                               
+-->
+
+<html>
+
+<head>
+	<title>Men's Shirt Block</title>
+	<script type="text/javascript" src="patterndraw.js"></script>
+	<script type="text/javascript" src="json2.js"></script>
+	<script type="text/javascript">var flnm = "mensshirtblock-burda"</script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload="getpatternfile(flnm)">
+
+<div class="header-holder">
+	<div class="header">
+		<a href="/"><img src="images/headerlogo.png"/></a>
+		<div class="headnav">
+			<a href="/about.html">About</a>
+		</div>
+	</div>
+</div>
+
+<div class="draw-wrapper">
+	<div class="measwrapper">
+		<div id="patterntitle" class="patterntitle">
+		</div>
+		<div id="measurements" class="measurements">
+			
+		</div>
+		
+		<div id="units" class="measurements">
+			Units
+			<br>
+			<form>
+			<input type="radio" id="pxradio" name="meassys" /> : pixels <br />
+			<input type="radio" id="inradio" name="meassys" /> : inches <br />
+			<input type="radio" id="cmradio" name="meassys" checked="true" /> : cms
+			</form>
+		</div>
+
+		<div id="options" class="measurements">
+			View Options
+			<br>
+			<form>
+			
+			<input type="checkbox" id="gridopt" onclick="drawpattern()"/> : Grid <br />
+			<input type="checkbox" id="constopt" onclick="drawpattern()"/> : Construction Lines <br />
+			<input type="checkbox" id="constptopt" onclick="drawpattern()"/> : Construction Points <br />
+
+			</form>
+		</div>
+
+		<div id="savebuttondiv" class="measurements">
+			<button type="button" onclick="savesvg()"> Save as SVG! </button>
+		</div>
+	</div>
+	
+	<div id="drawarea" class="drawarea">
+	</div>
+</div>
+
+</body>
+
+</html>
