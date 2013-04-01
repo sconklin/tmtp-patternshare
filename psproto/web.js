@@ -1,17 +1,45 @@
-
 function drawPatternIfReady(){
+    console.log("drawPatternIfReady");
     // See whether everything is ready to draw a pattern.
     // If it is, call drawPattern
 
-    // Are measurements loaded?
-    // Is a pattern Script Loaded?
-    if ((typeof window.measurementData != 'undefined') &&
-    (typeof window.patternData != 'undefined')){
+    // TODO if there's a pattern loaded, mark the unused measurements
 
-	// Draw the pattern
-	console.log("Draw Pattern Here");
-	//var mmap = convertMeasurementData(window.measurementData);
-	//drawPattern(window.measurementData, window.styleData, mmap);
+
+    // Are measurements loaded?
+    if (typeof window.measurementData != 'undefined') {
+	// If they are, update the measurements list
+	var md = window.measurementData.clientdata.measurements
+	var measElTxt="";
+	for(var mname in md){
+	    //console.log(mname + ': ' + md[mname])
+	    measElTxt += "<input type=\"text\" size=\"8\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + mname + "<br/>";
+	}
+	measElTxt += "</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
+	$("#measurements").html(measElTxt);
+	// Is patterndata loaded?
+	if (typeof window.patternData != 'undefined'){
+	    console.log("We have a pattern file loaded");
+	    var pmd = window.patternData.pattern.measurements;
+	    // disable any measurements that the pattern doesn't use
+	    for(var mname in md){
+		if ($.inArray(mname, pmd) == -1) {
+		    $("#"+mname).prop('disabled', true);
+		    $("#"+mname).attr('class', "disabledmeasurement");
+		} else {
+		    // This is a required measurement
+		    $("#"+mname).prop('disabled', false);
+		    $("#"+mname).attr('class', "enabledmeasurement");
+		}
+	    }
+
+	    checkMeas();
+	    // TODO change the units to match what's in the measurements file
+	    // Draw the pattern
+	    console.log("Draw Pattern Here");
+	    //var mmap = convertMeasurementData(window.measurementData);
+	    //drawPattern(window.measurementData, window.styleData, mmap);
+	}
     }
 }
 
@@ -98,12 +126,14 @@ function getPattern(){
 
 // Turn off caching, or changes to json files, etc
 // won't get reloaded
-console.log("Start");
+console.log("Start . . .");
 
-//document.getElementById("patterntitle").innerHTML += titletxt;
+var ua = navigator.userAgent;
+if((~ua.indexOf('MSIE'))) {
+    alert("It appears that you're using Internet Explorer. This site probably won't work for you. We're working on it and we apologize for the inconvenience. Firefox is a great free browser alternative on which this site should work.")
+}
 
-
-$.ajaxSetup({ cache: false });
+$.ajaxSetup({ cache: false }); // Don't cache results from json file loads
 
 // catch the click on the measurements button
 $("#SMButton").click(function(e){

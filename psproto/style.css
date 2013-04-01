@@ -82,6 +82,11 @@ a:visited {
 	float: left;
 }
 
+.disabledmeasurement {
+	color: #BBB;
+	background-color: #CCC;
+}
+
 .pmtitle {
 	font-size: 16px;
 	margin: 5px;

@@ -5,37 +5,11 @@ vers 	date 		changes
 0.1.2   03.19.13    added more math, added construction options/grid
 */
 
-var measarray;
-var titletxt;
+//var titletxt;
 var parsed;
-var JSONholder;
 
-function getpatternfile(filename){
-	var flnm = "patterns/" + filename + ".json";
-	var req = new XMLHttpRequest();
-	req.open("GET", flnm, false);
-	req.send();
-	console.log(req.responseText);
-	JSONholder = req.responseText;
-
-	parsed = JSON.parse(JSONholder);
-	//console.log(parsed.pattern);
-
-	var ua = navigator.userAgent;
-	if((~ua.indexOf('MSIE'))) {
-		//showSourceEditor(0,true);
-		//return;
-		//console.log("chrome or ie");
-		alert("It appears that you're using Internet Explorer. This site probably won't work for you. We're working on it and we apologize for the inconvenience. Firefox is a great free browser alternative on which this site should work.")
-	}
-
-	measarray = new Array();
-	titletxt = parsed.pattern.title;
-	setupmeas();
-}
-
+/*
 function setupmeas(){
-	//console.log(parsed);
 	document.getElementById("patterntitle").innerHTML += titletxt;
 	for (var i=0; i<parsed.pattern.measurements.length; i++){
 		//console.log(parsed.pattern.defaults[i]);
@@ -52,6 +26,7 @@ function setupmeas(){
 		drawpattern();
 	}
 }
+*/
 
 var maxx, maxy, minx, miny;
 var pt = {};
@@ -60,11 +35,11 @@ function calcPoints(){
 	maxy = 0;
 	minx = 0;
 	miny = 0;
-	for (i in parsed.pattern.points){
+	for (i in window.patternData.pattern.points){
 		var ltr = i;
 		pt[ltr] = {};
-		var evalx = eval(parsed.pattern.points[i].x);
-		var evaly = eval(parsed.pattern.points[i].y);
+		var evalx = eval(window.patternData.pattern.points[i].x);
+		var evaly = eval(window.patternData.pattern.points[i].y);
 
 		pt[ltr].x = evalx;
 		pt[ltr].y = evaly;
@@ -72,30 +47,40 @@ function calcPoints(){
 		minx = Math.min(minx, pt[ltr].x);
 		maxy = Math.max(maxy, pt[ltr].y);
 		miny = Math.min(miny, pt[ltr].y);
-		console.log(ltr + ".x: " + parsed.pattern.points[i].x + " = " + pt[ltr].x);
-		console.log(ltr + ".y: " + parsed.pattern.points[i].y + " = " + pt[ltr].y);
+		console.log(ltr + ".x: " + window.patternData.pattern.points[i].x + " = " + pt[ltr].x);
+		console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
 		//console.log("maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
 	}
 	//console.log(pt);
 }
 
 var meas = {};
-var meascheck = false;;
+var measValid = true;
 
-function getMeas(){
-	console.log("getting meas");
-	console.log(parsed.pattern.measurements.length);
-	for ( i in parsed.pattern.measurements ){
-		var str = parsed.pattern.measurements[i];
-		console.log(str);
-		var measnum = document.getElementById(str).value;
-		console.log(measnum);
-		if ( measnum != "" && isNaN(measnum)==false ) {
-			meas[str] = measnum;
-			console.log("meas."+str+": " + meas[str]);
-			meascheck = true;
-		} else { meascheck = false; }
+
+function checkMeas(){
+    //
+    // Required measurements are those in the pattern file list
+    // Check to make sure all required measurements have a value
+    // Check the values in the entry fields
+    //
+/*
+    measValid = true;
+    console.log("checking meas");
+    var md = window.measurementData.clientdata.measurements;
+    var pmd = window.patternData.pattern.measurements;
+    for(var mname in md){
+	if ($.inArray(mname, pmd) == -1) {
+	    $("#"+mname).prop('disabled', true);
+	} else {
+	    // This is a required measurement
+	    $("#"+mname).prop('disabled', false);
+	    if ( md[mname] == "" || isNaN(md[mname])==true ) {
+		measValid = false;
+	    }
 	}
+    }
+*/
 }
 
 var reformedsvg = "";
@@ -112,7 +97,7 @@ var gridsvgstr = "";
 var constptstr = "";
 
 function drawpattern(){
-	getMeas();
+	checkMeas();
 	reformedsvg = "";
 	svgnohead = "";
 	svgsaveheader = "";
@@ -126,7 +111,7 @@ function drawpattern(){
 	constptopt = document.getElementById("constptopt").checked;
 	gridopt = document.getElementById("gridopt").checked;
 	
-	if ( meascheck ) {
+	if ( measValid ) {
 
 		calcPoints();
 
@@ -137,38 +122,38 @@ function drawpattern(){
 
 		if ( constopt ) {
 			svgconststr += "<g>";
-			for (i in parsed.pattern.construction){
+			for (i in window.patternData.pattern.construction){
 				svgconststr += "<";
-				svgconststr += parsed.pattern.construction[i].type + " " + "id=\"" + parsed.pattern.construction[i].id + "\" ";
-				for (j in parsed.pattern.construction[i].drawattr){
-					var evaled = eval(parsed.pattern.construction[i].drawattr[j]); 
+				svgconststr += window.patternData.pattern.construction[i].type + " " + "id=\"" + window.patternData.pattern.construction[i].id + "\" ";
+				for (j in window.patternData.pattern.construction[i].drawattr){
+					var evaled = eval(window.patternData.pattern.construction[i].drawattr[j]); 
 					evaled *= unitscayl;
-					//console.log("og: " + parsed.pattern.construction[i].drawattr[j] + "ev: " + evaled);
+					//console.log("og: " + window.patternData.pattern.construction[i].drawattr[j] + "ev: " + evaled);
 					svgconststr += j + "=\"" + evaled + "\" ";
 				}
-				if (parsed.pattern.construction[i].type == "path"){
+				if (window.patternData.pattern.construction[i].type == "path"){
 					svgconststr += " d=\" ";
-					for (j in parsed.pattern.construction[i].d){
-						svgconststr += parsed.pattern.construction[i].d[j][0];
-						for (var k=1; k<parsed.pattern.construction[i].d[j].length; k++){
-							console.log(parsed.pattern.construction[i].d[j][k][0]);
-							var eval0 = eval(parsed.pattern.construction[i].d[j][k][0]);
-							var eval1 = eval(parsed.pattern.construction[i].d[j][k][1]);
+					for (j in window.patternData.pattern.construction[i].d){
+						svgconststr += window.patternData.pattern.construction[i].d[j][0];
+						for (var k=1; k<window.patternData.pattern.construction[i].d[j].length; k++){
+							console.log(window.patternData.pattern.construction[i].d[j][k][0]);
+							var eval0 = eval(window.patternData.pattern.construction[i].d[j][k][0]);
+							var eval1 = eval(window.patternData.pattern.construction[i].d[j][k][1]);
 							eval0 *= unitscayl;
 							eval1 *= unitscayl;
-							console.log("j[0]: " + parsed.pattern.construction[i].d[j][0]);
-							if (parsed.pattern.construction[i].d[j][0] !== "m") { eval0; eval1; }
+							console.log("j[0]: " + window.patternData.pattern.construction[i].d[j][0]);
+							if (window.patternData.pattern.construction[i].d[j][0] !== "m") { eval0; eval1; }
 							
 							svgconststr += " " + eval0 + "," + eval1 + " ";
 						}
 					}
 					svgconststr += " \" ";
 				}
-				for (j in parsed.pattern.construction[i].appearanceattr){
-					svgconststr += j + "=\"" + parsed.pattern.construction[i].appearanceattr[j] + "\" ";
+				for (j in window.patternData.pattern.construction[i].appearanceattr){
+					svgconststr += j + "=\"" + window.patternData.pattern.construction[i].appearanceattr[j] + "\" ";
 				}
-				if (parsed.pattern.construction[i].type == "text"){
-					svgconststr += ">" + parsed.pattern.construction[i].content + "</text>";
+				if (window.patternData.pattern.construction[i].type == "text"){
+					svgconststr += ">" + window.patternData.pattern.construction[i].content + "</text>";
 				}
 				else {
 					svgconststr += "/>";
@@ -177,28 +162,28 @@ function drawpattern(){
 			svgconststr += "</g>";
 		}
 		
-		for (i in parsed.pattern.main){
+		for (i in window.patternData.pattern.main){
 			svgobjstring += "<";
-			svgobjstring += parsed.pattern.main[i].type + " " + "id=\"" + parsed.pattern.main[i].id + "\" ";
-			for (j in parsed.pattern.main[i].drawattr){
-				var evaled = eval(parsed.pattern.main[i].drawattr[j]); 
+			svgobjstring += window.patternData.pattern.main[i].type + " " + "id=\"" + window.patternData.pattern.main[i].id + "\" ";
+			for (j in window.patternData.pattern.main[i].drawattr){
+				var evaled = eval(window.patternData.pattern.main[i].drawattr[j]); 
 				evaled *= unitscayl;
-				//console.log("og: " + parsed.pattern.main[i].drawattr[j] + "ev: " + evaled);
+				//console.log("og: " + window.patternData.pattern.main[i].drawattr[j] + "ev: " + evaled);
 				svgobjstring += j + "=\"" + evaled + "\" ";
 			}
 
-			if (parsed.pattern.main[i].type == "path"){
+			if (window.patternData.pattern.main[i].type == "path"){
 				svgobjstring += " d=\" ";
-				for (j in parsed.pattern.main[i].d){
-					svgobjstring += parsed.pattern.main[i].d[j][0];
-					for (var k=1; k<parsed.pattern.main[i].d[j].length; k++){
-						console.log(parsed.pattern.main[i].d[j][k][0]);
-						var eval0 = eval(parsed.pattern.main[i].d[j][k][0]);
-						var eval1 = eval(parsed.pattern.main[i].d[j][k][1]);
+				for (j in window.patternData.pattern.main[i].d){
+					svgobjstring += window.patternData.pattern.main[i].d[j][0];
+					for (var k=1; k<window.patternData.pattern.main[i].d[j].length; k++){
+						console.log(window.patternData.pattern.main[i].d[j][k][0]);
+						var eval0 = eval(window.patternData.pattern.main[i].d[j][k][0]);
+						var eval1 = eval(window.patternData.pattern.main[i].d[j][k][1]);
 						eval0 *= unitscayl;
 						eval1 *= unitscayl;
-						console.log("j[0]: " + parsed.pattern.main[i].d[j][0]);
-						if (parsed.pattern.main[i].d[j][0] !== "m") { eval0; eval1; }
+						console.log("j[0]: " + window.patternData.pattern.main[i].d[j][0]);
+						if (window.patternData.pattern.main[i].d[j][0] !== "m") { eval0; eval1; }
 						
 						svgobjstring += " " + eval0 + "," + eval1 + " ";
 					}
@@ -206,12 +191,12 @@ function drawpattern(){
 				svgobjstring += " \" ";
 			}
 
-			for (j in parsed.pattern.main[i].appearanceattr){
-				svgobjstring += j + "=\"" + parsed.pattern.main[i].appearanceattr[j] + "\" ";
+			for (j in window.patternData.pattern.main[i].appearanceattr){
+				svgobjstring += j + "=\"" + window.patternData.pattern.main[i].appearanceattr[j] + "\" ";
 			}
 
-			if (parsed.pattern.main[i].type == "text"){
-				svgobjstring += ">" + parsed.pattern.main[i].content + "</text>";
+			if (window.patternData.pattern.main[i].type == "text"){
+				svgobjstring += ">" + window.patternData.pattern.main[i].content + "</text>";
 			}
 			else {
 				svgobjstring += "/>";
@@ -293,7 +278,7 @@ function drawpattern(){
 		//reformedsvg += svgheader[0];
 		var viewBoxheader = "<svg width=\"" + "750" + "\" height=\"" + "550" + "\" viewBox=\"0 0 " + svgw + " " + svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
 		svgsaveheader = "<svg width=\"" + svgw + "\" height=\"" + svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
-		svgtitle = "<text font-size=\"24\" y=\"24\" x=\"5\" fill=\"#000000\">" + titletxt + "</text>";
+		svgtitle = "<text font-size=\"24\" y=\"24\" x=\"5\" fill=\"#000000\">" + window.patternData.pattern.title + "</text>";
 		svgtransform = "<g transform=\"translate(" + xshift + "," + yshift + ")\">";
 		svgend = "</g></svg>";
 
