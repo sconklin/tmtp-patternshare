@@ -8,18 +8,10 @@ function drawPatternIfReady(){
 
     // Are measurements loaded?
     if (typeof window.measurementData != 'undefined') {
-	// If they are, update the measurements list
-	var md = window.measurementData.clientdata.measurements
-	var measElTxt="";
-	for(var mname in md){
-	    //console.log(mname + ': ' + md[mname])
-	    measElTxt += "<input type=\"text\" size=\"8\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + mname + "<br/>";
-	}
-	measElTxt += "</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
-	$("#measurements").html(measElTxt);
 	// Is patterndata loaded?
 	if (typeof window.patternData != 'undefined'){
 	    console.log("We have a pattern file loaded");
+	    var md = window.measurementData.clientdata.measurements
 	    var pmd = window.patternData.pattern.measurements;
 	    // disable any measurements that the pattern doesn't use
 	    for(var mname in md){
@@ -33,8 +25,23 @@ function drawPatternIfReady(){
 		}
 	    }
 
-	    checkMeas();
-	    // TODO change the units to match what's in the measurements file
+	    // Change the units selector to match what's in the measurements file
+	    var clientUnits = window.measurementData.clientdata.units;
+	    console.log("Client Units: " + clientUnits);
+	    if (clientUnits == "px") {
+		$("#pxradio").attr('checked', 'checked')
+	    }
+	    else if (clientUnits == "in") {
+		$("#inradio").attr('checked', 'checked')
+	    }
+	    else if (clientUnits == "cm") {
+		$("#cmradio").attr('checked', 'checked')
+	    }
+	    else {
+		alert("Invalid units field in measurement file");
+	    }
+
+	    //checkMeas();
 	    // Draw the pattern
 	    console.log("Draw Pattern Here");
 	    //var mmap = convertMeasurementData(window.measurementData);
@@ -165,6 +172,16 @@ $("#popupSelectM").change(function(e) {
 	    window.measurementData = mdata;
 	    console.log("LOADED MEASUREMENTS");
 	    $("#measuretitle").html(window.measurementData.clientdata.customername);
+
+	    // Copy all the values from the measurement file to the text entries
+	    var md = mdata.clientdata.measurements
+	    var measElTxt="";
+	    for(var mname in md){
+		//console.log(mname + ': ' + md[mname])
+		measElTxt += "<input type=\"text\" size=\"8\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + mname + "<br/>";
+	    }
+	    measElTxt += "</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
+	    $("#measurements").html(measElTxt);
 
 	    // See whether we're ready to draw
 	    drawPatternIfReady();

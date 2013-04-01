@@ -57,32 +57,6 @@ function calcPoints(){
 var meas = {};
 var measValid = true;
 
-
-function checkMeas(){
-    //
-    // Required measurements are those in the pattern file list
-    // Check to make sure all required measurements have a value
-    // Check the values in the entry fields
-    //
-/*
-    measValid = true;
-    console.log("checking meas");
-    var md = window.measurementData.clientdata.measurements;
-    var pmd = window.patternData.pattern.measurements;
-    for(var mname in md){
-	if ($.inArray(mname, pmd) == -1) {
-	    $("#"+mname).prop('disabled', true);
-	} else {
-	    // This is a required measurement
-	    $("#"+mname).prop('disabled', false);
-	    if ( md[mname] == "" || isNaN(md[mname])==true ) {
-		measValid = false;
-	    }
-	}
-    }
-*/
-}
-
 var reformedsvg = "";
 var svgnohead = "";
 var svgsaveheader = "";
@@ -97,7 +71,7 @@ var gridsvgstr = "";
 var constptstr = "";
 
 function drawpattern(){
-	checkMeas();
+        // checkMeas()??
 	reformedsvg = "";
 	svgnohead = "";
 	svgsaveheader = "";
