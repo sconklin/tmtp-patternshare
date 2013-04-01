@@ -1,0 +1,24 @@
+{
+  "clientdata": {
+    "customername": "Man1",
+    "units": "cm",
+    "measurements": {
+      "hips": "94",
+      "bust": "100",
+      "waist": "70",
+      "shoulder": "100",
+      "nape_to_waist": "100",
+      "waist_to_hip": "20.6",
+      "chest_width": "100",
+      "neck": "100",
+      "chest": "100",
+      "armscye_depth": "100",
+      "waist_length": "100",
+      "back_width": "100",
+      "sleeve_length": "100",
+      "shirt_length": "100",
+      "bust_dart_width": "100",
+      "skirt_length": "70",
+    }
+  }
+}
