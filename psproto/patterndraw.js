@@ -8,26 +8,6 @@ vers 	date 		changes
 //var titletxt;
 var parsed;
 
-/*
-function setupmeas(){
-	document.getElementById("patterntitle").innerHTML += titletxt;
-	for (var i=0; i<parsed.pattern.measurements.length; i++){
-		//console.log(parsed.pattern.defaults[i]);
-		document.getElementById("measurements").innerHTML += 
-			"<input type=\"text\" size=\"8\" id=\"" + parsed.pattern.measurements[i] + "\" value=\"" + parsed.pattern.defaults[i] + "\" />" + parsed.pattern.measurements[i] + "<br/>";
-		//console.log(parsed.pattern.measurements[i]);
-		if (i == parsed.pattern.measurements.length-1) {
-			document.getElementById("measurements").innerHTML += 
-				"</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
-			}
-	}
-	getMeas();
-	if (meascheck){
-		drawpattern();
-	}
-}
-*/
-
 var maxx, maxy, minx, miny;
 var pt = {};
 function calcPoints(){
@@ -57,6 +37,20 @@ function calcPoints(){
 var meas = {};
 var measValid = true;
 
+function getMeas(){
+    console.log("getMeas");
+    var pmd = window.patternData.pattern.measurements;
+    pmd.map( function(item) {
+	var measnum = $("#"+item).val();
+	if ( measnum != "" && isNaN(measnum)==false ) {
+	    meas[item] = measnum;
+	    //console.log("meas."+item+": " + measnum);
+	} else { measValid = false; }
+    })
+    console.log("measValid is " + measValid);
+}
+
+
 var reformedsvg = "";
 var svgnohead = "";
 var svgsaveheader = "";
@@ -71,7 +65,7 @@ var gridsvgstr = "";
 var constptstr = "";
 
 function drawpattern(){
-        // checkMeas()??
+        getMeas()
 	reformedsvg = "";
 	svgnohead = "";
 	svgsaveheader = "";
@@ -93,6 +87,7 @@ function drawpattern(){
 		if ( document.getElementById("cmradio").checked == true ) { unitscayl = 28.346; }
 		else if ( document.getElementById("inradio").checked == true ) { unitscayl = 72; }
 		else { unitscayl = 1; }
+                console.log("unitscayl = " + unitscayl);
 
 		if ( constopt ) {
 			svgconststr += "<g>";

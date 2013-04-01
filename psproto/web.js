@@ -1,7 +1,7 @@
 function drawPatternIfReady(){
     console.log("drawPatternIfReady");
     // See whether everything is ready to draw a pattern.
-    // If it is, call drawPattern
+    // If it is, call drawpattern
 
     // Are measurements loaded?
     if (typeof window.measurementData != 'undefined') {
@@ -47,11 +47,11 @@ function drawPatternIfReady(){
 		alert("Invalid units field in measurement file");
 	    }
 
-	    //checkMeas();
 	    // Draw the pattern
+	    getMeas();
 	    console.log("Draw Pattern Here");
 	    //var mmap = convertMeasurementData(window.measurementData);
-	    //drawPattern(window.measurementData, window.styleData, mmap);
+	    drawpattern();
 	}
     }
 }
