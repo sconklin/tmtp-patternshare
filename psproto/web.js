@@ -6,8 +6,7 @@ function drawPatternIfReady(){
     // Are measurements loaded?
     // Is a pattern Script Loaded?
     if ((typeof window.measurementData != 'undefined') &&
-    (typeof drawPattern == 'function')){
-	// do any setup work here for the canvas (none yet)
+    (typeof window.patternData != 'undefined')){
 
 	// Draw the pattern
 	console.log("Draw Pattern Here");
@@ -54,7 +53,7 @@ function getMeasurement(){
     });
 }
 
-function getPattern(e){
+function getPattern(){
     // Fetch a list of available pattern files
     // Right now this grabs a list from a json file,
     // but could ultimately query a db
@@ -119,7 +118,7 @@ $("#SPButton").click(function(e){
     console.log("Pbutton Clicked");
     e.preventDefault();
     console.log("PButton");
-    getPattern(e);
+    getPattern();
 });
 
 // Triggered when the user selects a measurement file
@@ -130,13 +129,21 @@ $("#popupSelectM").change(function(e) {
     console.log(mFileName);
     // Now we have a file selected
     $("#selectMeasurementsDiv").hide();
-    $.getJSON(mFileName, function(mdata) {
-	// Now we have measurement data
-	window.measurementData = mdata
+    $.getJSON(mFileName)
+	.done(function(mdata) {
+	    // Now we have measurement data
+	    window.measurementData = mdata;
+	    console.log("LOADED MEASUREMENTS");
+	    $("#measuretitle").html(window.measurementData.clientdata.customername);
 
-	// See whether we're ready to draw
-	drawPatternIfReady();
-    });
+	    // See whether we're ready to draw
+	    drawPatternIfReady();
+	})
+	.fail(function( jqxhr, textStatus, error ) {
+	    var err = textStatus + ', ' + error;
+	    console.log( "Measurement Request Failed: " + err);
+	    alert("An error was encountered while parsing the Measurement data file")
+	});
 });
 
 
@@ -149,13 +156,22 @@ $("#popupSelectP").change(function(e) {
     // Now we have a file selected, so hide the selection popup
     $("#selectPatternDiv").hide();
 
-    $.getJSON(pFileName, function(pdata) {
-	// Now we have measurement data
-	window.patternData = pdata
-	// TODO update text in the pattern name block
+    $.getJSON(pFileName)
+	.done(function(pdata) {
+	    // Now we have measurement data
+	    window.patternData = pdata;
+	    $("#patterntitle").html(window.patternData.pattern.title);
 
-	// See whether we're ready to draw
-	drawPatternIfReady();
+	    // See whether we're ready to draw
+	    drawPatternIfReady();
+	})
+	.fail(function( jqxhr, textStatus, error ) {
+	    var err = textStatus + ', ' + error;
+	    console.log( "Pattern Request Failed: " + err);
+	    alert("An error was encountered while parsing the Pattern data file")
+	});
+
+    $.getJSON(pFileName, function(pdata) {
     });
 });
 
