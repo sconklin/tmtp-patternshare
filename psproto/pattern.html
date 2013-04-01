@@ -11,14 +11,10 @@
 <html>
 
 <head>
-	<title>Men's Shirt Block</title>
-	<script type="text/javascript" src="patterndraw.js"></script>
-	<script type="text/javascript" src="json2.js"></script>
-	<script type="text/javascript">var flnm = "mensshirtblock-burda"</script>
+	<title>The Pattern Share</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
-<body onload="getpatternfile(flnm)">
+</body>
 
 <div class="header-holder">
 	<div class="header">
@@ -32,7 +28,28 @@
 <div class="draw-wrapper">
 	<div class="measwrapper">
 		<div id="patterntitle" class="patterntitle">
+		  No Pattern
 		</div>
+
+		<div id="patternbuttondiv" class="pmbutton">
+		  <input id="SPButton" type="button" value="Select Pattern" />
+		</div>
+		<div id="measurebuttondiv" class="pmbutton">
+		  <input id="SMButton" type="button" value="Select Measurements" />
+		</div>
+
+		<div id="selectMeasurementsDiv" class="popupDiv">
+		  <select id="popupSelectM">
+		    <option value="dummy">Dummy</option>
+		  </select>
+		</div>
+
+		<div id="selectPatternDiv" class="popupDiv">
+		  <select id="popupSelectP">
+		    <option value="dummy">Dummy</option>
+		  </select>
+		</div>
+
 		<div id="measurements" class="measurements">
 			
 		</div>
@@ -52,9 +69,9 @@
 			<br>
 			<form>
 			
-			<input type="checkbox" id="gridopt" onclick="drawpattern()"/> : Grid <br />
-			<input type="checkbox" id="constopt" onclick="drawpattern()"/> : Construction Lines <br />
-			<input type="checkbox" id="constptopt" onclick="drawpattern()"/> : Construction Points <br />
+			<input type="checkbox" id="gridopt" onclick="drawPatternIfReady()"/> : Grid <br />
+			<input type="checkbox" id="constopt" onclick="drawPatternIfReady()"/> : Construction Lines <br />
+			<input type="checkbox" id="constptopt" onclick="drawPatternIfReady()"/> : Construction Points <br />
 
 			</form>
 		</div>
@@ -68,6 +85,10 @@
 	</div>
 </div>
 
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script type="text/javascript" src="json2.js"></script>
+<script type="text/javascript" src="patterndraw.js"></script>
+<script type="text/javascript" src="web.js"></script>
 </body>
 
 </html>
