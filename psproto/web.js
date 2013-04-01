@@ -3,9 +3,6 @@ function drawPatternIfReady(){
     // See whether everything is ready to draw a pattern.
     // If it is, call drawPattern
 
-    // TODO if there's a pattern loaded, mark the unused measurements
-
-
     // Are measurements loaded?
     if (typeof window.measurementData != 'undefined') {
 	// Is patterndata loaded?
@@ -13,7 +10,16 @@ function drawPatternIfReady(){
 	    console.log("We have a pattern file loaded");
 	    var md = window.measurementData.clientdata.measurements
 	    var pmd = window.patternData.pattern.measurements;
-	    // disable any measurements that the pattern doesn't use
+
+	    // make sure measurements in the pattern exist in the
+	    // measurement file
+	    pmd.map( function(item) {
+		if (!(item in md)) {
+		    alert("Measurement <" + item + "> is required by the pattern and is not in the selected measurement file");
+		}
+	    })
+
+	    // disable any measurement inputs that the pattern doesn't use
 	    for(var mname in md){
 		if ($.inArray(mname, pmd) == -1) {
 		    $("#"+mname).prop('disabled', true);
