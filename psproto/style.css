@@ -82,9 +82,18 @@ a:visited {
 	float: left;
 }
 
+.measlabel {
+    display: inline-block;
+}
+
+.disabledmeaslabel {
+    display: none;
+}
+
 .disabledmeasurement {
 	color: #BBB;
 	background-color: #CCC;
+	display: none;
 }
 
 .pmtitle {

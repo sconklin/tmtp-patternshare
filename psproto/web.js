@@ -24,10 +24,12 @@ function drawPatternIfReady(){
 		if ($.inArray(mname, pmd) == -1) {
 		    $("#"+mname).prop('disabled', true);
 		    $("#"+mname).attr('class', "disabledmeasurement");
+		    $("#"+mname+"-label").attr('class', "disabledmeaslabel");
 		} else {
 		    // This is a required measurement
 		    $("#"+mname).prop('disabled', false);
 		    $("#"+mname).attr('class', "enabledmeasurement");
+		    $("#"+mname+"-label").attr('class', "measlabel");
 		}
 	    }
 
@@ -121,7 +123,7 @@ function measurementChangeHandler(){
 	    var measElTxt="";
 	    for(var mname in md){
 		//console.log(mname + ': ' + md[mname])
-		measElTxt += "<input type=\"text\" size=\"8\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + mname + "<br/>";
+		measElTxt += "<input type=\"text\" size=\"8\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + "<div id=\"" + mname + "-label\" class=\"measlabel\">" + mname + "<br/>" + "</div>";
 	    }
 	    measElTxt += "</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
 	    $("#measurements").html(measElTxt);
