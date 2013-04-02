@@ -56,86 +56,28 @@ function drawPatternIfReady(){
     }
 }
 
-function getMeasurement(){
-    // Fetch a list of available Measurements
-    // Right now this grabs a list from a json file,
-    // but could ultimately query a db
-    $.getJSON("measurements/measurement_list.json", function(mlist) {
+function getDataIntoSelect(filepath, selectId, prompt){
+    // Fetch a list
+    $.getJSON(filepath, function(plist) {
 
-	// we'll set up the select list, then display the popup
-	// that contains it
-	var $el = $("#popupSelectM");
+	var $el = $("#"+selectId);
 	$el.empty(); // remove old options from the select
 
-	// Add the first prompt. Selecting this one will not trigger
-	// a change, since it is selected already
-	$el.append($("<option></option>")
-	       .attr("value", "select").text("Select Measurements"));
-
-	// Add the choices we read from the json file
-	$.each(mlist, function(key, val) {
-	    // remove the .json from the end
-	    var name = val.slice(0,-5);
-	    // Add the option to the list
-	    $el.append($("<option></option>")
-		   .attr("value", val).text(name));
-	});
-	// TODO This doesn't display correctly the second click
-	// set the location of the popup right over the button
-	buttonOffset = $("#SMButton").offset();
-	console.log( "Button offset left: " + buttonOffset.left + ", top: " + buttonOffset.top );
-	pdOffset = $("#selectMeasurementsDiv").offset();
-	console.log( "MDiv offset left: " + pdOffset.left + ", top: " + pdOffset.top );
-
-	//$("#selectMeasurementsDiv").offset({ top: 0, left: 0})
-	$("#selectMeasurementsDiv").offset({ top: buttonOffset.top, left: buttonOffset.left})
-	$("#selectMeasurementsDiv").show();
-	// Now, when user selects one of these the change callback will happen
-    });
-}
-
-function getPattern(){
-    // Fetch a list of available pattern files
-    // Right now this grabs a list from a json file,
-    // but could ultimately query a db
-    $.getJSON("patterns/pattern_list.json", function(plist) {
-
-	// we'll set up the select list, then display the popup
-	// that contains it
-	var $el = $("#popupSelectP");
-	$el.empty(); // remove old options from the select
-
-	// Add the first prompt. Selecting this one will not trigger
-	// a change, since it is selected already
-	$el.append($("<option></option>")
-		   .attr("value", "select").text("Select Pattern"));
+	// Add the prompt
+        $el.append($("<option></option>")
+		   .attr("value", "dummy").text(prompt));
 
 	// Add the choices we read from the json file
 	$.each(plist, function(key, val) {
             // remove the .js from the end
-            var name = val.slice(0,-3);
+            var name = val.slice(0,-5);
             // Add the option to the list
             $el.append($("<option></option>")
 		       .attr("value", val).text(name));
 	});
-
-	// TODO This doesn't display correctly the second click
-	// set the location of the popup right over the button
-	console.log("here");
-	buttonOffset = $("#SPButton").offset();
-	console.log( "Button offset left: " + buttonOffset.left + ", top: " + buttonOffset.top );
-	pdOffset = $("#selectPatternDiv").offset();
-	console.log( "PDiv offset left: " + pdOffset.left + ", top: " + pdOffset.top );
-
-	//$("#selectPatternDiv").offset({ top: 0, left: 0})
-	$("#selectPatternDiv").offset({ top: buttonOffset.top, left: buttonOffset.left})
-	$("#selectPatternDiv").show();
-	// Now, when user selects one of these the change callback will happen
+	// now select the first item in the list
     });
 }
-
-
-// --------
 
 // Turn off caching, or changes to json files, etc
 // won't get reloaded
@@ -148,30 +90,25 @@ if((~ua.indexOf('MSIE'))) {
 
 $.ajaxSetup({ cache: false }); // Don't cache results from json file loads
 
-// catch the click on the measurements button
-$("#SMButton").click(function(e){
-    console.log("Mbutton Clicked");
-    e.preventDefault();
-    console.log("MButton");
-    getMeasurement();
-});
+// Load the choices for the Pattern and Measurement select buttons
+// This is from static files now but can be from a database
+console.log("About to load patterns");
+getDataIntoSelect("patterns/pattern_list.json", "SelectP", "Select Pattern");
+console.log("selpat = " + $("#SelectP").val());
+//patternChangeHandler();
+console.log("About to load measurements");
+getDataIntoSelect("measurements/measurement_list.json", "SelectM", "Select Measurements");
+//measurementChangeHandler();
 
-// catch the click on the patterns button
-$("#SPButton").click(function(e){
-    console.log("Pbutton Clicked");
-    e.preventDefault();
-    console.log("PButton");
-    getPattern();
-});
-
-// Triggered when the user selects a measurement file
-// from the popup
-$("#popupSelectM").change(function(e) {
+function measurementChangeHandler(){
     console.log("Measurement file CHANGED");
-    mFileName = './measurements/' + $("#popupSelectM").val();
+    mFileName = './measurements/' + $("#SelectM").val();
     console.log(mFileName);
-    // Now we have a file selected
-    $("#selectMeasurementsDiv").hide();
+
+    // remove the dummy from the select list. This is kinda dumb but the dummy has to be there
+    // initially because we need to force the user to generate a change event
+    $("#SelectM option[value='dummy']").remove();
+
     $.getJSON(mFileName)
 	.done(function(mdata) {
 	    // Now we have measurement data
@@ -197,17 +134,19 @@ $("#popupSelectM").change(function(e) {
 	    console.log( "Measurement Request Failed: " + err);
 	    alert("An error was encountered while parsing the Measurement data file")
 	});
-});
+}
 
+// Triggered when the user selects a measurement file from the select
+$("#SelectM").change(measurementChangeHandler);
 
-// Triggered when the user selects a pattern file
-// from the popup
-$("#popupSelectP").change(function(e) {
+function patternChangeHandler(){
     console.log("Pattern file CHANGED");
-    pFileName = './patterns/' + $("#popupSelectP").val();
+    pFileName = './patterns/' + $("#SelectP").val();
     console.log(pFileName);
-    // Now we have a file selected, so hide the selection popup
-    $("#selectPatternDiv").hide();
+
+    // remove the dummy from the select list. This is kinda dumb but the dummy has to be there
+    // initially because we need to force the user to generate a change event
+    $("#SelectP option[value='dummy']").remove();
 
     $.getJSON(pFileName)
 	.done(function(pdata) {
@@ -223,8 +162,7 @@ $("#popupSelectP").change(function(e) {
 	    console.log( "Pattern Request Failed: " + err);
 	    alert("An error was encountered while parsing the Pattern data file")
 	});
+}
 
-    $.getJSON(pFileName, function(pdata) {
-    });
-});
-
+// Triggered when the user selects a pattern file from the select
+$("#SelectP").change(patternChangeHandler);

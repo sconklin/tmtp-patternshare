@@ -95,30 +95,13 @@ a:visited {
 	background-color: #eee;
 }
 
-.pmbutton {
+.selectDiv {
 	font-size: 10px;
 	margin: 5px;
-	padding: 5px;
+	width: 160px;
+	height: 20px;
 	color: #555;
 	background-color: #eee;
-}
-
-.popupDiv {
-   z-index: 100;
-   position: fixed;
-   display: none;
-}
-
-#popupSelectM{
-   z-index: 1000;
-   position: fixed;
-   width: 175px;
-}
-
-#popupSelectP{
-   z-index: 1000;
-   position: fixed;
-   width: 175px;
 }
 
 .measurements {
