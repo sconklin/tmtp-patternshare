@@ -1,6 +1,6 @@
 {
   "clientdata": {
-    "customername": "Man1",
+    "customername": "Woman2",
     "units": "cm",
     "measurements": {
       "hips": "94",
@@ -10,13 +10,13 @@
       "nape_to_waist": "100",
       "waist_to_hip": "20.6",
       "chest_width": "100",
-      "neck": "100",
-      "chest": "100",
-      "armscye_depth": "100",
-      "waist_length": "100",
-      "back_width": "100",
-      "sleeve_length": "100",
-      "shirt_length": "100",
+      "neck": "37",
+      "chest": "90",
+      "armscye_depth": "20",
+      "waist_length": "40",
+      "back_width": "30",
+      "sleeve_length": "75",
+      "shirt_length": "70",
       "bust_dart_width": "100",
       "skirt_length": "70"
     }
