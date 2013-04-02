@@ -5,9 +5,6 @@ vers 	date 		changes
 0.1.2   03.19.13    added more math, added construction options/grid
 */
 
-//var titletxt;
-var parsed;
-
 var maxx, maxy, minx, miny;
 var pt = {};
 function calcPoints(){
@@ -27,17 +24,19 @@ function calcPoints(){
 		minx = Math.min(minx, pt[ltr].x);
 		maxy = Math.max(maxy, pt[ltr].y);
 		miny = Math.min(miny, pt[ltr].y);
-		console.log(ltr + ".x: " + window.patternData.pattern.points[i].x + " = " + pt[ltr].x);
-		console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
-		//console.log("maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
+		//console.log(ltr + ".x: " + window.patternData.pattern.points[i].x + " = " + pt[ltr].x);
+		//console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
+		//console.log("Point "+ltr+" maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
 	}
 	//console.log(pt);
 }
 
-var meas = {};
-var measValid = true;
+var measValid;
+var meas;
 
 function getMeas(){
+measValid = true;
+    meas = {};
     console.log("getMeas");
     var pmd = window.patternData.pattern.measurements;
     pmd.map( function(item) {
@@ -65,7 +64,13 @@ var gridsvgstr = "";
 var constptstr = "";
 
 function drawpattern(){
-        getMeas()
+        getMeas();
+        maxx = 0;
+        maxy = 0;
+        minx = 0;
+        miny = 0;
+        pt = {};
+
 	reformedsvg = "";
 	svgnohead = "";
 	svgsaveheader = "";
@@ -105,12 +110,12 @@ function drawpattern(){
 					for (j in window.patternData.pattern.construction[i].d){
 						svgconststr += window.patternData.pattern.construction[i].d[j][0];
 						for (var k=1; k<window.patternData.pattern.construction[i].d[j].length; k++){
-							console.log(window.patternData.pattern.construction[i].d[j][k][0]);
+							//console.log(window.patternData.pattern.construction[i].d[j][k][0]);
 							var eval0 = eval(window.patternData.pattern.construction[i].d[j][k][0]);
 							var eval1 = eval(window.patternData.pattern.construction[i].d[j][k][1]);
 							eval0 *= unitscayl;
 							eval1 *= unitscayl;
-							console.log("j[0]: " + window.patternData.pattern.construction[i].d[j][0]);
+							//console.log("j[0]: " + window.patternData.pattern.construction[i].d[j][0]);
 							if (window.patternData.pattern.construction[i].d[j][0] !== "m") { eval0; eval1; }
 							
 							svgconststr += " " + eval0 + "," + eval1 + " ";
@@ -146,12 +151,12 @@ function drawpattern(){
 				for (j in window.patternData.pattern.main[i].d){
 					svgobjstring += window.patternData.pattern.main[i].d[j][0];
 					for (var k=1; k<window.patternData.pattern.main[i].d[j].length; k++){
-						console.log(window.patternData.pattern.main[i].d[j][k][0]);
+						//console.log(window.patternData.pattern.main[i].d[j][k][0]);
 						var eval0 = eval(window.patternData.pattern.main[i].d[j][k][0]);
 						var eval1 = eval(window.patternData.pattern.main[i].d[j][k][1]);
 						eval0 *= unitscayl;
 						eval1 *= unitscayl;
-						console.log("j[0]: " + window.patternData.pattern.main[i].d[j][0]);
+						//console.log("j[0]: " + window.patternData.pattern.main[i].d[j][0]);
 						if (window.patternData.pattern.main[i].d[j][0] !== "m") { eval0; eval1; }
 						
 						svgobjstring += " " + eval0 + "," + eval1 + " ";
@@ -171,7 +176,7 @@ function drawpattern(){
 				svgobjstring += "/>";
 			}
 		}
-		console.log("maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
+		console.log("A maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
 		maxx *= unitscayl;
 		maxy *= unitscayl;
 		minx *= unitscayl;
@@ -180,7 +185,7 @@ function drawpattern(){
 		miny -= 20;
 		maxx += 20;
 		maxy += 20;
-		console.log("maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
+		console.log("B maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
 		var txtshift = 30;
 		var svgw = maxx - minx;
 		var svgh = maxy - miny + txtshift;
