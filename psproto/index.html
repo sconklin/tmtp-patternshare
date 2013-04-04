@@ -20,14 +20,17 @@
 	<div class="header">
 		<a href="/"><img src="images/headerlogo.png"/></a>
 		<div class="headnav">
-			<a href="/about.html">About</a>
+			<a id="menu" href="index.html">Home</a>
+			<a id="menu" href="measurements.html">Measurements</a>
+			<a id="menu" href="patterns.html">Patterns</a>
+			<a id="menu" href="about.html">About</a>
 		</div>
 	</div>
 </div>
 
 <div class="draw-wrapper">
 	<div class="measwrapper">
-		<div id="patterntitle" class="pmtitle">
+		<div class="pmtitle">
 		  Pattern
 		</div>
 
@@ -37,7 +40,7 @@
 		  </select>
 		</div>
 
-		<div id="measuretitle" class="pmtitle">
+		<div class="pmtitle">
 		  Measurements
 		</div>
 
@@ -53,7 +56,7 @@
 		</div>
 		
 		<div id="units" class="measurements">
-			Units
+			<div class="meastitle">Units</div>
 			<br>
 			<form>
 			<input type="radio" id="pxradio" name="meassys" /> : pixels <br />
@@ -63,7 +66,7 @@
 		</div>
 
 		<div id="options" class="measurements">
-			View Options
+			<div class="meastitle">View Options</div>
 			<br>
 			<form>
 			
@@ -75,12 +78,15 @@
 		</div>
 
 		<div id="savebuttondiv" class="measurements">
-			<button type="button" onclick="savesvg()"> Save as SVG! </button>
+			<button id="savebutton" type="button" onclick="savesvg()"> Save as SVG! </button>
 		</div>
 	</div>
 	
 	<div id="drawarea" class="drawarea">
 	</div>
+</div>
+<div class="footer">
+	Developed by Susan Spencer
 </div>
 
 <script type="text/javascript" src="jquery-1.9.1.js"></script>

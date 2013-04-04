@@ -250,7 +250,7 @@ function drawpattern(){
 		}
 		
 		//reformedsvg += svgheader[0];
-		var viewBoxheader = "<svg width=\"" + "750" + "\" height=\"" + "550" + "\" viewBox=\"0 0 " + svgw + " " + svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
+		var viewBoxheader = "<svg width=\"" + "700" + "\" height=\"" + "550" + "\" viewBox=\"0 0 " + svgw + " " + svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
 		svgsaveheader = "<svg width=\"" + svgw + "\" height=\"" + svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
 		svgtitle = "<text font-size=\"24\" y=\"24\" x=\"5\" fill=\"#000000\">" + window.patternData.pattern.title + "</text>";
 		svgtransform = "<g transform=\"translate(" + xshift + "," + yshift + ")\">";

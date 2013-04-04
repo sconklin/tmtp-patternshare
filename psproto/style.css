@@ -12,9 +12,25 @@ a:visited {
 	text-decoration: none;
 }
 
+a#menu{
+	border-left: 2px solid #F0A830;
+	padding-left:3px;
+	font-size: 16px;
+}
+
+ul{
+	color: #fff;
+	font-size:15px;
+}
+
+body{
+	background-color:#FCEBB6;
+}
+
+
 .header-holder {
-	width: 100%;
-	background-color: #FC9D9A;
+	background-color: #FCEBB6;
+	margin-bottom: 5px;
 }
 
 .header {
@@ -22,15 +38,31 @@ a:visited {
 	width: 950px;
 	height: 48px;
 	padding-top: 12px;
-	padding-left: 10px;
+	padding-left: 30px;
 	color: #fff;
-	background-color: #FE4365;
+	background-color: #78C0A8;
+	-moz-border-radius: 1em 4em 1em 4em;
+	border-radius: 1em 4em 1em 4em;
+}
+
+.footer{
+	color: #fff;
+	background-color: #78C0A8;
+	height: 70px;
+	width: 950px;
+	margin: 0 auto;
+	padding-right: 20px;
+	padding-top:13px;
+	text-align:right;
+	-moz-border-radius: 4em 1em 4em 1em;
+	border-radius: 4em 1em 4em 1em;
 }
 
 .content-holder {
-	margin: 0 auto;
-	width: 960px;
-	background-color: #fff;
+	margin-left: auto;
+	margin-right: auto;
+	width: 950px;
+	background-color: #FCEBB6;
 }
 
 .imagebox {
@@ -72,14 +104,21 @@ a:visited {
 }
 
 .draw-wrapper {
-	width: 960px;
-	height: 100%;
+	width: 930px;
+	height: 700px;
 	margin: 0 auto;
+	background-color: #FCEBB6;
 }
 
 .measwrapper {
-	width: 180px;
+	width: 190px;
 	float: left;
+	margin-right:10px;
+	background-color: #5E412F;
+	-moz-border-radius: 25px 10px / 10px 25px;
+	border-radius: 25px 10px / 10px 25px;
+	padding:10px 0;
+
 }
 
 .measlabel {
@@ -100,8 +139,13 @@ a:visited {
 	font-size: 16px;
 	margin: 5px;
 	padding: 5px;
-	color: #555;
-	background-color: #eee;
+	color: #fff;
+	font-weight:bold;
+}
+.meastitle {
+	font-size: 16px;
+	color: #fff;
+	font-weight:bold;
 }
 
 .selectDiv {
@@ -109,27 +153,36 @@ a:visited {
 	margin: 5px;
 	width: 160px;
 	height: 20px;
-	color: #555;
-	background-color: #eee;
+	color: #fff;
 }
 
 .measurements {
 	font-size: 10px;
 	margin: 5px;
 	padding: 5px;
-	color: #555;
-	background-color: #eee;
+	color: #fff;	
 }
 
 .drawarea {
-	width: 750px;
-	height: 550px;
+	width: 700px;
+	height: 600px;
 	margin: 5px;
 	padding: 5px;
 	float: left;
-	border: solid;
-	border-color: #999;
-	border-width: 1px;
+	background-color: #fff;
+	-moz-border-radius: 25px 10px / 10px 25px;
+	border-radius: 25px 10px / 10px 25px;
+}
+.drawarea_about {
+	width: 700px;
+	height: 600px;
+	margin: 5px;
+	padding:5px;
+	padding-left:10px;
+	float: left;
+	background-color: #fff;
+	-moz-border-radius: 25px 10px / 10px 25px;
+	border-radius: 25px 10px / 10px 25px;
 }
 
 .headnav{
@@ -139,4 +192,28 @@ a:visited {
 	color: #fff;
 	padding-top: 12px;
 	padding-right: 20px;
+}
+
+#units{
+	border: 2px solid #fff;
+	-moz-border-radius: 10px 25px / 25px 10px;
+	border-radius: 10px 25px / 25px 10px;	
+}
+
+#options{
+	border: 2px solid #fff;
+	margin-top:15px;
+	-moz-border-radius: 10px 25px / 25px 10px;
+	border-radius: 10px 25px / 25px 10px;
+}
+
+#savebuttondiv{
+	text-align:center;
+	}
+
+#savebutton{
+	background-color:#F07818;
+	border:none;
+	padding:5px;
+	color:#fff;
 }
