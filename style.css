@@ -122,7 +122,24 @@ body{
 }
 
 .measlabel {
-    display: inline-block;
+    display:inline;
+	font-size: 12px;
+	margin-left: 3px;
+}
+
+input[type=text]{
+	width: 50px;
+	margin: 7px 5px 0 5px;
+	border: none;
+	padding: 2px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+select{
+	padding: 3px;
+	border: none;
+	min-width:100px;
 }
 
 .disabledmeaslabel {
@@ -211,7 +228,7 @@ body{
 	text-align:center;
 	}
 
-#savebutton{
+button{
 	background-color:#F07818;
 	border:none;
 	padding:5px;

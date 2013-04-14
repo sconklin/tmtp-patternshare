@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<!--
+.  .                 .  .                    .               
+|- |-. ,-.   ,-. ,-. |- |- ,-. ,-. ,-.   ,-. |-. ,-. ,-. ,-. 
+|  | | |-'   | | ,-| |  |  |-' |   | |   `-. | | ,-| |   |-' 
+`' ' ' `-'   |-' `-^ `' `' `-' '   ' '   `-' ' ' `-^ '   `-' 
+             |                                               
+-->
+
+<html>
+
+<head>
+	<title>The Pattern Share</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="shortcut icon" href="fav.png" type="image/x-icon" />
+</head>
+</body>
+
+<div class="header-holder">
+	<div class="header">
+		<a href="/"><img src="images/headerlogo.png"/></a>
+		<div class="headnav">
+			<a id="menu" href="index.html">Home</a>
+			<a id="menu" href="measurements.html">Measurements</a>
+			<a id="menu_a" href="patterns.html">Patterns</a>
+			<a id="menu" href="about.html">About</a>
+		</div>
+	</div>
+</div>
+
+<div class="draw-wrapper">
+	<div class="measwrapper">
+		<article class="accordion">
+
+			<section id="pattern">
+			  <h2><a href="#pattern">Pattern</a></h2>
+			  <p>Lorem ipsum dolor sit amet,...</p>
+			</section>
+			
+			<section id="points">
+			  <h2><a href="#points">Points</a></h2>
+			  <p>Lorem ipsum dolor sit amet,...</p>
+			</section>
+			
+			<section id="measurements">
+			  <h2><a href="#measurements">Measurements</a></h2>
+			  <p>Lorem ipsum dolor sit amet,...</p>
+			</section>
+			
+		</article>
+		<div id="savebuttondiv" class="measurements">
+			<button id="savebutton" type="button" onclick="savepattern()"> Save! </button>
+		</div>
+	</div>
+	
+	<div id="drawarea" class="drawarea_about">
+	</div>
+</div>
+
+<script type="text/javascript" src="jquery-1.9.1.js"></script>
+<script type="text/javascript" src="patterndraw.js"></script>
+<script type="text/javascript" src="web.js"></script>
+</body>
+
+</html>

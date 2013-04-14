@@ -95,11 +95,11 @@ $.ajaxSetup({ cache: false }); // Don't cache results from json file loads
 // Load the choices for the Pattern and Measurement select buttons
 // This is from static files now but can be from a database
 console.log("About to load patterns");
-getDataIntoSelect("patterns/pattern_list.json", "SelectP", "Select Pattern");
+getDataIntoSelect("patterns/pattern_list.json", "SelectP", "Select");
 console.log("selpat = " + $("#SelectP").val());
 //patternChangeHandler();
 console.log("About to load measurements");
-getDataIntoSelect("measurements/measurement_list.json", "SelectM", "Select Measurements");
+getDataIntoSelect("measurements/measurement_list.json", "SelectM", "Select");
 //measurementChangeHandler();
 
 function measurementChangeHandler(){
@@ -123,7 +123,7 @@ function measurementChangeHandler(){
 	    var measElTxt="";
 	    for(var mname in md){
 		//console.log(mname + ': ' + md[mname])
-		measElTxt += "<input type=\"text\" size=\"8\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + "<div id=\"" + mname + "-label\" class=\"measlabel\">" + mname + "<br/>" + "</div>";
+		measElTxt += "<input type=\"text\" size=\"8\" class=\"measbox\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + "<div id=\"" + mname + "-label\" class=\"measlabel\">" + mname + "<br/>" + "</div>";
 	    }
 	    measElTxt += "</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
 	    $("#measurements").html(measElTxt);
