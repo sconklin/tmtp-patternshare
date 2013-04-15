@@ -1,0 +1,2 @@
+./startWebServer.sh &
+./startTmtp.sh
