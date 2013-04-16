@@ -444,17 +444,38 @@ window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || 
 window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
 // (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 
-var db = window.indexedDB.open('FriendDB');
+if (!window.indexedDB) {
+    window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.")
+}
 
-if (db.version != '1') {
+var db;
+
+var request = window.indexedDB.open('FriendDB');
+request.onsuccess = function(event) {
+        window.db = this.result;
+		console.log(db);
+		console.log(db.version);
+        //var transaction = db.transaction([], IDBTransaction.READ_ONLY);
+        //var curRequest = transaction.objectStore('ObjectStore Name').openCursor();
+        //curRequest.onsuccess = true;
+    };
+request.onerror = function(event) {
+        switch(event.target.error) {
+               case VersionError:
+                    console.log("The stored database is more recent than the one needed");
+                    break;
+        }
+    };
+
+//if (db.version != '1') {
   // User's first visit, initialize database.
   db.createObjectStore('Friends', // name of new object store
                         'id',      // key path
                         true);     // auto increment?
   db.setVersion('1');
-} else {
+//} else {
   // DB already initialized.
-}
+//}
 
 var store = db.openObjectStore('Friends');
 
@@ -485,9 +506,7 @@ console.log(user.id);
 				  "waist": "120"
 				}
 			}
-		},
-		database: databasev1,
-		storeName:"measurements"
+		}
 	});
 		
     var Book = Backbone.Collection.extend({

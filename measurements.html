@@ -54,40 +54,74 @@
 				  <input type="text" id="customername" placeholder="John Doe" value="John Doe">
 				</div>
 			  </div>
-			  <hr>
+			  <hr>			
 			  <h5>Input your Measures</h5>
-			  <div class="control-group">
-				<label class="control-label" for="inputEmail">Hips</label>
-				<div class="controls">
-				  <input type="text" id="hips" placeholder="100">
+			
+				<div class="accordion" id="accordion2">
+				  <div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+						Measurements #1
+					  </a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse in">
+					  <div class="accordion-inner">
+
+						  <div class="control-group">
+							<label class="control-label" for="inputEmail">Hips</label>
+							<div class="controls">
+							  <input type="text" id="hips" placeholder="100">
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" for="inputEmail">Bust</label>
+							<div class="controls">
+							  <input type="text" id="bust" placeholder="88">
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" for="inputEmail">Waist</label>
+							<div class="controls">
+							  <input type="text" id="waist" placeholder="70">
+							</div>
+						  </div>
+
+					  </div>
+					</div>
+				  </div>
+				  <div class="accordion-group">
+					<div class="accordion-heading">
+					  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+						Measurements #2
+					  </a>
+					</div>
+					<div id="collapseTwo" class="accordion-body collapse">
+					  <div class="accordion-inner">
+						
+						  <div class="control-group">
+							<div class="controls">
+							  <label class="radio">
+								<input type="radio" id="cm" name="units" checked="true" /> Centimeters
+							  </label>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<div class="controls">
+							  <label class="radio">
+								<input type="radio" id="in" name="units" /> Inches
+							  </label>
+							</div>
+						  </div>						
+						
+						
+					  </div>
+					</div>
+				  </div>
 				</div>
-			  </div>
-			  <div class="control-group">
-				<label class="control-label" for="inputEmail">Bust</label>
-				<div class="controls">
-				  <input type="text" id="bust" placeholder="88">
-				</div>
-			  </div>
-			  <div class="control-group">
-				<label class="control-label" for="inputEmail">Waist</label>
-				<div class="controls">
-				  <input type="text" id="waist" placeholder="70">
-				</div>
-			  </div>
-			  <div class="control-group">
-				<div class="controls">
-				  <label class="radio">
-					<input type="radio" id="cm" name="units" checked="true" /> Centimeters
-				  </label>
-				</div>
-			  </div>
-			  <div class="control-group">
-				<div class="controls">
-				  <label class="radio">
-					<input type="radio" id="in" name="units" /> Inches
-				  </label>
-				</div>
-			  </div>
+			
+			
+
+
 			  <div class="control-group">
 				<div class="controls">
 				  <button id="submit" type="submit" class="btn">Save measures</button>
@@ -102,6 +136,7 @@
 </div>
 
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/underscore-min.js"></script>
 <script type="text/javascript" src="js/backbone.js"></script>
 <script type="text/javascript" src="js/backbone-indexeddb.js"></script>
