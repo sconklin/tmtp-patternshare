@@ -1,0 +1,100 @@
+    {
+        "customername": { "value":"Susan",  "type":"string", "gui_text":"Client Name"},
+        "measureunit": { "value":"cm", "type":"string", "gui_text":"Measurement Unit (in or cm)"},
+
+        "neck_circumference": { "value":"0", "type":"float", "gui_text":"Neck Circumference"},
+        "neck_width": { "value":"16.5", "type":"float", "gui_text":"Neck Width"},
+
+        "underarm_circumference": { "value":"101", "type":"float", "gui_text":"Underarm Circumference"},
+        "front_underarm_width": { "value":"50.5", "type":"float", "gui_text":"Front Underarm Width"},
+        "front_underarm_height": { "value":"9", "type":"float", "gui_text":"Front Underarm Height"},
+        "back_underarm_width": { "value":"50.5", "type":"float", "gui_text":"Back Underarm Width"},
+        "back_underarm_height": { "value":"24", "type":"float", "gui_text":"Back Underarm Height"},
+
+        "across_chest": { "value":"37", "type":"float", "gui_text":"Across Chest - Narrowest point between arms across front"},
+        "across_chest_height": { "value":"0", "type":"float", "gui_text":"Across Chest Height - Front Neck to Across Chest line"},
+        "across_chest_balance": { "value":"19.5", "type":"float", "gui_text":"Across Chest Balance - Front Neck to Shoulder Tip"},
+        "across_back": { "value":"35", "type":"float", "gui_text":"Across Back - Narrowest point between arms across back"},
+        "across_back_height": { "value":"19.5", "type":"float", "gui_text":"Across Back Height - Nape to Across Back line"},
+        "across_back_balance": { "value":"19", "type":"float", "gui_text":"Across Back Balane - Nape to Shoulder Tip"},
+
+        "bust_circumference": { "value":"102", "type":"float", "gui_text":"Bust Circumference"},
+        "front_bust_width": { "value":"51.5", "type":"float", "gui_text":"Front Bust Width-- from Side-to-Side across front"},
+        "front_bust_height": { "value":"18", "type":"float", "gui_text":"Bust Height"},
+        "bust_point_distance": { "value":"20.5", "type":"float", "gui_text":"Front Bust Points Distance"},
+        "bust_underarm_height": { "value":"7", "type":"float", "gui_text":"Bust Height"},
+        "back_bust_width": { "value":"47.5", "type":"float", "gui_text":"Back Bust Width"},
+        "back_bust_height": { "value":"29", "type":"float", "gui_text":"Back Bust Width"},
+
+        "underbust_circumference": { "value":"0", "type":"float", "gui_text":"Underbust Circumference"},
+        "front_underbust_width": { "value":"45", "type":"float", "gui_text":"Front Underbust Width"},
+        "front_underbust_height": { "value":"23", "type":"float", "gui_text":"Front Underbust Height"},
+        "front_underbust_length": { "value":"15.5", "type":"float", "gui_text":"Front Underbust Length"},
+        "side_underbust_height": { "value":"11", "type":"float", "gui_text":"Side Underbust Height"},
+        "back_underbust_width": { "value":"45", "type":"float", "gui_text":"Back Underbust Width"},
+        "back_underbust_length": { "value":"8", "type":"float", "gui_text":"Back Underbust Length"},
+
+        "shoulder": { "value":"13", "type":"float", "gui_text":"Shoulder Seam Length - from Neck side to Shoulder tip"},
+        "front_shoulder_height": { "value":"51", "type":"float", "gui_text":"Front Shoulder Height - from Neck side to Waistline down Front"},
+        "front_shoulder_width": { "value":"0", "type":"float", "gui_text":"Front Shoulder Width - from Shoulder tip to Shoulder tip across Front"},
+        "back_shoulder_height": { "value":"0", "type":"float", "gui_text":"Back Shoulder Height - from Neck side to Waistline down Back"},
+        "back_shoulder_width": { "value":"0", "type":"float", "gui_text":"Back Shoulder Width - from Shoulder tip to Shoulder tip across Back"},
+
+        "side": { "value":"21.5", "type":"float", "gui_text":"Side Length"},
+
+        "front_neck_balance": { "value":"51", "type":"float", "gui_text":"Front Waist to Side Neck"},
+        "front_shoulder_balance": { "value":"48.5", "type":"float", "gui_text":"Front Waist to Shoulder Tip"},
+        "front_waist_balance": { "value":"41.5", "type":"float", "gui_text":"Front Neck to Side Waist"},
+        "back_neck_balance": { "value":"45", "type":"float", "gui_text":"Back Waist to Side Neck"},
+        "back_shoulder_balance": { "value":"44.5", "type":"float", "gui_text":"Back Waist to Shoulder Tip"},
+        "back_waist_balance": { "value":"51", "type":"float", "gui_text":"Nape to Side Waist"},
+
+        "waist_circumference": { "value":"92.7", "type":"float", "gui_text":"Waist Circumference"},
+        "front_waist_width": { "value":"48", "type":"float", "gui_text":"Front Waist Width, Center-to-Side"},
+        "front_waist_length": { "value":"39", "type":"float", "gui_text":"Front Waist Length"},
+        "back_waist_width": { "value":"45.5", "type":"float", "gui_text":"Back Waist Width, Center-to-Side"},
+        "back_waist_length": { "value":"43.5", "type":"float", "gui_text":"Back Waist Length"},
+
+        "armscye_height": { "value":"0", "type":"float", "gui_text":"Armsye Height"},
+        "armscye_width": { "value":"0", "type":"float", "gui_text":"Armsye Width"},
+
+        "overarm_length": { "value":"0", "type":"float", "gui_text":"Overarm Length"},
+        "underarm_length": { "value":"0", "type":"float", "gui_text":"Underarm Length"},
+        "arm_sleeve_top_offset": { "value":"0", "type":"float", "gui_text":"Arm Circumference"},
+        "arm_sleevecap_width": { "value":"0", "type":"float", "gui_text": "Arm Sleevecap Width"},
+        "arm_circumference": { "value":"0", "type":"float", "gui_text":"Arm Circumference"},
+        "elbow_circumference": { "value":"0", "type":"float", "gui_text":"Elbow Circumference"},
+        "wrist_circumference": { "value":"0", "type":"float", "gui_text":"Wrist Circumference"},
+        "hand_circumference": { "value":"0", "type":"float", "gui_text":"Hand Circumference"},
+
+        "hip_circumference": { "value":"116", "type":"float", "gui_text":"Hip Circumference"},
+        "front_hip_width": { "value":"51", "type":"float", "gui_text":"Front Hip Width, Side-to-Side"},
+        "front_hip_length": { "value":"21", "type":"float", "gui_text":"Front Hip Length"},
+        "back_hip_width": { "value":"65", "type":"float", "gui_text":"Back Hip Width, Side-to-Side"},
+        "back_hip_length": { "value":"26", "type":"float", "gui_text":"Back Hip Length"},
+        "side_hip_length": { "value":"23", "type":"float", "gui_text":"Side Hip length"},
+        "pelvic_distance":{ "value":"27", "type":"float", "gui_text":"Distance between pelvic bones" },
+
+        "front_rise": { "value":"24", "type":"float", "gui_text":"Front Rise"},
+        "side_rise": { "value":"28", "type":"float", "gui_text":"Side Rise"},
+        "back_rise": { "value":"24", "type":"float", "gui_text":"Rise"},
+
+        "crotch_length": { "value":"0", "type":"float", "gui_text":"Crotch  Length - Front Waist around to Back Waist"},
+        "front_crotch_length": { "value":"0", "type":"float", "gui_text":"Crotch Length Front - Front Waist to lowest point of crotch"},
+        "back_crotch_length": { "value":"0", "type":"float", "gui_text":"Crotch Length Front - Back Waist to lowest point of crotch"},
+        "front_crotch_extension": { "value":"0", "type":"float", "gui_text":"Crotch Front Extension"},
+        "back_crotch_extension": { "value":"0", "type":"float", "gui_text":"Crotch Back Extension"},
+
+        "outseam": { "value":"107", "type":"float", "gui_text":"Outside Leg length --> Waist to Floor"},
+        "inseam": { "value":"79", "type":"float", "gui_text":"Inside Leg length --> Crotch to Floor"},
+
+        "thigh_circumference": { "value":"0", "type":"float", "gui_text":"Thigh Circumference"},
+        "front_thigh_width": { "value":"0", "type":"float", "gui_text":"Front Thigh Width"},
+        "back_thigh_width": { "value":"0", "type":"float", "gui_text":"Back Thigh Width"},
+
+        "knee_circumference": { "value":"0", "type":"float", "gui_text":"Knee Circumference"},
+        "calve_circumference": { "value":"0", "type":"float", "gui_text":"Calve Circumference"},
+        "ankle_circumference": { "value":"0", "type":"float", "gui_text":"Ankle circumference"},
+        "foot_circumference": { "value":"0", "type":"float", "gui_text":"Foot circumference" }
+
+  }
