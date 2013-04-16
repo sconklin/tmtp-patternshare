@@ -3,14 +3,14 @@ body, select, input, textarea {
 	color: #777;
 }
 
-a:link {
+/*a:link {
 	color:#fff;
 	text-decoration: none;
 }
 a:visited {
 	color:#fff;
 	text-decoration: none;
-}
+}*/
 
 a#menu{
 	border-left: 2px solid #F0A830;
@@ -104,20 +104,21 @@ body{
 }
 
 .draw-wrapper {
-	width: 930px;
-	height: 700px;
+	/*width: 930px;
+	height: 700px;*/
 	margin: 0 auto;
 	background-color: #FCEBB6;
 }
 
 .measwrapper {
-	width: 190px;
+	/*width: 190px;
 	float: left;
-	margin-right:10px;
+	margin-right:10px;*/
 	background-color: #5E412F;
 	-moz-border-radius: 25px 10px / 10px 25px;
 	border-radius: 25px 10px / 10px 25px;
-	padding:10px 0;
+	padding:10px;
+	width: 170px;
 
 }
 
@@ -175,20 +176,22 @@ select{
 
 .measurements {
 	font-size: 10px;
-	margin: 5px;
-	padding: 5px;
+	/*margin: 5px;
+	padding: 5px;*/
 	color: #fff;	
 }
 
 .drawarea {
-	width: 700px;
+	/*width: 700px;
 	height: 600px;
 	margin: 5px;
 	padding: 5px;
-	float: left;
+	float: left;*/
 	background-color: #fff;
 	-moz-border-radius: 25px 10px / 10px 25px;
 	border-radius: 25px 10px / 10px 25px;
+	padding: 15px;
+	min-height: 500px;
 }
 .drawarea_about {
 	width: 700px;

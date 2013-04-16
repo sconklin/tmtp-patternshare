@@ -436,6 +436,7 @@
 	
 	];
 
+
 // In the following line, you should include the prefixes of implementations you want to test.
 window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 // DON'T use "var indexedDB = ..." if you're not in a function.
@@ -449,62 +450,83 @@ if (!window.indexedDB) {
 }
 
 var db;
-
-var request = window.indexedDB.open('FriendDB');
-request.onsuccess = function(event) {
-        window.db = this.result;
-		console.log(db);
-		console.log(db.version);
-        //var transaction = db.transaction([], IDBTransaction.READ_ONLY);
-        //var curRequest = transaction.objectStore('ObjectStore Name').openCursor();
-        //curRequest.onsuccess = true;
-    };
+var request = window.indexedDB.open('TauMetaTauDB', '1');
 request.onerror = function(event) {
         switch(event.target.error) {
                case VersionError:
                     console.log("The stored database is more recent than the one needed");
                     break;
         }
-    };
+};
+request.onupgradeneeded = function(event) {
+		// onupgradeneeded event: new version or new database: 
+		// first time accessed: create the stores, layout the structure for the DB
 
-//if (db.version != '1') {
-  // User's first visit, initialize database.
-  db.createObjectStore('Friends', // name of new object store
-                        'id',      // key path
-                        true);     // auto increment?
-  db.setVersion('1');
-//} else {
-  // DB already initialized.
-//}
-
-var store = db.openObjectStore('Friends');
-
-var user = store.put({name: 'Eric',
-                       gender: 'male',
-                       likes: 'html5'});
-
-console.log(user.id);
+        db = event.target.result;
+		console.log(db);
+		console.log(db.version);
+		//db.setVersion('1');
+		var store = db.createObjectStore('Measurements', 			// name of new object store
+										 {keyPath: 'name',      	// key path
+										 autoIncrement: true});     // auto increment?*/
+		console.log("store created: "+store.name);
 		
-	
+		/*if (db.version == 1) {
+			// User's first visit, initialize database.
+			//db.setVersion('1');
+			var store = db.createObjectStore('Measurements', // name of new object store
+											 'id',      // key path
+											 true);     // auto increment?
+			console.log("store created");
+			var user = store.put({name: 'Eric',
+								   gender: 'male',
+								   likes: 'html5'});
+
+			console.log(user.id);			
+		} else {
+			// DB already initialized.
+		}*/
+        //var transaction = db.transaction([], IDBTransaction.READ_ONLY);
+        //var curRequest = transaction.objectStore('ObjectStore Name').openCursor();
+        //curRequest.onsuccess = true;
+};
+/*request.onsuccess = function(event) {
+		var db = event.target.result;
+		console.log(db);
+		var transaction = db.transaction(['Measurements'],'readwrite');
+		transaction.oncomplete = function(event){
+			console.log('transaction done');
+		};
+		transaction.onerror = function(event){
+			// OHIO....
+		};
+		var objectStore = transaction.objectStore('Measurements');
+		for (var i in measurements) {
+			var request = objectStore.add(measurements[i]);
+			request.onsuccess = function(event){
+				// whatever
+			};
+		}
+		
+};*/
+
+
+
 
     var Pattern = Backbone.Model.extend({
-        urlRoot: '/pattern',
-		defaults: {                                         // the "default" property of the Model class
+        urlRoot: 'pattern',
+		defaults: {                     // the "defaults" property of the Model class
             name: ''
         }
     });
 	
 	var Measurement = Backbone.Model.extend({
-		urlRoot: 'pattern',
+		urlRoot: 'measurement',
 		defaults: {
 			"clientdata": {
-				"customername": "Man1",
+				"customername": "",
 				"units": "cm",
-				"measurements": {
-				  "hips": "130",
-				  "bust": "100",
-				  "waist": "120"
-				}
+				"measurements": universal.clientdata.measurements
 			}
 		}
 	});
@@ -519,84 +541,137 @@ console.log(user.id);
     
 	var MeasurementView = Backbone.View.extend({
 		el: 'form#measurementInput',
+		template: $("#inputTemplate").html(),
+		
 		initialize: function(){
-			console.log('measurementview initialized');
-			console.log(this.$el);
+			//console.log('measurementview initialized');
+			//console.log(this.$el);
 			this.model = new Measurement();
+			this.render();
+		},
+		render: function(){
+			var tmpl = _.template(this.template);
+			this.$el.find('#drawarea').html(tmpl({'data': universal.clientdata.measurements}));
+
+			
+			/***********************************************************
+			
+			THIS DOESN'T BELONG HERE
+			
+			***********************************************************
+			
+			var request = window.indexedDB.open('TauMetaTauDB', '1');
+			request.onerror = function(event) {
+				//blablabla
+				console.log('OOOOOOO');
+			};
+			request.onsuccess = function(event) {
+				var db = event.target.result;
+					//console.log(db);
+				var transaction = db.transaction(['Measurements']);
+
+				var objectStore = transaction.objectStore('Measurements');
+				//console.log(objectStore);
+				//var request = objectStore.add(model.attributes);
+				var request = objectStore.get('Paul');
+				request.onsuccess = function(event){
+					// whatever
+					console.log('successful request for a key');
+					console.log(request.result.clientdata);
+					//console.log('WAHSHTIER');
+				};
+				request.onerror = function(event){
+					console.log('OHIO');
+				};
+				
+				
+				var req = objectStore.openCursor();
+				req.onsuccess = function(event) {
+					var cursor = event.target.result;
+					console.log(cursor);
+					if(cursor){
+						var getreq = objectStore.get(cursor.key);
+						getreq.onsuccess = function() {
+							console.log('key: ', cursor.key, 'value: ', getreq.result);
+							var $name = $('<p />').text(cursor.key);
+							$('#customers').append($name);
+							cursor.continue();
+						};
+					}
+				};
+			};			
+			
+			/*******************************************************************/
+			
+			return this;
+			
 		},
 		events: {
-			'click #submit': 'saveToLocal'
+			'click #saveMeasurements': 'saveData'
 		},
-		saveToLocal: function(e){
+		saveData: function(e){
 			e.preventDefault();
-				console.log('save to local');
-			this.model.get('clientdata').customername = this.$el.find('#customername').val();
-				console.log(this.model);
-			this.model.get('clientdata').units = $("input[name=units]:checked").attr('id');
-			localStorage.setItem('measurement',JSON.stringify(this.model));
-			this.model.save();
+			var model = this.model;
+			var $form = this.$el;
+
+			// update model
+			model.set('name', this.$el.find('#customername').val());
+			model.get('clientdata').customername = this.$el.find('#customername').val();
+			model.get('clientdata').units = $("input[name=units]:checked").attr('id');
+			var measurements = model.get('clientdata').measurements;
+			for (var part in measurements){
+				for (var j in measurements[part]) {
+					var newVal = $form.find('#'+j).val();
+					measurements[part][j].val = newVal ? newVal : measurements[part][j].val;
+				}
+			}
+			
+			// localStorage
+			measurementList = localStorage.getItem('measurementList') ? JSON.parse(localStorage.getItem('measurementList')) : [];
+			if (measurementList.indexOf(model.get('name'))<0) measurementList.push(model.get('name'));
+			localStorage.setItem('measurementList',JSON.stringify(measurementList));
+			localStorage.setItem(model.get('name'),JSON.stringify(model));
+			
+			// HTTP save to server
+			model.save();
+			
+
+			/********************************************************************
+			
+			THIS PART NEEDS WOME WORK
+
+			*********************************************************************/
+			
+			// indexedDB
+			var request = window.indexedDB.open('TauMetaTauDB', '1');
+			request.onerror = function(event) {
+				//blablabla
+			};
+			request.onsuccess = function(event) {
+				var db = event.target.result;
+				var transaction = db.transaction(['Measurements'],'readwrite');
+				transaction.oncomplete = function(event){
+					console.log('transaction done');
+				};
+				transaction.onerror = function(event){
+					// OHIO....
+				};
+				var objectStore = transaction.objectStore('Measurements');
+				//console.log(objectStore);
+				//var request = objectStore.add(model.attributes);
+				var request = objectStore.put(model.attributes);
+				request.onsuccess = function(event){
+					// whatever
+				};
+			};
+			
+			/********************************************************************/
+			
 		}
 		
 	});
 	
-    var PatternView = Backbone.View.extend({
-        tagName:    "button",
-        //className:  "contact-container",
-        //template:   $('#contactTemplate').html(),
-        
-        render: function () {
-            //var tmpl = _.template(this.template);           // store _.template() function for future reference
-            
-            //this.$el.html(tmpl(this.model.toJSON()));       // interpolate data in template, then insert in this view's element's html
-            //this.$el.html(this.model.toJSON());       
-            this.$el.html(this.model.get('pattern').title);       
-            return this;                                    // convenient for chaining
-        },
-		
-		events: {
-			"click": "saveToLocal"
-		},
-		
-		saveToLocal: function(){
-			console.log('save to localstorage!');
-			window.localStorage.setItem(this.model.get('pattern').title+'-'+(new Date()).toISOString(),JSON.stringify(this.model));
-		}/*,
-        
-        events: {
-            "click button.delete": "deleteContact"
-        }*/
-    });
-    
-    var BookView = Backbone.View.extend({
-        el:     $('#patterns'),
-        
-        initialize: function () {
-			this.$el.empty();
-            this.collection = new Book(patterns);
-			this.render();
-            //this.$el.find('#filter').append(this.createSelect());
-            //this.on("change:filterType", this.filterByType, this);
-            //this.collection.on("reset", this.render, this);
-            //this.collection.on("add", this.renderContact, this);
-        },
-        
-        render: function () {
-            var that = this;
-            //this.$el.find('article').remove();
-            _.each(this.collection.models, function (item){
-                that.renderPattern(item); 
-            }, this);
-        },
-        
-        renderPattern: function (item) {
-            var patternView = new PatternView({
-                model:  item
-            });
-            this.$el.append(patternView.render().el);
-        }
-    });
-    
-    var ContactsRouter = Backbone.Router.extend({
+    var TauMetaTauRouter = Backbone.Router.extend({
         routes: {
             "filter/:type": "urlFilter"
         },
@@ -607,10 +682,9 @@ console.log(user.id);
         }
     });
     
-    var book = new BookView();
-	var measures = new MeasurementView();
+    var measures = new MeasurementView();
     
-    var contactsRouter = new ContactsRouter();
+    var taumetarouter = new TauMetaTauRouter();
     
     Backbone.history.start();
 		
