@@ -270,7 +270,7 @@
 	
 	var pageView = Backbone.View.extend({
 		el: 'div.draw-wrapper',
-		template: $("#aboutTemplate").html(),
+		//template: $("#aboutTemplate").html(),
 		render: function(){
 			
 			var tmpl = _.template(this.template);
@@ -289,8 +289,8 @@
             "filter/:type": "urlFilter",
 			"measurements": "measurementsForm",
 			"about":		"aboutPage",
-			"patterns":		"aboutPage",
-			"":				"aboutPage"
+			"patterns":		"patternsPage",
+			"":				"roadmapPage"
         },
         
         urlFilter: function (type) {
@@ -305,13 +305,24 @@
 		aboutPage: function() {
 			about.render();  
 		},
+		roadmapPage: function() {
+			roadmap.render();  
+		},
+		patternsPage: function() {
+			patterns.render();  
+		}
 		
 		
     });
     
     var measurements = new MeasurementView();
 	var about = new pageView();
-    
+	about.template = $("#aboutTemplate").html();
+    var roadmap = new pageView();
+    roadmap.template = $("#roadmapTemplate").html();
+    var patterns = new pageView();
+    patterns.template = $("#patternsTemplate").html();
+	
     var taumetarouter = new TauMetaTauRouter();
     
     Backbone.history.start();
