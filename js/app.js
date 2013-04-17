@@ -286,11 +286,12 @@
 	
     var TauMetaTauRouter = Backbone.Router.extend({
         routes: {
-            "filter/:type": "urlFilter",
-			"measurements": "measurementsForm",
-			"about":		"aboutPage",
+//			"search/:query/p:page": "search"   // #search/kiwis/p7   	GENERAL FORMAT: "query" and "page" can be passed 
+//																		as arguments for the callback function 
+            "":				"roadmapPage",
+			"measurements": "measurementsPage",
 			"patterns":		"patternsPage",
-			"":				"roadmapPage"
+			"about":		"aboutPage"
         },
         
         urlFilter: function (type) {
@@ -298,30 +299,31 @@
             directory.trigger("change:filterType");
         },
 		
-		measurementsForm: function() {
-			measurements.render(currentMeasurement.clientdata);  
-		},
-
-		aboutPage: function() {
-			about.render();  
-		},
 		roadmapPage: function() {
 			roadmap.render();  
 		},
+		measurementsPage: function() {
+			measurements.render(currentMeasurement.clientdata);  
+		},
 		patternsPage: function() {
 			patterns.render();  
-		}
-		
+		},
+		aboutPage: function() {
+			about.render();  
+		},
 		
     });
     
-    var measurements = new MeasurementView();
-	var about = new pageView();
-	about.template = $("#aboutTemplate").html();
+
     var roadmap = new pageView();
     roadmap.template = $("#roadmapTemplate").html();
+    var measurements = new MeasurementView();
+	//// PATTERNS WILL GET THEIR OWN VIEW, 
     var patterns = new pageView();
     patterns.template = $("#patternsTemplate").html();
+	//// PATTERNS WILL GET THEIR OWN VIEW,
+	var about = new pageView();
+	about.template = $("#aboutTemplate").html();
 	
     var taumetarouter = new TauMetaTauRouter();
     
