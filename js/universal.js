@@ -1,6 +1,6 @@
 var universal = {
 	"clientdata": {
-		"customername": "Woman1",
+		"customername": "",
 		"units": "cm",
 		"measurements": {
 			"girth":{

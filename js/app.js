@@ -1,517 +1,142 @@
 //(function ($) {
-    var patterns = [
-{
-"pattern": {
-  "title": "Men's Shirt Block",
-  "defaults": [ "40", "100", "24.4", "44.6", "40", "85", "81" ],
-  "measurements": [ "neck", "chest", "armscye_depth", "waist_length", "back_width", "sleeve_length", "shirt_length" ], 
-  "main": [
-    {
-      "id": "outline",
-      "type": "path",
-      "d": [
-        ["m", ["0","0"] ],
-        ["L", ["pt.G.x","pt.G.y"] ],
-        ["L", ["pt.H.x","pt.H.y"] ],
-        ["L", ["pt.V.x","pt.V.y"] ],
-        ["C", ["pt.Vout.x","pt.Vout.y"], ["pt.Win.x","pt.Win.y"], ["pt.W.x","pt.W.y"] ],
-        ["L", ["pt.Y.x","pt.Y.y"] ],
-        ["C", ["pt.Yout.x","pt.Yout.y"], ["pt.Lin.x","pt.Lin.y"], ["pt.L.x","pt.L.y"] ],
-        ["C", ["pt.Lout.x","pt.Lout.y"], ["pt.Min.x","pt.Min.y"], ["pt.M.x","pt.M.y"] ],
-        ["C", ["pt.Mout.x","pt.Mout.y"], ["pt.Qin.x","pt.Qin.y"], ["pt.Q.x","pt.Q.y"] ],
-        ["C", ["pt.Qout.x","pt.Qout.y"], ["pt.Uin.x","pt.Uin.y"], ["pt.U.x","pt.U.y"] ],
-        ["L", ["pt.S.x","pt.S.y"] ],
-        ["C", ["pt.Sout.x","pt.Sout.y"], ["pt.Ain.x","pt.Ain.y"], ["pt.A.x","pt.A.y"] ],
-        ["z"]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
-    },
-    {
-      "id": "sleeve",
-        "type": "path",
-        "d": [
-          ["M", ["pt.l.x","pt.l.y"] ],
-          ["L", ["pt.b.x","pt.b.y"] ],
-          ["L", ["pt.i.x","pt.i.y"] ],
-          ["L", ["pt.j.x","pt.j.y"] ],
-          ["L", ["pt.k.x","pt.k.y"] ],
-          ["L", ["pt.q.x","pt.q.y"] ],
-          ["L", ["pt.s.x","pt.s.y"] ],
-          ["L", ["pt.m.x","pt.m.y"] ],
-          ["L", ["pt.p.x","pt.p.y"] ],
-          ["z"]
-        ],
-        "drawattr": {},
-        "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
-    }
-  ],
-  "construction": [
-    {
-      "id": "armscye line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.B.x","pt.B.y"] ],
-        ["L", ["pt.C.x","pt.C.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "waist line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.E.x","pt.E.y"] ],
-        ["L", ["pt.F.x","pt.F.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "mid line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.M.x","pt.M.y"] ],
-        ["L", ["pt.O.x","pt.O.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "elbow line",
-      "type": "path",
-      "d": [
-        ["M", ["pt.k.x","pt.z.y"] ],
-        ["L", ["pt.l.x","pt.z.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "arm line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.i.x","pt.i.y"] ],
-        ["L", ["pt.m.x","pt.m.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "arm hole for sleeve",
-      "type": "path",
-      "d": [
-        ["M", ["pt.g.x","pt.g.y"] ],
-        ["L", ["pt.e.x","pt.e.y"] ],
-        ["L", ["pt.h.x","pt.h.y"] ],
-        ["L", ["pt.b.x","pt.b.y"] ],
-        ["L", ["pt.f.x","pt.f.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    }
-  ],
-  "points": {
-    "A": { "x": "0", "y": "0" },
-    "B": { "x": "0", "y": "1.1*meas.armscye_depth" },
-    "C": { "x": ".58*meas.chest", "y": "pt.B.y" },
-    "D": { "x": "pt.C.x", "y": "0" },
-    "E": { "x": "0", "y": "1.02*meas.waist_length" },
-    "F": { "x": "pt.C.x", "y": "1.02*meas.waist_length" },
-    "G": { "x": "0", "y": "1.01*meas.shirt_length" },
-    "H": { "x": "pt.C.x", "y": "pt.G.y" },
-    "I": { "x": ".563*meas.back_width", "y": "pt.B.y" },
-    "J": { "x": "pt.I.x", "y": "pt.A.y" },
-    "K": { "x": ".348*meas.chest", "y": "pt.B.y" },
-    "L": { "x": "pt.K.x", "y": "pt.K.y-.143*meas.armscye_depth" },
-    "M": { "x": "(pt.K.x+pt.I.x)/2-(.005*meas.chest)", "y": "pt.K.y" },
-    "N": { "x": "pt.M.x", "y": "pt.E.y" },
-    "O": { "x": "pt.M.x", "y": "pt.G.y" },
-    "P": { "x": "pt.A.x", "y": ".54*meas.armscye_depth" },
-    "Q": { "x": "pt.I.x", "y": "pt.P.y" },
-    "R": { "x": ".188*meas.neck", "y": "0" },
-    "S": { "x": "pt.R.x", "y": "-0.05*meas.neck" },
-    "T": { "x": "pt.I.x", "y": "pt.Q.y-.414*meas.armscye_depth" },
-    "U": { "x": "pt.T.x+.0875*meas.back_width", "y": "pt.T.y" },
-    "V": { "x": "pt.D.x", "y": "pt.D.y+.2*meas.neck" },
-    "W": { "x": "pt.V.x-.175*meas.neck", "y": "pt.D.y" },
-    "X": { "x": "pt.U.x", "y": "pt.U.y+.082*meas.armscye_depth" },
-    "Y": { "x": "pt.W.x-Math.sqrt((((pt.U.x-pt.S.x)*(pt.U.x-pt.S.x))+((pt.U.y-pt.S.y)*(pt.U.y-pt.S.y)))-(pt.X.y*pt.X.y))", "y": "pt.X.y" },
-    "Ain":  { "x": "(pt.A.x+pt.S.x)/2", "y": "pt.A.y" },
-    "Lin":  { "x": "pt.L.x+(dist(pt.L,pt.Y)/3)*Math.cos(angleBetween(pt.M,pt.Y))", "y": "pt.L.y+(dist(pt.L,pt.Y)/3)*Math.sin(angleBetween(pt.M,pt.Y))" },
-    "Lout": { "x": "pt.L.x+(dist(pt.L,pt.M)/3)*Math.cos(angleBetween(pt.M,pt.Y)+Math.PI)", "y": "pt.L.y+(dist(pt.L,pt.M)/3)*Math.sin(angleBetween(pt.M,pt.Y)+Math.PI)" },
-    "Min":  { "x": "pt.M.x+(pt.L.x-pt.M.x)/3", "y": "pt.M.y"},
-    "Mout": { "x": "pt.Q.x", "y": "pt.M.y"},
-    "Qin":  { "x": "pt.Q.x", "y": "pt.Q.y" },
-    "Qout": { "x": "pt.Q.x", "y": "pt.Q.y" },
-    "Sout": { "x": "pt.S.x", "y": "pt.S.y/2" },
-    "Uin":  { "x": "pt.Q.x", "y": "pt.U.y+(dist(pt.Q,pt.U)/2)" },
-    "Vout": { "x": "pt.V.x-((pt.V.x-pt.W.x)/2)", "y": "pt.V.y" },
-    "Win":  { "x": "pt.W.x", "y": "pt.W.y+((pt.V.y-pt.W.y)/2)" },
-    "Yout": { "x": "pt.L.x", "y": "pt.Y.y+(dist(pt.L,pt.Y)/3)" },
 
-    "slshift":  { "x": "1.25*pt.C.x-pt.A.x", "y": "0" },
-    "a": { "x": "pt.slshift.x + pt.K.x", "y": "pt.K.y" },
-    "b": { "x": "pt.slshift.x + pt.L.x", "y": "pt.L.y" },
-    "armsclen": { "x": "bezierLength(pt.Y,pt.Yout,pt.Lin,pt.L) + bezierLength(pt.L,pt.Lout,pt.Min,pt.M) + bezierLength(pt.M,pt.Mout,pt.Qin,pt.Q) + bezierLength(pt.Q,pt.Qout,pt.Uin,pt.U)", "y": "0" },
-    "c": { "x": "pt.a.x", "y": "pt.a.y - pt.armsclen.x/3" },
-    "d": { "x": "pt.a.x", "y": "pt.a.y - pt.armsclen.x/6" },
-    "e": { "x": "pt.slshift.x + pt.Q.x", "y": "pt.d.y" },
-    "f": { "x": "pt.slshift.x + pt.Y.x", "y": "pt.Y.y" },
-    "g": { "x": "pt.slshift.x + pt.U.x", "y": "pt.U.y" },
-    "h": { "x": "pt.slshift.x + pt.M.x", "y": "pt.M.y" },
-    "i": { "x": "pt.b.x - Math.sqrt( 1.1*dist(pt.b,pt.f)*1.1*dist(pt.b,pt.f) - (pt.b.y-pt.c.y)*(pt.b.y-pt.c.y) )", "y": "pt.c.y" },
-    "j": { "x": "pt.i.x - Math.sqrt( 1.1*dist(pt.e,pt.g)*1.1*dist(pt.e,pt.g) - (pt.d.y-pt.c.y)*(pt.d.y-pt.c.y) )", "y": "pt.d.y" },
-    "k": { "x": "pt.j.x - Math.sqrt( 1.1*dist(pt.e,pt.h)*1.1*dist(pt.e,pt.h) - (pt.a.y-pt.d.y)*(pt.a.y-pt.d.y) )", "y": "pt.a.y" },
-    "l": { "x": "pt.a.x + Math.sqrt( 1.1*dist(pt.b,pt.h)*1.1*dist(pt.b,pt.h) - (pt.h.y-pt.b.y)*(pt.h.y-pt.b.y) )", "y": "pt.a.y" },
-    "m": { "x": "pt.i.x", "y": "pt.i.y + 1*meas.sleeve_length" },
-    "n": { "x": "pt.l.x", "y": "pt.m.y" },
-    "o": { "x": "pt.k.x", "y": "pt.m.y" },
-    "p": { "x": "pt.n.x - .1*(pt.n.x-pt.o.x)", "y": "pt.n.y" },
-    "q": { "x": "pt.o.x + .1*(pt.n.x-pt.o.x)", "y": "pt.o.y" },
-    "r": { "x": "(pt.q.x+pt.m.x)/2", "y": "pt.m.y" },
-    "s": { "x": "pt.r.x", "y": "pt.r.y + .02*(pt.n.x-pt.o.x)" },
-    "t": { "x": "pt.r.x", "y": "pt.s.y - .2*(pt.n.x-pt.o.x)" },
-    "z": { "x": "pt.l.x", "y": "(pt.l.y+pt.n.y)/2" }
-  }
-}
-},
-
-{
-"pattern": {
-  "title": "Women's Basic Bodice Block",
-  "defaults": [ "88", "70", "21", "12", "41", "37", "34", "20.6", "32.4", "7" ],
-  "measurements": [ "bust", "waist", "armscye_depth", "shoulder", "nape_to_waist", "neck", "back_width", "waist_to_hip", "chest_width", "bust_dart_width" ], 
-  "main": [
-    {
-      "id": "outline",
-      "type": "path",
-      "d": [
-        ["m", ["pt.A.x","pt.A.y"] ],
-        ["L", ["pt.E.x","pt.E.y"] ],
-        ["L", ["pt.Ql.x","pt.Ql.y"] ],
-        ["L", ["pt.P.x","pt.P.y"] ],
-        ["L", ["pt.Qr.x","pt.Qr.y"] ],
-        ["L", ["pt.AAl.x","pt.AAl.y"] ],
-        ["L", ["pt.Z.x","pt.Z.y"] ],
-        ["L", ["pt.AAr.x","pt.AAr.y"] ],
-        ["L", ["pt.Vl.x","pt.Vl.y"] ],
-        ["L", ["pt.BP.x","pt.BP.y"] ],
-        ["L", ["pt.Vr.x","pt.Vr.y"] ],
-        ["L", ["pt.F.x","pt.F.y"] ],
-        ["L", ["pt.S.x","pt.S.y"] ],
-        ["L", ["pt.R.x","pt.R.y"] ],
-        ["L", ["pt.U.x","pt.U.y"] ],
-        ["L", ["pt.W.x","pt.W.y"] ],
-        ["L", ["pt.X.x","pt.X.y"] ],
-        ["L", ["pt.Y.x","pt.Y.y"] ],
-        ["L", ["pt.Tdiag.x","pt.Tdiag.y"] ],
-        ["L", ["pt.Z.x","pt.Z.y"] ],
-        ["L", ["pt.Ldiag.x","pt.Ldiag.y"] ],
-        ["L", ["pt.N.x","pt.N.y"] ],
-        ["L", ["pt.I.x","pt.I.y"] ],
-        ["L", ["pt.Jd1.x","pt.Jd1.y"] ],
-        ["L", ["pt.K.x","pt.K.y"] ],
-        ["L", ["pt.Jd2.x","pt.Jd2.y"] ],
-        ["L", ["pt.G.x","pt.G.y"] ],
-        ["z"]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
-    }
-  ],
-  "construction": [
-    {
-      "id": "armscye line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.B.x","pt.B.y"] ],
-        ["L", ["pt.C.x","pt.C.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "waist line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.E.x","pt.E.y"] ],
-        ["L", ["pt.F.x","pt.F.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "mid line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.Z.x","pt.Z.y"] ],
-        ["L", ["pt.AA.x","pt.AA.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    }
-  ],
-  "points": {
-    "A": { "x": "0", "y": "meas.neck*.0375" },
-    "B": { "x": "0", "y": "pt.A.y + 1.024*meas.armscye_depth" },
-    "C": { "x": "pt.B.x + .55*meas.bust", "y": "pt.B.y" },
-    "D": { "x": "pt.C.x", "y": "0" },
-    "E": { "x": "0", "y": "meas.nape_to_waist" },
-    "F": { "x": "pt.C.x", "y": "pt.E.y" },
-    "G": { "x": ".195*meas.neck", "y": "0" },
-    "H": { "x": "0", "y": "pt.A.y + .167*meas.armscye_depth" },
-    "I": { "x": "pt.G.x+ Math.sqrt((1.083*meas.shoulder*1.083*meas.shoulder)-(pt.H.y*pt.H.y))", "y": "pt.H.y" },
-    "J": { "x": "(pt.G.x+pt.I.x)/2", "y": "(pt.G.y+pt.I.y)/2" },
-    "Jd1": { "x": "pt.J.x + (.0417*meas.shoulder) * Math.cos(Math.asin((pt.I.y-pt.G.y)/(dist(pt.G,pt.I))))", "y": "pt.J.y + (.0417*meas.shoulder) * Math.sin(Math.asin((pt.I.y-pt.G.y)/(dist(pt.G,pt.I))))" },
-    "Jd2": { "x": "pt.J.x - (.0417*meas.shoulder) * Math.cos(Math.asin((pt.I.y-pt.G.y)/(dist(pt.G,pt.I))))", "y": "pt.J.y - (.0417*meas.shoulder) * Math.cos(Math.asin((pt.I.y-pt.G.y)/(dist(pt.G,pt.I))))" },
-    "K": { "x": "pt.J.x-.083*meas.shoulder", "y": "pt.J.y + .417*meas.shoulder" },
-    "L": { "x": ".515*meas.back_width", "y": "pt.B.y" },
-    "M": { "x": "pt.L.x", "y": "pt.H.y" },
-    "N": { "x": "pt.M.x", "y": "(pt.M.y+pt.L.y)/2" },
-    "P": { "x": "(pt.B.x+pt.L.x)/2", "y": "pt.B.y" },
-    "Q": { "x": "pt.P.x", "y": "pt.E.y" },
-    "R": { "x": "pt.D.x - (.182*meas.neck*Math.cos(Math.atan(-pt.D.y/pt.D.x)))", "y": "pt.D.y + (.182*meas.neck*Math.sin(Math.atan(-pt.D.y/pt.D.x)))" },
-    "S": { "x": "pt.D.x", "y": "pt.D.y + .195*meas.neck" },
-    "T": { "x": "pt.C.x - .5*meas.chest_width - .5*meas.bust_dart_width", "y": "pt.C.y" },
-    "U": { "x": "(pt.T.x+pt.C.x)/2", "y": "pt.T.y" },
-    "V": { "x": "pt.U.x", "y": "pt.F.y" },
-    "BP": { "x": "pt.U.x", "y": "pt.A.y+1.143*meas.armscye_depth" },
-    "W": { "x": "pt.R.x - (meas.bust_dart_width*Math.cos(Math.atan(-pt.D.y/pt.D.x)))", "y": "pt.R.y + (meas.bust_dart_width*Math.sin(Math.atan(-pt.D.y/pt.D.x)))" },
-    "XI": { "x": "pt.I.x", "y": "pt.I.y+.125*meas.shoulder" },
-    "X": { "x": "pt.W.x - Math.sqrt((meas.shoulder*meas.shoulder)-((pt.XI.y-pt.W.y)*(pt.XI.y-pt.W.y)))", "y": "pt.XI.y" },
-    "Y": { "x": "pt.T.x", "y": "pt.T.y - meas.armscye_depth/3" },
-    "Z": { "x": "(pt.L.x+pt.T.x)/2", "y": "pt.T.y" },
-    "AA": { "x": "pt.Z.x", "y": "pt.E.y" },
-    "Tdiag": { "x": "pt.T.x - .023*meas.bust*Math.cos(Math.PI/4)", "y": "pt.T.y - .023*meas.bust*Math.sin(Math.PI/4)" },
-    "Ldiag": { "x": "pt.L.x + .028*meas.bust*Math.cos(Math.PI/4)", "y": "pt.L.y - .028*meas.bust*Math.sin(Math.PI/4)" },
-    "AB": { "x": "pt.F.x", "y": "pt.F.y + .011*meas.bust" },
-    "Dart": { "x": "(1.034*meas.bust-meas.waist)/6", "y": "0" },
-    "Ql": { "x": "pt.Q.x-.95*pt.Dart.x/2", "y": "pt.F.y" },
-    "Qr": { "x": "pt.Q.x+.95*pt.Dart.x/2", "y": "pt.F.y" },
-    "AAl": { "x": "pt.AA.x-pt.Dart.x/3", "y": "pt.F.y" },
-    "AAr": { "x": "pt.AA.x+2*pt.Dart.x/3", "y": "pt.F.y" },
-    "Vl": { "x": "pt.V.x-1.05*pt.Dart.x/2", "y": "pt.F.y" },
-    "Vr": { "x": "pt.V.x+1.05*pt.Dart.x/2", "y": "pt.F.y" }
-  }
-}
-},
-
-{
-"pattern": {
-  "title": "Women's Basic Skirt",
-  "defaults": [ "70", "94", "70", "20.6" ],
-  "measurements": [ "waist", "hips", "skirt_length", "waist_to_hip" ], 
-  "main": [
-    {
-      "id": "outline",
-      "type": "path",
-      "d": [
-        ["m", ["pt.A.x","pt.A.y"] ],
-        ["L", ["pt.K.x","pt.K.y"] ],
-        ["L", ["pt.L.x","pt.L.y"] ],
-        ["L", ["pt.K.x","pt.K.y"] ],
-        ["L", ["pt.M.x","pt.M.y"] ],
-        ["L", ["pt.N.x","pt.N.y"] ],
-        ["L", ["pt.M.x","pt.M.y"] ],
-        ["L", ["pt.J.x","pt.J.y"] ],
-        ["L", ["pt.G.x","pt.G.y"] ],
-        ["L", ["pt.Q.x","pt.Q.y"] ],
-        ["L", ["pt.R.x","pt.R.y"] ],
-        ["L", ["pt.S.x","pt.S.y"] ],
-        ["L", ["pt.R.x","pt.R.y"] ],
-        ["L", ["pt.B.x","pt.B.y"] ],
-        ["L", ["pt.D.x","pt.D.y"] ],
-        ["L", ["pt.C.x","pt.C.y"] ],
-        ["z"]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
-    }
-  ],
-  "construction": [
-    {
-      "id": "hip line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.E.x","pt.E.y"] ],
-        ["L", ["pt.F.x","pt.F.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    },
-    {
-      "id": "mid line",
-      "type": "path",
-      "d": [
-        ["m", ["pt.G.x","pt.G.y"] ],
-        ["L", ["pt.H.x","pt.H.y"] ]
-      ],
-      "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
-    }
-  ],
-  "points": {
-    "A": { "x": "0", "y": "0" },
-    "B": { "x": ".516*meas.hips", "y": "0" },
-    "C": { "x": "0", "y": "meas.skirt_length" },
-    "D": { "x": "pt.B.x", "y": "pt.C.y" },
-    "E": { "x": "0", "y": "meas.waist_to_hip" },
-    "F": { "x": "pt.B.x", "y": "pt.E.y" },
-    "G": { "x": ".266*meas.hips", "y": "pt.F.y" },
-    "H": { "x": "pt.G.x", "y": "pt.C.y" },
-    "I": { "x": ".311*meas.waist", "y": "0" },
-    "J": { "x": "pt.I.x", "y": "-.018*meas.waist" },
-    "K": { "x": "(pt.A.x+pt.J.x)/3", "y": "(pt.A.y+pt.J.y)/3" },
-    "L": { "x": "pt.K.x + .2*meas.waist*Math.sin(Math.asin((pt.A.y-pt.K.y)/(dist(pt.A,pt.J)/3)))", "y": "pt.K.y + .2*meas.waist*Math.cos(Math.asin((pt.A.y-pt.K.y)/(dist(pt.A,pt.J)/3)))" },
-    "M": { "x": "2*(pt.A.x+pt.J.x)/3", "y": "2*(pt.A.y+pt.J.y)/3" },
-    "N": { "x": "pt.M.x + .179*meas.waist*Math.sin(Math.asin((pt.A.y-pt.M.y)/(2*dist(pt.A,pt.J)/3)))", "y": "pt.M.y + .179*meas.waist*Math.cos(Math.asin((pt.A.y-pt.M.y)/(2*dist(pt.A,pt.J)/3)))" },
-    "P": { "x": "pt.B.x - .282*meas.waist", "y": "0" },
-    "Q": { "x": "pt.P.x", "y": "-.018*meas.waist" },
-    "R": { "x": "pt.Q.x + (pt.B.x-pt.Q.x)/3", "y": "2*(pt.Q.y+pt.B.y)/3" },
-    "S": { "x": "pt.R.x + .143*meas.waist*Math.sin(Math.asin((pt.Q.y-pt.R.y)/(dist(pt.Q,pt.B)/3)))", "y": "pt.R.y + .143*meas.waist*Math.cos(Math.asin((pt.Q.y-pt.R.y)/(dist(pt.Q,pt.B)/3)))" }
-  }
-}
-}
-
-    ];
+	/******************************************************************************
+	IndexedDB
+	*******************************************************************************/
 	
-	var measurements = [
-{
-  "clientdata": {
-    "customername": "Man1",
-    "units": "cm",
-    "measurements": {
-      "hips": "130",
-      "bust": "100",
-      "waist": "120",
-      "shoulder": "100",
-      "nape_to_waist": "100",
-      "waist_to_hip": "25",
-      "chest_width": "100",
-      "neck": "40",
-      "chest": "100",
-      "armscye_depth": "24.4",
-      "waist_length": "44.6",
-      "back_width": "40",
-      "sleeve_length": "85",
-      "shirt_length": "81",
-      "bust_dart_width": "100",
-      "skirt_length": "65"
-    }
-  }
-},
-
-{
-  "clientdata": {
-    "customername": "Woman1",
-    "units": "cm",
-    "measurements": {
-      "hips": "100",
-      "bust": "88",
-      "waist": "70",
-      "shoulder": "12",
-      "nape_to_waist": "41",
-      "waist_to_hip": "20.6",
-      "chest_width": "32.4",
-      "neck": "37",
-      "chest": "100",
-      "armscye_depth": "21",
-      "armscye_girth": "41.3",
-      "waist_length": "42",
-      "back_width": "34",
-      "side": "21.6",
-      "sleeve_length": "87",
-      "shirt_length": "75",
-      "bust_dart_width": "7",
-      "skirt_length": "72",
-      "upper_front_height": "25.7",
-      "elbow_height": "34.9",
-      "elbow_girth": "25.4",
-      "hand_girth": "20"
-    }
-  }
-}
+	// In the following line, you should include the prefixes of implementations you want to test.
+	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+	// DON'T use "var indexedDB = ..." if you're not in a function.
+	// Moreover, you may need references to some window.IDB* objects:
+	window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
+	// (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
 	
+	if (!window.indexedDB) {
+		window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.")
+	}
 	
-	];
+	const DB_NAME = 'TauMetaTauDB';
+	const DB_VERSION = 1; // Use a long long for this value (don't use a float)
+	const DB_STORE_NAME = 'Measurements';
 
+	var db;
 
-// In the following line, you should include the prefixes of implementations you want to test.
-window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-// DON'T use "var indexedDB = ..." if you're not in a function.
-// Moreover, you may need references to some window.IDB* objects:
-window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
-// (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
-
-if (!window.indexedDB) {
-    window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.")
-}
-
-var db;
-var request = window.indexedDB.open('TauMetaTauDB', '1');
-request.onerror = function(event) {
-        switch(event.target.error) {
-               case VersionError:
-                    console.log("The stored database is more recent than the one needed");
-                    break;
-        }
-};
-request.onupgradeneeded = function(event) {
-		// onupgradeneeded event: new version or new database: 
-		// first time accessed: create the stores, layout the structure for the DB
-
-        db = event.target.result;
-		console.log(db);
-		console.log(db.version);
-		//db.setVersion('1');
-		var store = db.createObjectStore('Measurements', 			// name of new object store
-										 {keyPath: 'name',      	// key path
-										 autoIncrement: true});     // auto increment?*/
-		console.log("store created: "+store.name);
-		
-		/*if (db.version == 1) {
-			// User's first visit, initialize database.
-			//db.setVersion('1');
-			var store = db.createObjectStore('Measurements', // name of new object store
-											 'id',      // key path
-											 true);     // auto increment?
-			console.log("store created");
-			var user = store.put({name: 'Eric',
-								   gender: 'male',
-								   likes: 'html5'});
-
-			console.log(user.id);			
-		} else {
-			// DB already initialized.
-		}*/
-        //var transaction = db.transaction([], IDBTransaction.READ_ONLY);
-        //var curRequest = transaction.objectStore('ObjectStore Name').openCursor();
-        //curRequest.onsuccess = true;
-};
-/*request.onsuccess = function(event) {
-		var db = event.target.result;
-		console.log(db);
-		var transaction = db.transaction(['Measurements'],'readwrite');
-		transaction.oncomplete = function(event){
-			console.log('transaction done');
+	function openDb() {
+		console.log("openDb ...");
+		var req = indexedDB.open(DB_NAME, DB_VERSION);
+		req.onsuccess = function (evt) {
+			// Better use "this" than "req" to get the result to avoid problems with
+			// garbage collection.
+			// db = req.result;
+			console.log("openDb DONE");
+			db = this.result;
 		};
-		transaction.onerror = function(event){
-			// OHIO....
+		req.onerror = function (evt) {
+			console.error("openDb:", evt.target.errorCode);
 		};
-		var objectStore = transaction.objectStore('Measurements');
-		for (var i in measurements) {
-			var request = objectStore.add(measurements[i]);
-			request.onsuccess = function(event){
-				// whatever
-			};
-		}
+		req.onupgradeneeded = function (evt) {
+			console.log("openDb.onupgradeneeded");
+			var store = evt.currentTarget.result.createObjectStore(
+				DB_STORE_NAME, { keyPath: 'name', autoIncrement: true });
+		};
+	}
+
+
+	
+	
+  /**
+   * @param {string} store_name
+   * @param {string} mode either "readonly" or "readwrite"
+   */
+  function getObjectStore(store_name, mode) {
+    var tx = db.transaction(store_name, mode);
+    return tx.objectStore(store_name);
+  }
+
+  function clearObjectStore(store_name) {
+    var store = getObjectStore(DB_STORE_NAME, 'readwrite');
+    var req = store.clear();
+    req.onsuccess = function(evt) {
+      displayActionSuccess("Store cleared");
+      displayPubList(store);
+    };
+    req.onerror = function (evt) {
+      console.error("clearObjectStore:", evt.target.errorCode);
+      displayActionFailure(this.error);
+    };
+  }
+ 
+  function getBlob(key, store, success_callback) {
+    var req = store.get(key);
+    req.onsuccess = function(evt) {
+      var value = evt.target.result;
+      if (value)
+        success_callback(value.blob);
+    };
+  }
+ 
+  /**
+   * @param {IDBObjectStore=} store
+   */
+	function buildCustomerList(store) {
+	
+		console.log("openDb ...");
+		var req = indexedDB.open(DB_NAME, DB_VERSION);
+		req.onsuccess = function (evt) {
+			// Better use "this" than "req" to get the result to avoid problems with
+			// garbage collection.
+			// db = req.result;
+			console.log("openDb DONE");
+			db = this.result;
+			
+			
+				console.log("buildCustomerList.....");
+			 
+				if (typeof store == 'undefined')
+					store = getObjectStore(DB_STORE_NAME, 'readonly');
+			 
+				var req;
+				var resultList = [];
+				req = store.openCursor();
+				req.onerror = function(evt) {
+					console.error("add error", this.error);
+					//displayActionFailure(this.error);
+				};
+				req.onsuccess = function(evt) {
+					var cursor = evt.target.result;
+					if (cursor) {
+						req = store.get(cursor.key);
+						req.onsuccess = function (evt) {
+							resultList.push(cursor.key);
+							//console.log(resultList);					
+						};
+						cursor.continue();
+					} else {
+						//console.log("No more entries");
+						//console.log(resultList);
+						customerList = resultList;
+					}
+				};			
 		
-};*/
+		};
+		req.onerror = function (evt) {
+			console.error("openDb:", evt.target.errorCode);
+		};
+	}
 
 
+	var customerList = [];
+	var currentPattern;
+	var currentMeasurement = universal;
 
+	//openDb();
+	//buildCustomerList();
+
+	/******************************************************************************
+	BackBone.js
+	*******************************************************************************/
+	
 
     var Pattern = Backbone.Model.extend({
         urlRoot: 'pattern',
@@ -540,74 +165,31 @@ request.onupgradeneeded = function(event) {
 	});
     
 	var MeasurementView = Backbone.View.extend({
-		el: 'form#measurementInput',
-		template: $("#inputTemplate").html(),
+		el: 'div.draw-wrapper',
+		template: $("#measurementTemplate").html(),
 		
 		initialize: function(){
-			//console.log('measurementview initialized');
-			//console.log(this.$el);
 			this.model = new Measurement();
-			this.render();
+			//this.render(currentMeasurement.clientdata);   
 		},
-		render: function(){
+		render: function(data){
+			//// replace this with indexedDB!!!!
+			var customers = JSON.parse(localStorage.getItem('customerList'));
+			var data = data;
+			//var customers = customerList;     // built from indexedDB: function buildCustomerList()
+			//console.log(customerList);
+			
 			var tmpl = _.template(this.template);
-			this.$el.find('#drawarea').html(tmpl({'data': universal.clientdata.measurements}));
 
-			
-			/***********************************************************
-			
-			THIS DOESN'T BELONG HERE
-			
-			***********************************************************
-			
-			var request = window.indexedDB.open('TauMetaTauDB', '1');
-			request.onerror = function(event) {
-				//blablabla
-				console.log('OOOOOOO');
-			};
-			request.onsuccess = function(event) {
-				var db = event.target.result;
-					//console.log(db);
-				var transaction = db.transaction(['Measurements']);
-
-				var objectStore = transaction.objectStore('Measurements');
-				//console.log(objectStore);
-				//var request = objectStore.add(model.attributes);
-				var request = objectStore.get('Paul');
-				request.onsuccess = function(event){
-					// whatever
-					console.log('successful request for a key');
-					console.log(request.result.clientdata);
-					//console.log('WAHSHTIER');
-				};
-				request.onerror = function(event){
-					console.log('OHIO');
-				};
-				
-				
-				var req = objectStore.openCursor();
-				req.onsuccess = function(event) {
-					var cursor = event.target.result;
-					console.log(cursor);
-					if(cursor){
-						var getreq = objectStore.get(cursor.key);
-						getreq.onsuccess = function() {
-							console.log('key: ', cursor.key, 'value: ', getreq.result);
-							var $name = $('<p />').text(cursor.key);
-							$('#customers').append($name);
-							cursor.continue();
-						};
-					}
-				};
-			};			
-			
-			/*******************************************************************/
+			this.$el.empty();
+			this.$el.html(tmpl({'data': data, 'name': data.customername, 'customers': customers}));
 			
 			return this;
 			
 		},
 		events: {
-			'click #saveMeasurements': 'saveData'
+			'click #saveMeasurements': 'saveData',
+			'change #customerSelect': 'renderCustomer'
 		},
 		saveData: function(e){
 			e.preventDefault();
@@ -627,9 +209,9 @@ request.onupgradeneeded = function(event) {
 			}
 			
 			// localStorage
-			measurementList = localStorage.getItem('measurementList') ? JSON.parse(localStorage.getItem('measurementList')) : [];
-			if (measurementList.indexOf(model.get('name'))<0) measurementList.push(model.get('name'));
-			localStorage.setItem('measurementList',JSON.stringify(measurementList));
+			customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
+			if (customerList.indexOf(model.get('name'))<0) customerList.push(model.get('name'));
+			localStorage.setItem('customerList',JSON.stringify(customerList));
 			localStorage.setItem(model.get('name'),JSON.stringify(model));
 			
 			// HTTP save to server
@@ -638,7 +220,7 @@ request.onupgradeneeded = function(event) {
 
 			/********************************************************************
 			
-			THIS PART NEEDS WOME WORK
+			THIS PART NEEDS SOME WORK
 
 			*********************************************************************/
 			
@@ -667,25 +249,69 @@ request.onupgradeneeded = function(event) {
 			
 			/********************************************************************/
 			
+			//// GIVE SOME FEEDBACK WHEN SAVING MEASUREMENTS:
+			
+			//alert('Measurements saved for customer: '+model.get('name'));
+			$alert = $('#alertSaved');
+			$message = '<b>Hooray!</b> You just saved measurements for customer: <b>'+model.get('name')+'</b>';
+			$alert.html($message).fadeTo(200,1);
+			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
+			
+			
+		},
+		renderCustomer: function(e){
+			currentCustomer = e.currentTarget.value;
+			
+			//// replace this with indexedDB !!!!!
+			currentMeasurement = JSON.parse(localStorage.getItem(currentCustomer));
+			this.render(currentMeasurement.clientdata);
+		}
+	});
+	
+	var pageView = Backbone.View.extend({
+		el: 'div.draw-wrapper',
+		template: $("#aboutTemplate").html(),
+		render: function(){
+			
+			var tmpl = _.template(this.template);
+
+			this.$el.empty();
+			this.$el.html(tmpl());
+			
+			return this;
+			
 		}
 		
 	});
 	
     var TauMetaTauRouter = Backbone.Router.extend({
         routes: {
-            "filter/:type": "urlFilter"
+            "filter/:type": "urlFilter",
+			"measurements": "measurementsForm",
+			"about":		"aboutPage"
         },
         
         urlFilter: function (type) {
             directory.filterType = type;
             directory.trigger("change:filterType");
-        }
+        },
+		
+		measurementsForm: function() {
+			measurements.render(currentMeasurement.clientdata);  
+		},
+
+		aboutPage: function() {
+			about.render();  
+		},
+		
+		
     });
     
-    var measures = new MeasurementView();
+    var measurements = new MeasurementView();
+	var about = new pageView();
     
     var taumetarouter = new TauMetaTauRouter();
     
     Backbone.history.start();
-		
+	
 //} (jQuery));

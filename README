@@ -1,8 +1,3 @@
-This fork attempts to implement BackBone into the existing code, and also adds some functionality for measurement input and storage of data.
-The test is hosted here: http://www.westpaper.com/apps/tmtp
-
-********
-
 These files are for the development of a web application to edit pattern files, based on combined code from the TMTP and Pattern Share Projects.
 
 Tau Meta Tau Physica http://www.taumeta.org/"

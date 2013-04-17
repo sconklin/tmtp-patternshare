@@ -62,7 +62,7 @@
 
 <script id="inputTemplate" type="text/template">
 	<label  for="customername">Customer Name</label>
-	<input type="text" id="customername" placeholder="John Doe" class="span6">
+	<input type="text" id="customername" placeholder="<%= name %>" class="span6" value="<%= name %>">
 	<hr>
 	
 	<% for (var part in data){ %>
@@ -71,7 +71,7 @@
 		<% for (var i in data[part]) { %>
 			<div class="span3">
 				<label><%- data[part][i].title %></label>
-				<input type="text" id="<%- i %>" placeholder="<%- data[part][i].val %>">
+				<input type="text" id="<%- i %>" placeholder="<%- data[part][i].val %>" value="<%- data[part][i].val %>" >
 			</div>
 		<% } %>
 	</div>
