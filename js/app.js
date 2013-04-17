@@ -189,7 +189,7 @@
 		},
 		events: {
 			'click #saveMeasurements': 'saveData',
-			'change #customerSelect': 'renderCustomer'
+			'change #customerSelect': 'selectCustomer'
 		},
 		saveData: function(e){
 			e.preventDefault();
@@ -259,7 +259,7 @@
 			
 			
 		},
-		renderCustomer: function(e){
+		selectCustomer: function(e){
 			currentCustomer = e.currentTarget.value;
 			
 			//// replace this with indexedDB !!!!!
@@ -288,7 +288,9 @@
         routes: {
             "filter/:type": "urlFilter",
 			"measurements": "measurementsForm",
-			"about":		"aboutPage"
+			"about":		"aboutPage",
+			"patterns":		"aboutPage",
+			"":				"aboutPage"
         },
         
         urlFilter: function (type) {
