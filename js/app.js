@@ -127,11 +127,10 @@
 
 
 	var customerList = [];
-	var currentPattern;
-	var bodyCurrent = bodyStandard;
+	var patternCurrent;
+	var bodyCurrent = bodyStandard;   // this is wrong, the Current Body should reference a model from within a collection, not a plain object...    we'll get there
 
 	openDb();
-	//buildCustomerList();
 
 	/******************************************************************************
 	BackBone.js
@@ -140,7 +139,7 @@
 
     var Pattern = Backbone.Model.extend({
         urlRoot: 'pattern',
-		defaults: {                     // the "defaults" property of the Model class
+		defaults: {
             name: ''
         }
     });
@@ -249,27 +248,25 @@
 			
 			/********************************************************************/
 			
-			bodyCurrent = model.attributes;
-			//console.log(bodyCurrent);
-			this.render(bodyCurrent.clientdata);  			
-
+			// bodyCurrent = ;
+			// re-render view, to update the dropdown menu for measurement selection
+			this.render(model.attributes.clientdata);  			
 			
 			//// GIVE SOME FEEDBACK WHEN SAVING MEASUREMENTS:
 			
-			//alert('Measurements saved for customer: '+model.get('name'));
 			$alert = $('#alertSaved');
 			$message = '<b>Hooray!</b> You just saved measurements for customer: <b>'+model.get('name')+'</b>';
 			$alert.html($message).fadeTo(200,1);
 			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
-			
-			
 		},
+		
 		selectCustomer: function(e){
 			currentCustomer = e.currentTarget.value;
 			
 			//// replace this with indexedDB !!!!!
 			bodyCurrent = JSON.parse(localStorage.getItem(currentCustomer));
 			this.render(bodyCurrent.clientdata);
+			//// wrong, the data parameter should be extracted from a model, not a plain object
 		}
 	});
 	
@@ -309,6 +306,7 @@
 		},
 		measurementsPage: function() {
 			measurements.render(bodyCurrent.clientdata);  
+			//// wrong as well, the data parameter should be extracted from a model, not a plain object
 		},
 		patternsPage: function() {
 			patterns.render();  
@@ -322,11 +320,14 @@
 
     var todo = new pageView();
     todo.template = $("#todoTemplate").html();
+	
     var measurements = new MeasurementView();
-	//// PATTERNS WILL GET THEIR OWN VIEW, 
+	
+//// PATTERNS WILL GET THEIR OWN VIEW, 
     var patterns = new pageView();
     patterns.template = $("#patternsTemplate").html();
-	//// PATTERNS WILL GET THEIR OWN VIEW,
+//// PATTERNS WILL GET THEIR OWN VIEW,
+	
 	var about = new pageView();
 	about.template = $("#aboutTemplate").html();
 	
