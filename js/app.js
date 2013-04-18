@@ -1,141 +1,8 @@
-//(function ($) {
+//(function ($) {    // Commented out for development purposes only, remove for production
 
-	/******************************************************************************
-	IndexedDB
-	*******************************************************************************/
-	
-	// In the following line, you should include the prefixes of implementations you want to test.
-	window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-	// DON'T use "var indexedDB = ..." if you're not in a function.
-	// Moreover, you may need references to some window.IDB* objects:
-	window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
-	window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange
-	// (Mozilla has never prefixed these objects, so we don't need window.mozIDB*)
-	
-	if (!window.indexedDB) {
-		window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such feature will not be available.")
-	}
-	
-	const DB_NAME = 'TauMetaTauDB';
-	const DB_VERSION = 1; // Use a long long for this value (don't use a float)
-	const DB_STORE_NAME = 'Measurements';
-
-	var db;
-
-	function openDb() {
-		console.log("openDb ...");
-		var req = indexedDB.open(DB_NAME, DB_VERSION);
-		req.onsuccess = function (evt) {
-			// Better use "this" than "req" to get the result to avoid problems with
-			// garbage collection.
-			// db = req.result;
-			console.log("openDb DONE");
-			db = this.result;
-		};
-		req.onerror = function (evt) {
-			console.error("openDb:", evt.target.errorCode);
-		};
-		req.onupgradeneeded = function (evt) {
-			console.log("openDb.onupgradeneeded");
-			var store = evt.currentTarget.result.createObjectStore(
-				DB_STORE_NAME, { keyPath: 'name', autoIncrement: true });
-		};
-	}
-
-
-	
-	
-  /**
-   * @param {string} store_name
-   * @param {string} mode either "readonly" or "readwrite"
-   */
-  function getObjectStore(store_name, mode) {
-    var tx = db.transaction(store_name, mode);
-    return tx.objectStore(store_name);
-  }
-
-  function clearObjectStore(store_name) {
-    var store = getObjectStore(DB_STORE_NAME, 'readwrite');
-    var req = store.clear();
-    req.onsuccess = function(evt) {
-      displayActionSuccess("Store cleared");
-      displayPubList(store);
-    };
-    req.onerror = function (evt) {
-      console.error("clearObjectStore:", evt.target.errorCode);
-      displayActionFailure(this.error);
-    };
-  }
- 
-  function getBlob(key, store, success_callback) {
-    var req = store.get(key);
-    req.onsuccess = function(evt) {
-      var value = evt.target.result;
-      if (value)
-        success_callback(value.blob);
-    };
-  }
- 
-  /**
-   * @param {IDBObjectStore=} store
-   */
-	function buildCustomerList(store) {
-	
-		console.log("openDb ...");
-		var req = indexedDB.open(DB_NAME, DB_VERSION);
-		req.onsuccess = function (evt) {
-			// Better use "this" than "req" to get the result to avoid problems with
-			// garbage collection.
-			// db = req.result;
-			console.log("openDb DONE");
-			db = this.result;
-			
-			
-				console.log("buildCustomerList.....");
-			 
-				if (typeof store == 'undefined')
-					store = getObjectStore(DB_STORE_NAME, 'readonly');
-			 
-				var req;
-				var resultList = [];
-				req = store.openCursor();
-				req.onerror = function(evt) {
-					console.error("add error", this.error);
-					//displayActionFailure(this.error);
-				};
-				req.onsuccess = function(evt) {
-					var cursor = evt.target.result;
-					if (cursor) {
-						req = store.get(cursor.key);
-						req.onsuccess = function (evt) {
-							resultList.push(cursor.key);
-							//console.log(resultList);					
-						};
-						cursor.continue();
-					} else {
-						//console.log("No more entries");
-						//console.log(resultList);
-						customerList = resultList;
-					}
-				};			
-		
-		};
-		req.onerror = function (evt) {
-			console.error("openDb:", evt.target.errorCode);
-		};
-	}
-
-
-	var customerList = [];
 	var patternCurrent;
-	var bodyCurrent = bodyStandard;   // this is wrong, the Current Body should reference a model from within a collection, not a plain object...    we'll get there
-
-	openDb();
-
-	/******************************************************************************
-	BackBone.js
-	*******************************************************************************/
-	
+  	// this is wrong, the Current Body should reference a model 
+										// from within a collection, not a plain object...    we'll get there
 
     var Pattern = Backbone.Model.extend({
         urlRoot: 'pattern',
@@ -147,7 +14,8 @@
 	var Measurement = Backbone.Model.extend({
 		urlRoot: 'measurement',
 		defaults: {
-			"clientdata": bodyStandard.clientdata
+			"clientdata": bodyStandard.clientdata,
+			"name": ""
 		}
 	});
 		
@@ -158,6 +26,8 @@
 	var Bodies = Backbone.Collection.extend({
 		model: Measurement
 	});
+	
+	var PatternView = Backbone.View.extend({});
     
 	var MeasurementView = Backbone.View.extend({
 		el: 'div.draw-wrapper',
@@ -165,22 +35,24 @@
 		
 		initialize: function(){
 			this.model = new Measurement();
-			//this.render(bodyCurrent.clientdata);   
+
+			// build collection of measurements from localStorage
+			var customerList = JSON.parse(localStorage.getItem('customerList'));
+			var models = [];
+			for (var i in customerList){
+				models.push(JSON.parse(localStorage.getItem(customerList[i])));
+			}
+			this.collection = new Bodies(models);
 		},
 		render: function(data){
-			//// replace this with indexedDB!!!!
+			// TO DO: for listing, render shouldn't reference localStorage but the view's collection instead
 			var customers = JSON.parse(localStorage.getItem('customerList'));
-			var data = data;
-			//var customers = customerList;     // built from indexedDB: function buildCustomerList()
-			//console.log(customerList);
-			console.log('rendering...');
 			var tmpl = _.template(this.template);
 
 			this.$el.empty();
 			this.$el.html(tmpl({'data': data, 'name': data.customername, 'customers': customers}));
 			
 			return this;
-			
 		},
 		events: {
 			'click #saveMeasurements': 'saveData',
@@ -190,8 +62,8 @@
 			e.preventDefault();
 			var model = this.model;
 			var $form = this.$el;
-
-			// update model
+			
+			// update the model
 			model.set('name', this.$el.find('#customername').val());
 			model.get('clientdata').customername = this.$el.find('#customername').val();
 			model.get('clientdata').units = $("input[name=units]:checked").attr('id');
@@ -202,75 +74,36 @@
 					measurements[part][j].val = newVal ? newVal : measurements[part][j].val;
 				}
 			}
-			
-			
-
 						
-			// localStorage
-			customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
+			// localStorage create/update the customer list
+			var customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
 			if (customerList.indexOf(model.get('name'))<0) customerList.push(model.get('name'));
 			localStorage.setItem('customerList',JSON.stringify(customerList));
+			// localStorage create/update the measurement
 			localStorage.setItem(model.get('name'),JSON.stringify(model));
 			
 			// HTTP save to server
 			// model.save();
-			
 
-			/********************************************************************
-			
-			THIS PART NEEDS SOME WORK
-
-			*********************************************************************/
-			
-			// indexedDB
-			var request = window.indexedDB.open('TauMetaTauDB', '1');
-			request.onerror = function(event) {
-				//blablabla
-				console.log('DATABASE ERROR');
-			};
-			request.onsuccess = function(event) {
-				var db = event.target.result;
-				var transaction = db.transaction(['Measurements'],'readwrite');
-				transaction.oncomplete = function(event){
-					console.log('transaction done');
-				};
-				transaction.onerror = function(event){
-					// OHIO....
-				};
-				var objectStore = transaction.objectStore('Measurements');
-				//console.log(objectStore);
-				//var request = objectStore.add(model.attributes);
-				var request = objectStore.put(model.attributes);
-				request.onsuccess = function(event){
-					// whatever
-				};
-			};
-			
-			/********************************************************************/
-			
-			// bodyCurrent = ;
 			// re-render view, to update the dropdown menu for measurement selection
 			this.render(model.attributes.clientdata);  			
 			
-			//// GIVE SOME FEEDBACK WHEN SAVING MEASUREMENTS:
-			
+			//// give some feedback when saving measurements:
 			$alert = $('#alertSaved');
 			$message = '<b>Hooray!</b> You just saved measurements for customer: <b>'+model.get('name')+'</b>';
 			$alert.html($message).fadeTo(200,1);
 			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
 		},
-		
 		selectCustomer: function(e){
 			currentCustomer = e.currentTarget.value;
-			
-			//// replace this with indexedDB !!!!!
-			bodyCurrent = JSON.parse(localStorage.getItem(currentCustomer));
-			this.render(bodyCurrent.clientdata);
-			//// wrong, the data parameter should be extracted from a model, not a plain object
+			// TO DO: bodyCurrent should be drawn from the view's collection
+			bodyCurrent = new Measurement(JSON.parse(localStorage.getItem(currentCustomer)));
+			// TO DO: bodyCurrent should reference a model inside the view's collection, not create a new one
+			this.render(bodyCurrent.get('clientdata'));
 		}
 	});
 	
-	var pageView = Backbone.View.extend({
+	var PageView = Backbone.View.extend({
 		el: 'div.draw-wrapper',
 		//template: $("#aboutTemplate").html(),
 		render: function(){
@@ -281,9 +114,7 @@
 			this.$el.html(tmpl());
 			
 			return this;
-			
 		}
-		
 	});
 	
     var TauMetaTauRouter = Backbone.Router.extend({
@@ -295,18 +126,15 @@
 			"patterns":		"patternsPage",
 			"about":		"aboutPage"
         },
-        
         urlFilter: function (type) {
             directory.filterType = type;
             directory.trigger("change:filterType");
         },
-		
 		todoPage: function() {
 			todo.render();  
 		},
 		measurementsPage: function() {
-			measurements.render(bodyCurrent.clientdata);  
-			//// wrong as well, the data parameter should be extracted from a model, not a plain object
+			measurements.render(bodyCurrent.get('clientdata'));  
 		},
 		patternsPage: function() {
 			patterns.render();  
@@ -314,21 +142,21 @@
 		aboutPage: function() {
 			about.render();  
 		},
-		
     });
     
-
-    var todo = new pageView();
+	var bodyCurrent = new Measurement(bodyStandard); 	
+	
+    var todo = new PageView();
     todo.template = $("#todoTemplate").html();
 	
     var measurements = new MeasurementView();
 	
 //// PATTERNS WILL GET THEIR OWN VIEW, 
-    var patterns = new pageView();
+    var patterns = new PageView();
     patterns.template = $("#patternsTemplate").html();
 //// PATTERNS WILL GET THEIR OWN VIEW,
 	
-	var about = new pageView();
+	var about = new PageView();
 	about.template = $("#aboutTemplate").html();
 	
     var taumetarouter = new TauMetaTauRouter();
