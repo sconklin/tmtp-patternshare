@@ -128,9 +128,9 @@
 
 	var customerList = [];
 	var currentPattern;
-	var currentMeasurement = universal;
+	var bodyCurrent = bodyStandard;
 
-	//openDb();
+	openDb();
 	//buildCustomerList();
 
 	/******************************************************************************
@@ -148,11 +148,7 @@
 	var Measurement = Backbone.Model.extend({
 		urlRoot: 'measurement',
 		defaults: {
-			"clientdata": {
-				"customername": "",
-				"units": "cm",
-				"measurements": universal.clientdata.measurements
-			}
+			"clientdata": bodyStandard.clientdata
 		}
 	});
 		
@@ -170,7 +166,7 @@
 		
 		initialize: function(){
 			this.model = new Measurement();
-			//this.render(currentMeasurement.clientdata);   
+			//this.render(bodyCurrent.clientdata);   
 		},
 		render: function(data){
 			//// replace this with indexedDB!!!!
@@ -178,7 +174,7 @@
 			var data = data;
 			//var customers = customerList;     // built from indexedDB: function buildCustomerList()
 			//console.log(customerList);
-			
+			console.log('rendering...');
 			var tmpl = _.template(this.template);
 
 			this.$el.empty();
@@ -208,6 +204,9 @@
 				}
 			}
 			
+			
+
+						
 			// localStorage
 			customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
 			if (customerList.indexOf(model.get('name'))<0) customerList.push(model.get('name'));
@@ -215,7 +214,7 @@
 			localStorage.setItem(model.get('name'),JSON.stringify(model));
 			
 			// HTTP save to server
-			model.save();
+			// model.save();
 			
 
 			/********************************************************************
@@ -228,6 +227,7 @@
 			var request = window.indexedDB.open('TauMetaTauDB', '1');
 			request.onerror = function(event) {
 				//blablabla
+				console.log('DATABASE ERROR');
 			};
 			request.onsuccess = function(event) {
 				var db = event.target.result;
@@ -249,6 +249,11 @@
 			
 			/********************************************************************/
 			
+			bodyCurrent = model.attributes;
+			//console.log(bodyCurrent);
+			this.render(bodyCurrent.clientdata);  			
+
+			
 			//// GIVE SOME FEEDBACK WHEN SAVING MEASUREMENTS:
 			
 			//alert('Measurements saved for customer: '+model.get('name'));
@@ -263,8 +268,8 @@
 			currentCustomer = e.currentTarget.value;
 			
 			//// replace this with indexedDB !!!!!
-			currentMeasurement = JSON.parse(localStorage.getItem(currentCustomer));
-			this.render(currentMeasurement.clientdata);
+			bodyCurrent = JSON.parse(localStorage.getItem(currentCustomer));
+			this.render(bodyCurrent.clientdata);
 		}
 	});
 	
@@ -288,7 +293,7 @@
         routes: {
 //			"search/:query/p:page": "search"   // #search/kiwis/p7   	GENERAL FORMAT: "query" and "page" can be passed 
 //																		as arguments for the callback function 
-            "":				"roadmapPage",
+            "":				"todoPage",
 			"measurements": "measurementsPage",
 			"patterns":		"patternsPage",
 			"about":		"aboutPage"
@@ -299,11 +304,11 @@
             directory.trigger("change:filterType");
         },
 		
-		roadmapPage: function() {
-			roadmap.render();  
+		todoPage: function() {
+			todo.render();  
 		},
 		measurementsPage: function() {
-			measurements.render(currentMeasurement.clientdata);  
+			measurements.render(bodyCurrent.clientdata);  
 		},
 		patternsPage: function() {
 			patterns.render();  
@@ -315,8 +320,8 @@
     });
     
 
-    var roadmap = new pageView();
-    roadmap.template = $("#roadmapTemplate").html();
+    var todo = new pageView();
+    todo.template = $("#todoTemplate").html();
     var measurements = new MeasurementView();
 	//// PATTERNS WILL GET THEIR OWN VIEW, 
     var patterns = new pageView();
