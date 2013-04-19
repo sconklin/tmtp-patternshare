@@ -3,6 +3,7 @@ body { padding-top: 60px; overflow-y: scroll;}
 .draw-wrapper { min-height: 700px;}
 
 .form-inline label, .form-inline select, .form-inline input { margin-right: 20px;}	
+.form-inline button { margin-left: 20px;}	
 
 footer {
 	background-color: #333;

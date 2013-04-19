@@ -39,18 +39,6 @@
               <li id="menuMeasurements"><a href="#measurements">Measurements</a></li>
               <li id="menuPatterns"><a href="#patterns">Patterns</a></li>
               <li id="menuAbout"><a href="#about">About</a></li>
-              <!--li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li-->
             </ul>
             <form class="navbar-form pull-right">
               <input class="span2" type="text" placeholder="Username (doesn't)">
@@ -122,10 +110,10 @@
 		<p>Measurements view:</p>
 
 		<ul>
-		<li>make available default measurements (man/woman)</li>
+		<li>adit app-bodyMeasurement.js to make default measurements available (man/woman)</li>
 		<li>better layout for the form, with helper images</li>
-		<li>form validation: check for numerical values within a certain (human?) range</li>
 		<li>unit conversion cm &lt;--&gt; in</li>
+		<li>ability to delete measurement</li>
 		</ul>
 		
 		<p>Patterns view:</p>
@@ -139,7 +127,7 @@
 		<ul>
 		<li>database structure</li>
 		<li>user log-in</li>
-		<li>receive requests for saving JSON info from webapp</li>
+		<li>receive requests for saving JSON data from webapp</li>
 		</ul>		
 		
 		<p>Other:</p>
@@ -151,9 +139,44 @@
 </script>
 
 <script id="patternsTemplate" type="text/template">
+<form id="measurementInput" class="">
+	<div class="row form-inline">
+		<div class="measwrapper span12">
+			<h1>Patterns</h1>
+			<div class="well">	
+				<select id="patternSelect">
+					<option>Select Pattern...</option>
+					<% for (var i in patternList) { %>
+						<option value="<%- patternList[i].cid %>"><%- patternList[i].attributes.pattern.title %></option>
+					<% } %>
+				</select>
+				<select id="patternCustomerSelect">
+					<option>Select Customer...</option>
+					<% for (var i in customers) { %>
+						<option value="<%- customers[i] %>"><%- customers[i] %></option>
+					<% } %>
+				</select>
+				
+				<button id="renderSvg" class="btn btn-danger pull-right"> Render the pattern! </button>
+				<button id="saveSvg" class="btn btn-danger pull-right"> Save as SVG </button>
 
-<h1>Patterns</h1>
-
+			</div>
+		</div>
+	</div>
+</form>
+<hr>
+<div class="row">
+	<div class="span3">
+		<div class="well" style="min-height:400px;">
+			<h3>Parameters</h3>
+		</div>
+	</div>
+	<div class="span9">
+		<div class="well" style="min-height:700px;">
+			<h3>Rendering Surface</h3>
+		</div>
+	</div>
+</div>
 </script>
 
 <script id="measurementTemplate" type="text/template">
@@ -161,12 +184,12 @@
 	<div class="row form-inline">
 		<div class="measwrapper span12">
 			<h1>Measurements</h1>
-			<div class="well">	
+			<div class="well control-group">	
 				<input type="text" id="customername" placeholder="Customer Name" value="<%= name %>">
 				<select id="customerSelect">
 					<option>Select Customer...</option>
 					<% for (var i in customers) { %>
-						<option value="<%- customers[i] %>"><%- customers[i] %></option>
+						<option value="<%- customers[i].cid %>"><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
 				
@@ -181,7 +204,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="alertSaved" class="alert alert-success">
+	<div id="alertSaved" class="alert">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<b>Hooray!</b> You just saved measurements for customer <b><%= name %></b>
 	</div>
@@ -198,9 +221,9 @@
 					<hr>
 				</div>
 				<% for (var i in data.measurements[part]) { %>
-					<div class="span2">
+					<div class="span2 control-group">
 						<label><%- data.measurements[part][i].title %></label>
-						<input type="text" id="<%- i %>" placeholder="" value="<%- data.measurements[part][i].val %>" class="span2">
+						<input type="text" id="<%- i %>" placeholder="" value="<%- data.measurements[part][i].val %>" class="span2 numerical">
 					</div>
 				<% } %>
 			</div>
@@ -219,7 +242,8 @@
 
 <script type="text/javascript" src="js/patterndraw.js"></script>
 <script type="text/javascript" src="js/web.js"></script>
-<script type="text/javascript" src="js/app-bodyMeasurement.js"></script>
+<script type="text/javascript" src="js/app-defaultMeasurements.js"></script>
+<script type="text/javascript" src="js/app-defaultPatterns.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 
 </body>
