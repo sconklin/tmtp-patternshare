@@ -5,6 +5,8 @@
 	
 	// TO DO: everytime localStorage is used, Backbone.sync should be called simultaneously
 	
+	// TO DO: MeasurementView is wrong: there should be a view for model nested inside a view for collection
+	
 	********************************************************************/
 
 	var patternCurrent;
@@ -174,14 +176,21 @@
 			
 			console.log('saving data...');
 			
+			var $name = this.$el.find('#customername').val();
 			
-			var model = bodyCurrent;
+			if ( JSON.parse(localStorage.getItem('customerList')).indexOf($name) >= 0){
+				console.log('already exists');
+				var model = bodyCurrent;
+			} else {
+				console.log('new user');
+				var model = new Measurement();
+				console.log(model);
+			}
 			//console.log(model);
 			var $form = this.$el;
 			
 			// update the model
 			// model.set('name', this.$el.find('#customername').val());
-			var $name = this.$el.find('#customername').val();
 			model.get('clientdata').customername = $name;
 			model.get('clientdata').units = $("input[name=units]:checked").attr('id');
 			var measurements = model.get('clientdata').measurements;
@@ -192,7 +201,12 @@
 				}
 			}
 			
-			// update the collection.............. ?????????
+			// update the collection.............. UGLY SOLUTION ?????????
+			if ( JSON.parse(localStorage.getItem('customerList')).indexOf($name) < 0){
+				console.log('add new model to collection');
+				this.collection.push(model);
+				bodyCurrent = this.collection.get(model);
+			}
 						
 			// localStorage create/update the customer list
 			var customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
@@ -206,7 +220,7 @@
 			// model.save();
 
 			// re-render view, to update the dropdown menu for measurement selection
-			this.render(model.attributes.clientdata);  			
+			this.render(bodyCurrent.get('clientdata'));  			
 			
 			//// give some feedback when saving measurements:
 			$alert = $('#alertSaved');
@@ -217,8 +231,7 @@
 			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
 		},
 		selectCustomer: function(e){
-			currentCustomer = e.currentTarget.value;
-			bodyCurrent = this.collection.get(currentCustomer);
+			bodyCurrent = this.collection.get(e.currentTarget.value);
 			this.render(bodyCurrent.get('clientdata'));
 		}
 	});
@@ -275,7 +288,7 @@
 	var about = new PageView();
 	about.template = $("#aboutTemplate").html();
 	
-    var taumetarouter = new TauMetaTauRouter();
+    var taumetataurouter = new TauMetaTauRouter();
     
     Backbone.history.start();
 	
