@@ -7,6 +7,8 @@
 	
 	// TO DO: MeasurementView is wrong: there should be a view for model nested inside a view for collection
 	
+	// TO DO: abstract localStorage saving function
+	
 	********************************************************************/
 
 	var patternCurrent;
@@ -38,8 +40,8 @@
 		template: $("#patternsTemplate").html(),
 		
 		initialize: function(){
-			// TO DO: this list is currently built from static variables residing in app-patterns.js
-			// it will be built from server or local memory collections of patterns
+			// TO DO: this list is currently only built from static variables residing in app-patterns.js
+			// in the future, it will ALSO be built from server or local memory collections of patterns
 
 			var models = [];
 			for (var i in defaultPatterns){
@@ -52,6 +54,8 @@
 			bodyCurrent = null;
 
 			// ??? TO DO: for listing, render shouldn't reference localStorage but the view's collection instead
+			// perhaps, the measurement collection should be built first, independently of views, 
+			// and then assigned to the measurements view??? 
 			var customers = JSON.parse(localStorage.getItem('customerList'));
 			var patternList = this.collection.models;
 			var tmpl = _.template(this.template);
@@ -62,10 +66,10 @@
 			return this;
 		},
 		events: {
-			'change #patternCustomerSelect': 'selection',
-			'change #patternSelect': 'selection'
+			'change #patternCustomerSelect': 'selectionMade',
+			'change #patternSelect': 'selectionMade'
 		},
-		selection: function(){
+		selectionMade: function(){
 			console.log('selection made');
 		}
 	});
@@ -75,7 +79,7 @@
 		template: $("#measurementTemplate").html(),
 		
 		initialize: function(){
-			// insert dafaults into localStorage if not included...
+			// insert defaults into localStorage if not included...
 			
 			/*************************************************************************/
 			// TO DO: this is wrong! the collection should first include the defaults
@@ -107,6 +111,7 @@
 			this.$el.empty();
 			this.$el.html(tmpl({'data': data, 'name': data.customername, 'customers': customers}));
 			
+			// INPUT VALIDATION
 			$('input.numerical').change(function(e){
 				if (!isNum(e.target.value)) {
 					$(this).parent().addClass('error');
@@ -132,8 +137,6 @@
 					$(this).parent().removeClass('error');
 				}
 			});	
-
-
 			
 			return this;
 		},
@@ -143,7 +146,8 @@
 		},
 		saveData: function(e){
 			e.preventDefault();
-
+			
+			/*************************************************************/
 			// First, validate the form			
 			var $nameInput = $('input#customername');
 			if ($nameInput.val().length == 0) {
@@ -173,6 +177,7 @@
 				console.log('error: invalid input...');
 				return false;
 			}
+			/*************************************************************/
 			
 			console.log('saving data...');
 			
@@ -186,7 +191,7 @@
 				var model = new Measurement();
 				console.log(model);
 			}
-			//console.log(model);
+
 			var $form = this.$el;
 			
 			// update the model
@@ -207,7 +212,8 @@
 				this.collection.push(model);
 				bodyCurrent = this.collection.get(model);
 			}
-						
+				
+			// ABSTRACT THIS		
 			// localStorage create/update the customer list
 			var customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
 			if (customerList.indexOf($name)<0) customerList.push($name);
@@ -276,8 +282,17 @@
 		},
     });
     
+	
+	// INITIALIZE INSTANCES OF THE CLASSES JUST DEFINED
+	
+	// MODEL
 	var bodyCurrent = new Measurement(bodyStandard); 	
 	
+	// COLLECTIONS
+	// pattern collection
+	// measurement collection	
+	
+	// VIEWS
     var todo = new PageView();
     todo.template = $("#todoTemplate").html();
 	
