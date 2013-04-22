@@ -42,18 +42,19 @@
 		template: $("#patternsTemplate").html(),
 		meas: {}, 
 		initialize: function(){
-			this.collection = patternCollection;
 		},
 		render: function(){
 			var tmpl = _.template(this.template);
 
 			this.$el.empty();
 			this.$el.html(tmpl({
-				'patternList': this.collection.models, 
+				'patternList': patternCollection.models, 
 				'customers': customerCollection.models, 
 				'parameters': this.meas, 
 				'options': patterndraw.settings})
 			);
+			
+
 			
 			if (bodyCurrent && patternCurrent){
 				patterndraw.settings.drawArea = document.getElementById("drawing");
@@ -67,6 +68,7 @@
 			'change #patternSelect': 'patternSelect',
 			'change input[type=checkbox]': 'optionsToggle',
 			'change .parameter': 'parameterChange',
+			'click #saveSvg': 'saveSvg'
 		},
 		patternCustomerSelect: function(e){
 			bodyCurrent = customerCollection.get(e.currentTarget.value);
@@ -90,6 +92,10 @@
 			parameter = e.currentTarget.id;
 			this.meas[e.currentTarget.id] = e.currentTarget.value;
 			this.render();
+		},
+		saveSvg: function(e){
+			e.preventDefault();
+			// implement SVG saving.......
 		}
 	});
     
@@ -180,31 +186,18 @@
 			console.log('saving data...');
 			
 			var $name = this.$el.find('#customername').val();
-			var $id = this.$el.find('#customerid').val();
 			var $form = this.$el;
 
-			if (!customerCollection.get($id)){
-				console.log('new customer');
-			} else {
-				console.log('existing customer');
-				var model = customerCollection.get($id);
-			}
-
 			// update the model
-			// model.set('name', this.$el.find('#customername').val());
 			var data = this.model.get('clientdata');
 			data.customername = $name;
 			data.units = $("input[name=units]:checked").attr('id');
-			//var measurements = model.attributes.clientdata.measurements;
 			for (var part in data.measurements){
-				//console.log(part);
 				for (var j in data.measurements[part]) {
 					var newVal = $form.find('#'+j).val();
-					//console.log(newVal);
 					data.measurements[part][j] = newVal ? newVal : data.measurements[part][j];
 				}
 			}
-			//console.log(data);
 			
 			this.model.set({'clientdata': data});
 			
@@ -218,7 +211,7 @@
 			storageSave('customerList', $name, this.model.attributes);
 			
 			// HTTP save to server
-			// model.save();
+			this.model.save();
 
 			// re-render view, to update the dropdown menu for measurement selection
 			this.render();  			
@@ -272,7 +265,7 @@
 			measurementForm.render();  
 		},
 		patternsPage: function() {
-			patterns.render();  
+			patterns.render();
 		},
 		aboutPage: function() {
 			about.render();  

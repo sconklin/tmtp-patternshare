@@ -110,7 +110,7 @@
 		<p>Measurements view:</p>
 
 		<ul>
-		<li>adit app-bodyMeasurement.js to make default measurements available (man/woman)</li>
+		<li>edit app-bodyMeasurement.js to make default measurements available (man/woman)</li>
 		<li>better layout for the form, with helper images</li>
 		<li>unit conversion cm &lt;--&gt; in</li>
 		<li>ability to delete measurement</li>
@@ -119,7 +119,8 @@
 		<p>Patterns view:</p>
 
 		<ul>
-		<li>refactor existing code into Backbone (ha!)</li>
+		<li>ability to render pattern from custom measurements</li>
+		<li>save to SVG</li>
 		</ul>
 		
 		<p>Back-end:</p>
@@ -145,16 +146,16 @@
 		<div class="measwrapper span12">
 			<h1>Patterns</h1>
 			<div class="well">	
-				<select id="patternSelect">
-					<option>Select Pattern...</option>
-					<% for (var i in patternList) { %>
-						<option value="<%- patternList[i].cid %>"><%- patternList[i].attributes.pattern.title %></option>
-					<% } %>
-				</select>
 				<select id="patternCustomerSelect">
 					<option>Select Customer...</option>
 					<% for (var i in customers) { %>
 						<option value="<%- customers[i].cid %>"><%- customers[i].attributes.clientdata.customername %></option>
+					<% } %>
+				</select>
+				<select id="patternSelect">
+					<option>Select Pattern...</option>
+					<% for (var i in patternList) { %>
+						<option value="<%- patternList[i].cid %>"><%- patternList[i].attributes.pattern.title %></option>
 					<% } %>
 				</select>
 				

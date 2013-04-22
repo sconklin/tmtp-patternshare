@@ -291,7 +291,7 @@ patterndraw.draw.constptopt = function( points ){
     constptstr += "fill=\"#000000\" ";
     constptstr += "/>";
 
-    constptstr += "<text ";
+    constptstr += "<text font-size='20'";
     constptstr += "x=\"" + x + "\" y=\"" + y + "\"";
     constptstr += " >" + ltr + ": (" + points[ltr].x.toFixed(3) + ", " + points[ltr].y.toFixed(3) + ")";
     constptstr += "</text>";
