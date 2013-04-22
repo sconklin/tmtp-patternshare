@@ -11,7 +11,7 @@
 	
 	********************************************************************/
 	
-	var TMTP = TMTP || {};
+	// var TMTP = TMTP || {};
 	
 	var meas = {};
 
@@ -291,6 +291,8 @@
 			about.render();  
 		},
     });
+	
+	
 	
 	// INITIALIZE INSTANCES OF THE CLASSES JUST DEFINED
 	
