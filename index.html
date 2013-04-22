@@ -110,10 +110,11 @@
 		<p>Measurements view:</p>
 
 		<ul>
-		<li>edit app-bodyMeasurement.js to make default measurements available (man/woman)</li>
+		<li>edit app-defaults.js to make default measurements available (man/woman)</li>
 		<li>better layout for the form, with helper images</li>
 		<li>unit conversion cm &lt;--&gt; in</li>
 		<li>ability to delete measurement</li>
+		<li>ability to save/restore measurements from file</li>
 		</ul>
 		
 		<p>Patterns view:</p>
@@ -141,19 +142,19 @@
 </script>
 
 <script id="patternsTemplate" type="text/template">
-<form id="measurementInput" class="">
+<form id="patternInput" class="">
 	<div class="row form-inline">
 		<div class="measwrapper span12">
 			<h1>Patterns</h1>
 			<div class="well">	
 				<select id="patternCustomerSelect">
-					<option>Select Customer...</option>
+					<option>1. Select Customer...</option>
 					<% for (var i in customers) { %>
 						<option value="<%- customers[i].cid %>"><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
 				<select id="patternSelect">
-					<option>Select Pattern...</option>
+					<option>2. Select Pattern...</option>
 					<% for (var i in patternList) { %>
 						<option value="<%- patternList[i].cid %>"><%- patternList[i].attributes.pattern.title %></option>
 					<% } %>
@@ -216,7 +217,8 @@
 				<label class="radio">
 					<input type="radio" id="in" name="units" <% if(data.attributes.clientdata.units == "in"){ %> checked="true" <%}%> /> Inches
 				</label>
-				<button id="saveMeasurements" class="btn btn-danger pull-right" type="submit"> Save measurements! </button>
+				<button id="saveMeasurements" class="btn btn-danger pull-right" type="submit"> SAVE </button>
+				<button id="newMeasurements" class="btn btn-warning pull-right" type="submit"> NEW </button>
 
 			</div>
 		</div>

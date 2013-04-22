@@ -16,24 +16,26 @@
 	var meas = {};
 
     var Pattern = Backbone.Model.extend({
-        urlRoot: 'pattern',
+        //urlRoot: 'pattern',
 		defaults: {
 			"pattern": patternStandard.pattern
         }
     });
 	
 	var Measurement = Backbone.Model.extend({
-		urlRoot: 'measurement',
+		//urlRoot: 'measurement',
 		defaults: {
 			"clientdata": bodyStandard.clientdata
 		}
 	});
 		
     var patternCollection = Backbone.Collection.extend({
+		url: 'patterns',
 		model: Pattern
     });
 	
 	var measurementCollection = Backbone.Collection.extend({
+		url: 'measurements',
 		model: Measurement
 	});
 	
@@ -147,8 +149,14 @@
 			return this;
 		},
 		events: {
+			'click #newMeasurements': 'clearForm',
 			'click #saveMeasurements': 'saveData',
 			'change #customerSelect': 'selectCustomer'
+		},
+		clearForm: function(){
+			this.model = new Measurement();
+			bodyCurrent = this.model;
+			this.render();
 		},
 		saveData: function(e){
 			e.preventDefault();
@@ -294,6 +302,7 @@
 			customerCollection.add(new Measurement(JSON.parse(localStorage.getItem(customerList[i]))));
 		}
 	}
+	// THIRD: upon authentication, retrieve models from server.......
 	
 	var patternCollection = new patternCollection();
 	// FIRST: include defaults in collection
