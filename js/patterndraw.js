@@ -3,304 +3,325 @@ vers    date        changes
 0.1     02.27.13    1st release
 0.1.1   02.28.13    added some math
 0.1.2   03.19.13    added more math, added construction options/grid
+0.1.3	04.21.13	DRLZ code refactor
 */
 
-var maxx, maxy, minx, miny;
-var pt = {};
+//fix string replace for multiple occurrencies and fix object structure
+//fix zoom!wtf
+  //save some IE trouble with console
+if (typeof console === "undefined"){
+  console={};
+  console.log = function(){ return; };
+}
 
-function calcPoints() {
-  maxx = 0;
-  maxy = 0;
-  minx = 0;
-  miny = 0;
-  for (i in window.patternData.pattern.points) {
+var patterndraw = patterndraw || {};
 
-    var ltr = i;
+//set some defaulst settings 
+patterndraw.settings = {
+  constopt: false, // show construction lines?
+  constptopt: false, // show construction points?
+  gridopt: false, // show grid?
+  units: 28.346, // cm as default units
+  drawArea: document.getElementById("drawing"),
+  height: 500,
+  width: 700,
+  messages: true // enable or disable debug console notifications
+};
+
+  //update or intialize settings values
+patterndraw.init = function(settings){
+  for(var key in settings)
+    if(patterndraw.settings.hasOwnProperty(key)) patterndraw.settings[key] = settings[key];
+};
+  
+  //help changing units
+patterndraw.settings.setinches = function(){
+  patterndraw.settings.units = 72;
+};
+patterndraw.settings.setcm = function(){
+  patterndraw.settings.units = 28.346;
+};
+
+patterndraw.message = function(message){
+  if(patterndraw.settings.messages) console.log(message)
+}
+
+  // draw a pattern file with a set of measurements
+patterndraw.drawpattern = function( pattern, meas ){
+
+    //process measurements
+  if ( meas ) {
+      //process points
+    pt = patterndraw.draw.calcPoints( pattern, meas );
+    patterndraw.message("patterndraw.settings.units = " + patterndraw.settings.units);
+    
+      // generate svg elements
+    var svgElms = patterndraw.svg.generate( pattern.title );
+
+      // generate final svg string
+    var reformedsvg = svgElms.viewBoxheader + svgElms.svgtitle + svgElms.svgtransform; // add headers
+    if (patterndraw.settings.gridopt) { reformedsvg += patterndraw.draw.grid(); } // add the grid
+    if (patterndraw.settings.constopt) { reformedsvg += patterndraw.draw.constopt( pattern.construction ); } // add the construction lines
+    if (patterndraw.settings.constptopt) { reformedsvg += patterndraw.draw.constptopt( pt ); } // add the construction points
+    reformedsvg += patterndraw.draw.patterndraw( pattern.main ); // add the pattern
+    reformedsvg += svgElms.svgend; // svg closing
+
+	patterndraw.message(patterndraw.settings.drawArea);
+    patterndraw.settings.drawArea.innerHTML = reformedsvg;
+
+  } else {
+    alert("Please enter a number in each measurement box.");
+  }
+  //patterndraw.message(ptarray[1]);
+};
+
+/////////////////////////////////////////
+/////////////////////////////////////////
+//////////////    DRAW    ///////////////
+/////// general drawing functions ///////
+
+patterndraw.draw = patterndraw.draw || {};
+
+  //loop throught the pattern files and eval sequencially every point string
+  // and return it as an object
+patterndraw.draw.calcPoints = function ( pattern, meas ) {
+  var pt = {}, i;
+
+    //initialize global limits
+  patterndraw.svg.settings.maxx = 0;
+  patterndraw.svg.settings.maxy = 0;
+  patterndraw.svg.settings.minx = 0;
+  patterndraw.svg.settings.miny = 0;
+
+  for (i in pattern.points) {
+
+    var ltr = i; // name of the point
     pt[ltr] = {};
 
-    console.log('evalx = ' + window.patternData.pattern.points[i].x);
-    console.log('evaly = ' + window.patternData.pattern.points[i].y);
+    patterndraw.message('evalx = ' + pattern.points[i].x);
+    patterndraw.message('evaly = ' + pattern.points[i].y);
 
     // the + unary removes leading zeroes
-    var evalx = +eval(window.patternData.pattern.points[i].x);
-    var evaly = +eval(window.patternData.pattern.points[i].y);
+    var evalx = +eval( pattern.points[i].x );
+    var evaly = +eval( pattern.points[i].y );
 
     pt[ltr].x = evalx;
     pt[ltr].y = evaly;
-    maxx = Math.max(maxx, pt[ltr].x);
-    minx = Math.min(minx, pt[ltr].x);
-    maxy = Math.max(maxy, pt[ltr].y);
-    miny = Math.min(miny, pt[ltr].y);
-    console.log(ltr + ".x: " + window.patternData.pattern.points[i].x + " = " + pt[ltr].x);
-    console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
-    console.log("Point "+ltr+" maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
+
+      //update global limits so we can center the drawing
+    patterndraw.svg.settings.maxx = Math.max(patterndraw.svg.settings.maxx, pt[ltr].x);
+    patterndraw.svg.settings.minx = Math.min(patterndraw.svg.settings.minx, pt[ltr].x);
+    patterndraw.svg.settings.maxy = Math.max(patterndraw.svg.settings.maxy, pt[ltr].y);
+    patterndraw.svg.settings.miny = Math.min(patterndraw.svg.settings.miny, pt[ltr].y);
+
+    patterndraw.message(ltr + ".x: " + pattern.points[i].x + " = " + pt[ltr].x);
+    patterndraw.message(ltr + ".y: " + pattern.points[i].y + " = " + pt[ltr].y);
+    patterndraw.message("Point "+ ltr +" maxx: " + patterndraw.svg.settings.maxx + ", maxy: " + patterndraw.svg.settings.maxy + ", minx: " + 
+      patterndraw.svg.settings.minx + ", miny: " + patterndraw.svg.settings.miny);
   }
-  //console.log(pt);
-}
+  //patterndraw.message(pt);
+  return pt;
+};
 
-var measValid;
-var meas;
+  //process pattern mesurements return measurements object or false if error
+patterndraw.draw.getMeas = function( measurements ) {
+  var measValid = true,
+    meas = {},
+    pmd = measurements;
 
-function getMeas() {
-  measValid = true;
-  meas = {};
-  console.log("getMeas");
-  var pmd = window.patternData.pattern.measurements;
+  patterndraw.message("getMeas");
+
   pmd.map( function(item) {
-    var measnum = $("#"+item).val();
-    if ( measnum !== "" && isNaN(measnum) == false ) {
-        meas[item] = measnum;
-        console.log("meas."+item+": " + measnum);
+    var measnum = $("#"+item).val(); //<------------ jquery
+    if ( measnum !== "" && isNaN(measnum) === false ) {
+      meas[item] = measnum;
+      patterndraw.message("meas."+item+": " + measnum);
     } else { measValid = false; }
   });
-  console.log("measValid is " + measValid);
-}
+  patterndraw.message("measValid is " + measValid);
 
+  return measValid ? meas : false;
+};
 
-var reformedsvg = "";
-var svgnohead = "";
-var svgsaveheader = "";
-var svgtitle = "";
-var svgobjstring = "";
-var svgtransform = "";
-var svgconststr = "";
-var constopt;
-var constptopt;
-var gridopt;
-var gridsvgstr = "";
-var constptstr = "";
+  //return a svg grid string
+patterndraw.draw.grid = function(){
+  var grid = "<g>",
+    numx = patterndraw.svg.settings.svgw / patterndraw.settings.units,
+    numy = patterndraw.svg.settings.svgh / patterndraw.settings.units;
 
-function drawpattern(){
-    //getMeas();
-    maxx = 0;
-    maxy = 0;
-    minx = 0;
-    miny = 0;
-    pt = {};
-
-    reformedsvg = "";
-    svgnohead = "";
-    svgsaveheader = "";
-    svgtitle = "";
-    svgobjstring = "";
-    svgtransform = "";
-    svgconststr = "";
-    gridsvgstr = "";
-    constptstr = "";
-    constopt = document.getElementById("constopt").checked;
-    constptopt = document.getElementById("constptopt").checked;
-    gridopt = document.getElementById("gridopt").checked;
-    IN = 72;
-    CM = 28.346;
-
-    if ( measValid ) {
-
-        calcPoints();
-
-        var unitscayl;
-        if ( document.getElementById("cmradio").checked == true ) { unitscayl = 28.346; }
-        else if ( document.getElementById("inradio").checked == true ) { unitscayl = 72; }
-        else { unitscayl = 1; };
-
-        console.log("unitscayl = " + unitscayl);
-
-        if ( constopt ) {
-            console.log('constopt');
-            svgconststr += "<g>";
-            console.log('got to here!');
-            for (i in window.patternData.pattern.construction) {
-                console.log('i = ' + i);
-                svgconststr += "<";
-                svgconststr += window.patternData.pattern.construction[i].type + " " + "id=\"" + window.patternData.pattern.construction[i].id + "\" ";
-                for (j in window.patternData.pattern.construction[i].drawattr){
-                    var evaled = eval(window.patternData.pattern.construction[i].drawattr[j]);
-                    evaled *= unitscayl;
-                    console.log("og: " + window.patternData.pattern.construction[i].drawattr[j] + "ev: " + evaled);
-                    svgconststr += j + "=\"" + evaled + "\" ";
-                }
-                if (window.patternData.pattern.construction[i].type == "path"){
-                    svgconststr += " d=\" ";
-                    for (j in window.patternData.pattern.construction[i].d){
-                        svgconststr += window.patternData.pattern.construction[i].d[j][0];
-                        for (var k=1; k<window.patternData.pattern.construction[i].d[j].length; k++){
-                            //console.log(window.patternData.pattern.construction[i].d[j][k][0]);
-                            var eval0 = eval(window.patternData.pattern.construction[i].d[j][k][0]);
-                            var eval1 = eval(window.patternData.pattern.construction[i].d[j][k][1]);
-                            eval0 *= unitscayl;
-                            eval1 *= unitscayl;
-                            //console.log("j[0]: " + window.patternData.pattern.construction[i].d[j][0]);
-                            if (window.patternData.pattern.construction[i].d[j][0] !== "m") { eval0; eval1; }
-
-                            svgconststr += " " + eval0 + "," + eval1 + " ";
-                        }
-                    }
-                    svgconststr += " \" ";
-                }
-                for (j in window.patternData.pattern.construction[i].appearanceattr){
-                    svgconststr += j + "=\"" + window.patternData.pattern.construction[i].appearanceattr[j] + "\" ";
-                }
-                if (window.patternData.pattern.construction[i].type == "text"){
-                    svgconststr += ">" + window.patternData.pattern.construction[i].content + "</text>";
-                }
-                else {
-                    svgconststr += "/>";
-                }
-            }
-            svgconststr += "</g>";
-        }
-
-        for (i in window.patternData.pattern.main){
-            svgobjstring += "<";
-            svgobjstring += window.patternData.pattern.main[i].type + " " + "id=\"" + window.patternData.pattern.main[i].id + "\" ";
-            for (j in window.patternData.pattern.main[i].drawattr){
-                var evaled = eval(window.patternData.pattern.main[i].drawattr[j]);
-                evaled *= unitscayl;
-                //console.log("og: " + window.patternData.pattern.main[i].drawattr[j] + "ev: " + evaled);
-                svgobjstring += j + "=\"" + evaled + "\" ";
-            }
-
-            if (window.patternData.pattern.main[i].type == "path"){
-                svgobjstring += " d=\" ";
-                for (j in window.patternData.pattern.main[i].d){
-                    svgobjstring += window.patternData.pattern.main[i].d[j][0];
-                    for (var k=1; k<window.patternData.pattern.main[i].d[j].length; k++){
-                        //console.log(window.patternData.pattern.main[i].d[j][k][0]);
-                        var eval0 = eval(window.patternData.pattern.main[i].d[j][k][0]);
-                        var eval1 = eval(window.patternData.pattern.main[i].d[j][k][1]);
-                        eval0 *= unitscayl;
-                        eval1 *= unitscayl;
-                        //console.log("j[0]: " + window.patternData.pattern.main[i].d[j][0]);
-                        if (window.patternData.pattern.main[i].d[j][0] !== "m") { eval0; eval1; }
-
-                        svgobjstring += " " + eval0 + "," + eval1 + " ";
-                    }
-                }
-                svgobjstring += " \" ";
-            }
-
-            for (j in window.patternData.pattern.main[i].appearanceattr){
-                svgobjstring += j + "=\"" + window.patternData.pattern.main[i].appearanceattr[j] + "\" ";
-            }
-
-            if (window.patternData.pattern.main[i].type == "text"){
-                svgobjstring += ">" + window.patternData.pattern.main[i].content + "</text>";
-            }
-            else {
-                svgobjstring += "/>";
-            }
-        }
-        console.log("A maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
-        maxx *= unitscayl;
-        maxy *= unitscayl;
-        minx *= unitscayl;
-        miny *= unitscayl;
-        minx -= 20;
-        miny -= 20;
-        maxx += 20;
-        maxy += 20;
-        console.log("B maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
-        var txtshift = 30;
-        var svgw = maxx - minx;
-        var svgh = maxy - miny + txtshift;
-        var xshift = -minx;
-        var yshift = -miny + txtshift;
-
-        if (gridopt){
-            gridsvgstr += "<g>";
-            var numx = svgw/unitscayl;
-            var numy = svgh/unitscayl;
-            for (var i=0; i<numx; i++){
-                gridsvgstr += "<path d=\"";
-                gridsvgstr += "M " + i*unitscayl + ",0 ";
-                gridsvgstr += "l " + "0," + svgh + " ";
-                if (i%10 == 0){
-                    gridsvgstr += "\" stroke-width=\"2\" stroke=\"#aaaaff\" fill=\"none\" />";
-                }
-                else if (i%5 == 0) {
-                    gridsvgstr += "\" stroke-width=\"1\" stroke=\"#aaaaff\" fill=\"none\" />";
-                }
-                else {
-                    gridsvgstr += "\" stroke-width=\"0.25\" stroke=\"#aaaaff\" fill=\"none\" />";
-                }
-            }
-            for (var i=0; i<numy; i++){
-                gridsvgstr += "<path d=\"";
-                gridsvgstr += "M 0," + i*unitscayl;
-                gridsvgstr += " l " + svgw  + ",0 ";
-                if (i%10 == 0){
-                    gridsvgstr += "\" stroke-width=\"2\" stroke=\"#aaaaff\" fill=\"none\" />";
-                }
-                else if (i%5 == 0) {
-                    gridsvgstr += "\" stroke-width=\"1\" stroke=\"#aaaaff\" fill=\"none\" />";
-                }
-                else {
-                    gridsvgstr += "\" stroke-width=\"0.25\" stroke=\"#aaaaff\" fill=\"none\" />";
-                }
-            }
-            gridsvgstr += "</g>";
-        }
-
-        if (constptopt){
-            constptstr += "<g>";
-            for (i in pt){
-                var ltr = i;
-                var x = pt[ltr].x * unitscayl;
-                var y = pt[ltr].y * unitscayl;
-
-                constptstr += "<ellipse id=\"" + ltr + "\" ";
-                constptstr += "cx=\"" + x + "\" cy=\"" + y + "\" ";
-                constptstr += "rx=\"3\" ry=\"3\" ";
-                constptstr += "fill=\"#000000\" ";
-                constptstr += "/>";
-
-                constptstr += "<text ";
-                constptstr += "x=\"" + x + "\" y=\"" + y + "\"";
-                constptstr += " >" + ltr + ": (" + pt[ltr].x.toFixed(3) + ", " + pt[ltr].y.toFixed(3) + ")";
-                constptstr += "</text>";
-                //console.log(ltr + ": (" + x + ", " + y + ")");
-            }
-            constptstr += "</g>";
-        }
-
-        //reformedsvg += svgheader[0];
-        var viewBoxheader = "<svg width=\"" + "700" + "\" height=\"" + "550" + "\" viewBox=\"0 0 " + svgw + " " + svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
-        svgsaveheader = "<svg width=\"" + svgw + "\" height=\"" + svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
-        svgtitle = "<text font-size=\"24\" y=\"24\" x=\"5\" fill=\"#000000\">" + window.patternData.pattern.title + "</text>";
-        svgtransform = "<g transform=\"translate(" + xshift + "," + yshift + ")\">";
-        svgend = "</g></svg>";
-
-        reformedsvg += viewBoxheader;
-        reformedsvg += svgtitle;
-        reformedsvg += svgtransform;
-        if (gridopt) { reformedsvg += gridsvgstr; }
-        if (constopt) { reformedsvg += svgconststr; }
-        if (constptopt) { reformedsvg += constptstr; }
-        reformedsvg += svgobjstring;
-        reformedsvg += svgend;
-        //console.log(reformedsvg);
-
-        var da = document.getElementById("drawarea");
-        da.innerHTML = reformedsvg;
-    } else {
-        alert("Please enter a number in each measurement box.");
+  for (var i=0; i<numx; i++){
+    grid += "<path d=\"";
+    grid += "M " + i * patterndraw.settings.units + ",0 ";
+    grid += "l " + "0," + patterndraw.svg.settings.svgh + " ";
+    if (i%10 === 0){
+        grid += "\" stroke-width=\"2\" stroke=\"#aaaaff\" fill=\"none\" />";
     }
-    //console.log(ptarray[1]);
-}
+    else if (i%5 === 0) {
+        grid += "\" stroke-width=\"1\" stroke=\"#aaaaff\" fill=\"none\" />";
+    }
+    else {
+        grid += "\" stroke-width=\"0.25\" stroke=\"#aaaaff\" fill=\"none\" />";
+    }
+  }
+  for (var j=0; j<numy; j++){
+    grid += "<path d=\"";
+    grid += "M 0," + j*patterndraw.settings.units;
+    grid += " l " + patterndraw.svg.settings.svgw  + ",0 ";
+    if (j%10 === 0){
+      grid += "\" stroke-width=\"2\" stroke=\"#aaaaff\" fill=\"none\" />";
+    }
+    else if (j%5 === 0) {
+      grid += "\" stroke-width=\"1\" stroke=\"#aaaaff\" fill=\"none\" />";
+    }
+    else {
+      grid += "\" stroke-width=\"0.25\" stroke=\"#aaaaff\" fill=\"none\" />";
+    }
+  }
+  grid += "</g>";
+  return grid;
+};
+
+  //return svg string for the construction lines
+patterndraw.draw.constopt = function( construction ){
+  patterndraw.message('got to here!');
+
+  var svgconststr = "<g>", i, j;
+  for ( i in construction ) {
+    patterndraw.message('i = ' + i);
+    svgconststr += "<";
+    svgconststr += construction[i].type + " " + "id=\"" + construction[i].id + "\" ";
+    for (j in construction[i].drawattr){
+      var evaled = eval( construction[i].drawattr[j] );
+      evaled *= patterndraw.settings.units;
+      patterndraw.message("og: " + construction[i].drawattr[j] + "ev: " + evaled);
+      svgconststr += j + "=\"" + evaled + "\" ";
+    }
+    if ( construction[i].type == "path" ){
+      svgconststr += " d=\" ";
+      for (j in construction[i].d){
+        svgconststr += construction[i].d[j][0];
+        for (var k=1; k < construction[i].d[j].length; k++){
+          //patterndraw.message(window.patternData.pattern.construction[i].d[j][k][0]);
+          var eval0 = eval( construction[i].d[j][k][0] );
+          var eval1 = eval( construction[i].d[j][k][1] );
+          eval0 *= patterndraw.settings.units;
+          eval1 *= patterndraw.settings.units;
+          //patterndraw.message("j[0]: " + window.patternData.pattern.construction[i].d[j][0]);
+          if ( construction[i].d[j][0] !== "m" ) { eval0; eval1; }
+
+          svgconststr += " " + eval0 + "," + eval1 + " ";
+        }
+      }
+      svgconststr += " \" ";
+    }
+    var l;
+    for ( l in construction[i].appearanceattr ){
+      svgconststr += l + "=\"" + construction[i].appearanceattr[l] + "\" ";
+    }
+    if ( construction[i].type == "text" ){
+      svgconststr += ">" + construction[i].content + "</text>";
+    } else {
+      svgconststr += "/>";
+    }
+  }
+  svgconststr += "</g>";
+
+  return svgconststr;
+};
+
+  //return svg string for the pattern
+patterndraw.draw.patterndraw = function( pattern ){
+
+  var svgobjstring = '', i, j;
+
+  for (i in pattern){
+    svgobjstring += "<";
+    svgobjstring += pattern[i].type + " " + "id=\"" + pattern[i].id + "\" ";
+    for ( j in pattern[i].drawattr ){
+      var evaled = eval( pattern[i].drawattr[j] );
+      evaled *= patterndraw.settings.units;
+      //patterndraw.message("og: " + window.patternData.pattern.main[i].drawattr[j] + "ev: " + evaled);
+      svgobjstring += j + "=\"" + evaled + "\" ";
+    }
+
+    if ( pattern[i].type == "path" ){
+      svgobjstring += " d=\" ";
+      for (j in pattern[i].d){
+        svgobjstring += pattern[i].d[j][0];
+        for (var k=1; k< pattern[i].d[j].length; k++){
+          //patterndraw.message(window.patternData.pattern.main[i].d[j][k][0]);
+          var eval0 = eval( pattern[i].d[j][k][0]);
+          var eval1 = eval( pattern[i].d[j][k][1]);
+          eval0 *= patterndraw.settings.units;
+          eval1 *= patterndraw.settings.units;
+          //patterndraw.message("j[0]: " + window.patternData.pattern.main[i].d[j][0]);
+          if ( pattern[i].d[j][0] !== "m") { eval0; eval1; }
+
+          svgobjstring += " " + eval0 + "," + eval1 + " ";
+        }
+      }
+      svgobjstring += " \" ";
+    }
+
+    for (j in pattern[i].appearanceattr){
+      svgobjstring += j + "=\"" + pattern[i].appearanceattr[j] + "\" ";
+    }
+
+    if (pattern[i].type == "text"){
+      svgobjstring += ">" + pattern[i].content + "</text>";
+    }
+    else {
+      svgobjstring += "/>";
+    }
+  }
+  return svgobjstring;
+};
+
+  //return svg string for the construction points
+patterndraw.draw.constptopt = function( points ){
+  var constptstr = "<g>", i;
+  for (i in points){
+    var ltr = i,
+      x = points[ltr].x * patterndraw.settings.units,
+      y = points[ltr].y * patterndraw.settings.units;
+
+    constptstr += "<ellipse id=\"" + ltr + "\" ";
+    constptstr += "cx=\"" + x + "\" cy=\"" + y + "\" ";
+    constptstr += "rx=\"3\" ry=\"3\" ";
+    constptstr += "fill=\"#000000\" ";
+    constptstr += "/>";
+
+    constptstr += "<text ";
+    constptstr += "x=\"" + x + "\" y=\"" + y + "\"";
+    constptstr += " >" + ltr + ": (" + points[ltr].x.toFixed(3) + ", " + points[ltr].y.toFixed(3) + ")";
+    constptstr += "</text>";
+    //patterndraw.message(ltr + ": (" + x + ", " + y + ")");
+  }
+  constptstr += "</g>";
+  return constptstr;
+};
 
 /////////////////////////////////////////
 /////////////////////////////////////////
 //////////////    MATH    ///////////////
 /////////////////////////////////////////
 
-function angleBetween(pt1, pt2){
+/* _ IMPORTANT: if you create any new function you should
+/* _ remember that all the functions are aliased in the window
+/* _ namespace so they can be used for the eval 
+/* _ so BE CARFUL WITH FUNCION NAMES COLLISION */
+
+patterndraw.math = patterndraw.math || {};
+
+patterndraw.math.angleBetween = function(pt1, pt2){
     var dy = pt2.y - pt1.y;
     var dx = pt2.x - pt1.x;
     var ang = Math.atan2(dy, dx);
-    console.log("angleBetween (" + pt1.x + ", " + pt1.y + ") & (" + pt2.x + ", " + pt2.y + ") = " + ang);
+    patterndraw.message("angleBetween (" + pt1.x + ", " + pt1.y + ") & (" + pt2.x + ", " + pt2.y + ") = " + ang);
     return ang;
-}
+};
 
-function angleBetween3pts(a, b, c){
+patterndraw.math.angleBetween3pts = function(a, b, c){
     var ab = new Object();
     var cb = new Object();
     ab.x = b.x-a.x;
@@ -310,36 +331,36 @@ function angleBetween3pts(a, b, c){
     var dot = (ab.x*cb.x + ab.y*cb.y);
     var cross = (ab.x*cb.y - ab.y*cb.x);
     var alpha = Math.atan2(cross,dot);
-    console.log("alpha: " + alpha);
+    patterndraw.message("alpha: " + alpha);
     return(alpha);
-}
+};
 
-function dist(pt1, pt2){
+patterndraw.math.dist = function(pt1, pt2){
     var dy = pt2.y - pt1.y;
     var dx = pt2.x - pt1.x;
     var d = Math.sqrt(dy*dy + dx*dx);
-    console.log("distance between (" + pt1.x + ", " + pt1.y + ") & (" + pt2.x + ", " + pt2.y + ") = " + d);
+    patterndraw.message("distance between (" + pt1.x + ", " + pt1.y + ") & (" + pt2.x + ", " + pt2.y + ") = " + d);
     return d;
-}
+};
 
-function numdist(num1, num2){
+patterndraw.math.numdist = function(num1, num2){
     return Math.sqrt((num1*num1) + (num2*num2));
-}
+};
 
-function rotate(p, o, theta, ltr){
-    var p0 = new Object();
+patterndraw.math.rotate = function(p, o, theta, ltr){
+    var p0 = {};
     p0.x = Math.cos(theta) * (p.x-o.x) - Math.sin(theta) * (p.y-o.y) + o.x;
     p0.y = Math.sin(theta) * (p.x-o.x) + Math.cos(theta) * (p.y-o.y) + o.y;
-    console.log("ltr: " + ltr);
+    patterndraw.message("ltr: " + ltr);
     if (ltr == 'x'){ return p0.x; }
     if (ltr == 'y'){ return p0.y; }
-}
+};
 
-function radians(deg){
+patterndraw.math.radians = function(deg){
     return deg*Math.PI/180;
-}
+};
 
-function bezierLength(start, c1, c2, end){
+patterndraw.math.bezierLength = function(start, c1, c2, end){
     var t;
     var steps = 10;
     var len = 0;
@@ -347,70 +368,70 @@ function bezierLength(start, c1, c2, end){
     var curveptx, curvepty;
     var xdiff, ydiff;
     for (var i=0; i<steps; i++){
-        t = i/steps;
-        curveptx = ( start.x*Math.pow((1-t),3) + (3*c1.x*Math.pow((1-t),2)*t) + (3*c2.x*(1-t)*t*t) + (end.x*Math.pow(t,3)) );
-        curvepty = ( start.y*Math.pow((1-t),3) + (3*c1.y*Math.pow((1-t),2)*t) + (3*c2.y*(1-t)*t*t) + (end.y*Math.pow(t,3)) );
+      t = i/steps;
+      curveptx = ( start.x*Math.pow((1-t),3) + (3*c1.x*Math.pow((1-t),2)*t) + (3*c2.x*(1-t)*t*t) + (end.x*Math.pow(t,3)) );
+      curvepty = ( start.y*Math.pow((1-t),3) + (3*c1.y*Math.pow((1-t),2)*t) + (3*c2.y*(1-t)*t*t) + (end.y*Math.pow(t,3)) );
 
-        if (i>0){
-            xdiff = curveptx - prevpt.x;
-            ydiff = curvepty - prevpt.y;
+      if (i>0){
+        xdiff = curveptx - prevpt.x;
+        ydiff = curvepty - prevpt.y;
 
-            len += Math.sqrt(xdiff*xdiff + ydiff*ydiff);
-        }
+        len += Math.sqrt(xdiff*xdiff + ydiff*ydiff);
+      }
 
-        prevpt.x = curveptx;
-        prevpt.y = curvepty;
+      prevpt.x = curveptx;
+      prevpt.y = curvepty;
 
     }
     return len;
-}
+};
 
-function ccIntersect(P0, r0, P1, r1, ltr){
-    var d = dist(P0, P1);
-    console.log("d: "+d);
+patterndraw.math.ccIntersect = function(P0, r0, P1, r1, ltr){
+    var d = patterndraw.math.dist(P0, P1);
+    patterndraw.message("d: "+d);
     r1 = parseFloat(r1);
     r0 = parseFloat(r0);
-    console.log("r1: " + r1);
+    patterndraw.message("r1: " + r1);
     var r0r1 = r0+r1;
-    console.log("r0+r1= " + r0r1);
+    patterndraw.message("r0+r1= " + r0r1);
     if (r0r1<d){
-        console.log("No Intersection between " + P0 + " and " + P1 + " with radii " + r0 + " and " + r1);
+        patterndraw.message("No Intersection between " + P0 + " and " + P1 + " with radii " + r0 + " and " + r1);
         return 0;
     }
     if (d<Math.abs(r0-r1)){
-        console.log("One circle is inside another.");
+        patterndraw.message("One circle is inside another.");
         return 0;
     }
     var a = (r0*r0 - r1*r1 + d*d)/(2*d);
-    console.log("a: "+a);
+    patterndraw.message("a: "+a);
     var b = d-a;
-    console.log("b: "+b);
+    patterndraw.message("b: "+b);
     var h = Math.sqrt(r0*r0 - a*a);
 
     var P2 = {};
     P2.x = P0.x + a*(P1.x-P0.x)/d;
     P2.y = P0.y + a*(P1.y-P0.y)/d;
-    console.log("P2: (" + P2.x + ", " + P2.y + ")");
+    patterndraw.message("P2: (" + P2.x + ", " + P2.y + ")");
 
     var P31 = {};
     P31.x = P2.x + h*(P1.y-P0.y)/d;
     P31.y = P2.y - h*(P1.x-P0.x)/d;
-    console.log("P31: (" + P31.x + ", " + P31.y + ")");
+    patterndraw.message("P31: (" + P31.x + ", " + P31.y + ")");
 
     var P32 = {};
     P32.x = P2.x - h*(P1.y-P0.y)/d;
     P32.y = P2.y + h*(P1.x-P0.x)/d;
-    console.log("P32: (" + P32.x + ", " + P32.y + ")");
+    patterndraw.message("P32: (" + P32.x + ", " + P32.y + ")");
 
     if (ltr == 'x'){ return P32.x; }
     if (ltr == 'y'){ return P32.y; }
-}
+};
 
-function pointOnLineAtLength(p1, p2, length, ltr) {
+patterndraw.math.pointOnLineAtLength = function(p1, p2, length, ltr) {
     //Accepts points p1 and p2, length, and letter 'x' or 'y'
     //Returns x or y of point on the line at length measured from p1 towards p2
     //If length is negative, returns point found at length measured from p1 in opposite direction from p2
-    console.log('length = ', length);
+    patterndraw.message('length = ', length);
     var lineangle = angleBetween(p1, p2);
     var x = (length * Math.cos(lineangle)) + p1.x;
     var y  = (length * Math.sin(lineangle)) + p1.y;
@@ -418,49 +439,103 @@ function pointOnLineAtLength(p1, p2, length, ltr) {
       return x;
     } else {
       return y;
-    };
-}
+    }
+};
 
-function midPoint(p1, p2, ltr) {
+patterndraw.math.midPoint = function(p1, p2, ltr) {
     //Accepts p1 & p2. Returns x or y of point at midpoint between p1 & p2
-    console.log("midPoint.x => p1.x=" + p1.x + " + p2.x=" + p2.x + " = " + (p1.x + p2.x) / 2.0);
-    console.log("midPoint.y => p1.y=" + p1.y + " + p2.y=" + p2.y + " = " + (p1.y + p2.y) / 2.0);
-    console.log((p1.y + p2.y) / 2.0);
+    patterndraw.message("midPoint.x => p1.x=" + p1.x + " + p2.x=" + p2.x + " = " + (p1.x + p2.x) / 2.0);
+    patterndraw.message("midPoint.y => p1.y=" + p1.y + " + p2.y=" + p2.y + " = " + (p1.y + p2.y) / 2.0);
+    patterndraw.message((p1.y + p2.y) / 2.0);
     if (ltr == 'x'){
-        if (p1.x == p2.x) {
-            x = p1.x;
-        } else {
-            x = (p1.x + p2.x) / 2.0;
-        };
-        return x;
-      };
-      if (ltr == 'y'){
-        if (p1.y == p2.y) {
-            y = p1.y;
-        } else {
-            y = (p1.y + p2.y) / 2.0;
-        };
-        return y;
-    };
-}
+      if (p1.x == p2.x) {
+        x = p1.x;
+      } else {
+        x = (p1.x + p2.x) / 2.0;
+      }
+      return x;
+    }
+    if (ltr == 'y'){
+      if (p1.y == p2.y) {
+        y = p1.y;
+      } else {
+        y = (p1.y + p2.y) / 2.0;
+      }
+      return y;
+    }
+};
 
+  //generate global alias of the functions of the patterndraw.math object so are available when parsing the json
+patterndraw.math.alase = function(){
+  for(funct in patterndraw.math){
+    if(typeof(patterndraw.math[funct]) == 'function')
+    window[funct] = patterndraw.math[funct];
+  }
+}()
 
 /////////////////////////////////////////
 /////////////////////////////////////////
 //////////////    SAVE    ///////////////
 /////////////////////////////////////////
 
-function savesvg() {
+patterndraw.svg = patterndraw.svg || {};
+
+patterndraw.svg.settings = {
+  maxx: 0, //set the limits of the svg so we can center the drawing
+  maxy: 0,
+  minx: 0,
+  miny: 0,
+  txtshift: 30,
+  svgw: null, //calculated size of the svg
+  svgh: null,
+  xshift: null, //translate the element so it's displayed at origin
+  yshift: null
+};
+
+patterndraw.svg.generate = function(title) {
+  patterndraw.message("A maxx: " + patterndraw.svg.settings.maxx + ", maxy: " + patterndraw.svg.settings.maxy +
+    ", minx: " + patterndraw.svg.settings.minx + ", miny: " + patterndraw.svg.settings.miny);
+  patterndraw.svg.settings.maxx *= patterndraw.settings.units;
+  patterndraw.svg.settings.maxy *= patterndraw.settings.units;
+  patterndraw.svg.settings.minx *= patterndraw.settings.units;
+  patterndraw.svg.settings.miny *= patterndraw.settings.units;
+  patterndraw.svg.settings.minx -= 20;
+  patterndraw.svg.settings.miny -= 20;
+  patterndraw.svg.settings.maxx += 20;
+  patterndraw.svg.settings.maxy += 20;
+  patterndraw.message("B maxx: " + patterndraw.svg.settings.maxx + ", maxy: " + patterndraw.svg.settings.maxy +
+    ", minx: " + patterndraw.svg.settings.minx + ", miny: " + patterndraw.svg.settings.miny);
+
+  patterndraw.svg.settings.svgw = patterndraw.svg.settings.maxx - patterndraw.svg.settings.minx;
+  patterndraw.svg.settings.svgh = patterndraw.svg.settings.maxy - patterndraw.svg.settings.miny + patterndraw.svg.settings.txtshift;
+  patterndraw.svg.settings.xshift = -patterndraw.svg.settings.minx;
+  patterndraw.svg.settings.yshift = -patterndraw.svg.settings.miny + patterndraw.svg.settings.txtshift;
+
+    //reformedsvg += svgheader[0];
+  var svgObj = {};
+  svgObj.viewBoxheader = "<svg width=\"" + patterndraw.settings.width + "\" height=\"" + patterndraw.settings.height + "\" viewBox=\"0 0 " +
+    patterndraw.svg.settings.svgw + " " + patterndraw.svg.settings.svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
+  svgObj.svgsaveheader = "<svg width=\"" + patterndraw.svg.settings.svgw +
+    "\" height=\"" + patterndraw.svg.settings.svgh + "\" xmlns=\"http://www.w3.org/2000/svg\">";
+  svgObj.svgtitle = "<text font-size=\"24\" y=\"24\" x=\"5\" fill=\"#000000\">" + title + "</text>";
+  svgObj.svgtransform = "<g transform=\"translate(" + patterndraw.svg.settings.xshift + "," + patterndraw.svg.settings.yshift + ")\">";
+  svgObj.svgend = "</g></svg>";
+
+  return svgObj;
+};
+
+  /// PENDING:
+patterndraw.svg.savesvg = function() {
     //Editor.show_save_warning = false;
 
     // by default, we add the XML prolog back, systems integrating SVG-edit (wikis, CMSs)
     // can just provide their own custom save handler and might not want the XML prolog
     //svg = '<?xml version="1.0"?>\n' + svg;
-    var svgsavestring = svgsaveheader + svgtitle + svgtransform;
-    if (gridopt) { svgsavestring += gridsvgstr; }
-    if (constopt) { svgsavestring += svgconststr; }
-    if (constptopt) { svgsavestring += constptstr; }
-    svgsavestring += svgobjstring + svgend;
+    var svgsavestring = patterndraw.svg.svgsaveheader + patterndraw.svg.svgtitle + patterndraw.svg.svgtransform;
+    if (patterndraw.svg.gridopt) { svgsavestring += patterndraw.svg.gridsvgstr; }
+    if (patterndraw.svg.constopt) { svgsavestring += patterndraw.svg.svgconststr; }
+    if (patterndraw.svg.constptopt) { svgsavestring += patterndraw.svg.constptstr; }
+    svgsavestring += patterndraw.svg.svgobjstring + svgend;
     // Opens the SVG in new window, with warning about Mozilla bug #308590 when applicable
     var ua = navigator.userAgent;
     // Chrome 5 (and 6?) don't allow saving, show source instead ( http://code.google.com/p/chromium/issues/detail?id=46735 )
@@ -468,14 +543,14 @@ function savesvg() {
     if((~ua.indexOf('Chrome') || ~ua.indexOf('MSIE'))) {
         //showSourceEditor(0,true);
         //return;
-        console.log("chrome or ie");
+        patterndraw.message("chrome or ie");
     }
-    var svg64 = Base64(svgsavestring);
-    console.log(svg64);
+    var svg64 = patterndraw.svg.Base64(svgsavestring);
+    patterndraw.message(svg64);
     var win = window.open("data:image/svg+xml;base64," + svg64);
-}
+};
 
-function Base64(input){
+patterndraw.svg.Base64 = function(input){
     // private property
     var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
     // public method for encoding
@@ -503,4 +578,4 @@ function Base64(input){
         keyStr.charAt(enc3) + keyStr.charAt(enc4);
     }
     return output;
-}
+};

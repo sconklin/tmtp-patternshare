@@ -154,9 +154,19 @@
 				<select id="patternCustomerSelect">
 					<option>Select Customer...</option>
 					<% for (var i in customers) { %>
-						<option value="<%- customers[i] %>"><%- customers[i] %></option>
+						<option value="<%- customers[i].cid %>"><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
+				
+				<label class="checkbox">
+					<input type="checkbox" id="constopt" <% if (options.constopt){ %> checked <% } %> />Construction
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" id="constptopt" <% if (options.constptopt){ %> checked <% } %> />Points
+				</label>
+				<label class="checkbox">
+					<input type="checkbox" id="gridopt" <% if (options.gridopt){ %> checked <% } %>/>Grid
+				</label>
 				
 				<!--button id="renderSvg" class="btn btn-danger pull-right"> Render the pattern! </button-->
 				<button id="saveSvg" class="btn btn-danger pull-right"> Save as SVG </button>
@@ -168,15 +178,17 @@
 <hr>
 <div class="row">
 	<div class="span3">
-		<div class="well" style="min-height:400px;">
-			<h3>Parameters</h3>
-			<label>Parameter 1</label>
-			<input type="range" min="0" max="1000"/>
+		<div class="" >
+			<!--h3>Parameters</h3-->
+			<% for (var i in parameters) { %>
+				<label><%- i %></label>
+				<input class="parameter" id="<%- i %>" type="number" value="<%- parameters[i] %>"/>
+			<% } %>
 		</div>
 	</div>
 	<div class="span9">
-		<div class="well" style="min-height:700px;">
-			<h3>Rendering Surface</h3>
+		<div id="drawing" class="" >
+			<!--h3>Rendering Surface</h3-->
 		</div>
 	</div>
 </div>
@@ -188,7 +200,8 @@
 		<div class="measwrapper span12">
 			<h1>Measurements</h1>
 			<div class="well control-group">	
-				<input type="text" id="customername" placeholder="Customer Name" value="<%= name %>">
+				<input type="text" id="customername" placeholder="Customer Name" value="<%= data.attributes.clientdata.customername %>">
+				<input type="text" id="customerid" value="<%= data.cid %>" style="display: none;">
 				<select id="customerSelect">
 					<option>Select Customer...</option>
 					<% for (var i in customers) { %>
@@ -197,10 +210,10 @@
 				</select>
 				
 				<label class="radio">
-					<input type="radio" id="cm" name="units" <% if(data.units == "cm"){ %> checked="true" <%}%> /> Centimeters
+					<input type="radio" id="cm" name="units" <% if(data.attributes.clientdata.units == "cm"){ %> checked="true" <%}%> /> Centimeters
 				</label>
 				<label class="radio">
-					<input type="radio" id="in" name="units" <% if(data.units == "in"){ %> checked="true" <%}%> /> Inches
+					<input type="radio" id="in" name="units" <% if(data.attributes.clientdata.units == "in"){ %> checked="true" <%}%> /> Inches
 				</label>
 				<button id="saveMeasurements" class="btn btn-danger pull-right" type="submit"> Save measurements! </button>
 
@@ -216,17 +229,17 @@
 		<div id="drawarea" class="drawarea span12">
 			
 				
-			<% for (var part in data.measurements){ %>
+			<% for (var part in data.attributes.clientdata.measurements){ %>
 			<div class="row">
 				<div class="span12">
 					<hr>
 					<h4><%- part.toUpperCase() %></h4>
 					<hr>
 				</div>
-				<% for (var i in data.measurements[part]) { %>
+				<% for (var i in data.attributes.clientdata.measurements[part]) { %>
 					<div class="span2 control-group">
-						<label><%- data.measurements[part][i].title %></label>
-						<input type="text" id="<%- i %>" placeholder="" value="<%- data.measurements[part][i].val %>" class="span2 numerical">
+						<label><%- title[i] %></label>
+						<input type="text" id="<%- i %>" placeholder="" value="<%- data.attributes.clientdata.measurements[part][i] %>" class="span2 numerical">
 					</div>
 				<% } %>
 			</div>

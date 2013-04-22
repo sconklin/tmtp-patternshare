@@ -415,482 +415,308 @@ var defaultPatterns = [mensshirtblock, womensbasicbodice, womensbasicskirt ];
 MEASUREMENTS
 ***********************************************************************/
 
-var bodyStandard = {
-
-	"clientdata": {
-
-		"customername": "",
-
-		"units": "cm",
-
-		"measurements": {
-
-			"girth":{
-
-				"head_girth": {val:"", title:"Head Girth"},
-
-				"mid_neck_girth": {val:"", title:"Mid-Neck Girth"},
-
-				"neck_base_girth": {val:"", title:"Neck Base Girth"},
-
-				"upper_chest_girth": {val:"", title:"Mid-Neck Girth"}, 
-
-				"bust__girth": {val:"", title:"Bust Girth"},
-
-				"under_bust_girth": {val:"", title:"Under-Bust Girth"},
-
-				"waist_girth": {val:"", title:"Waist Girth"},
-
-				"high_hip_girth": {val:"", title:"High Hip Girth"},
-
-				"hip_girth": {val:"", title:"Hip Girth"},
-
-				"thigh_girth": {val:"", title:"Thigh Girth"},
-
-				"mid_thigh_girth": {val:"", title:"Mid-Thigh Girth"},
-
-				"knee_girth": {val:"", title:"Knee Girth"},
-
-				"calf_girth": {val:"", title:"Calf Girth"},
-
-				"ankle_girth": {val:"", title:"Ankle Girth"},
-
-				"shoulder_girth": {val:"", title:"Shoulder Girth"},
-
-				"trunk_girth": {val:"", title:"Trunk Girth"},
-
-				"armscye_girth": {val:"", title:"Armscye Girth"},
-
-				"elbow_girth": {val:"", title:"Elbow Girth"},
-
-				"upper_arm_girth": {val:"", title:"Upper Arm Girth"},
-
-				"wrist_girth": {val:"", title:"Wrist Girth"},
-
-				"hand_girth": {val:"", title:"Hand Girth"}
-
-			},
-
-			"height":{
-
-				"waist_to_hip_height": {val:"", title:"Waist-to-Hip Height"},
-
-				"waist_to_knee_height": {val:"", title:"Waist-to-Knee Height"},
-
-				"waist_height": {val:"", title:"Waist Height"},
-
-				"high_hip_height": {val:"", title:"High Hip Height"},
-
-				"hip_height": {val:"", title:"Hip Height"},
-
-				"crotch_height": {val:"", title:"Crotch Height"},
-
-				"rise_height": {val:"", title:"Rise Height"},
-
-				"cervical_to_knee_height": {val:"", title:"Cervical-to-Knee Height"},
-
-				"cervical_height": {val:"", title:"Cervical Height"},
-
-				"knee_height": {val:"", title:"Knee Height"},
-
-				"ankle_height": {val:"", title:"Ankle Height"}
-
-			},
-
-			"depth":{
-
-				"scye_depth": {val:"", title:"Scye Depth"}
-
-			},
-
-			"length":{
-
-				"side_waist_length": {val:"", title:"Side-Waist Length"},
-
-				"head_and_neck_length": {val:"", title:"Head and Neck Length"},
-
-				"center_front_waist_length": {val:"", title:"Center-Front-Waist Length"},
-
-				"center_back_waist_length": {val:"", title:"Center-Back-Waist Length"},
-
-				"shoulder_length": {val:"", title:"Shoulder Length"},
-
-				"shoulder_and_arm_length": {val:"", title:"Shoulder and Arm Length"},
-
-				"underarm_length": {val:"", title:"Underarm Length"},
-
-				"cervical_to_wrist_length": {val:"", title:"Cervical-to-Wrist Length"},
-
-				"shoulder_to_elbow_length": {val:"", title:"Shoulder-to-Elbow Length"},
-
-				"arm_length": {val:"", title:"Arm Length"},
-
-				"crotch_length": {val:"", title:"Crotch Length"},
-
-				"hand_length": {val:"", title:"Hand Length"},
-
-				"foot_length": {val:"", title:"Foot Length"}
-
-			},
-
-			"width":{
-
-				"upper_front_chest_width": {val:"", title:"Upper-Front-Chest Width"},
-
-				"front_chest_width": {val:"", title:"Front-Chest Width"},
-
-				"across_front_shoulder_width": {val:"", title:"Across-Front-Shoulder Width"},
-
-				"across_back_shoulder_width": {val:"", title:"Across-Back-Shoulder Width"},
-
-				"upper_back_width": {val:"", title:"Upper-Back Width"},
-
-				"back_width": {val:"", title:"Back Width"},
-
-				"shoulder_width": {val:"", title:"Shoulder Width"},
-
-				"hand_width": {val:"", title:"Hand Width"},
-
-				"foot_width": {val:"", title:"Foot Width"}
-
-			},
-
-			"other":{
-
-				"bustpoint_to_bustpoint": {val:"", title:"Bustpoint to Bustpoint"},
-
-				"halter_bustpoint_to_bustpoint": {val:"", title:"Halter Bustpoint to Bustpoint"},
-
-				"neck_to_bustpoint": {val:"", title:"Neck to Bustpoint"},
-
-				"shoulder_slope_degree": {val:"", title:"Shoulder Slope Degree"}
-
-			}
-
-		}
-
-	}
-
+var bodyNames = {
+	"head_girth": "Head Girth",
+	"mid_neck_girth": "Mid-Neck Girth",
+	"neck_base_girth": "Neck Base Girth",
+	"upper_chest_girth": "Mid-Neck Girth", 
+	"bust__girth": "Bust Girth",
+	"under_bust_girth": "Under-Bust Girth",
+	"waist_girth": "Waist Girth",
+	"high_hip_girth": "High Hip Girth",
+	"hip_girth": "Hip Girth",
+	"thigh_girth": "Thigh Girth",
+	"mid_thigh_girth": "Mid-Thigh Girth",
+	"knee_girth": "Knee Girth",
+	"calf_girth": "Calf Girth",
+	"ankle_girth": "Ankle Girth",
+	"shoulder_girth": "Shoulder Girth",
+	"trunk_girth": "Trunk Girth",
+	"armscye_girth": "Armscye Girth",
+	"elbow_girth": "Elbow Girth",
+	"upper_arm_girth": "Upper Arm Girth",
+	"wrist_girth": "Wrist Girth",
+	"hand_girth": "Hand Girth",
+	"waist_to_hip_height": "Waist-to-Hip Height",
+	"waist_to_knee_height": "Waist-to-Knee Height",
+	"waist_height": "Waist Height",
+	"high_hip_height": "High Hip Height",
+	"hip_height": "Hip Height",
+	"crotch_height": "Crotch Height",
+	"rise_height": "Rise Height",
+	"cervical_to_knee_height": "Cervical-to-Knee Height",
+	"cervical_height": "Cervical Height",
+	"knee_height": "Knee Height",
+	"ankle_height": "Ankle Height",
+	"scye_depth": "Scye Depth",
+	"side_waist_length": "Side-Waist Length",
+	"head_and_neck_length": "Head and Neck Length",
+	"center_front_waist_length": "Center-Front-Waist Length",
+	"center_back_waist_length": "Center-Back-Waist Length",
+	"shoulder_length": "Shoulder Length",
+	"shoulder_and_arm_length": "Shoulder and Arm Length",
+	"underarm_length": "Underarm Length",
+	"cervical_to_wrist_length": "Cervical-to-Wrist Length",
+	"shoulder_to_elbow_length": "Shoulder-to-Elbow Length",
+	"arm_length": "Arm Length",
+	"crotch_length": "Crotch Length",
+	"hand_length": "Hand Length",
+	"foot_length": "Foot Length",
+	"upper_front_chest_width": "Upper-Front-Chest Width",
+	"front_chest_width": "Front-Chest Width",
+	"across_front_shoulder_width": "Across-Front-Shoulder Width",
+	"across_back_shoulder_width": "Across-Back-Shoulder Width",
+	"upper_back_width": "Upper-Back Width",
+	"back_width": "Back Width",
+	"shoulder_width": "Shoulder Width",
+	"hand_width": "Hand Width",
+	"foot_width": "Foot Width",
+	"bustpoint_to_bustpoint": "Bustpoint to Bustpoint",
+	"halter_bustpoint_to_bustpoint": "Halter Bustpoint to Bustpoint",
+	"neck_to_bustpoint": "Neck to Bustpoint",
+	"shoulder_slope_degree": "Shoulder Slope Degree"
 };
 
-
+var bodyStandard = {
+	"clientdata": {
+		"customername": "",
+		"units": "cm",
+		"measurements": {
+			"girth":{
+				"head_girth": "",
+				"mid_neck_girth": "",
+				"neck_base_girth": "",
+				"upper_chest_girth": "", 
+				"bust__girth": "",
+				"under_bust_girth": "",
+				"waist_girth": "",
+				"high_hip_girth": "",
+				"hip_girth": "",
+				"thigh_girth": "",
+				"mid_thigh_girth": "",
+				"knee_girth": "",
+				"calf_girth": "",
+				"ankle_girth": "",
+				"shoulder_girth": "",
+				"trunk_girth": "",
+				"armscye_girth": "",
+				"elbow_girth": "",
+				"upper_arm_girth": "",
+				"wrist_girth": "",
+				"hand_girth": ""
+			},
+			"height":{
+				"waist_to_hip_height": "",
+				"waist_to_knee_height": "",
+				"waist_height": "",
+				"high_hip_height": "",
+				"hip_height": "",
+				"crotch_height": "",
+				"rise_height": "",
+				"cervical_to_knee_height": "",
+				"cervical_height": "",
+				"knee_height": "",
+				"ankle_height": ""
+			},
+			"depth":{
+				"scye_depth": ""
+			},
+			"length":{
+				"side_waist_length": "",
+				"head_and_neck_length": "",
+				"center_front_waist_length": "",
+				"center_back_waist_length": "",
+				"shoulder_length": "",
+				"shoulder_and_arm_length": "",
+				"underarm_length": "",
+				"cervical_to_wrist_length": "",
+				"shoulder_to_elbow_length": "",
+				"arm_length": "",
+				"crotch_length": "",
+				"hand_length": "",
+				"foot_length": ""
+			},
+			"width":{
+				"upper_front_chest_width": "",
+				"front_chest_width": "",
+				"across_front_shoulder_width": "",
+				"across_back_shoulder_width": "",
+				"upper_back_width": "",
+				"back_width": "",
+				"shoulder_width": "",
+				"hand_width": "",
+				"foot_width": ""
+			},
+			"other":{
+				"bustpoint_to_bustpoint": "",
+				"halter_bustpoint_to_bustpoint": "",
+				"neck_to_bustpoint": "",
+				"shoulder_slope_degree": ""
+			}
+		}
+	}
+};
 
 var manStandard = {
-
 	"clientdata": {
-
 		"customername": "Man Standard",
-
 		"units": "cm",
-
 		"measurements": {
-
 			"girth":{
-
-				"head_girth": {val:"100", title:"Head Girth"},
-
-				"mid_neck_girth": {val:"", title:"Mid-Neck Girth"},
-
-				"neck_base_girth": {val:"", title:"Neck Base Girth"},
-
-				"upper_chest_girth": {val:"", title:"Mid-Neck Girth"}, 
-
-				"bust__girth": {val:"", title:"Bust Girth"},
-
-				"under_bust_girth": {val:"", title:"Under-Bust Girth"},
-
-				"waist_girth": {val:"", title:"Waist Girth"},
-
-				"high_hip_girth": {val:"", title:"High Hip Girth"},
-
-				"hip_girth": {val:"", title:"Hip Girth"},
-
-				"thigh_girth": {val:"", title:"Thigh Girth"},
-
-				"mid_thigh_girth": {val:"", title:"Mid-Thigh Girth"},
-
-				"knee_girth": {val:"", title:"Knee Girth"},
-
-				"calf_girth": {val:"", title:"Calf Girth"},
-
-				"ankle_girth": {val:"", title:"Ankle Girth"},
-
-				"shoulder_girth": {val:"", title:"Shoulder Girth"},
-
-				"trunk_girth": {val:"", title:"Trunk Girth"},
-
-				"armscye_girth": {val:"", title:"Armscye Girth"},
-
-				"elbow_girth": {val:"", title:"Elbow Girth"},
-
-				"upper_arm_girth": {val:"", title:"Upper Arm Girth"},
-
-				"wrist_girth": {val:"", title:"Wrist Girth"},
-
-				"hand_girth": {val:"", title:"Hand Girth"}
-
+				"head_girth": "",
+				"mid_neck_girth": "",
+				"neck_base_girth": "",
+				"upper_chest_girth": "", 
+				"bust__girth": "",
+				"under_bust_girth": "",
+				"waist_girth": "",
+				"high_hip_girth": "",
+				"hip_girth": "",
+				"thigh_girth": "",
+				"mid_thigh_girth": "",
+				"knee_girth": "",
+				"calf_girth": "",
+				"ankle_girth": "",
+				"shoulder_girth": "",
+				"trunk_girth": "",
+				"armscye_girth": "",
+				"elbow_girth": "",
+				"upper_arm_girth": "",
+				"wrist_girth": "",
+				"hand_girth": ""
 			},
-
 			"height":{
-
-				"waist_to_hip_height": {val:"", title:"Waist-to-Hip Height"},
-
-				"waist_to_knee_height": {val:"", title:"Waist-to-Knee Height"},
-
-				"waist_height": {val:"", title:"Waist Height"},
-
-				"high_hip_height": {val:"", title:"High Hip Height"},
-
-				"hip_height": {val:"", title:"Hip Height"},
-
-				"crotch_height": {val:"", title:"Crotch Height"},
-
-				"rise_height": {val:"", title:"Rise Height"},
-
-				"cervical_to_knee_height": {val:"", title:"Cervical-to-Knee Height"},
-
-				"cervical_height": {val:"", title:"Cervical Height"},
-
-				"knee_height": {val:"", title:"Knee Height"},
-
-				"ankle_height": {val:"", title:"Ankle Height"}
-
+				"waist_to_hip_height": "",
+				"waist_to_knee_height": "",
+				"waist_height": "",
+				"high_hip_height": "",
+				"hip_height": "",
+				"crotch_height": "",
+				"rise_height": "",
+				"cervical_to_knee_height": "",
+				"cervical_height": "",
+				"knee_height": "",
+				"ankle_height": ""
 			},
-
 			"depth":{
-
-				"scye_depth": {val:"", title:"Scye Depth"}
-
+				"scye_depth": ""
 			},
-
 			"length":{
-
-				"side_waist_length": {val:"", title:"Side-Waist Length"},
-
-				"head_and_neck_length": {val:"", title:"Head and Neck Length"},
-
-				"center_front_waist_length": {val:"", title:"Center-Front-Waist Length"},
-
-				"center_back_waist_length": {val:"", title:"Center-Back-Waist Length"},
-
-				"shoulder_length": {val:"", title:"Shoulder Length"},
-
-				"shoulder_and_arm_length": {val:"", title:"Shoulder and Arm Length"},
-
-				"underarm_length": {val:"", title:"Underarm Length"},
-
-				"cervical_to_wrist_length": {val:"", title:"Cervical-to-Wrist Length"},
-
-				"shoulder_to_elbow_length": {val:"", title:"Shoulder-to-Elbow Length"},
-
-				"arm_length": {val:"", title:"Arm Length"},
-
-				"crotch_length": {val:"", title:"Crotch Length"},
-
-				"hand_length": {val:"", title:"Hand Length"},
-
-				"foot_length": {val:"", title:"Foot Length"}
-
+				"side_waist_length": "",
+				"head_and_neck_length": "",
+				"center_front_waist_length": "",
+				"center_back_waist_length": "",
+				"shoulder_length": "",
+				"shoulder_and_arm_length": "",
+				"underarm_length": "",
+				"cervical_to_wrist_length": "",
+				"shoulder_to_elbow_length": "",
+				"arm_length": "",
+				"crotch_length": "",
+				"hand_length": "",
+				"foot_length": ""
 			},
-
 			"width":{
-
-				"upper_front_chest_width": {val:"", title:"Upper-Front-Chest Width"},
-
-				"front_chest_width": {val:"", title:"Front-Chest Width"},
-
-				"across_front_shoulder_width": {val:"", title:"Across-Front-Shoulder Width"},
-
-				"across_back_shoulder_width": {val:"", title:"Across-Back-Shoulder Width"},
-
-				"upper_back_width": {val:"", title:"Upper-Back Width"},
-
-				"back_width": {val:"", title:"Back Width"},
-
-				"shoulder_width": {val:"", title:"Shoulder Width"},
-
-				"hand_width": {val:"", title:"Hand Width"},
-
-				"foot_width": {val:"", title:"Foot Width"}
-
+				"upper_front_chest_width": "",
+				"front_chest_width": "",
+				"across_front_shoulder_width": "",
+				"across_back_shoulder_width": "",
+				"upper_back_width": "",
+				"back_width": "",
+				"shoulder_width": "",
+				"hand_width": "",
+				"foot_width": ""
 			},
-
 			"other":{
-
-				"bustpoint_to_bustpoint": {val:"", title:"Bustpoint to Bustpoint"},
-
-				"halter_bustpoint_to_bustpoint": {val:"", title:"Halter Bustpoint to Bustpoint"},
-
-				"neck_to_bustpoint": {val:"", title:"Neck to Bustpoint"},
-
-				"shoulder_slope_degree": {val:"", title:"Shoulder Slope Degree"}
-
+				"bustpoint_to_bustpoint": "",
+				"halter_bustpoint_to_bustpoint": "",
+				"neck_to_bustpoint": "",
+				"shoulder_slope_degree": ""
 			}
-
 		}
-
 	}
-
 };
 
 
 
 var womanStandard = {
-
 	"clientdata": {
-
 		"customername": "Woman Standard",
-
 		"units": "cm",
-
 		"measurements": {
-
 			"girth":{
-
-				"head_girth": {val:"", title:"Head Girth"},
-
-				"mid_neck_girth": {val:"", title:"Mid-Neck Girth"},
-
-				"neck_base_girth": {val:"", title:"Neck Base Girth"},
-
-				"upper_chest_girth": {val:"", title:"Mid-Neck Girth"}, 
-
-				"bust__girth": {val:"", title:"Bust Girth"},
-
-				"under_bust_girth": {val:"", title:"Under-Bust Girth"},
-
-				"waist_girth": {val:"", title:"Waist Girth"},
-
-				"high_hip_girth": {val:"", title:"High Hip Girth"},
-
-				"hip_girth": {val:"", title:"Hip Girth"},
-
-				"thigh_girth": {val:"", title:"Thigh Girth"},
-
-				"mid_thigh_girth": {val:"", title:"Mid-Thigh Girth"},
-
-				"knee_girth": {val:"", title:"Knee Girth"},
-
-				"calf_girth": {val:"", title:"Calf Girth"},
-
-				"ankle_girth": {val:"", title:"Ankle Girth"},
-
-				"shoulder_girth": {val:"", title:"Shoulder Girth"},
-
-				"trunk_girth": {val:"", title:"Trunk Girth"},
-
-				"armscye_girth": {val:"", title:"Armscye Girth"},
-
-				"elbow_girth": {val:"", title:"Elbow Girth"},
-
-				"upper_arm_girth": {val:"", title:"Upper Arm Girth"},
-
-				"wrist_girth": {val:"", title:"Wrist Girth"},
-
-				"hand_girth": {val:"", title:"Hand Girth"}
-
+				"head_girth": "",
+				"mid_neck_girth": "",
+				"neck_base_girth": "",
+				"upper_chest_girth": "", 
+				"bust__girth": "",
+				"under_bust_girth": "",
+				"waist_girth": "",
+				"high_hip_girth": "",
+				"hip_girth": "",
+				"thigh_girth": "",
+				"mid_thigh_girth": "",
+				"knee_girth": "",
+				"calf_girth": "",
+				"ankle_girth": "",
+				"shoulder_girth": "",
+				"trunk_girth": "",
+				"armscye_girth": "",
+				"elbow_girth": "",
+				"upper_arm_girth": "",
+				"wrist_girth": "",
+				"hand_girth": ""
 			},
-
 			"height":{
-
-				"waist_to_hip_height": {val:"", title:"Waist-to-Hip Height"},
-
-				"waist_to_knee_height": {val:"", title:"Waist-to-Knee Height"},
-
-				"waist_height": {val:"", title:"Waist Height"},
-
-				"high_hip_height": {val:"", title:"High Hip Height"},
-
-				"hip_height": {val:"", title:"Hip Height"},
-
-				"crotch_height": {val:"", title:"Crotch Height"},
-
-				"rise_height": {val:"", title:"Rise Height"},
-
-				"cervical_to_knee_height": {val:"", title:"Cervical-to-Knee Height"},
-
-				"cervical_height": {val:"", title:"Cervical Height"},
-
-				"knee_height": {val:"", title:"Knee Height"},
-
-				"ankle_height": {val:"", title:"Ankle Height"}
-
+				"waist_to_hip_height": "",
+				"waist_to_knee_height": "",
+				"waist_height": "",
+				"high_hip_height": "",
+				"hip_height": "",
+				"crotch_height": "",
+				"rise_height": "",
+				"cervical_to_knee_height": "",
+				"cervical_height": "",
+				"knee_height": "",
+				"ankle_height": ""
 			},
-
 			"depth":{
-
-				"scye_depth": {val:"", title:"Scye Depth"}
-
+				"scye_depth": ""
 			},
-
 			"length":{
-
-				"side_waist_length": {val:"", title:"Side-Waist Length"},
-
-				"head_and_neck_length": {val:"", title:"Head and Neck Length"},
-
-				"center_front_waist_length": {val:"", title:"Center-Front-Waist Length"},
-
-				"center_back_waist_length": {val:"", title:"Center-Back-Waist Length"},
-
-				"shoulder_length": {val:"", title:"Shoulder Length"},
-
-				"shoulder_and_arm_length": {val:"", title:"Shoulder and Arm Length"},
-
-				"underarm_length": {val:"", title:"Underarm Length"},
-
-				"cervical_to_wrist_length": {val:"", title:"Cervical-to-Wrist Length"},
-
-				"shoulder_to_elbow_length": {val:"", title:"Shoulder-to-Elbow Length"},
-
-				"arm_length": {val:"", title:"Arm Length"},
-
-				"crotch_length": {val:"", title:"Crotch Length"},
-
-				"hand_length": {val:"", title:"Hand Length"},
-
-				"foot_length": {val:"", title:"Foot Length"}
-
+				"side_waist_length": "",
+				"head_and_neck_length": "",
+				"center_front_waist_length": "",
+				"center_back_waist_length": "",
+				"shoulder_length": "",
+				"shoulder_and_arm_length": "",
+				"underarm_length": "",
+				"cervical_to_wrist_length": "",
+				"shoulder_to_elbow_length": "",
+				"arm_length": "",
+				"crotch_length": "",
+				"hand_length": "",
+				"foot_length": ""
 			},
-
 			"width":{
-
-				"upper_front_chest_width": {val:"", title:"Upper-Front-Chest Width"},
-
-				"front_chest_width": {val:"", title:"Front-Chest Width"},
-
-				"across_front_shoulder_width": {val:"", title:"Across-Front-Shoulder Width"},
-
-				"across_back_shoulder_width": {val:"", title:"Across-Back-Shoulder Width"},
-
-				"upper_back_width": {val:"", title:"Upper-Back Width"},
-
-				"back_width": {val:"", title:"Back Width"},
-
-				"shoulder_width": {val:"", title:"Shoulder Width"},
-
-				"hand_width": {val:"", title:"Hand Width"},
-
-				"foot_width": {val:"", title:"Foot Width"}
-
+				"upper_front_chest_width": "",
+				"front_chest_width": "",
+				"across_front_shoulder_width": "",
+				"across_back_shoulder_width": "",
+				"upper_back_width": "",
+				"back_width": "",
+				"shoulder_width": "",
+				"hand_width": "",
+				"foot_width": ""
 			},
-
 			"other":{
-
-				"bustpoint_to_bustpoint": {val:"", title:"Bustpoint to Bustpoint"},
-
-				"halter_bustpoint_to_bustpoint": {val:"", title:"Halter Bustpoint to Bustpoint"},
-
-				"neck_to_bustpoint": {val:"", title:"Neck to Bustpoint"},
-
-				"shoulder_slope_degree": {val:"", title:"Shoulder Slope Degree"}
-
+				"bustpoint_to_bustpoint": "",
+				"halter_bustpoint_to_bustpoint": "",
+				"neck_to_bustpoint": "",
+				"shoulder_slope_degree": ""
 			}
-
 		}
-
 	}
-
 };
 
 

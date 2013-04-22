@@ -10,8 +10,10 @@
 	// TO DO: abstract localStorage saving function
 	
 	********************************************************************/
-
-	var patternCurrent;
+	
+	var TMTP = TMTP || {};
+	
+	var meas = {};
 
     var Pattern = Backbone.Model.extend({
         urlRoot: 'pattern',
@@ -27,50 +29,67 @@
 		}
 	});
 		
-    var Book = Backbone.Collection.extend({
+    var patternCollection = Backbone.Collection.extend({
 		model: Pattern
     });
 	
-	var Bodies = Backbone.Collection.extend({
+	var measurementCollection = Backbone.Collection.extend({
 		model: Measurement
 	});
 	
 	var PatternView = Backbone.View.extend({
 		el: 'div.draw-wrapper',
 		template: $("#patternsTemplate").html(),
-		
+		meas: {}, 
 		initialize: function(){
-			// TO DO: this list is currently only built from static variables residing in app-patterns.js
-			// in the future, it will ALSO be built from server or local memory collections of patterns
-
-			var models = [];
-			for (var i in defaultPatterns){
-				models.push(new Pattern(defaultPatterns[i]));
-			}
-			this.collection = new Book(models);
+			this.collection = patternCollection;
 		},
 		render: function(){
-			patternCurrent = null;
-			bodyCurrent = null;
-
-			// ??? TO DO: for listing, render shouldn't reference localStorage but the view's collection instead
-			// perhaps, the measurement collection should be built first, independently of views, 
-			// and then assigned to the measurements view??? 
-			var customers = JSON.parse(localStorage.getItem('customerList'));
-			var patternList = this.collection.models;
 			var tmpl = _.template(this.template);
 
 			this.$el.empty();
-			this.$el.html(tmpl({'patternList': patternList, 'customers': customers}));
+			this.$el.html(tmpl({
+				'patternList': this.collection.models, 
+				'customers': customerCollection.models, 
+				'parameters': this.meas, 
+				'options': patterndraw.settings})
+			);
+			
+			if (bodyCurrent && patternCurrent){
+				patterndraw.settings.drawArea = document.getElementById("drawing");
+				patterndraw.drawpattern(patternCurrent.attributes.pattern,this.meas);			
+			}
 			
 			return this;
 		},
 		events: {
-			'change #patternCustomerSelect': 'selectionMade',
-			'change #patternSelect': 'selectionMade'
+			'change #patternCustomerSelect': 'patternCustomerSelect',
+			'change #patternSelect': 'patternSelect',
+			'change input[type=checkbox]': 'optionsToggle',
+			'change .parameter': 'parameterChange',
 		},
-		selectionMade: function(){
-			console.log('selection made');
+		patternCustomerSelect: function(e){
+			bodyCurrent = customerCollection.get(e.currentTarget.value);
+			this.render();
+		},
+		patternSelect: function(e){
+			patternCurrent = patternCollection.get(e.currentTarget.value);
+			// PROVISIONAL: calculate measures from pattern defaults....
+			// should instead REQUIRE the listed measures from customer!
+			this.meas = {};
+			for (var i in patternCurrent.attributes.pattern.defaults){
+				this.meas[patternCurrent.attributes.pattern.measurements[i]] = patternCurrent.attributes.pattern.defaults[i];
+			}			
+			this.render();
+		},
+		optionsToggle: function(e){
+			patterndraw.settings[e.currentTarget.id] = e.currentTarget.checked;
+			this.render();
+		},
+		parameterChange: function(e){
+			parameter = e.currentTarget.id;
+			this.meas[e.currentTarget.id] = e.currentTarget.value;
+			this.render();
 		}
 	});
     
@@ -79,37 +98,16 @@
 		template: $("#measurementTemplate").html(),
 		
 		initialize: function(){
-			// insert defaults into localStorage if not included...
-			
-			/*************************************************************************/
-			// TO DO: this is wrong! the collection should first include the defaults
-			// and then check if there is anything available in localstorage or server!!!!
-			for (var i in defaultMeasurements){
-				localStorage.setItem(
-					defaultMeasurements[i].clientdata.customername, 
-					JSON.stringify(defaultMeasurements[i]));
-				var customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
-				if (customerList.indexOf(defaultMeasurements[i].clientdata.customername)<0) {
-					customerList.push(defaultMeasurements[i].clientdata.customername);
-				}
-				localStorage.setItem('customerList',JSON.stringify(customerList));
-			}
-			// build collection of measurements from localStorage 
-			var customerList = JSON.parse(localStorage.getItem('customerList'));
-			var models = [];
-			for (var i in customerList){
-				models.push(JSON.parse(localStorage.getItem(customerList[i])));
-			}
-			this.collection = new Bodies(models);
-			
-			/*****************************************************************/
+			this.model = new Measurement();
+			bodyCurrent = this.model;
 		},
-		render: function(data){
-			var customers = this.collection.models;
+		render: function(){
 			var tmpl = _.template(this.template);
+			
+			this.model = bodyCurrent;
 
 			this.$el.empty();
-			this.$el.html(tmpl({'data': data, 'name': data.customername, 'customers': customers}));
+			this.$el.html(tmpl({'data': this.model, 'title': window.bodyNames, 'customers': customerCollection.models}));
 			
 			// INPUT VALIDATION
 			$('input.numerical').change(function(e){
@@ -135,6 +133,8 @@
 					});
 				} else {
 					$(this).parent().removeClass('error');
+					// commas are accepted, but get replaced by dots
+					$(this).val($(this).val().replace(',','.'));
 				}
 			});	
 			
@@ -165,8 +165,6 @@
 				$nameInput.parent().removeClass('error');
 			}
 
-			
-
 			if ($('form .error').length > 0){
 				$alert = $('#alertSaved');
 				$alert.removeClass('alert-success');
@@ -182,51 +180,48 @@
 			console.log('saving data...');
 			
 			var $name = this.$el.find('#customername').val();
-			
-			if ( JSON.parse(localStorage.getItem('customerList')).indexOf($name) >= 0){
-				console.log('already exists');
-				var model = bodyCurrent;
+			var $id = this.$el.find('#customerid').val();
+			var $form = this.$el;
+
+			if (!customerCollection.get($id)){
+				console.log('new customer');
 			} else {
-				console.log('new user');
-				var model = new Measurement();
-				console.log(model);
+				console.log('existing customer');
+				var model = customerCollection.get($id);
 			}
 
-			var $form = this.$el;
-			
 			// update the model
 			// model.set('name', this.$el.find('#customername').val());
-			model.get('clientdata').customername = $name;
-			model.get('clientdata').units = $("input[name=units]:checked").attr('id');
-			var measurements = model.get('clientdata').measurements;
-			for (var part in measurements){
-				for (var j in measurements[part]) {
+			var data = this.model.get('clientdata');
+			data.customername = $name;
+			data.units = $("input[name=units]:checked").attr('id');
+			//var measurements = model.attributes.clientdata.measurements;
+			for (var part in data.measurements){
+				//console.log(part);
+				for (var j in data.measurements[part]) {
 					var newVal = $form.find('#'+j).val();
-					measurements[part][j].val = newVal ? newVal : measurements[part][j].val;
+					//console.log(newVal);
+					data.measurements[part][j] = newVal ? newVal : data.measurements[part][j];
 				}
 			}
+			//console.log(data);
 			
-			// update the collection.............. UGLY SOLUTION ?????????
-			if ( JSON.parse(localStorage.getItem('customerList')).indexOf($name) < 0){
-				console.log('add new model to collection');
-				this.collection.push(model);
-				bodyCurrent = this.collection.get(model);
-			}
-				
-			// ABSTRACT THIS		
-			// localStorage create/update the customer list
-			var customerList = localStorage.getItem('customerList') ? JSON.parse(localStorage.getItem('customerList')) : [];
-			if (customerList.indexOf($name)<0) customerList.push($name);
-			localStorage.setItem('customerList',JSON.stringify(customerList));
+			this.model.set({'clientdata': data});
+			
+			// update the collection
+			customerCollection.set(this.model, {remove: false});
+			
+			bodyCurrent = this.model;
 
-			// localStorage create/update the measurement
-			localStorage.setItem($name,JSON.stringify(model));
+			
+			// localStorage
+			storageSave('customerList', $name, this.model.attributes);
 			
 			// HTTP save to server
 			// model.save();
 
 			// re-render view, to update the dropdown menu for measurement selection
-			this.render(bodyCurrent.get('clientdata'));  			
+			this.render();  			
 			
 			//// give some feedback when saving measurements:
 			$alert = $('#alertSaved');
@@ -237,8 +232,10 @@
 			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
 		},
 		selectCustomer: function(e){
-			bodyCurrent = this.collection.get(e.currentTarget.value);
-			this.render(bodyCurrent.get('clientdata'));
+			//var body = this.collection.get(e.currentTarget.value);
+			bodyCurrent = customerCollection.get(e.currentTarget.value);
+			this.model = bodyCurrent;
+			this.render();
 		}
 	});
 	
@@ -272,7 +269,7 @@
 			todo.render();  
 		},
 		measurementsPage: function() {
-			measurements.render(bodyStandard.clientdata);  
+			measurementForm.render();  
 		},
 		patternsPage: function() {
 			patterns.render();  
@@ -281,22 +278,43 @@
 			about.render();  
 		},
     });
-    
 	
 	// INITIALIZE INSTANCES OF THE CLASSES JUST DEFINED
 	
-	// MODEL
-	var bodyCurrent = new Measurement(bodyStandard); 	
+	// MODELS
+	var bodyCurrent; // = new Measurement(bodyStandard); 	
+	var patternCurrent;
 	
 	// COLLECTIONS
-	// pattern collection
-	// measurement collection	
+	var customerCollection = new measurementCollection();
+	// FIRST: include defaults in collection
+	// customerCollection.add(new Measurement(window.bodyStandard));
+	for ( var i in window.defaultMeasurements ){
+		//console.log('build measurements collection: defaults: '+window.defaultMeasurements[i].clientdata.customername);
+		customerCollection.add(new Measurement(window.defaultMeasurements[i]));
+	}
+	// SECOND: include measurements from localStorage:
+	var customerList = JSON.parse(localStorage.getItem('customerList'));
+	if (customerList != undefined){
+		for (var i in customerList){
+			//console.log('build measurements collection: localStorage: '+customerList[i]);
+			customerCollection.add(new Measurement(JSON.parse(localStorage.getItem(customerList[i]))));
+		}
+	}
+	
+	var patternCollection = new patternCollection();
+	// FIRST: include defaults in collection
+	for ( var i in window.defaultPatterns ){
+		console.log('build patterns collection: defaults:'+window.defaultPatterns[i].pattern.title);
+		patternCollection.add(new Measurement(window.defaultPatterns[i]));
+	}
+	
 	
 	// VIEWS
     var todo = new PageView();
     todo.template = $("#todoTemplate").html();
 	
-    var measurements = new MeasurementView();
+    var measurementForm = new MeasurementView();
 	
     var patterns = new PatternView();
 	
@@ -315,13 +333,27 @@
 	// Form Validation
 	
 	var isNum = function(n){
-        reNum = new RegExp(/^\d+((\.|,)\d+)?$/);
+        reNum = new RegExp(/^(\d+((\.|,)\d+)?)?$/);
         return reNum.test(n);
     }
 	
 	var isHum = function(n){
 		var i = parseFloat(n);
-		return ( i > 0 && i < 1000 );
+		return ( i >= 0 && i < 1000 );
+	}
+	
+	// localStorage utility functions
+	
+	var storageList = function(listName){
+		if (!window.localStorage.getItem(listName))	window.localStorage.setItem(listName, '[]');
+		return JSON.parse(window.localStorage.getItem(listName));
+	}
+	
+	var storageSave = function(listName, key, value){
+		var list = storageList(listName);
+		if (list.indexOf(key) < 0) list.push(key);
+		window.localStorage.setItem(listName, JSON.stringify(list));
+		window.localStorage.setItem(key, JSON.stringify(value));
 	}
 	
 //} (jQuery));
