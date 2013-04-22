@@ -25,7 +25,7 @@ patterndraw.settings = {
   drawArea: document.getElementById("drawing"),
   height: 500,
   width: 700,
-  messages: true // enable or disable debug console notifications
+  messages: false // enable or disable debug console notifications
 };
 
   //update or intialize settings values

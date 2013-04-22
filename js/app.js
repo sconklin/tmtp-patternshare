@@ -50,7 +50,7 @@
 
 			this.$el.empty();
 			this.$el.html(tmpl({
-				'patternList': patternCollection.models, 
+				'patterns': patternCollection.models, 
 				'customers': customerCollection.models, 
 				'parameters': this.meas, 
 				'options': patterndraw.settings})
@@ -73,18 +73,23 @@
 			'click #saveSvg': 'saveSvg'
 		},
 		patternCustomerSelect: function(e){
-			bodyCurrent = customerCollection.get(e.currentTarget.value);
-			this.render();
+			$('#patternCustomerSelect [value=dummy]').attr('disabled','true');
+			if (e.currentTarget.value != 'dummy'){
+				bodyCurrent = customerCollection.get(e.currentTarget.value);
+				this.render();
+			}
 		},
 		patternSelect: function(e){
-			patternCurrent = patternCollection.get(e.currentTarget.value);
-			// PROVISIONAL: calculate measures from pattern defaults....
-			// should instead REQUIRE the listed measures from customer!
-			this.meas = {};
-			for (var i in patternCurrent.attributes.pattern.defaults){
-				this.meas[patternCurrent.attributes.pattern.measurements[i]] = patternCurrent.attributes.pattern.defaults[i];
-			}			
-			this.render();
+			if (e.currentTarget.value != 'dummy'){
+				patternCurrent = patternCollection.get(e.currentTarget.value);
+				// PROVISIONAL: calculate measures from pattern defaults....
+				// should instead REQUIRE the listed measures from customer!
+				this.meas = {};
+				for (var i in patternCurrent.attributes.pattern.defaults){
+					this.meas[patternCurrent.attributes.pattern.measurements[i]] = patternCurrent.attributes.pattern.defaults[i];
+				}			
+				this.render();
+			}
 		},
 		optionsToggle: function(e){
 			patterndraw.settings[e.currentTarget.id] = e.currentTarget.checked;
@@ -228,7 +233,7 @@
 			$alert = $('#alertSaved');
 			$alert.removeClass('alert-error');
 			$alert.addClass('alert-success');
-			$message = '<b>Hooray!</b> You just saved measurements for customer: <b>'+$name+'</b>';
+			$message = '<b>Great!</b> You just saved measurements for customer: <b>'+$name+'</b>';
 			$alert.html($message).fadeTo(200,1);
 			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
 		},
@@ -262,20 +267,27 @@
 			"patterns":		"patternsPage",
 			"about":		"aboutPage"
         },
-        urlFilter: function (type) {
+        /*urlFilter: function (type) {
             directory.filterType = type;
             directory.trigger("change:filterType");
-        },
+        },*/
 		todoPage: function() {
+			$('.nav li.active').toggleClass('active');
 			todo.render();  
 		},
 		measurementsPage: function() {
+			$('.nav li.active').toggleClass('active');
+			$('#menuMeasurements').toggleClass('active');
 			measurementForm.render();  
 		},
 		patternsPage: function() {
+			$('.nav li.active').toggleClass('active');
+			$('#menuPatterns').toggleClass('active');
 			patterns.render();
 		},
 		aboutPage: function() {
+			$('.nav li.active').toggleClass('active');
+			$('#menuAbout').toggleClass('active');
 			about.render();  
 		},
     });
@@ -307,7 +319,7 @@
 	var patternCollection = new patternCollection();
 	// FIRST: include defaults in collection
 	for ( var i in window.defaultPatterns ){
-		console.log('build patterns collection: defaults:'+window.defaultPatterns[i].pattern.title);
+		//console.log('build patterns collection: defaults:'+window.defaultPatterns[i].pattern.title);
 		patternCollection.add(new Measurement(window.defaultPatterns[i]));
 	}
 	

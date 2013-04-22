@@ -145,18 +145,18 @@
 <form id="patternInput" class="">
 	<div class="row form-inline">
 		<div class="measwrapper span12">
-			<h1>Patterns</h1>
+			<!--h1>Patterns</h1-->
 			<div class="well">	
 				<select id="patternCustomerSelect">
-					<option>1. Select Customer...</option>
+					<option value="dummy">1. Select Customer...</option>
 					<% for (var i in customers) { %>
-						<option value="<%- customers[i].cid %>"><%- customers[i].attributes.clientdata.customername %></option>
+						<option value="<%- customers[i].cid %>" <% if (customers[i].cid == bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
 				<select id="patternSelect">
-					<option>2. Select Pattern...</option>
-					<% for (var i in patternList) { %>
-						<option value="<%- patternList[i].cid %>"><%- patternList[i].attributes.pattern.title %></option>
+					<option value="dummy">2. Select Pattern...</option>
+					<% for (var i in patterns) { %>
+						<option value="<%- patterns[i].cid %>" <% if (patternCurrent && patterns[i].cid == patternCurrent.cid) { %> selected <% } %>><%- patterns[i].attributes.pattern.title %></option>
 					<% } %>
 				</select>
 				
@@ -200,7 +200,7 @@
 <form id="measurementInput" class="">
 	<div class="row form-inline">
 		<div class="measwrapper span12">
-			<h1>Measurements</h1>
+			<!--h1>Measurements</h1-->
 			<div class="well control-group">	
 				<input type="text" id="customername" placeholder="Customer Name" value="<%= data.attributes.clientdata.customername %>">
 				<input type="text" id="customerid" value="<%= data.cid %>" style="display: none;">
