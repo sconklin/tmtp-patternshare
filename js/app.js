@@ -18,7 +18,7 @@
     var Pattern = Backbone.Model.extend({
         //urlRoot: 'pattern',
 		defaults: {
-			//"pattern": patternStandard.pattern
+			"pattern": patternStandard.pattern
         }
     });
 	
@@ -84,10 +84,11 @@
 				patternCurrent = patternCollection.get(e.currentTarget.value);
 				// PROVISIONAL: calculate measures from pattern defaults....
 				// should instead REQUIRE the listed measures from customer!
-				this.meas = {};
-				for (var i in patternCurrent.attributes.pattern.defaults){
+				// this.meas = {};
+				this.meas = patternCurrent.attributes.pattern.measurements;
+				/*for (var i in patternCurrent.attributes.pattern.defaults){
 					this.meas[patternCurrent.attributes.pattern.measurements[i]] = patternCurrent.attributes.pattern.defaults[i];
-				}			
+				}*/			
 				this.render();
 			}
 		},
