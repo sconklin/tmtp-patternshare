@@ -232,7 +232,6 @@
 			
 			// update the collection
 			customerCollection.set(this.model, {remove: false});
-			
 			bodyCurrent = this.model;
 
 			
@@ -240,7 +239,7 @@
 			storageSaveToList('customerList', $name, this.model.attributes);
 			
 			// HTTP save to server
-			this.model.save();
+			// this.model.save();
 
 			// re-render view, to update the dropdown menu for measurement selection
 			this.missing = {};
@@ -264,7 +263,7 @@
 			if (e.currentTarget.value != 'dummy'){
 				this.model = customerCollection.get(e.currentTarget.value);
 				bodyCurrent = this.model;
-				//this.missing = {};
+				this.missing = {};
 				this.render();
 			}
 		}
@@ -373,13 +372,15 @@
 		},
     });
 	
-	// INITIALIZE INSTANCES OF THE CLASSES JUST DEFINED
 	
-	// MODELS
+//  INITIALIZE INSTANCES OF THE CLASSES JUST DEFINED
+
+//  MODELS
 	var bodyCurrent; // = new Measurement(bodyStandard); 	
 	var patternCurrent;
 	
-	// COLLECTIONS
+	
+//  COLLECTIONS
 	var customerCollection = new measurementCollection();
 	// FIRST: include defaults in collection
 	// customerCollection.add(new Measurement(window.bodyStandard));
@@ -406,7 +407,7 @@
 	}
 	
 	
-	// VIEWS
+//  VIEWS
     var todo = new PageView();
     todo.template = $("#todoTemplate").html();
 	
@@ -417,6 +418,7 @@
 	var about = new PageView();
 	about.template = $("#aboutTemplate").html();
 	
+//  ROUTER	
     var taumetataurouter = new TauMetaTauRouter();
     
     Backbone.history.start();
