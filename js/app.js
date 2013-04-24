@@ -18,7 +18,7 @@
     var Pattern = Backbone.Model.extend({
         //urlRoot: 'pattern',
 		defaults: {
-			"pattern": patternStandard.pattern
+			//"pattern": patternStandard.pattern
         }
     });
 	
