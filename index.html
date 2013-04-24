@@ -52,7 +52,7 @@
 
 
 
-<div class="draw-wrapper container"></div>
+<div id="wrapper" class="container"></div>
 
 
 <footer>
@@ -60,6 +60,8 @@
 		<p class="pull-right">We're Sew Buzzed</p>
 	</div>
 </footer>
+
+
 <script id="aboutTemplate" type="text/template">
 	<div class="row">
 		<div class="span6">
@@ -177,22 +179,24 @@
 	</div>
 </form>
 <hr>
-<div class="row">
-	<div class="span3">
-		<div class="" >
-			<!--h3>Parameters</h3-->
-			<% for (var i in parameters) { %>
-				<label><%- i %></label>
-				<input class="parameter" id="<%- i %>" type="number" value="<%- parameters[i] %>"/>
-			<% } %>
-		</div>
+<div id="stage" class="row">
+	
+</div>
+</script>
+
+<script id="patternsRenderTemplate" type="text/template">
+	<div id="parameters" class="span3">
+		<!--h3>Parameters</h3-->
+		<% for (var i in parameters) { %>
+			<label><%- i %></label>
+			<input class="parameter" id="<%- i %>" type="number" value="<%- parameters[i] %>"/>
+		<% } %>
 	</div>
 	<div class="span9">
 		<div id="drawing" class="" >
 			<!--h3>Rendering Surface</h3-->
 		</div>
 	</div>
-</div>
 </script>
 
 <script id="measurementTemplate" type="text/template">
@@ -228,24 +232,15 @@
 	</div>
 
 	<div class="row">
-		<div id="drawarea" class="drawarea span12">
+		<div id="drawarea" class="drawarea">
 			
 				
-			<% for (var part in data.attributes.clientdata.measurements){ %>
-			<div class="row">
-				<div class="span12">
-					<hr>
-					<h4><%- part.toUpperCase() %></h4>
-					<hr>
-				</div>
-				<% for (var i in data.attributes.clientdata.measurements[part]) { %>
+				<% for (var i in data.attributes.clientdata.measurements) { %>
 					<div class="span2 control-group">
 						<label><%- title[i] %></label>
-						<input type="text" id="<%- i %>" placeholder="" value="<%- data.attributes.clientdata.measurements[part][i] %>" class="span2 numerical">
+						<input type="text" id="<%- i %>" placeholder="" value="<%- data.attributes.clientdata.measurements[i] %>" class="span2 numerical">
 					</div>
 				<% } %>
-			</div>
-			<% } %>
 		</div>
 	</div>
 </form>

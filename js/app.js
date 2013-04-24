@@ -12,9 +12,6 @@
 	********************************************************************/
 	
 	// var TMTP = TMTP || {};
-	
-	// var meas = {};
-	
 
     var Pattern = Backbone.Model.extend({
         //urlRoot: 'pattern',
@@ -41,10 +38,10 @@
 	});
 	
 	var PatternView = Backbone.View.extend({
-		el: 'div.draw-wrapper',
+		el: 'div#wrapper',
 		template: $("#patternsTemplate").html(),
-		meas: {}, 
 		initialize: function(){
+			this.renderView = new PatternRenderView();
 		},
 		render: function(){
 			var tmpl = _.template(this.template);
@@ -53,11 +50,63 @@
 			this.$el.html(tmpl({
 				'patterns': patternCollection.models, 
 				'customers': customerCollection.models, 
-				'parameters': this.meas, 
 				'options': patterndraw.settings})
 			);
 			
+			this.renderPat();
+			
+			return this;
+		},
+		renderPat: function(){
+			this.renderView.$el = $('#stage');
+			if (patternCurrent) this.renderView.meas = patternCurrent.attributes.pattern.measurements;
+			/*for (var i in patternCurrent.attributes.pattern.measurements){
+				this.renderView.meas[i] = bodyCurrent.attributes.clientdata.measurements[i];
+			}*/
+			this.renderView.render();
+		},
+		events: {
+			'change #patternCustomerSelect': 'patternCustomerSelect',
+			'change #patternSelect': 'patternSelect',
+			'change input[type=checkbox]': 'optionsToggle',
+			'click #saveSvg': 'saveSvg',
+			'change .parameter': 'parameterChange'
+		},
+		patternCustomerSelect: function(e){
+			if (e.currentTarget.value != 'dummy'){
+				bodyCurrent = customerCollection.get(e.currentTarget.value);
+				this.renderPat();
+			}
+		},
+		patternSelect: function(e){
+			if (e.currentTarget.value != 'dummy'){
+				patternCurrent = patternCollection.get(e.currentTarget.value);
+				this.renderPat();
+			}
+		},
+		optionsToggle: function(e){
+			patterndraw.settings[e.currentTarget.id] = e.currentTarget.checked;
+			this.renderPat();
+		},
+		saveSvg: function(e){
+			e.preventDefault();
+			// implement SVG saving.......
+		},
+		parameterChange: function(e){
+			this.renderView.meas[e.currentTarget.id] = e.currentTarget.value;
+			this.renderPat();
+		}
+	});
+    
+	var PatternRenderView = Backbone.View.extend({
+		template: $("#patternsRenderTemplate").html(),
+		initialize: function(){
+		},
+		render: function(){
+			var tmpl = _.template(this.template);
 
+			this.$el.empty();
+			this.$el.html(tmpl({'parameters': this.meas}));
 			
 			if (bodyCurrent && patternCurrent){
 				patterndraw.settings.drawArea = document.getElementById("drawing");
@@ -65,53 +114,12 @@
 			}
 			
 			return this;
-		},
-		events: {
-			'change #patternCustomerSelect': 'patternCustomerSelect',
-			'change #patternSelect': 'patternSelect',
-			'change input[type=checkbox]': 'optionsToggle',
-			'change .parameter': 'parameterChange',
-			'click #saveSvg': 'saveSvg'
-		},
-		patternCustomerSelect: function(e){
-			$('#patternCustomerSelect [value=dummy]').attr('disabled','true');
-			if (e.currentTarget.value != 'dummy'){
-				bodyCurrent = customerCollection.get(e.currentTarget.value);
-				this.render();
-			}
-		},
-		patternSelect: function(e){
-			if (e.currentTarget.value != 'dummy'){
-				patternCurrent = patternCollection.get(e.currentTarget.value);
-				// PROVISIONAL: calculate measures from pattern defaults....
-				// should instead REQUIRE the listed measures from customer!
-				// this.meas = {};
-				this.meas = patternCurrent.attributes.pattern.measurements;
-				/*for (var i in patternCurrent.attributes.pattern.defaults){
-					this.meas[patternCurrent.attributes.pattern.measurements[i]] = patternCurrent.attributes.pattern.defaults[i];
-				}*/			
-				this.render();
-			}
-		},
-		optionsToggle: function(e){
-			patterndraw.settings[e.currentTarget.id] = e.currentTarget.checked;
-			this.render();
-		},
-		parameterChange: function(e){
-			parameter = e.currentTarget.id;
-			this.meas[e.currentTarget.id] = e.currentTarget.value;
-			this.render();
-		},
-		saveSvg: function(e){
-			e.preventDefault();
-			// implement SVG saving.......
 		}
 	});
     
 	var MeasurementView = Backbone.View.extend({
-		el: 'div.draw-wrapper',
+		el: 'div#wrapper',
 		template: $("#measurementTemplate").html(),
-		
 		initialize: function(){
 			this.model = new Measurement();
 			bodyCurrent = this.model;
@@ -156,14 +164,9 @@
 			return this;
 		},
 		events: {
-			'click #newMeasurements': 'clearForm',
 			'click #saveMeasurements': 'saveData',
+			'click #newMeasurements': 'clearForm',
 			'change #customerSelect': 'selectCustomer'
-		},
-		clearForm: function(){
-			this.model = new Measurement();
-			bodyCurrent = this.model;
-			this.render();
 		},
 		saveData: function(e){
 			e.preventDefault();
@@ -201,17 +204,16 @@
 			console.log('saving data...');
 			
 			var $name = this.$el.find('#customername').val();
+			var $units = this.$el.find("input[name=units]:checked").attr('id')
 			var $form = this.$el;
 
 			// update the model
-			var data = this.model.get('clientdata');
 			data.customername = $name;
-			data.units = $("input[name=units]:checked").attr('id');
-			for (var part in data.measurements){
-				for (var j in data.measurements[part]) {
-					var newVal = $form.find('#'+j).val();
-					data.measurements[part][j] = newVal ? newVal : data.measurements[part][j];
-				}
+			data.units = $units;
+			var data = this.model.get('clientdata');
+			for (var j in data.measurements) {
+				var newVal = $form.find('#'+j).val();
+				data.measurements[j] = newVal ? newVal : data.measurements[j];
 			}
 			
 			this.model.set({'clientdata': data});
@@ -239,16 +241,20 @@
 			$alert.html($message).fadeTo(200,1);
 			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
 		},
+		clearForm: function(){
+			this.model = new Measurement();
+			bodyCurrent = this.model;
+			this.render();
+		},
 		selectCustomer: function(e){
-			//var body = this.collection.get(e.currentTarget.value);
-			bodyCurrent = customerCollection.get(e.currentTarget.value);
-			this.model = bodyCurrent;
+			this.model = customerCollection.get(e.currentTarget.value);
+			bodyCurrent = this.model;
 			this.render();
 		}
 	});
 	
 	var PageView = Backbone.View.extend({
-		el: 'div.draw-wrapper',
+		el: 'div#wrapper',
 		render: function(){
 			
 			var tmpl = _.template(this.template);
@@ -269,10 +275,6 @@
 			"patterns":		"patternsPage",
 			"about":		"aboutPage"
         },
-        /*urlFilter: function (type) {
-            directory.filterType = type;
-            directory.trigger("change:filterType");
-        },*/
 		todoPage: function() {
 			$('.nav li.active').toggleClass('active');
 			todo.render();  
@@ -320,6 +322,7 @@
 	}
 	// THIRD: upon authentication, retrieve models from server.......
 	
+
 	var patternCollection = new patternCollection();
 	// FIRST: include defaults in collection
 	for ( var i in window.defaultPatterns ){
