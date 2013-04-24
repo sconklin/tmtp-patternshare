@@ -13,7 +13,7 @@
 	
 	// var TMTP = TMTP || {};
 	
-	var meas = {};
+	// var meas = {};
 
     var Pattern = Backbone.Model.extend({
         //urlRoot: 'pattern',
