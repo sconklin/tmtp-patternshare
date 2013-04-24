@@ -122,7 +122,6 @@
 		<p>Patterns view:</p>
 
 		<ul>
-		<li>ability to render pattern from custom measurements</li>
 		<li>save to SVG</li>
 		</ul>
 		
@@ -149,13 +148,14 @@
 			<!--h1>Patterns</h1-->
 			<div class="well">	
 				<select id="patternCustomerSelect">
-					<option value="dummy">1. Select Customer...</option>
+					<!--option value="dummy">1. Select Measurement...</option-->
+					<option value="dummy">Default Measurements</option>
 					<% for (var i in customers) { %>
-						<option value="<%- customers[i].cid %>" <% if (customers[i].cid == bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
+						<option value="<%- customers[i].cid %>" <% if (bodyCurrent && customers[i].cid == bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
 				<select id="patternSelect">
-					<option value="dummy">2. Select Pattern...</option>
+					<option value="dummy">Select Pattern...</option>
 					<% for (var i in patterns) { %>
 						<option value="<%- patterns[i].cid %>" <% if (patternCurrent && patterns[i].cid == patternCurrent.cid) { %> selected <% } %>><%- patterns[i].attributes.pattern.title %></option>
 					<% } %>
@@ -177,8 +177,12 @@
 			</div>
 		</div>
 	</div>
+<div id="alert" class="alert alert-error">
+	Some measurements are missing. Please <a href="#measurements" style="text-decoration: underline">fill out the form</a>
+</div>	
 </form>
-<hr>
+
+
 <div id="stage" class="row">
 	
 </div>
@@ -205,28 +209,21 @@
 		<div class="measwrapper span12">
 			<!--h1>Measurements</h1-->
 			<div class="well control-group">	
-				<input type="text" id="customername" placeholder="Customer Name" value="<%= data.attributes.clientdata.customername %>">
-				<input type="text" id="customerid" value="<%= data.cid %>" style="display: none;">
 				<select id="customerSelect">
-					<option>Select Customer...</option>
+					<option value="dummy">Select Customer...</option>
 					<% for (var i in customers) { %>
-						<option value="<%- customers[i].cid %>"><%- customers[i].attributes.clientdata.customername %></option>
+						<option value="<%- customers[i].cid %>" <% if (bodyCurrent && customers[i].cid == bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
 				
-				<label class="radio">
-					<input type="radio" id="cm" name="units" <% if(data.attributes.clientdata.units == "cm"){ %> checked="true" <%}%> /> Centimeters
-				</label>
-				<label class="radio">
-					<input type="radio" id="in" name="units" <% if(data.attributes.clientdata.units == "in"){ %> checked="true" <%}%> /> Inches
-				</label>
+
 				<button id="saveMeasurements" class="btn btn-danger pull-right" type="submit"> SAVE </button>
 				<button id="newMeasurements" class="btn btn-warning pull-right" type="submit"> NEW </button>
 
 			</div>
 		</div>
 	</div>
-	<div id="alertSaved" class="alert">
+	<div id="alert" class="alert">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<b>Hooray!</b> You just saved measurements for customer <b><%= name %></b>
 	</div>
@@ -235,14 +232,38 @@
 		<div id="drawarea" class="drawarea">
 			
 				
-				<% for (var i in data.attributes.clientdata.measurements) { %>
-					<div class="span2 control-group">
-						<label><%- title[i] %></label>
-						<input type="text" id="<%- i %>" placeholder="" value="<%- data.attributes.clientdata.measurements[i] %>" class="span2 numerical">
-					</div>
-				<% } %>
+
 		</div>
 	</div>
+</form>
+
+
+</script>
+
+<script id="measurementFormTemplate" type="text/template">
+<div class="form-inline">
+	<div class="measwrapper span12">
+		<!--h1>Measurements</h1-->
+		<div class="control-group">	
+			<input type="text" id="customername" class="span6" placeholder="Customer Name" value="<%= data.attributes.clientdata.customername %>">
+			<label class="radio">
+				<input type="radio" id="cm" name="units" <% if(data.attributes.clientdata.units == "cm"){ %> checked="true" <%}%> /> Centimeters
+			</label>
+			<label class="radio">
+				<input type="radio" id="in" name="units" <% if(data.attributes.clientdata.units == "in"){ %> checked="true" <%}%> /> Inches
+			</label>
+			<hr>
+		</div>
+	</div>
+</div>
+
+	
+<% for (var i in data.attributes.clientdata.measurements) { %>
+	<div class="span3 control-group">
+		<label><%- title[i] %></label>
+		<input type="text" id="<%- i %>" placeholder="" value="<%- data.attributes.clientdata.measurements[i] %>" class="span3 numerical <% if (missing[i]==true) { %>missing<% } %>">
+	</div>
+<% } %>
 </form>
 
 

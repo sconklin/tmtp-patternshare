@@ -5,8 +5,8 @@ PATTERNS
 var patternStandard = {
 "pattern": {
   "title": "",
-  //"defaults": [ ], //floats
   "measurements": {}, //strings : floats
+  "parameters": {},
   "main": [
     {
       "id": "",
@@ -40,11 +40,13 @@ var mensshirtblock = {
   "title": "Men's Shirt Block",
   //"defaults": [ "40", "100", "24.4", "44.6", "40", "85", "81" ],
   "measurements": { 
-		"neck": "40", 
-		"chest": "100", 
-		"armscye_depth": "24.4", 
-		"waist_length": "44.6", 
-		"back_width": "40", 
+		"neck_base_girth": "40", 
+		"front_chest_width": "100", 
+		"scye_depth": "24.4", 
+		"center_front_waist_length": "44.6", 
+		"back_width": "40"
+	}, 
+  "parameters": {		
 		"sleeve_length": "85", 
 		"shirt_length": "81" 
 	}, 
@@ -156,29 +158,29 @@ var mensshirtblock = {
   ],
   "points": {
     "A": { "x": "0", "y": "0" },
-    "B": { "x": "0", "y": "1.1*meas.armscye_depth" },
-    "C": { "x": ".58*meas.chest", "y": "pt.B.y" },
+    "B": { "x": "0", "y": "1.1*meas.scye_depth" },
+    "C": { "x": ".58*meas.front_chest_width", "y": "pt.B.y" },
     "D": { "x": "pt.C.x", "y": "0" },
-    "E": { "x": "0", "y": "1.02*meas.waist_length" },
-    "F": { "x": "pt.C.x", "y": "1.02*meas.waist_length" },
+    "E": { "x": "0", "y": "1.02*meas.center_front_waist_length" },
+    "F": { "x": "pt.C.x", "y": "1.02*meas.center_front_waist_length" },
     "G": { "x": "0", "y": "1.01*meas.shirt_length" },
     "H": { "x": "pt.C.x", "y": "pt.G.y" },
     "I": { "x": ".563*meas.back_width", "y": "pt.B.y" },
     "J": { "x": "pt.I.x", "y": "pt.A.y" },
-    "K": { "x": ".348*meas.chest", "y": "pt.B.y" },
-    "L": { "x": "pt.K.x", "y": "pt.K.y-.143*meas.armscye_depth" },
-    "M": { "x": "(pt.K.x+pt.I.x)/2-(.005*meas.chest)", "y": "pt.K.y" },
+    "K": { "x": ".348*meas.front_chest_width", "y": "pt.B.y" },
+    "L": { "x": "pt.K.x", "y": "pt.K.y-.143*meas.scye_depth" },
+    "M": { "x": "(pt.K.x+pt.I.x)/2-(.005*meas.front_chest_width)", "y": "pt.K.y" },
     "N": { "x": "pt.M.x", "y": "pt.E.y" },
     "O": { "x": "pt.M.x", "y": "pt.G.y" },
-    "P": { "x": "pt.A.x", "y": ".54*meas.armscye_depth" },
+    "P": { "x": "pt.A.x", "y": ".54*meas.scye_depth" },
     "Q": { "x": "pt.I.x", "y": "pt.P.y" },
-    "R": { "x": ".188*meas.neck", "y": "0" },
-    "S": { "x": "pt.R.x", "y": "-0.05*meas.neck" },
-    "T": { "x": "pt.I.x", "y": "pt.Q.y-.414*meas.armscye_depth" },
+    "R": { "x": ".188*meas.neck_base_girth", "y": "0" },
+    "S": { "x": "pt.R.x", "y": "-0.05*meas.neck_base_girth" },
+    "T": { "x": "pt.I.x", "y": "pt.Q.y-.414*meas.scye_depth" },
     "U": { "x": "pt.T.x+.0875*meas.back_width", "y": "pt.T.y" },
-    "V": { "x": "pt.D.x", "y": "pt.D.y+.2*meas.neck" },
-    "W": { "x": "pt.V.x-.175*meas.neck", "y": "pt.D.y" },
-    "X": { "x": "pt.U.x", "y": "pt.U.y+.082*meas.armscye_depth" },
+    "V": { "x": "pt.D.x", "y": "pt.D.y+.2*meas.neck_base_girth" },
+    "W": { "x": "pt.V.x-.175*meas.neck_base_girth", "y": "pt.D.y" },
+    "X": { "x": "pt.U.x", "y": "pt.U.y+.082*meas.scye_depth" },
     "Y": { "x": "pt.W.x-Math.sqrt((((pt.U.x-pt.S.x)*(pt.U.x-pt.S.x))+((pt.U.y-pt.S.y)*(pt.U.y-pt.S.y)))-(pt.X.y*pt.X.y))", "y": "pt.X.y" },
     "Ain":  { "x": "(pt.A.x+pt.S.x)/2", "y": "pt.A.y" },
     "Lin":  { "x": "pt.L.x+(dist(pt.L,pt.Y)/3)*Math.cos(angleBetween(pt.M,pt.Y))", "y": "pt.L.y+(dist(pt.L,pt.Y)/3)*Math.sin(angleBetween(pt.M,pt.Y))" },
@@ -225,7 +227,7 @@ var womensbasicbodice = {
   "title": "Women's Basic Bodice Block",
   //"defaults": [ "88", "70", "21", "12", "41", "37", "34", "20.6", "32.4", "7" ],
   "measurements": { 
-		"bust": "88", 
+		"bust_girth": "88", 
 		"waist": "70", 
 		"armscye_depth": "21", 
 		"shoulder": "12", 
@@ -235,7 +237,10 @@ var womensbasicbodice = {
 		"waist_to_hip": "20.6", 
 		"chest_width": "32.4", 
 		"bust_dart_width": "7" 
-	}, 
+  },
+  "parameters":{
+  		
+  },	 
   "main": [
     {
       "id": "outline",
@@ -309,7 +314,7 @@ var womensbasicbodice = {
   "points": {
     "A": { "x": "0", "y": "meas.neck*.0375" },
     "B": { "x": "0", "y": "pt.A.y + 1.024*meas.armscye_depth" },
-    "C": { "x": "pt.B.x + .55*meas.bust", "y": "pt.B.y" },
+    "C": { "x": "pt.B.x + .55*meas.bust_girth", "y": "pt.B.y" },
     "D": { "x": "pt.C.x", "y": "0" },
     "E": { "x": "0", "y": "meas.nape_to_waist" },
     "F": { "x": "pt.C.x", "y": "pt.E.y" },
@@ -337,10 +342,10 @@ var womensbasicbodice = {
     "Y": { "x": "pt.T.x", "y": "pt.T.y - meas.armscye_depth/3" },
     "Z": { "x": "(pt.L.x+pt.T.x)/2", "y": "pt.T.y" },
     "AA": { "x": "pt.Z.x", "y": "pt.E.y" },
-    "Tdiag": { "x": "pt.T.x - .023*meas.bust*Math.cos(Math.PI/4)", "y": "pt.T.y - .023*meas.bust*Math.sin(Math.PI/4)" },
-    "Ldiag": { "x": "pt.L.x + .028*meas.bust*Math.cos(Math.PI/4)", "y": "pt.L.y - .028*meas.bust*Math.sin(Math.PI/4)" },
-    "AB": { "x": "pt.F.x", "y": "pt.F.y + .011*meas.bust" },
-    "Dart": { "x": "(1.034*meas.bust-meas.waist)/6", "y": "0" },
+    "Tdiag": { "x": "pt.T.x - .023*meas.bust_girth*Math.cos(Math.PI/4)", "y": "pt.T.y - .023*meas.bust_girth*Math.sin(Math.PI/4)" },
+    "Ldiag": { "x": "pt.L.x + .028*meas.bust_girth*Math.cos(Math.PI/4)", "y": "pt.L.y - .028*meas.bust_girth*Math.sin(Math.PI/4)" },
+    "AB": { "x": "pt.F.x", "y": "pt.F.y + .011*meas.bust_girth" },
+    "Dart": { "x": "(1.034*meas.bust_girth-meas.waist)/6", "y": "0" },
     "Ql": { "x": "pt.Q.x-.95*pt.Dart.x/2", "y": "pt.F.y" },
     "Qr": { "x": "pt.Q.x+.95*pt.Dart.x/2", "y": "pt.F.y" },
     "AAl": { "x": "pt.AA.x-pt.Dart.x/3", "y": "pt.F.y" },
@@ -356,11 +361,13 @@ var womensbasicskirt = {
   "title": "Women's Basic Skirt",
   //"defaults": [ "70", "94", "70", "20.6" ],
   "measurements": { 
-		"waist": "70", 
-		"hips": "94", 
-		"skirt_length": "70", 
-		"waist_to_hip": "20.6"
+		"waist_girth": "70", 
+		"hip_girth": "94", 
+		"waist_to_hip_height": "20.6"
 	}, 
+  "parameters": {
+  		"skirt_length": "70"
+    },	
   "main": [
     {
       "id": "outline",
@@ -412,28 +419,28 @@ var womensbasicskirt = {
   ],
   "points": {
     "A": { "x": "0", "y": "0" },
-    "B": { "x": ".516*meas.hips", "y": "0" },
+    "B": { "x": ".516*meas.hip_girth", "y": "0" },
     "C": { "x": "0", "y": "meas.skirt_length" },
     "D": { "x": "pt.B.x", "y": "pt.C.y" },
-    "E": { "x": "0", "y": "meas.waist_to_hip" },
+    "E": { "x": "0", "y": "meas.waist_to_hip_height" },
     "F": { "x": "pt.B.x", "y": "pt.E.y" },
-    "G": { "x": ".266*meas.hips", "y": "pt.F.y" },
+    "G": { "x": ".266*meas.hip_girth", "y": "pt.F.y" },
     "H": { "x": "pt.G.x", "y": "pt.C.y" },
-    "I": { "x": ".311*meas.waist", "y": "0" },
-    "J": { "x": "pt.I.x", "y": "-.018*meas.waist" },
+    "I": { "x": ".311*meas.waist_girth", "y": "0" },
+    "J": { "x": "pt.I.x", "y": "-.018*meas.waist_girth" },
     "K": { "x": "(pt.A.x+pt.J.x)/3", "y": "(pt.A.y+pt.J.y)/3" },
-    "L": { "x": "pt.K.x + .2*meas.waist*Math.sin(Math.asin((pt.A.y-pt.K.y)/(dist(pt.A,pt.J)/3)))", "y": "pt.K.y + .2*meas.waist*Math.cos(Math.asin((pt.A.y-pt.K.y)/(dist(pt.A,pt.J)/3)))" },
+    "L": { "x": "pt.K.x + .2*meas.waist_girth*Math.sin(Math.asin((pt.A.y-pt.K.y)/(dist(pt.A,pt.J)/3)))", "y": "pt.K.y + .2*meas.waist_girth*Math.cos(Math.asin((pt.A.y-pt.K.y)/(dist(pt.A,pt.J)/3)))" },
     "M": { "x": "2*(pt.A.x+pt.J.x)/3", "y": "2*(pt.A.y+pt.J.y)/3" },
-    "N": { "x": "pt.M.x + .179*meas.waist*Math.sin(Math.asin((pt.A.y-pt.M.y)/(2*dist(pt.A,pt.J)/3)))", "y": "pt.M.y + .179*meas.waist*Math.cos(Math.asin((pt.A.y-pt.M.y)/(2*dist(pt.A,pt.J)/3)))" },
-    "P": { "x": "pt.B.x - .282*meas.waist", "y": "0" },
-    "Q": { "x": "pt.P.x", "y": "-.018*meas.waist" },
+    "N": { "x": "pt.M.x + .179*meas.waist_girth*Math.sin(Math.asin((pt.A.y-pt.M.y)/(2*dist(pt.A,pt.J)/3)))", "y": "pt.M.y + .179*meas.waist_girth*Math.cos(Math.asin((pt.A.y-pt.M.y)/(2*dist(pt.A,pt.J)/3)))" },
+    "P": { "x": "pt.B.x - .282*meas.waist_girth", "y": "0" },
+    "Q": { "x": "pt.P.x", "y": "-.018*meas.waist_girth" },
     "R": { "x": "pt.Q.x + (pt.B.x-pt.Q.x)/3", "y": "2*(pt.Q.y+pt.B.y)/3" },
-    "S": { "x": "pt.R.x + .143*meas.waist*Math.sin(Math.asin((pt.Q.y-pt.R.y)/(dist(pt.Q,pt.B)/3)))", "y": "pt.R.y + .143*meas.waist*Math.cos(Math.asin((pt.Q.y-pt.R.y)/(dist(pt.Q,pt.B)/3)))" }
+    "S": { "x": "pt.R.x + .143*meas.waist_girth*Math.sin(Math.asin((pt.Q.y-pt.R.y)/(dist(pt.Q,pt.B)/3)))", "y": "pt.R.y + .143*meas.waist_girth*Math.cos(Math.asin((pt.Q.y-pt.R.y)/(dist(pt.Q,pt.B)/3)))" }
   }
 }
 };
 
-var defaultPatterns = [mensshirtblock, womensbasicbodice, womensbasicskirt ];
+var defaultPatterns = [mensshirtblock, womensbasicskirt ]; //, womensbasicbodice
 
 /***********************************************************************
 MEASUREMENTS
