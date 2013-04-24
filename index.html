@@ -192,7 +192,7 @@
 	<div id="parameters" class="span3">
 		<!--h3>Parameters</h3-->
 		<% for (var i in parameters) { %>
-			<label><%- i %></label>
+			<label><% if(title[i]){ %><%- title[i] %><% }else{%><%- i %><% } %></label>
 			<input class="parameter" id="<%- i %>" type="number" value="<%- parameters[i] %>"/>
 		<% } %>
 	</div>

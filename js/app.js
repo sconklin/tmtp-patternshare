@@ -131,7 +131,7 @@
 			
 			// 5. render the parameter sliders
 			this.$el.empty();
-			this.$el.html(tmpl({'parameters': this.meas}));
+			this.$el.html(tmpl({'parameters': this.meas, 'title': window.bodyNames}));
 			
 			// 6. abort pattern rendering if ther are missing measurements
 			if (_.size(this.missing) > 0){
