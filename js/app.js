@@ -1,4 +1,4 @@
-//(function ($) {    // Commented out for development purposes only, remove for production
+(function ($) {   
 
 	/********************************************************************
 	START BACKBONE
@@ -7,8 +7,6 @@
 	
 	********************************************************************/
 	
-	// var TMTP = TMTP || {};
-
     var Pattern = Backbone.Model.extend({
         //urlRoot: 'pattern',
 		defaults: {
@@ -43,7 +41,6 @@
 			var tmpl = _.template(this.template);
 			
 			if (localStorage.getItem('patterndrawSettings')){
-				console.log('loading saved settings');
 				patterndraw.init(JSON.parse(localStorage.getItem('patterndrawSettings')));
 			}
 			
@@ -66,7 +63,7 @@
 			'change #patternCustomerSelect': 'patternCustomerSelect',
 			'change #patternSelect': 'patternSelect',
 			'change input[type=checkbox]': 'optionsToggle',
-			'change .parameter': 'parameterChange',
+			'change input.parameter': 'parameterChange',
 			'click #saveSvg': 'saveSvg'
 		},
 		patternCustomerSelect: function(e){
@@ -85,9 +82,8 @@
 		},
 		optionsToggle: function(e){
 			patterndraw.settings[e.currentTarget.id] = e.currentTarget.checked;
-			patterndraw.settings.drawArea = null;
+			patterndraw.settings.drawArea = null; // strange, only to avoid circular definition when stringifying into localStorage
 			storageSave('patterndrawSettings', patterndraw.settings);
-			console.log('settings saved');
 			if (patternCurrent) this.renderView.draw();
 		},
 		parameterChange: function(e){
@@ -188,70 +184,54 @@
 			var $nameInput = $('input#customername');
 			if ($nameInput.val().length == 0) {
 				$nameInput.parent().addClass('error');
-				$nameInput.attr({
-					'data-toggle': "tooltip", 
-					'data-original-title': "Please, supply a customer name",
-					'data-placement': "bottom",
-					'data-trigger': "manual"
-				}).tooltip('show').focus(function(){
-					$nameInput.tooltip('destroy');
-				});
-				//return false
+				$nameInput.attr({'data-original-title': "Please, supply a valid customer name"})
+					.tooltip('show').focus(function(){
+						$nameInput.tooltip('destroy');
+					});
 			} else {
 				$nameInput.parent().removeClass('error');
 			}
 
 			if ($('form .error').length > 0){
-				$alert = $('#alert');
-				$alert.removeClass('alert-success');
-				$alert.addClass('alert-error');
-				$message = '<b>Ooops!</b> Some values you entered are invalid. Please, correct them before you proceed';
-				$alert.html($message).fadeTo(200,1);
-				window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);				
-				console.log('error: invalid input...');
+				$('#alert').removeClass('alert-success').addClass('alert-error')
+					.html('<b>Ooops!</b> Some values you entered are invalid. Please, correct them before you proceed')
+					.fadeTo(200,1).delay(2000).fadeTo(800,0);
+				//console.log('error: invalid input...');
 				return false;
 			}
 			/*************************************************************/
 			
 			console.log('saving data...');
-			
-			var $name = this.$el.find('#customername').val();
-			var $units = this.$el.find("input[name=units]:checked").attr('id')
-			var $form = this.$el;
 
 			// update the model
 			var data = this.model.get('clientdata');
-			data.customername = $name;
-			data.units = $units;
+			data.customername = this.$el.find('#customername').val();
+			data.units = this.$el.find("input[name=units]:checked").attr('id');
 			for (var j in data.measurements) {
-				var newVal = $form.find('#'+j).val();
+				var newVal = this.$el.find('#'+j).val();
 				data.measurements[j] = newVal ? newVal : data.measurements[j];
 			}
 			
 			this.model.set({'clientdata': data});
-			
+			bodyCurrent = this.model;
+						
 			// update the collection
 			customerCollection.set(this.model, {remove: false});
-			bodyCurrent = this.model;
-
 			
 			// localStorage
 			storageSaveToList('customerList', $name, this.model.attributes);
 			
 			// HTTP save to server
-			// this.model.save();
+			this.model.save();
 
 			// re-render view, to update the dropdown menu for measurement selection
 			this.missing = {};
 			this.render();  			
 			
 			//// give some feedback when saving measurements:
-			$alert = $('#alert');
-			$alert.removeClass('alert-error');
-			$alert.addClass('alert-success');
-			$message = '<b>Great!</b> You just saved measurements for customer: <b>'+$name+'</b>';
-			$alert.html($message).fadeTo(200,1);
-			window.setTimeout(function(){$alert.fadeTo(800,0);}, 2000);
+			$('#alert').removeClass('alert-error').addClass('alert-success')
+				.html('<b>Great!</b> You just saved measurements for customer: <b>'+$name+'</b>')
+				.fadeTo(200,1).delay(2000).fadeTo(800,0);
 		},
 		clearForm: function(e){
 			e.preventDefault();
@@ -281,28 +261,20 @@
 			this.$el.empty();
 			this.$el.html(tmpl({'data': this.model, 'title': window.bodyNames, missing: this.missing}));
 			
-			// INPUT VALIDATION
+			// CLIENT-SIDE INPUT VALIDATION
 			$('input.numerical').change(function(e){
 				if (!isNum(e.target.value)) {
 					$(this).parent().addClass('error');
-					$(this).attr({
-						'data-toggle': "tooltip", 
-						'data-original-title': "Input must be numerical",
-						'data-placement': "top",
-						'data-trigger': "manual"
-					}).tooltip('show').focus(function(){
-						$(this).tooltip('destroy');
-					});
+					$(this).attr({'data-original-title': "Input must be numerical"})
+						.tooltip('show').focus(function(){
+							$(this).tooltip('destroy');
+						});
 				} else if (!isHum(e.target.value)) {
 					$(this).parent().addClass('error');
-					$(this).attr({
-						'data-toggle': "tooltip", 
-						'data-original-title': "Input must be human ;)",
-						'data-placement': "top",
-						'data-trigger': "manual"
-					}).tooltip('show').focus(function(){
-						$(this).tooltip('destroy');
-					});
+					$(this).attr({'data-original-title': "Input must be human ;)"})
+						.tooltip('show').focus(function(){
+							$(this).tooltip('destroy');
+						});
 				} else {
 					$(this).parent().removeClass('error');
 					// commas are accepted, but get replaced by dots
@@ -310,17 +282,13 @@
 				}
 			});	
 			
-			//MISSING MEASUREMENT
+			// MARK MISSING MEASUREMENTS
 			$('input.missing').each(function(e){
 				$(this).parent().addClass('error');
-				$(this).attr({
-					'data-toggle': "tooltip", 
-					'data-original-title': "Missing input",
-					'data-placement': "top",
-					'data-trigger': "manual"
-				}).tooltip('show').focus(function(){
-					$(this).tooltip('destroy');
-				});
+				$(this).attr({'data-original-title': "Missing input"})
+					.tooltip('show').focus(function(){
+						$(this).tooltip('destroy');
+					});
 			});	
 			
 			// REARRANGE FORM... ???
@@ -385,14 +353,12 @@
 	// FIRST: include defaults in collection
 	// customerCollection.add(new Measurement(window.bodyStandard));
 	for ( var i in window.defaultMeasurements ){
-		//console.log('build measurements collection: defaults: '+window.defaultMeasurements[i].clientdata.customername);
 		customerCollection.add(new Measurement(window.defaultMeasurements[i]));
 	}
 	// SECOND: include measurements from localStorage:
 	var customerList = JSON.parse(localStorage.getItem('customerList'));
 	if (customerList != undefined){
 		for (var i in customerList){
-			//console.log('build measurements collection: localStorage: '+customerList[i]);
 			customerCollection.add(new Measurement(JSON.parse(localStorage.getItem(customerList[i]))));
 		}
 	}
@@ -402,7 +368,6 @@
 	var patternCollection = new patternCollection();
 	// FIRST: include defaults in collection
 	for ( var i in window.defaultPatterns ){
-		//console.log('build patterns collection: defaults:'+window.defaultPatterns[i].pattern.title);
 		patternCollection.add(new Measurement(window.defaultPatterns[i]));
 	}
 	
@@ -459,4 +424,4 @@
 	
 	
 	
-//} (jQuery));
+} (jQuery));

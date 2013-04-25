@@ -246,7 +246,7 @@
 	<div class="measwrapper span12">
 		<!--h1>Measurements</h1-->
 		<div class="control-group">	
-			<input type="text" id="customername" class="span6" placeholder="Customer Name" value="<%= data.attributes.clientdata.customername %>">
+			<input type="text" id="customername" class="span6" placeholder="Customer Name" value="<%= data.attributes.clientdata.customername %>" data-toggle="tooltip" data-placement="right" data-trigger="manual">
 			<label class="radio">
 				<input type="radio" id="cm" name="units" <% if(data.attributes.clientdata.units == "cm"){ %> checked="true" <%}%> /> Centimeters
 			</label>
@@ -262,7 +262,7 @@
 <% for (var i in data.attributes.clientdata.measurements) { %>
 	<div class="span3 control-group">
 		<label><%- title[i] %></label>
-		<input type="text" id="<%- i %>" placeholder="" value="<%- data.attributes.clientdata.measurements[i] %>" class="span3 numerical <% if (missing[i]==true) { %>missing<% } %>">
+		<input type="text" id="<%- i %>" placeholder="" value="<%- data.attributes.clientdata.measurements[i] %>" class="span3 numerical <% if (missing[i]==true) { %>missing<% } %>" data-toggle="tooltip" data-placement="top" data-trigger="manual">
 	</div>
 <% } %>
 </form>
