@@ -1,4 +1,4 @@
-(function ($) {   
+//(function ($) {   
 
 	/********************************************************************
 	START BACKBONE
@@ -162,7 +162,7 @@
 			this.$el.empty();
 			this.$el.html(tmpl({'customers': customerCollection.models}));
 			
-			if (bodyCurrent) this.renderForm();
+			if (bodyCurrent)this.renderForm();
 			
 			return this;
 		},
@@ -173,6 +173,7 @@
 		},
 		events: {
 			'click #saveMeasurements': 'saveData',
+			'click #deleteMeasurements': 'deleteData',
 			'click #newMeasurements': 'clearForm',
 			'change #customerSelect': 'selectCustomer'
 		},
@@ -219,7 +220,7 @@
 			customerCollection.set(this.model, {remove: false});
 			
 			// localStorage
-			storageSaveToList('customerList', $name, this.model.attributes);
+			storageSaveToList('customerList', data.customername, this.model.attributes);
 			
 			// HTTP save to server
 			this.model.save();
@@ -230,13 +231,35 @@
 			
 			//// give some feedback when saving measurements:
 			$('#alert').removeClass('alert-error').addClass('alert-success')
-				.html('<b>Great!</b> You just saved measurements for customer: <b>'+$name+'</b>')
+				.html('<b>Great!</b> You just saved measurements for customer: <b>'+data.customername+'</b>')
+				.fadeTo(200,1).delay(2000).fadeTo(800,0);
+		},
+		deleteData: function(e){
+			e.preventDefault();
+
+			// update the collection
+			customerCollection.remove(this.model);
+			
+			// localStorage
+			// console.log(this.model.attributes.clientdata.customername);
+			storageDeleteFromList('customerList', this.model.attributes.clientdata.customername);
+			
+			// HTTP delete from server...
+
+			// re-render view, to update the dropdown menu for measurement selection
+			var $name = this.model.attributes.clientdata.customername;
+			this.missing = {};
+			bodyCurrent = new Measurement({'clientdata': JSON.parse(JSON.stringify(bodyStandard.clientdata))});
+			this.render();
+			
+			//// give some feedback when saving measurements:
+			$('#alert').removeClass('alert-error').addClass('alert-success')
+				.html('You successfully deleted measurements for customer: <b>'+$name+'</b>')
 				.fadeTo(200,1).delay(2000).fadeTo(800,0);
 		},
 		clearForm: function(e){
 			e.preventDefault();
-			this.model = new Measurement();
-			bodyCurrent = this.model;
+			bodyCurrent = new Measurement({'clientdata': JSON.parse(JSON.stringify(bodyStandard.clientdata))});
 			this.render();
 		},
 		selectCustomer: function(e){
@@ -351,7 +374,6 @@
 //  COLLECTIONS
 	var customerCollection = new measurementCollection();
 	// FIRST: include defaults in collection
-	// customerCollection.add(new Measurement(window.bodyStandard));
 	for ( var i in window.defaultMeasurements ){
 		customerCollection.add(new Measurement(window.defaultMeasurements[i]));
 	}
@@ -407,21 +429,29 @@
 	// localStorage utility functions
 	
 	var storageList = function(listName){
-		if (!window.localStorage.getItem(listName))	window.localStorage.setItem(listName, '[]');
-		return JSON.parse(window.localStorage.getItem(listName));
+		return JSON.parse(window.localStorage.getItem(listName)) || [];
 	}
 	
 	var storageSave = function(key, value){
 		window.localStorage.setItem(key, JSON.stringify(value));
 	}
 	
+	var storageDelete = function(key){
+		window.localStorage.removeItem(key);
+	}
+	
 	var storageSaveToList = function(listName, key, value){
 		var list = storageList(listName);
-		if (list.indexOf(key) < 0) list.push(key);
+		list = _.union(list,[key]);
 		storageSave(listName, list);
 		storageSave(key, value);
 	}
 	
+	var storageDeleteFromList = function(listName, key){
+		var list = storageList(listName);
+		list = _.without(list,key);
+		storageSave(listName, list);
+		storageDelete(key);
+	}
 	
-	
-} (jQuery));
+//} (jQuery));
