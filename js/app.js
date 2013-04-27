@@ -78,6 +78,7 @@
 		patternSelect: function(e){
 			if (e.currentTarget.value != 'dummy'){
 				TMTP.patternCurrent = TMTP.patternCollection.get(e.currentTarget.value);
+				$(e.currentTarget).find('[value=dummy]').attr('disabled',true);
 			}
 			this.renderPat();
 		},
