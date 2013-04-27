@@ -1,4 +1,3 @@
-//(function ($) {   
 
 	/********************************************************************
 	START BACKBONE
@@ -7,35 +6,37 @@
 	
 	********************************************************************/
 	
-    var Pattern = Backbone.Model.extend({
+	var TMTP = TMTP || {};
+	
+    TMTP.Pattern = Backbone.Model.extend({
         urlRoot: 'pattern',
 		defaults: {
 			"pattern": patternStandard.pattern
         }
     });
 	
-	var Measurement = Backbone.Model.extend({
+	TMTP.Measurement = Backbone.Model.extend({
 		urlRoot: 'measurement',
 		defaults: {
 			"clientdata": bodyStandard.clientdata
 		}
 	});
 		
-    var patternCollection = Backbone.Collection.extend({
+    TMTP.PatternCollection = Backbone.Collection.extend({
 		url: 'patterns',
-		model: Pattern
+		model: TMTP.Pattern
     });
 	
-	var measurementCollection = Backbone.Collection.extend({
+	TMTP.MeasurementCollection = Backbone.Collection.extend({
 		url: 'measurements',
-		model: Measurement
+		model: TMTP.Measurement
 	});
 	
-	var PatternView = Backbone.View.extend({
+	TMTP.PatternView = Backbone.View.extend({
 		el: 'div#wrapper',
 		template: $("#patternsTemplate").html(),
 		initialize: function(){
-			this.renderView = new PatternRenderView();
+			this.renderView = new TMTP.PatternRenderView();
 		},
 		render: function(){
 			var tmpl = _.template(this.template);
@@ -46,12 +47,12 @@
 			
 			this.$el.empty();
 			this.$el.html(tmpl({
-				'patterns': patternCollection.models, 
-				'customers': customerCollection.models, 
+				'patterns': TMTP.patternCollection.models, 
+				'customers': TMTP.customerCollection.models, 
 				'options': patterndraw.settings})
 			);
 			
-			if (patternCurrent) this.renderPat();
+			if (TMTP.patternCurrent) this.renderPat();
 			
 			return this;
 		},
@@ -68,23 +69,23 @@
 		},
 		patternCustomerSelect: function(e){
 			if (e.currentTarget.value != 'dummy' ){
-				bodyCurrent = customerCollection.get(e.currentTarget.value);
+				TMTP.bodyCurrent = TMTP.customerCollection.get(e.currentTarget.value);
 			} else {
-				bodyCurrent = null;
+				TMTP.bodyCurrent = null;
 			}
 			this.renderPat();
 		},
 		patternSelect: function(e){
 			if (e.currentTarget.value != 'dummy'){
-				patternCurrent = patternCollection.get(e.currentTarget.value);
+				TMTP.patternCurrent = TMTP.patternCollection.get(e.currentTarget.value);
 			}
 			this.renderPat();
 		},
 		optionsToggle: function(e){
 			patterndraw.settings[e.currentTarget.id] = e.currentTarget.checked;
 			patterndraw.settings.drawArea = null; // strange, only to avoid circular definition when stringifying into localStorage
-			storageSave('patterndrawSettings', patterndraw.settings);
-			if (patternCurrent) this.renderView.draw();
+			TMTP.storageSave('patterndrawSettings', patterndraw.settings);
+			if (TMTP.patternCurrent) this.renderView.draw();
 		},
 		parameterChange: function(e){
 			this.renderView.meas[e.currentTarget.id] = e.currentTarget.value;
@@ -96,7 +97,7 @@
 		}
 	});
     
-	var PatternRenderView = Backbone.View.extend({
+	TMTP.PatternRenderView = Backbone.View.extend({
 		template: $("#patternsRenderTemplate").html(),
 		initialize: function(){
 			this.meas = {};
@@ -109,20 +110,21 @@
 			$('#alert').fadeTo(20,0);
 			this.missing = {};
 			this.meas = {};
+			if(!TMTP.patternCurrent) return;
 			
 			// 2. retrieve measurements
-			if(bodyCurrent){
-				for (var i in patternCurrent.attributes.pattern.measurements){
-					this.meas[i] = bodyCurrent.attributes.clientdata.measurements[i];
+			if(TMTP.bodyCurrent){
+				for (var i in TMTP.patternCurrent.attributes.pattern.measurements){
+					this.meas[i] = TMTP.bodyCurrent.attributes.clientdata.measurements[i];
 					if (this.meas[i]  == '') this.missing[i] = true;
 				}
 			} else {
-				this.meas = _.clone(patternCurrent.attributes.pattern.measurements);
+				this.meas = _.clone(TMTP.patternCurrent.attributes.pattern.measurements);
 			}
 			
 			// 4. retrieve parameters
-			for (var i in patternCurrent.attributes.pattern.parameters){
-				this.meas[i] = patternCurrent.attributes.pattern.parameters[i]; 
+			for (var i in TMTP.patternCurrent.attributes.pattern.parameters){
+				this.meas[i] = TMTP.patternCurrent.attributes.pattern.parameters[i]; 
 			}
 			
 			// 5. render the parameter sliders
@@ -132,7 +134,7 @@
 			// 6. abort pattern rendering if ther are missing measurements
 			if (_.size(this.missing) > 0){
 				$('#alert').fadeTo(200,1);
-				measurementView.missing = this.missing;
+				TMTP.measurementView.missing = this.missing;
 				return;
 			}			
 			
@@ -143,24 +145,24 @@
 		},
 		draw: function(){
 			patterndraw.settings.drawArea = document.getElementById("drawing");
-			patterndraw.drawpattern(patternCurrent.attributes.pattern,this.meas);			
+			patterndraw.drawpattern(TMTP.patternCurrent.attributes.pattern,this.meas);			
 		}
 	});
     
-	var MeasurementView = Backbone.View.extend({
+	TMTP.MeasurementView = Backbone.View.extend({
 		el: 'div#wrapper',
 		template: $("#measurementTemplate").html(),
 		missing: {},
 		initialize: function(){
-			this.measForm = new MeasurementFormView();
+			this.measForm = new TMTP.MeasurementFormView();
 		},
 		render: function(){
 			var tmpl = _.template(this.template);
 			
 			this.$el.empty();
-			this.$el.html(tmpl({'customers': customerCollection.models}));
+			this.$el.html(tmpl({'customers': TMTP.customerCollection.models}));
 			
-			if (bodyCurrent)this.renderForm();
+			if (TMTP.bodyCurrent)this.renderForm();
 			
 			return this;
 		},
@@ -202,7 +204,7 @@
 			console.log('saving data...');
 
 			// update the model
-			var data = bodyCurrent.get('clientdata');
+			var data = TMTP.bodyCurrent.get('clientdata');
 			data.customername = this.$el.find('#customername').val();
 			data.units = this.$el.find("input[name=units]:checked").attr('id');
 			for (var j in data.measurements) {
@@ -210,17 +212,17 @@
 				data.measurements[j] = newVal ? newVal : data.measurements[j];
 			}
 			
-			bodyCurrent.set({'clientdata':data});	
+			TMTP.bodyCurrent.set({'clientdata':data});	
 			
 					
 			// update the collection
-			customerCollection.set(bodyCurrent, {remove: false});
+			TMTP.customerCollection.set(TMTP.bodyCurrent, {remove: false});
 			
 			// localStorage
-			storageSaveToList('customerList', data.customername, bodyCurrent.attributes);
+			TMTP.storageSaveToList('customerList', data.customername, TMTP.bodyCurrent.attributes);
 			
 			// HTTP save to server
-			bodyCurrent.save();
+			TMTP.bodyCurrent.save();
 
 			// re-render view, to update the dropdown menu for measurement selection
 			this.missing = {};
@@ -235,17 +237,17 @@
 			e.preventDefault();
 
 			// update the collection
-			customerCollection.remove(bodyCurrent);
+			TMTP.customerCollection.remove(TMTP.bodyCurrent);
 			
 			// localStorage
-			storageDeleteFromList('customerList', bodyCurrent.attributes.clientdata.customername);
+			TMTP.storageDeleteFromList('customerList', TMTP.bodyCurrent.attributes.clientdata.customername);
 			
 			// HTTP delete from server...
 
 			// re-render view, to update the dropdown menu for measurement selection
-			var $name = bodyCurrent.attributes.clientdata.customername;
+			var $name = TMTP.bodyCurrent.attributes.clientdata.customername;
 			this.missing = {};
-			bodyCurrent = new Measurement({'clientdata': JSON.parse(JSON.stringify(bodyStandard.clientdata))});
+			TMTP.bodyCurrent = new TMTP.Measurement({'clientdata': _.clone(bodyStandard.clientdata)});
 			this.render();
 			
 			//// give some feedback when saving measurements:
@@ -255,19 +257,19 @@
 		},
 		clearForm: function(e){
 			e.preventDefault();
-			bodyCurrent = new Measurement({'clientdata': JSON.parse(JSON.stringify(bodyStandard.clientdata))});
+			TMTP.bodyCurrent = new TMTP.Measurement({'clientdata': _.clone(bodyStandard.clientdata)});
 			this.render();
 		},
 		selectCustomer: function(e){
 			if (e.currentTarget.value != 'dummy'){
-				bodyCurrent = customerCollection.get(e.currentTarget.value);
+				TMTP.bodyCurrent = TMTP.customerCollection.get(e.currentTarget.value);
 				this.missing = {};
 				this.render();
 			}
 		}
 	});
 	
-	var MeasurementFormView = Backbone.View.extend({
+	TMTP.MeasurementFormView = Backbone.View.extend({
 		template: $("#measurementFormTemplate").html(),
 		initialize: function(){
 		},
@@ -275,17 +277,17 @@
 			var tmpl = _.template(this.template);
 			
 			this.$el.empty();
-			this.$el.html(tmpl({'data': bodyCurrent, 'title': window.bodyNames, missing: this.missing}));
+			this.$el.html(tmpl({'data': TMTP.bodyCurrent, 'title': window.bodyNames, missing: this.missing}));
 			
 			// CLIENT-SIDE INPUT VALIDATION
 			$('input.numerical').change(function(e){
-				if (!isNum(e.target.value)) {
+				if (!TMTP.isNum(e.target.value)) {
 					$(this).parent().addClass('error');
 					$(this).attr({'data-original-title': "Input must be numerical"})
 						.tooltip('show').focus(function(){
 							$(this).tooltip('destroy');
 						});
-				} else if (!isHum(e.target.value)) {
+				} else if (!TMTP.isHum(e.target.value)) {
 					$(this).parent().addClass('error');
 					$(this).attr({'data-original-title': "Input must be human ;)"})
 						.tooltip('show').focus(function(){
@@ -313,7 +315,7 @@
 		}	
 	});
 	
-	var PageView = Backbone.View.extend({
+	TMTP.PageView = Backbone.View.extend({
 		el: 'div#wrapper',
 		render: function(){
 			
@@ -326,7 +328,7 @@
 		}
 	});
 	
-    var TauMetaTauRouter = Backbone.Router.extend({
+    TMTP.TauMetaTauRouter = Backbone.Router.extend({
         routes: {
 //			"search/:query/p:page": "search"   // #search/kiwis/p7   	GENERAL FORMAT: "query" and "page" can be passed 
 //																		as arguments for the callback function 
@@ -337,22 +339,22 @@
         },
 		todoPage: function() {
 			$('.nav li.active').toggleClass('active');
-			todo.render();  
+			TMTP.todo.render();  
 		},
 		measurementsPage: function() {
 			$('.nav li.active').toggleClass('active');
 			$('#menuMeasurements').toggleClass('active');
-			measurementView.render();  
+			TMTP.measurementView.render();  
 		},
 		patternsPage: function() {
 			$('.nav li.active').toggleClass('active');
 			$('#menuPatterns').toggleClass('active');
-			patterns.render();
+			TMTP.patterns.render();
 		},
 		aboutPage: function() {
 			$('.nav li.active').toggleClass('active');
 			$('#menuAbout').toggleClass('active');
-			about.render();  
+			TMTP.about.render();  
 		},
     });
 	
@@ -360,46 +362,46 @@
 //  INITIALIZE INSTANCES OF THE CLASSES JUST DEFINED
 
 //  MODELS
-	var bodyCurrent;  	
-	var patternCurrent;
+	TMTP.bodyCurrent = null;  	
+	TMTP.patternCurrent = null;
 	
 	
 //  COLLECTIONS
-	var customerCollection = new measurementCollection();
+	TMTP.customerCollection = new TMTP.MeasurementCollection();
 	// FIRST: include defaults in collection
 	for ( var i in window.defaultMeasurements ){
-		customerCollection.add(new Measurement(window.defaultMeasurements[i]));
+		TMTP.customerCollection.add(new TMTP.Measurement(window.defaultMeasurements[i]));
 	}
 	// SECOND: include measurements from localStorage:
-	var customerList = JSON.parse(localStorage.getItem('customerList'));
-	if (customerList != undefined){
-		for (var i in customerList){
-			customerCollection.add(new Measurement(JSON.parse(localStorage.getItem(customerList[i]))));
+	TMTP.customerList = JSON.parse(localStorage.getItem('customerList'));
+	if (TMTP.customerList != undefined){
+		for (var i in TMTP.customerList){
+			TMTP.customerCollection.add(new TMTP.Measurement(JSON.parse(localStorage.getItem(TMTP.customerList[i]))));
 		}
 	}
 	// THIRD: upon authentication, retrieve models from server.......
 	
 
-	var patternCollection = new patternCollection();
+	TMTP.patternCollection = new TMTP.PatternCollection();
 	// FIRST: include defaults in collection
 	for ( var i in window.defaultPatterns ){
-		patternCollection.add(new Measurement(window.defaultPatterns[i]));
+		TMTP.patternCollection.add(new TMTP.Measurement(window.defaultPatterns[i]));
 	}
 	
 	
 //  VIEWS
-    var todo = new PageView();
-    todo.template = $("#todoTemplate").html();
+    TMTP.todo = new TMTP.PageView();
+    TMTP.todo.template = $("#todoTemplate").html();
 	
-    var measurementView = new MeasurementView();
+    TMTP.measurementView = new TMTP.MeasurementView();
 	
-    var patterns = new PatternView();
+    TMTP.patterns = new TMTP.PatternView();
 	
-	var about = new PageView();
-	about.template = $("#aboutTemplate").html();
+	TMTP.about = new TMTP.PageView();
+	TMTP.about.template = $("#aboutTemplate").html();
 	
 //  ROUTER	
-    var taumetataurouter = new TauMetaTauRouter();
+    TMTP.taumetataurouter = new TMTP.TauMetaTauRouter();
     
     Backbone.history.start();
 	
@@ -409,42 +411,40 @@
 	
 	// Form Validation
 	
-	var isNum = function(n){
-        reNum = new RegExp(/^(\d+((\.|,)\d+)?)?$/);
+	TMTP.isNum = function(n){
+        var reNum = new RegExp(/^(\d+((\.|,)\d+)?)?$/);
         return reNum.test(n);
     }
 	
-	var isHum = function(n){
+	TMTP.isHum = function(n){
 		var i = parseFloat(n);
 		return ( i >= 0 && i < 1000 );
 	}
 	
 	// localStorage utility functions
 	
-	var storageList = function(listName){
+	TMTP.storageList = function(listName){
 		return JSON.parse(window.localStorage.getItem(listName)) || [];
 	}
 	
-	var storageSave = function(key, value){
+	TMTP.storageSave = function(key, value){
 		window.localStorage.setItem(key, JSON.stringify(value));
 	}
 	
-	var storageDelete = function(key){
+	TMTP.storageDelete = function(key){
 		window.localStorage.removeItem(key);
 	}
 	
-	var storageSaveToList = function(listName, key, value){
-		var list = storageList(listName);
+	TMTP.storageSaveToList = function(listName, key, value){
+		var list = TMTP.storageList(listName);
 		list = _.union(list,[key]);
-		storageSave(listName, list);
-		storageSave(key, value);
+		TMTP.storageSave(listName, list);
+		TMTP.storageSave(key, value);
 	}
 	
-	var storageDeleteFromList = function(listName, key){
-		var list = storageList(listName);
+	TMTP.storageDeleteFromList = function(listName, key){
+		var list = TMTP.storageList(listName);
 		list = _.without(list,key);
-		storageSave(listName, list);
-		storageDelete(key);
+		TMTP.storageSave(listName, list);
+		TMTP.storageDelete(key);
 	}
-	
-//} (jQuery));
