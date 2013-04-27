@@ -8,14 +8,14 @@
 	********************************************************************/
 	
     var Pattern = Backbone.Model.extend({
-        //urlRoot: 'pattern',
+        urlRoot: 'pattern',
 		defaults: {
 			"pattern": patternStandard.pattern
         }
     });
 	
 	var Measurement = Backbone.Model.extend({
-		//urlRoot: 'measurement',
+		urlRoot: 'measurement',
 		defaults: {
 			"clientdata": bodyStandard.clientdata
 		}
@@ -111,13 +111,13 @@
 			this.meas = {};
 			
 			// 2. retrieve measurements
-			for (var i in patternCurrent.attributes.pattern.measurements){
-				if (bodyCurrent) {
-					this.meas[i] = bodyCurrent.attributes.clientdata.measurements[i]; 
-					if (this.meas[i] == '') this.missing[i] = true;
-				} else {
-					this.meas[i] = JSON.parse(JSON.stringify(patternCurrent.attributes.pattern.measurements[i]));
+			if(bodyCurrent){
+				for (var i in patternCurrent.attributes.pattern.measurements){
+					this.meas[i] = bodyCurrent.attributes.clientdata.measurements[i];
+					if (this.meas[i]  == '') this.missing[i] = true;
 				}
+			} else {
+				this.meas = _.clone(patternCurrent.attributes.pattern.measurements);
 			}
 			
 			// 4. retrieve parameters
@@ -132,7 +132,7 @@
 			// 6. abort pattern rendering if ther are missing measurements
 			if (_.size(this.missing) > 0){
 				$('#alert').fadeTo(200,1);
-				measurementForm.missing = this.missing;
+				measurementView.missing = this.missing;
 				return;
 			}			
 			
@@ -157,8 +157,6 @@
 		render: function(){
 			var tmpl = _.template(this.template);
 			
-			this.model = bodyCurrent;
-
 			this.$el.empty();
 			this.$el.html(tmpl({'customers': customerCollection.models}));
 			
@@ -197,7 +195,6 @@
 				$('#alert').removeClass('alert-success').addClass('alert-error')
 					.html('<b>Ooops!</b> Some values you entered are invalid. Please, correct them before you proceed')
 					.fadeTo(200,1).delay(2000).fadeTo(800,0);
-				//console.log('error: invalid input...');
 				return false;
 			}
 			/*************************************************************/
@@ -205,7 +202,7 @@
 			console.log('saving data...');
 
 			// update the model
-			var data = this.model.get('clientdata');
+			var data = bodyCurrent.get('clientdata');
 			data.customername = this.$el.find('#customername').val();
 			data.units = this.$el.find("input[name=units]:checked").attr('id');
 			for (var j in data.measurements) {
@@ -213,17 +210,17 @@
 				data.measurements[j] = newVal ? newVal : data.measurements[j];
 			}
 			
-			this.model.set({'clientdata': data});
-			bodyCurrent = this.model;
-						
+			bodyCurrent.set({'clientdata':data});	
+			
+					
 			// update the collection
-			customerCollection.set(this.model, {remove: false});
+			customerCollection.set(bodyCurrent, {remove: false});
 			
 			// localStorage
-			storageSaveToList('customerList', data.customername, this.model.attributes);
+			storageSaveToList('customerList', data.customername, bodyCurrent.attributes);
 			
 			// HTTP save to server
-			this.model.save();
+			bodyCurrent.save();
 
 			// re-render view, to update the dropdown menu for measurement selection
 			this.missing = {};
@@ -238,16 +235,15 @@
 			e.preventDefault();
 
 			// update the collection
-			customerCollection.remove(this.model);
+			customerCollection.remove(bodyCurrent);
 			
 			// localStorage
-			// console.log(this.model.attributes.clientdata.customername);
-			storageDeleteFromList('customerList', this.model.attributes.clientdata.customername);
+			storageDeleteFromList('customerList', bodyCurrent.attributes.clientdata.customername);
 			
 			// HTTP delete from server...
 
 			// re-render view, to update the dropdown menu for measurement selection
-			var $name = this.model.attributes.clientdata.customername;
+			var $name = bodyCurrent.attributes.clientdata.customername;
 			this.missing = {};
 			bodyCurrent = new Measurement({'clientdata': JSON.parse(JSON.stringify(bodyStandard.clientdata))});
 			this.render();
@@ -264,8 +260,7 @@
 		},
 		selectCustomer: function(e){
 			if (e.currentTarget.value != 'dummy'){
-				this.model = customerCollection.get(e.currentTarget.value);
-				bodyCurrent = this.model;
+				bodyCurrent = customerCollection.get(e.currentTarget.value);
 				this.missing = {};
 				this.render();
 			}
@@ -279,10 +274,8 @@
 		render: function(){
 			var tmpl = _.template(this.template);
 			
-			this.model = bodyCurrent;
-
 			this.$el.empty();
-			this.$el.html(tmpl({'data': this.model, 'title': window.bodyNames, missing: this.missing}));
+			this.$el.html(tmpl({'data': bodyCurrent, 'title': window.bodyNames, missing: this.missing}));
 			
 			// CLIENT-SIDE INPUT VALIDATION
 			$('input.numerical').change(function(e){
@@ -349,7 +342,7 @@
 		measurementsPage: function() {
 			$('.nav li.active').toggleClass('active');
 			$('#menuMeasurements').toggleClass('active');
-			measurementForm.render();  
+			measurementView.render();  
 		},
 		patternsPage: function() {
 			$('.nav li.active').toggleClass('active');
@@ -367,7 +360,7 @@
 //  INITIALIZE INSTANCES OF THE CLASSES JUST DEFINED
 
 //  MODELS
-	var bodyCurrent; // = new Measurement(bodyStandard); 	
+	var bodyCurrent;  	
 	var patternCurrent;
 	
 	
@@ -398,7 +391,7 @@
     var todo = new PageView();
     todo.template = $("#todoTemplate").html();
 	
-    var measurementForm = new MeasurementView();
+    var measurementView = new MeasurementView();
 	
     var patterns = new PatternView();
 	
