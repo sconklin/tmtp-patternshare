@@ -115,6 +115,7 @@
 		<li>edit app-defaults.js to make default measurements available (man/woman)</li>
 		<li>better layout for the form, with helper images</li>
 		<li>unit conversion cm &lt;--&gt; in</li>
+		<li>ability to delete measurement</li>
 		<li>ability to save/restore measurements from file</li>
 		</ul>
 		
@@ -137,9 +138,8 @@
 		<ul>
 		<li>use require.js for better organization</li>
 		</ul>
-		
-		<p>Raphael.js implementation available <a href="index-raphael.html#patterns">HERE</a></p>
-    </div>
+		<p>SVG implementation available <a href="index.html#patterns">HERE</a></p>
+     </div>
 </script>
 
 <script id="patternsTemplate" type="text/template">
@@ -152,13 +152,13 @@
 					<!--option value="dummy">1. Select Measurement...</option-->
 					<option value="dummy">Default Measurements</option>
 					<% for (var i in customers) { %>
-						<option value="<%- customers[i].cid %>" <% if (TMTP.bodyCurrent && customers[i].cid == TMTP.bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
+						<option value="<%- customers[i].cid %>" <% if (bodyCurrent && customers[i].cid == bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
 				<select id="patternSelect">
 					<option value="dummy">Select Pattern...</option>
 					<% for (var i in patterns) { %>
-						<option value="<%- patterns[i].cid %>" <% if (TMTP.patternCurrent && patterns[i].cid == TMTP.patternCurrent.cid) { %> selected <% } %>><%- patterns[i].attributes.pattern.title %></option>
+						<option value="<%- patterns[i].cid %>" <% if (patternCurrent && patterns[i].cid == patternCurrent.cid) { %> selected <% } %>><%- patterns[i].attributes.pattern.title %></option>
 					<% } %>
 				</select>
 				
@@ -213,13 +213,12 @@
 				<select id="customerSelect">
 					<option value="dummy">Select Customer...</option>
 					<% for (var i in customers) { %>
-						<option value="<%- customers[i].cid %>" <% if (TMTP.bodyCurrent && customers[i].cid == TMTP.bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
+						<option value="<%- customers[i].cid %>" <% if (bodyCurrent && customers[i].cid == bodyCurrent.cid) { %> selected <% } %>><%- customers[i].attributes.clientdata.customername %></option>
 					<% } %>
 				</select>
 				
 
-				<button id="saveMeasurements" class="btn btn-success pull-right" type="submit"> SAVE </button>
-				<button id="deleteMeasurements" class="btn btn-danger pull-right" type="submit"> DELETE </button>
+				<button id="saveMeasurements" class="btn btn-danger pull-right" type="submit"> SAVE </button>
 				<button id="newMeasurements" class="btn btn-warning pull-right" type="submit"> NEW </button>
 
 			</div>
@@ -277,7 +276,8 @@
 <script type="text/javascript" src="js/underscore-min.js"></script>
 <script type="text/javascript" src="js/backbone-min.js"></script>
 
-<script type="text/javascript" src="js/patterndraw.js"></script>
+<script type="text/javascript" src="js/raphael-min.js"></script>
+<script type="text/javascript" src="js/patterndraw-raphael.js"></script>
 <!--script type="text/javascript" src="js/web.js"></script-->
 <script type="text/javascript" src="js/app-defaults.js"></script>
 <script type="text/javascript" src="js/app.js"></script>

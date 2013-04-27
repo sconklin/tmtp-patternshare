@@ -1,0 +1,15 @@
+body { padding-top: 60px; overflow-y: scroll;}
+
+div#wrapper { min-height: 700px;}
+
+.form-inline label, .form-inline select, .form-inline input { margin-right: 20px;}	
+.form-inline button { margin-left: 20px;}	
+
+footer {
+	background-color: #333;
+	min-height: 150px;
+	margin-top: 60px;
+	padding: 30px 0;
+	color: #DDD;
+}
+#alert{ opacity: 0; }

@@ -1,0 +1,32 @@
+CACHE MANIFEST
+# 2013-04-22:v1
+
+# Explicitly cached 'master entries'.
+CACHE:
+index.html
+css/app.css
+css/bootstrap.united.min.css
+images/fav.png
+images/headerlogo.png
+js/app.js
+js/app-defaults.js
+js/backbone-min.js
+js/bootstrap.min.js
+js/jquery-1.9.1.min.js
+js/patterndraw.js
+js/underscore-min.js
+
+# Resources that require the user to be online.
+NETWORK:
+#login.php
+#/myapi
+#http://api.twitter.com
+#*
+
+# static.html will be served if main.py is inaccessible
+# offline.jpg will be served in place of all images in images/large/
+# offline.html will be served in place of all other .html files
+#FALLBACK:
+#/main.py /static.html
+#images/large/ images/offline.jpg
+#*.html /offline.html
