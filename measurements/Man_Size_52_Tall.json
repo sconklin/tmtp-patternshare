@@ -1,0 +1,33 @@
+{
+  "clientdata": {
+    "customername": "Man_Size_52_Tall",
+    "units": "cm",
+    "measurements": {
+        "neck_width" : 8.0,
+        "center_front_waist_length" : 17.375,
+        "center_back_waist_length" : 19.75,
+        "shoulder_length" : 6.625,
+        "side_waist_length":  9.125,
+        "front_upperbust_height" : 0,
+        "back_upperbust_height" : 24.0,
+        "waist_to_hip_height": 7.25,
+        "hip_height" : 38.0,
+        "ankle_height" : 4.0,
+        "center_front_waist_to_neck_point_balance" : 0,
+        "center_back_waist_to_neck_point_balance" : 23.0,
+        "front_neck_hollow_to_shoulder_point_balance" : 0,
+        "cervicale_to_shoulder_point_balance" : 10.0,
+        "upper_front_chest_width" : 17.0,
+        "upper_back_width" : 19.625,
+        "bust_girth" : 52.0,
+        "front_bust_width" : 26.0,
+        "back_bust_width" : 26.0,
+        "waist_girth" : 48.5,
+        "front_waist_width" : 26.5,
+        "back_waist_width" : 22,
+        "hip_girth" : 49,
+        "front_hip_width" : 24.5,
+        "back_hip_width" : 24.5
+      }
+    }
+}
