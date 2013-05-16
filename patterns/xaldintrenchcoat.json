@@ -1,0 +1,167 @@
+{
+  "pattern": {
+    "title": "Xaldin Trench Coat",
+    "defaults" : [
+        8.0,
+        17.375,
+        19.75,
+        6.625,
+        9.125,
+        0,
+        24.0,
+        7.25,
+        38.0,
+        4.0,
+        0,
+        23.0,
+        0,
+        10.0,
+        17.0,
+        19.625,
+        52.0,
+        26.0,
+        26.0,
+        48.5,
+        26.5,
+        22,
+        49,
+        24.5,
+        24.5
+    ],
+    "measurements": [
+        "neck_width",
+        "center_front_waist_length",
+        "center_back_waist_length",
+        "shoulder_length",
+        "side_waist_length",
+        "front_upperbust_height",
+        "back_upperbust_height",
+        "waist_to_hip_height",
+        "hip_height",
+        "ankle_height",
+        "center_front_waist_to_neck_point_balance",
+        "center_back_waist_to_neck_point_balance",
+        "front_neck_hollow_to_shoulder_point_balance",
+        "cervicale_to_shoulder_point_balance",
+        "upper_front_chest_width",
+        "upper_back_width",
+        "bust_girth",
+        "front_bust_width",
+        "back_bust_width",
+        "waist_girth",
+        "front_waist_width",
+        "back_waist_width",
+        "hip_girth",
+        "front_hip_width",
+        "back_hip_width"
+    ],
+
+    "main" : [
+        {
+          "id" : "Coat Back",
+          "type" : "path",
+          "d" : [
+            ["M", ["pt.a1.x","pt.a1.y"] ],
+            ["L", ["pt.a2.x","pt.a2.y"] ],
+            ["L", ["pt.a3.x","pt.a3.y"] ],
+            ["L", ["pt.a11.x","pt.a11.y"] ],
+            ["L", ["pt.a9.x","pt.a9.y"] ],
+            ["L", ["pt.a8.x","pt.a8.y"] ],
+            ["L", ["pt.a7.x","pt.a7.y"] ],
+            ["L", ["pt.a6.x","pt.a6.y"] ],
+            ["L", ["pt.a5.x","pt.a5.y"] ],
+            ["L", ["pt.a1.x","pt.a1.y"] ],
+            ["z"]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
+        }
+    ],
+
+    "construction": [
+        { "id" : "Center Back line",
+          "type": "path",
+          "d" : [
+            ["M", ["pt.a11.x","pt.a1.y"] ],
+            ["L", ["pt.a1.x","pt.a1.y"] ]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+        },
+        { "id": "Back Cervicale line",
+          "type": "path",
+          "d": [
+            ["M", ["pt.a1.x","pt.a1.y"] ],
+            ["L", ["pt.a11.x","pt.a1.y"] ]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+        },
+        { "id": "Upper Back line",
+          "type": "path",
+          "d": [
+            ["M", ["pt.a1.x","pt.a7.y"] ],
+            ["L", ["pt.a11.x","pt.a7.y"] ]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+        },
+        { "id": "Back Upper Bust/Chest line",
+          "type": "path",
+          "d": [
+            ["M", ["pt.a1.x","pt.a8.y"] ],
+            ["L", ["pt.a11.x","pt.a8.y"] ]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+        },
+        { "id": "Back Waist line",
+          "type": "path",
+          "d": [
+            ["M", ["pt.a1.x","pt.a2.y"] ],
+            ["L", ["pt.a11.x","pt.a2.y"] ]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+        },
+        { "id": "Back Hip line",
+          "type": "path",
+          "d": [
+            ["M", ["pt.a1.x","pt.a4.y"] ],
+            ["L", ["pt.a11.x","pt.a4.y"] ]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+        },
+        { "id": "Ankle line",
+          "type": "path",
+          "d": [
+            ["M", ["pt.a1.x","pt.a3.y"] ],
+            ["L", ["pt.a11.x","pt.a3.y"] ]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+        }
+    ],
+
+    "points": {
+      "a1": { "x": "0", "y": "0" },
+      "a2": { "x": "0", "y": "1*meas.center_back_waist_length" },
+      "a3": { "x": "0", "y": "pt.a2.y + 1*meas.waist_to_hip_height + 1*meas.hip_height - 1*meas.ankle_height" },
+      "a4": { "x": "0", "y": "pt.a2.y + 1*meas.waist_to_hip_height" },
+      "temp_a5" : "pointOnCircleAtX(pt.a2, 1*meas.center_back_waist_to_neck_point_balance, 0.5*meas.neck_width, 'y < pt.a2.y')" ,
+      "a5": { "x": "1.10*pt.temp_a5.x", "y": "pt.temp_a5.y" },
+      "a6": { "x": "1.05*ccIntersect(pt.a5,1*meas.shoulder_length,pt.a1,1*meas.cervicale_to_shoulder_point_balance, 'x')",
+              "y" : "ccIntersect(pt.a5, 1*meas.shoulder_length, pt.a1, 1*meas.cervicale_to_shoulder_point_balance, 'y')" },
+      "a7": { "x": "0.525*meas.upper_back_width", "y": "0.20*meas.back_upperbust_height" },
+      "a8": { "x": "0.525*meas.back_bust_width", "y": "1.10*meas.back_upperbust_height" },
+      "a9": { "x" : "1.05*ccIntersect(pt.a2, 0.5*meas.back_waist_width, pt.a8, meas.side_waist_length - 0.10*meas.back_upperbust_height, 'x')",
+              "y" : "ccIntersect(pt.a2, 0.5*meas.back_waist_width, pt.a8, meas.side_waist_length - 0.10*meas.back_upperbust_height, 'y')" },
+      "a10" : "polarPoint(pt.a4, 1.15*meas.back_hip_width, angleBetween(pt.a2, pt.a9))",
+      "a11" : "polarPoint(pt.a10, dist(pt.a4, pt.a3), angleBetween(pt.a9, pt.a10))",
+      "temp_a1in" : "right(pt.a1, dist(pt.a1, pt.a5)/3)",
+      "temp_a5out" : "polarPoint(pt.a5,dist(pt.a1,pt.a5)/6.0, angleBetween(pt.a5, pt.temp_a1in))",
+      "temp_a7out" : "polarPoint(pt.a7, dist(pt.a7,pt.a6)/3.0, 0.5*(angleBetween(pt.a7,pt.a6)+angleBetween(pt.a8,pt.a6)))"
+    }
+  }
+}
