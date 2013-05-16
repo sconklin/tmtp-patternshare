@@ -14,19 +14,28 @@ function calcPoints() {
   minx = 0;
   miny = 0;
   for (i in window.patternData.pattern.points) {
-
+    console.log('calculating ', i);
     var ltr = i;
     pt[ltr] = {};
-
-    console.log('evalx = ' + window.patternData.pattern.points[i].x);
-    console.log('evaly = ' + window.patternData.pattern.points[i].y);
-
-    // the + unary removes leading zeroes
-    var evalx = +eval(window.patternData.pattern.points[i].x);
-    var evaly = +eval(window.patternData.pattern.points[i].y);
-
+    if (window.patternData.pattern.points[i].x && window.patternData.pattern.points[i].y) {
+        console.log('point ', i, 'has x & y');
+        console.log('evalx = ' + window.patternData.pattern.points[i].x);
+        console.log('evaly = ' + window.patternData.pattern.points[i].y);
+        // the + unary removes leading zeroes
+        var evalx = +eval(window.patternData.pattern.points[i].x);
+        var evaly = +eval(window.patternData.pattern.points[i].y);
+    } else {
+        // console.log('evalpnt = ' + window.patternData.pattern.points[i])
+        var evaldict = eval(window.patternData.pattern.points[i]);
+        console.log('evaldict = ', evaldict);
+        console.log('evaldict.x = ', evaldict.x, 'evaldict.y = ', evaldict.y);
+        var evalx = evaldict.x;
+        var evaly = evaldict.y;
+        console.log('evalx, evaly = ', evalx, evaly);
+    }
     pt[ltr].x = evalx;
     pt[ltr].y = evaly;
+
     maxx = Math.max(maxx, pt[ltr].x);
     minx = Math.min(minx, pt[ltr].x);
     maxy = Math.max(maxy, pt[ltr].y);
@@ -150,9 +159,14 @@ function drawpattern(){
         }
 
         for (i in window.patternData.pattern.main){
+            console.log(i, ' A');
             svgobjstring += "<";
-            svgobjstring += window.patternData.pattern.main[i].type + " " + "id=\"" + window.patternData.pattern.main[i].id + "\" ";
+            console.log(i, 'A', window.patternData.pattern.main[i].type);
+            console.log(i, 'A', window.patternData.pattern.main[i].id);
+            svgobjstring += window.patternData.pattern.main[i].type
+                            + " " + "id=\"" + window.patternData.pattern.main[i].id + "\" ";
             for (j in window.patternData.pattern.main[i].drawattr){
+                console.log(i, 'B', j);
                 var evaled = eval(window.patternData.pattern.main[i].drawattr[j]);
                 evaled *= unitscayl;
                 //console.log("og: " + window.patternData.pattern.main[i].drawattr[j] + "ev: " + evaled);
@@ -160,11 +174,14 @@ function drawpattern(){
             }
 
             if (window.patternData.pattern.main[i].type == "path"){
+                console.log(i, 'C');
                 svgobjstring += " d=\" ";
                 for (j in window.patternData.pattern.main[i].d){
+                    console.log(i, 'C', j);
                     svgobjstring += window.patternData.pattern.main[i].d[j][0];
                     for (var k=1; k<window.patternData.pattern.main[i].d[j].length; k++){
-                        //console.log(window.patternData.pattern.main[i].d[j][k][0]);
+                        console.log(i, 'C', j, k, window.patternData.pattern.main[i].d[j]);
+                        console.log(window.patternData.pattern.main[i].d[j][k][0]);
                         var eval0 = eval(window.patternData.pattern.main[i].d[j][k][0]);
                         var eval1 = eval(window.patternData.pattern.main[i].d[j][k][1]);
                         eval0 *= unitscayl;
@@ -179,13 +196,16 @@ function drawpattern(){
             }
 
             for (j in window.patternData.pattern.main[i].appearanceattr){
+                console.log(i, 'D', j)
                 svgobjstring += j + "=\"" + window.patternData.pattern.main[i].appearanceattr[j] + "\" ";
             }
 
             if (window.patternData.pattern.main[i].type == "text"){
+                console.log(i, 'E');
                 svgobjstring += ">" + window.patternData.pattern.main[i].content + "</text>";
             }
             else {
+                console.log(i, 'F');
                 svgobjstring += "/>";
             }
         }
@@ -367,6 +387,9 @@ function bezierLength(start, c1, c2, end){
 
 function ccIntersect(P0, r0, P1, r1, ltr){
     var d = dist(P0, P1);
+    console.log('ccIntersect ', ltr);
+    console.log('P0 =', P0.x, P0.y, 'r0 = ', r0);
+    console.log('P1 =', P1.x, P1.y, 'r1 = ', r1);
     console.log("d: "+d);
     r1 = parseFloat(r1);
     r0 = parseFloat(r0);
@@ -444,6 +467,87 @@ function midPoint(p1, p2, ltr) {
     };
 }
 
+function polarPoint(p1, length, angle) {
+    /*
+    Adapted from http://www.teacherschoice.com.au/maths_library/coordinates/polar_-_rectangular_conversion.htm
+    Accepts p1 as type Point,length as float,angle as float. angle is in radians
+    Returns p2 as type Point, calculated at length and angle from p1,
+    Angles start at position 3:00 and move clockwise due to y increasing downwards
+    */
+    console.log('polarPoint p1 =', p1.x, p1.y, 'length = ', length, 'angle = ', angle);
+    var r = length;
+    var x = p1.x + (r*Math.cos(angle));
+    var y = p1.y + (r*Math.sin(angle));
+    console.log('x = ', x, 'y = ', y);
+    var p2 = { "x" : x, "y" : y};
+    console.log('return p2 = ', p2);
+    return p2;
+}
+
+function right(p1, n) {
+    //Accepts point p1 and float n. Returns p2 to the right of p1 at (p1.x+n, p1.y)
+    p2 = { "x" : p1.x + n, "y" : p1.y};
+    return p2;
+}
+
+function left(p1, n) {
+    //Accepts point p1 and float n. Returns p2 to the left of p1 at (p1.x-n, p1.y)
+    p2 = { "x" : p1.x - n, "y" : p1.y};
+    return p2;
+}
+
+function up(p1, n) {
+    //Accepts point p1 and float n. Returns p2 above p1 at (p1.x, p1.y-n)
+    p2 = { "x" : p1.x, "y" : p1.y - n};
+    return p2;
+}
+
+function down(p1, n) {
+    //Accepts point p1 and float n. Returns p2 below p1 at (p1.x, p1.y+n)
+    p2 = { "x" : p1.x, "y" : p1.y + n};
+    return p2;
+}
+
+function pointOnCircleAtX(C, r, x, test_y_str) {
+    /*
+    Finds points p on circle where p.x = cx
+    Accepts C as center point of the circle, r as radius point, and float x.
+    The eval_str is used to test which point to use for return values
+    Returns a dictionary of x & y
+    */
+    console.log('Circle = (', C.x, C.y, '), x = ', x, 'test_y_str =', test_y_str);
+    id = '';
+    pnts = {};
+    num = 0;
+    if ( Math.abs(x - C.x) > r) {
+        // TODO: better error handling here
+        console.log('cx is outside radius of circle in patterdraw.pointOnCircleAtX()');
+        return;
+    } else {
+        console.log('x is inside radius of circle in patterndraw.pointOnCircleAtX()');
+        translated_x = x - C.x // center of translated circle is (0,0)
+        console.log('translated_x = ', translated_x);
+
+        translated_y1 = Math.abs(Math.sqrt(r*r - translated_x*translated_x))
+        console.log('translated_y1 = ', translated_y1);
+
+        translated_y2 = -(translated_y1)
+        console.log('translated_y2 = ', translated_y2);
+
+        // test translated_y1
+        y = translated_y1 + C.y // translate back
+        console.log('translated_y1 + C.y = ', y);
+        if ( +eval(test_y_str) == false) {
+          // test translated_y2
+          y = translated_y2 + C.y // translate back
+          console.log('translated_y2 + C.y = ', y);
+        }
+        console.log('x = ', x, 'y = ', y);
+        return_dict = { "x" : x, "y" : y };
+        console.log('return_dict =', return_dict);
+        return return_dict;
+    }
+}
 
 /////////////////////////////////////////
 /////////////////////////////////////////
