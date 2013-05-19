@@ -385,51 +385,70 @@ function bezierLength(start, c1, c2, end){
     return len;
 }
 
-function ccIntersect(P0, r0, P1, r1, ltr){
-    var d = dist(P0, P1);
-    console.log('ccIntersect ', ltr);
-    console.log('P0 =', P0.x, P0.y, 'r0 = ', r0);
-    console.log('P1 =', P1.x, P1.y, 'r1 = ', r1);
-    console.log("d: "+d);
-    r1 = parseFloat(r1);
-    r0 = parseFloat(r0);
-    console.log("r1: " + r1);
-    var r0r1 = r0+r1;
-    console.log("r0+r1= " + r0r1);
-    if (r0r1<d){
-        console.log("No Intersection between " + P0 + " and " + P1 + " with radii " + r0 + " and " + r1);
-        return 0;
+function intersectCircles(C1, r1, C2, r2, test_str) {
+    /*
+    Accepts C1,r1,C2,r2 where C1 & C2 are center points of each circle, r1 & r2 are the radius of each circle,
+    and eval_str which tests for which of the maximum of 2 intersections to return.
+    Returns a dictionary { "x" : x, "y" : y} of class Pnt for each intersection
+    */
+    console.log("A");
+    x_0 = C1.x,
+    y_0 = C1.y;
+    x_1 = C2.x
+    y_1 = C2.y;
+    d = dist(C1, C2); // distance b/w circle centers
+    dx = (x_1 - x_0);
+    dy = (y_1 - y_0); // negate y b/c canvas increases top to bottom
+    P = [];
+    console.log("B");
+    if (d === 0) {
+        //intersections=0
+        console.log("C");
+        console.log('center of both circles are the same...patterndraw.intersectCircles()');
+        console.log('C1 =', C1.x, C1.y, 'radius1 =', r1);
+        console.log('C2 =', C2.x, C2.y, 'radius1 =',r2);
+    } else if (d < Math.abs(r1 - r2)) {
+        console.log("D");
+        //intersections=0
+        console.log('one circle is within the other d < abs(r1 - r2)...patterndraw.intersectCircles()');
+        console.log('d =', d);
+        console.log('C1 =', C1.x, C1.y, 'radius1 =', r1);
+        console.log('C2 =', C2.x, C2.y, 'radius2 =', r2);
+    } else if (d>(r1+r2)) {
+        console.log("E");
+        //intersections=0
+        console.log('circles do not intersect . d > r1+r2..patterndraw.intersectCircles()');
+        console.log('d =', d);
+        console.log('C1 =', C1.x, C1.y, 'radius1 =', r1);
+        console.log('C2 =', C2.x, C2.y, 'radius2 =', r2);
+        //TODO: check if acceptable using a small margin of error between r1 & r2?
+        //abs(r1-r2) < margin
+    } else {
+        console.log("F");
+        // intersections=2 or intersections=1
+        a = (r1*r1 - r2*r2 + d*d)/(2*d);
+        x_2 = x_0 + (dx*a/d);
+        y_2 = y_0 + (dy*a/d);
+        h = Math.sqrt(r1*r1 - a*a);
+        console.log("G");
+        rx = -dy*(h/d);
+        ry = dx*(h/d);
+        x1 = x_2 + rx;
+        y1 = y_2 + ry;
+        x2 = x_2 - rx;
+        y2 = y_2 - ry;
+        console.log(test_str , ' = ', +eval(test_str) );
+        if ( +eval(test_str) ) {
+          console.log("H");
+          return {"x" : x1, "y" : y1 };
+        } else {
+          console.log("I");
+          return {"x" : x2, "y" : y2 };
+        }
     }
-    if (d<Math.abs(r0-r1)){
-        console.log("One circle is inside another.");
-        return 0;
-    }
-    var a = (r0*r0 - r1*r1 + d*d)/(2*d);
-    console.log("a: "+a);
-    var b = d-a;
-    console.log("b: "+b);
-    var h = Math.sqrt(r0*r0 - a*a);
-
-    var P2 = {};
-    P2.x = P0.x + a*(P1.x-P0.x)/d;
-    P2.y = P0.y + a*(P1.y-P0.y)/d;
-    console.log("P2: (" + P2.x + ", " + P2.y + ")");
-
-    var P31 = {};
-    P31.x = P2.x + h*(P1.y-P0.y)/d;
-    P31.y = P2.y - h*(P1.x-P0.x)/d;
-    console.log("P31: (" + P31.x + ", " + P31.y + ")");
-
-    var P32 = {};
-    P32.x = P2.x - h*(P1.y-P0.y)/d;
-    P32.y = P2.y + h*(P1.x-P0.x)/d;
-    console.log("P32: (" + P32.x + ", " + P32.y + ")");
-
-    if (ltr == 'x'){ return P32.x; }
-    if (ltr == 'y'){ return P32.y; }
 }
 
-function pointOnLineAtLength(p1, p2, length, ltr) {
+function onLine(p1, p2, length) {
     //Accepts points p1 and p2, length, and letter 'x' or 'y'
     //Returns x or y of point on the line at length measured from p1 towards p2
     //If length is negative, returns point found at length measured from p1 in opposite direction from p2
@@ -437,11 +456,7 @@ function pointOnLineAtLength(p1, p2, length, ltr) {
     var lineangle = angleBetween(p1, p2);
     var x = (length * Math.cos(lineangle)) + p1.x;
     var y  = (length * Math.sin(lineangle)) + p1.y;
-    if (ltr == 'x'){
-      return x;
-    } else {
-      return y;
-    };
+    return { "x" : x, "y" : y };
 }
 
 function midPoint(p1, p2, ltr) {
@@ -467,27 +482,24 @@ function midPoint(p1, p2, ltr) {
     };
 }
 
-function polarPoint(p1, length, angle) {
+function polar(p1, length, angle) {
     /*
     Adapted from http://www.teacherschoice.com.au/maths_library/coordinates/polar_-_rectangular_conversion.htm
     Accepts p1 as type Point,length as float,angle as float. angle is in radians
     Returns p2 as type Point, calculated at length and angle from p1,
     Angles start at position 3:00 and move clockwise due to y increasing downwards
     */
-    console.log('polarPoint p1 =', p1.x, p1.y, 'length = ', length, 'angle = ', angle);
+    console.log('polar p1 =', p1.x, p1.y, 'length = ', length, 'angle = ', angle);
     var r = length;
     var x = p1.x + (r*Math.cos(angle));
     var y = p1.y + (r*Math.sin(angle));
     console.log('x = ', x, 'y = ', y);
-    var p2 = { "x" : x, "y" : y};
-    console.log('return p2 = ', p2);
-    return p2;
+    return { "x" : x, "y" : y};
 }
 
 function right(p1, n) {
     //Accepts point p1 and float n. Returns p2 to the right of p1 at (p1.x+n, p1.y)
-    p2 = { "x" : p1.x + n, "y" : p1.y};
-    return p2;
+    return { "x" : p1.x + n, "y" : p1.y};
 }
 
 function left(p1, n) {
@@ -508,44 +520,40 @@ function down(p1, n) {
     return p2;
 }
 
-function pointOnCircleAtX(C, r, x, test_y_str) {
+function onCircleAtX(C, r, x, test_y1_str) {
     /*
     Finds points p on circle where p.x = cx
     Accepts C as center point of the circle, r as radius point, and float x.
-    The eval_str is used to test which point to use for return values
+    The eval_str is used to test whether y1 or y2 is returned in dictionary
+    if Eval string is true  y = y1
+    if Eval string is false y = y2
     Returns a dictionary of x & y
     */
-    console.log('Circle = (', C.x, C.y, '), x = ', x, 'test_y_str =', test_y_str);
+    console.log('Circle = (', C.x, C.y, '), x = ', x, 'test_y1_str =', test_y1_str);
     id = '';
     pnts = {};
     num = 0;
     if ( Math.abs(x - C.x) > r) {
         // TODO: better error handling here
-        console.log('cx is outside radius of circle in patterdraw.pointOnCircleAtX()');
+        console.log('cx is outside radius of circle in patterdraw.onCircleAtX()');
         return;
     } else {
-        console.log('x is inside radius of circle in patterndraw.pointOnCircleAtX()');
+        console.log('x is inside radius of circle in patterndraw.onCircleAtX()');
         translated_x = x - C.x // center of translated circle is (0,0)
         console.log('translated_x = ', translated_x);
-
         translated_y1 = Math.abs(Math.sqrt(r*r - translated_x*translated_x))
         console.log('translated_y1 = ', translated_y1);
-
         translated_y2 = -(translated_y1)
         console.log('translated_y2 = ', translated_y2);
-
         // test translated_y1
-        y = translated_y1 + C.y // translate back
-        console.log('translated_y1 + C.y = ', y);
-        if ( +eval(test_y_str) == false) {
-          // test translated_y2
-          y = translated_y2 + C.y // translate back
-          console.log('translated_y2 + C.y = ', y);
+        y1 = translated_y1 + C.y // translate back
+        y2 = translated_y2 + C.y // translate back
+        if ( +eval(test_y1_str) ) {
+          y = y1;
+        } else {
+          y = y2;
         }
-        console.log('x = ', x, 'y = ', y);
-        return_dict = { "x" : x, "y" : y };
-        console.log('return_dict =', return_dict);
-        return return_dict;
+        return { "x" : x, "y" : y };
     }
 }
 
