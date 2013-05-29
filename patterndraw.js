@@ -396,6 +396,41 @@ function bezierLength(start, c1, c2, end){
     return len;
 }
 
+function onLineAtX(p1, p2, x) {
+    //on line p1-p2, given x find y
+    if (p1.x === p2.x) {
+        //vertical line
+        console.log('vertical line  at ', p1.x, '- no unique y for patterndraw.onLineAtX()');
+        return NaN;
+    } else if (p1.y === p2.y) {
+        //horizontal line
+        var y = p1.y;
+    } else {
+        var m = (p1.y - p2.y)/(p1.x - p2.x);
+        var b = p2.y - (m*p2.x);
+        var y = (x*m) - b;
+    }
+    return { "x": x, "y" : y };
+}
+
+function onLineAtY(p1, p2, y) {
+    //on line p1-p2,find x given y
+    if (p1.y === p2.y) {
+        //horizontal line
+        console.log('horizontal line  at ', p1.y, '- no unique x for patterndraw.onLineAtY()');
+        return NaN;
+    } else if (p1.x === p2.x) {
+        //vertical line
+        var x = p1.x;
+    } else {
+        var m = (p1.y - p2.y)/(p1.x - p2.x);
+        var b = p2.y - (m*p2.x);
+        var x = (y - b)/m;
+    }
+    return { "x" : x, "y" : y };
+}
+
+
 function intersectLines(p1,p2,p3,p4) {
     /*
     Accepts line1 as points p1 and p2 and line2 as points p3 and p4.
@@ -503,7 +538,7 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
     }
 }
 
-function onLine(p1, p2, length) {
+function onLineAtLength(p1, p2, length) {
     //Accepts points p1 and p2, length, and letter 'x' or 'y'
     //Returns x or y of point on the line at length measured from p1 towards p2
     //If length is negative, returns point found at length measured from p1 in opposite direction from p2
@@ -608,6 +643,46 @@ function onCircleAtX(C, r, x, test_y1_str) {
         return { "x" : x, "y" : y };
     }
 }
+
+function onCircleAtY(C, r, y, test_x1_str) {
+    /*
+    Finds up to 2 points p on circle where p.y = y
+    Accepts C as center point of the circle, r as radius, and y.
+    The eval_str is used to test which intersection is returned in dictionary
+    if Eval string is true  return x1, y
+    if Eval string is false return x2, y
+    Returns a dictionary of x & y
+    */
+    console.log('Circle = (', C.x, C.y, '), r = ', r, ' y = ', y, 'test_x1_str =', test_x1_str);
+    id = '';
+    pnts = {};
+    num = 0;
+    if ( Math.abs(y - C.y) > r) {
+        // TODO: better error handling here
+        console.log('y = ', y, 'C.y = ', C.y, 'r = ', r);
+        console.log('Math.abs(y - C.y) > r --> ', Math.abs(y - C.y), ' > ', r);
+        console.log('y is outside radius of circle in patterdraw.onCircleAtY()');
+        return;
+    } else {
+        console.log('y is inside radius of circle in patterndraw.onCircleAtY()');
+        translated_y = y - C.y // center of translated circle is (0,0)
+        console.log('translated_y = ', translated_y);
+        translated_x1 = Math.abs(Math.sqrt(r*r - translated_y*translated_y))
+        console.log('translated_x1 = ', translated_x1);
+        translated_x2 = -(translated_x1)
+        console.log('translated_x2 = ', translated_x2);
+        // test translated_x1
+        x1 = translated_x1 + C.x// translate back
+        x2 = translated_x2 + C.x // translate back
+        if ( +eval(test_x1_str) ) {
+          x = x1;
+        } else {
+          x = x2;
+        }
+        return { "x" : x, "y" : y };
+    }
+}
+
 
 function curveLength(P0, P1, P2, P3) {
     //create array with P0,P1,P2,P3
