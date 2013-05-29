@@ -50,7 +50,9 @@
         "front_hip_height" : 0.0,
         "back_hip_width" : 24.5,
         "back_hip_height" : 0.0,
-        "side_hip_height": 7.25
+        "side_hip_height": 7.25,
+
+        "arm_length" : 26.75
       }
     }
 }
