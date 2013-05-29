@@ -60,7 +60,8 @@
         "arm_length" : 29.5,
         "bicep_girth" : 17.0,
         "underarm_length" : 23.5,
-        "armcap_height" : 9.0
+        "armcap_height" : 9.0,
+        "hand_length" : 10.0
       }
     }
 }
