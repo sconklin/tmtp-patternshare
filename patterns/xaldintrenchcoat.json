@@ -32,7 +32,8 @@
         49.0,
         24.5,
         24.5,
-        29.5
+        29.5,
+        10.0
     ],
     "measurements": [
         "head_and_neck_length",
@@ -65,7 +66,8 @@
         "hip_girth",
         "front_hip_width",
         "back_hip_width",
-        "arm_length"
+        "arm_length",
+        "hand_length"
     ],
 
     "main" : [
@@ -90,27 +92,56 @@
           "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
         },
         {
-          "id" : "Coat Front",
+          "id" : "Coat Upper Front",
           "type" : "path",
           "d" : [
             ["M", ["pt.b1.x","pt.b1.y"] ],
-            ["L", ["pt.b2.x","pt.b2.y"] ],
-            ["L", ["pt.b3.x","pt.b3.y"] ],
-            ["C", ["pt.b3out.x","pt.b3out.y"], ["pt.b11in.x","pt.b11in.y"], ["pt.b11.x","pt.b11.y"] ],
-            ["L", ["pt.b10.x","pt.b10.y"] ],
+            ["L", ["pt.b13.x","pt.b13.y"] ],
+            ["C", ["pt.b13out.x","pt.b13out.y"], ["pt.b19in.x","pt.b19in.y"], ["pt.b19.x","pt.b19.y"] ],
+            ["C", ["pt.b19out.x","pt.b19out.y"], ["pt.b14in.x","pt.b14in.y"], ["pt.b14.x","pt.b14.y"] ],
+            ["C", ["pt.b14out.x","pt.b14out.y"], ["pt.b15in.x","pt.b15in.y"], ["pt.b15.x","pt.b15.y"] ],
+            ["L", ["pt.b17.x","pt.b17.y"] ],
+            ["L", ["pt.b18.x","pt.b18.y"] ] ,
+            ["L", ["pt.b10.x","pt.b10.y"] ] ,
             ["C", ["pt.b10out.x","pt.b10out.y"], ["pt.b12in.x","pt.b12in.y"], ["pt.b12.x","pt.b12.y"] ],
             ["C", ["pt.b12out.x","pt.b12out.y"], ["pt.b8in.x","pt.b8in.y"], ["pt.b8.x","pt.b8.y"] ],
             ["C", ["pt.b8out.x","pt.b8out.y"], ["pt.b7in.x","pt.b7in.y"], ["pt.b7.x","pt.b7.y"] ],
             ["C", ["pt.b7out.x","pt.b7out.y"], ["pt.b20in.x","pt.b20in.y"], ["pt.b20.x","pt.b20.y"] ],
             ["L", ["pt.b5.x","pt.b5.y"] ],
             ["C", ["pt.b5out.x","pt.b5out.y"],["pt.b1in.x","pt.b1in.y"],["pt.b1.x","pt.b1.y"] ],
-            ["M", ["pt.b13.x","pt.b13.y"] ],
-            ["C", ["pt.b13out.x","pt.b13out.y"],["pt.b19in.x","pt.b19in.y"],["pt.b19.x","pt.b19.y"] ],
-            ["C", ["pt.b19out.x","pt.b19out.y"],["pt.b14in.x","pt.b14in.y"],["pt.b14.x","pt.b14.y"] ],
-            ["L", ["pt.b17.x","pt.b17.y"] ],
-            ["L", ["pt.b18.x","pt.b18.y"] ],
-            ["L", ["pt.b10out.x","pt.b10out.y"] ],
-            ["L", ["pt.b15.x","pt.b15.y"] ]
+            ["z"]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
+        },
+        {
+          "id" : "Coat Lower Front",
+          "type" : "path",
+          "d" : [
+            ["M", ["pt.c1.x","pt.c1.y"] ],
+            ["L", ["pt.c2.x","pt.c2.y"] ],
+            ["L", ["pt.c3.x","pt.c3.y"] ],
+            ["C", ["pt.c3out.x","pt.c3out.y"], ["pt.c4in.x","pt.c4in.y"], ["pt.c4.x","pt.c4.y"] ],
+            ["L", ["pt.c5.x","pt.c5.y"] ],
+            ["L", ["pt.c6.x","pt.c6.y"] ],
+            ["C", ["pt.c6out.x","pt.c6out.y"], ["pt.c7in.x","pt.c7in.y"], ["pt.c7.x","pt.c7.y"] ],
+            ["C", ["pt.c7out.x","pt.c7out.y"], ["pt.c8in.x","pt.c8in.y"], ["pt.c8.x","pt.c8.y"] ],
+            ["C", ["pt.c8out.x","pt.c8out.y"], ["pt.c1in.x","pt.c1in.y"], ["pt.c1.x","pt.c1.y"] ],
+            ["z"]
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
+        },
+        {
+          "id" : "Coat Pocket Lining",
+          "type" : "path",
+          "d" : [
+            ["M", ["pt.g1.x","pt.g1.y"] ],
+            ["L", ["pt.g2.x","pt.g2.y"] ],
+            ["L", ["pt.g3.x","pt.g3.y"] ],
+            ["L", ["pt.g4.x","pt.g4.y"] ],
+            ["L", ["pt.g1.x","pt.g1.y"] ],
+            ["z"]
           ],
           "drawattr": {},
           "appearanceattr": { "stroke-width":"3", "stroke":"#000000", "fill":"none" }
@@ -151,8 +182,8 @@
           "type" : "path",
           "d" : [
             ["M", ["pt.f5.x","pt.f5.y"] ],
-            ["L", ["pt.f1.x","pt.f1.y"] ],
-            ["L", ["pt.f7.x","pt.f7.y"] ],
+            ["C", ["pt.f5out.x","pt.f5out.y"], ["pt.f1in.x","pt.f1in.y"], ["pt.f1.x","pt.f1.y"] ],
+            ["C", ["pt.f1out.x","pt.f1out.y"], ["pt.f7in.x","pt.f7in.y"], ["pt.f7.x","pt.f7.y"] ],
             ["L", ["pt.f12.x","pt.f12.y"] ],
             ["L", ["pt.f14.x","pt.f14.y"] ],
             ["L", ["pt.f13.x","pt.f13.y"] ],
@@ -328,7 +359,7 @@
       "b13" : "down(pt.b1, 0.5*pt.b7.y)",
       "b14" : "left(pt.b2, 0.6*dist(pt.b1, pt.b6))",
       "b15" : "down(pt.b14, 0.25*dist(pt.b9, pt.b10))",
-      "b17" : { "x": "pt.b15.x", "y": "pt.b15.y + dist(pt.b12, pt.b10)" },
+      "b17" : { "x": "pt.b15.x", "y": "pt.b15.y + 1.15*meas.hand_length" },
       "temp_b18" : "left(pt.b17, 0.5*dist(pt.b12, pt.b10))",
       "b18" : "intersectLines(pt.b17, pt.temp_b18, pt.b10, pt.b11)",
       "b19" : { "x": "pt.b1.x - 0.75*(pt.b1.x - pt.b7.x)", "y": "pt.b8.y" },
@@ -354,6 +385,22 @@
       "b15in" : "polar(pt.b15, 0.3*dist(pt.b14, pt.b15), angleBetween(pt.b15, pt.b14out))",
       "b19in" : "up(pt.b19, 0.5*dist(pt.b19, pt.b7))",
       "b19out" : "down(pt.b19, 0.3*dist(pt.b19, pt.b14))",
+      "c1" : "right(pt.b13, 2*dist(pt.b7, pt.b5))",
+      "c2" : "right(pt.b2, 2*dist(pt.b7, pt.b5))",
+      "c3" : "right(pt.b3, 2*dist(pt.b7, pt.b5))",
+      "c3out" : "right(pt.b3out, 2*dist(pt.b7, pt.b5))",
+      "c4in" : "right(pt.b11in, 2*dist(pt.b7, pt.b5))",
+      "c4" : "right(pt.b11, 2*dist(pt.b7, pt.b5))",
+      "c5" : "right(pt.b10, 2*dist(pt.b7, pt.b5))",
+      "c6" : "right(pt.b15, 2*dist(pt.b7, pt.b5))",
+      "c6out" : "right(pt.b15in, 2*dist(pt.b7, pt.b5))",
+      "c7in" : "right(pt.b14out, 2*dist(pt.b7, pt.b5))",
+      "c7" : "right(pt.b14, 2*dist(pt.b7, pt.b5))",
+      "c7out" : "right(pt.b14in, 2*dist(pt.b7, pt.b5))",
+      "c8in" : "right(pt.b19out, 2*dist(pt.b7, pt.b5))",
+      "c8" : "right(pt.b19, 2*dist(pt.b7, pt.b5))",
+      "c8out" : "right(pt.b19in, 2*dist(pt.b7, pt.b5))",
+      "c1in" : "right(pt.b13out, 2*dist(pt.b7, pt.b5))",
       "d1" : { "x": "pt.b5.x", "y": "2*pt.b5.y" },
       "d2" : "right(pt.d1, 0.80*(curveLength(pt.a5,pt.a5out,pt.a1in,pt.a1) + curveLength(pt.b5,pt.b5out,pt.b1in,pt.b1)))",
       "d3" : "up(pt.d1, 1.3*meas.head_and_neck_length)",
@@ -387,7 +434,15 @@
       "f11" : "onLineAtLength(pt.f5, pt.f9, dist(pt.f5, pt.f9)/3)",
       "f12" : "onLineAtLength(pt.f7, pt.f10, dist(pt.f7, pt.f10)/3)",
       "f13" : "left(pt.f6, 0.2*dist(pt.f6, pt.f3))",
-      "f14" : "right(pt.f8, 0.2*dist(pt.f8, pt.f3))"
+      "f14" : "right(pt.f8, 0.2*dist(pt.f8, pt.f3))",
+      "f5out" : "right(pt.f5, dist(pt.f5, pt.f1)/5)",
+      "f1in" : "left(pt.f1, dist(pt.f5, pt.f1)/3)",
+      "f1out" : "right(pt.f1, dist(pt.f1, pt.f7)/3)",
+      "f7in" : "left(pt.f7, dist(pt.f1, pt.f7)/4)",
+      "g1" : "down(pt.b15, dist(pt.b14, pt.b17))",
+      "g2" : "down(pt.b17, dist(pt.b14, pt.b17))",
+      "g3" : "down(pt.b18, dist(pt.b14, pt.b17))",
+      "g4" : "down(pt.b10, dist(pt.b14, pt.b17))"
     }
   }
 }
