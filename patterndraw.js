@@ -117,7 +117,6 @@ function drawpattern(){
         if ( constopt ) {
             console.log('constopt');
             svgconststr += "<g>";
-            console.log('got to here!');
             for (i in window.patternData.pattern.construction) {
                 console.log('i = ' + i);
                 svgconststr += "<";
