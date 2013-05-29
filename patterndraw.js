@@ -107,9 +107,10 @@ function drawpattern(){
         calcPoints();
 
         var unitscayl;
-        if ( document.getElementById("cmradio").checked == true ) { unitscayl = 28.346; }
-        else if ( document.getElementById("inradio").checked == true ) { unitscayl = 72; }
-        else { unitscayl = 1; };
+        //if ( document.getElementById("cmradio").checked == true ) { unitscayl = 90/2.54; }
+        //else if ( document.getElementById("inradio").checked == true ) { unitscayl = 90; }
+        //else { unitscayl = 1; };
+        unitscayl = 90;
 
         console.log("unitscayl = " + unitscayl);
 
@@ -269,11 +270,11 @@ function drawpattern(){
 
                 constptstr += "<ellipse id=\"" + ltr + "\" ";
                 constptstr += "cx=\"" + x + "\" cy=\"" + y + "\" ";
-                constptstr += "rx=\"3\" ry=\"3\" ";
-                constptstr += "fill=\"#000000\" ";
+                constptstr += "rx=\"5\" ry=\"5\" ";
+                constptstr += "fill=\"#ff0000\" ";
                 constptstr += "/>";
 
-                constptstr += "<text ";
+                constptstr += "<text style=\"font-family:arial;color:#ff0000;font-size:35px;\" ";
                 constptstr += "x=\"" + x + "\" y=\"" + y + "\"";
                 constptstr += " >" + ltr + ": (" + pt[ltr].x.toFixed(3) + ", " + pt[ltr].y.toFixed(3) + ")";
                 constptstr += "</text>";
@@ -334,6 +335,16 @@ function angleBetween3pts(a, b, c){
     return(alpha);
 }
 
+function slope(p1, p2) {
+    //Accepts two points and returns the slope
+    if ( p2.x === p1.x ) {
+        console.log('Vertical Line - no slope');
+    } else {
+        var m = (p2.y - p1.y)/(p2.x - p1.x);
+        return m;
+    }
+}
+
 function dist(pt1, pt2){
     var dy = pt2.y - pt1.y;
     var dx = pt2.x - pt1.x;
@@ -385,11 +396,55 @@ function bezierLength(start, c1, c2, end){
     return len;
 }
 
+function intersectLines(p1,p2,p3,p4) {
+    /*
+    Accepts line1 as points p1 and p2 and line2 as points p3 and p4.
+    Returns dictionary of intersection
+    Intersection does not have to be within the supplied line segments
+    */
+    var x = 0.0;
+    var y = 0.0;
+    if (p1.x === p2.x) {
+        // if 1st line vertical use slope of 2nd line
+        x = p1.x;
+        var m2 = slope(p3, p4);
+        var b2 = p3.y - m2*p3.x;
+        y = m2*x + b2;
+    } else if (p3.x === p4.x) {
+        // if 2nd line vertical use slope of 1st line
+        x = p3.x;
+        var m1 = slope(p1, p2);
+        var b1 = p1.y - m1*p1.x;
+        y = m1*x + b1;
+    } else {
+        // otherwise use ratio of difference between slopes
+        var m1 = (p2.y - p1.y)/(p2.x - p1.x);
+        var m2 = (p4.y-p3.y)/(p4.x-p3.x);
+        var b1 = p1.y - m1*p1.x;
+        var b2 = p3.y - m2*p3.x;
+        // if abs(b1-b2)<0.01 and (m1==m2)
+        if ( m1 === m2 ) {
+            console.log('***** Parallel lines in intersectLines2 *****')
+        //else:
+            //if (m1==m2):
+                //x=p1.x
+            //else:
+                //x=(b2-b1)/(m1-m2)
+        } else {
+            x = (b2 - b1)/(m1 - m2);
+            // arbitrary choice,could have used m2 & b2
+            y = (m1*x) + b1;
+        }
+    }
+    return { "x" : x, "y" : y };
+}
+
+
 function intersectCircles(C1, r1, C2, r2, test_str) {
     /*
     Accepts C1,r1,C2,r2 where C1 & C2 are center points of each circle, r1 & r2 are the radius of each circle,
-    and eval_str which tests for which of the maximum of 2 intersections to return.
-    Returns a dictionary { "x" : x, "y" : y} of class Pnt for each intersection
+    and eval_str which tests for which of the 2 intersections to return.
+    Returns a dictionary { "x" : x, "y" : y}
     */
     console.log("A");
     x_0 = C1.x,
@@ -459,27 +514,22 @@ function onLine(p1, p2, length) {
     return { "x" : x, "y" : y };
 }
 
-function midPoint(p1, p2, ltr) {
-    //Accepts p1 & p2. Returns x or y of point at midpoint between p1 & p2
+function midPoint(p1, p2) {
+    //Accepts p1 & p2. Returns dictionary {"x": x, "y":y} of midpoint between p1 & p2
     console.log("midPoint.x => p1.x=" + p1.x + " + p2.x=" + p2.x + " = " + (p1.x + p2.x) / 2.0);
     console.log("midPoint.y => p1.y=" + p1.y + " + p2.y=" + p2.y + " = " + (p1.y + p2.y) / 2.0);
     console.log((p1.y + p2.y) / 2.0);
-    if (ltr == 'x'){
-        if (p1.x == p2.x) {
-            x = p1.x;
-        } else {
-            x = (p1.x + p2.x) / 2.0;
-        };
-        return x;
-      };
-      if (ltr == 'y'){
-        if (p1.y == p2.y) {
-            y = p1.y;
-        } else {
-            y = (p1.y + p2.y) / 2.0;
-        };
-        return y;
+    if (p1.x == p2.x) {
+        x = p1.x;
+    } else {
+        x = (p1.x + p2.x) / 2.0;
     };
+    if (p1.y == p2.y) {
+        y = p1.y;
+    } else {
+        y = (p1.y + p2.y) / 2.0;
+    };
+    return { "x": x, "y": y };
 }
 
 function polar(p1, length, angle) {
@@ -522,20 +572,22 @@ function down(p1, n) {
 
 function onCircleAtX(C, r, x, test_y1_str) {
     /*
-    Finds points p on circle where p.x = cx
-    Accepts C as center point of the circle, r as radius point, and float x.
-    The eval_str is used to test whether y1 or y2 is returned in dictionary
+    Finds up to 2 points p on circle where p.x = x
+    Accepts C as center point of the circle, r as radius, and x.
+    The eval_str is used to test which intersection is returned in dictionary
     if Eval string is true  y = y1
     if Eval string is false y = y2
     Returns a dictionary of x & y
     */
-    console.log('Circle = (', C.x, C.y, '), x = ', x, 'test_y1_str =', test_y1_str);
+    console.log('Circle = (', C.x, C.y, '), r = ', r, ' x = ', x, 'test_y1_str =', test_y1_str);
     id = '';
     pnts = {};
     num = 0;
     if ( Math.abs(x - C.x) > r) {
         // TODO: better error handling here
-        console.log('cx is outside radius of circle in patterdraw.onCircleAtX()');
+        console.log('x = ', x, 'C.x = ', C.x, 'r = ', r);
+        console.log('Math.abs(x - C.x) > r --> ', Math.abs(x - C.x), ' > ', r);
+        console.log('x is outside radius of circle in patterdraw.onCircleAtX()');
         return;
     } else {
         console.log('x is inside radius of circle in patterndraw.onCircleAtX()');
@@ -555,6 +607,55 @@ function onCircleAtX(C, r, x, test_y1_str) {
         }
         return { "x" : x, "y" : y };
     }
+}
+
+function curveLength(P0, P1, P2, P3) {
+    //create array with P0,P1,P2,P3
+    var points = Array.prototype.slice.call(arguments);
+    console.log('points =', points);
+    //create array with P0.x,P0.y,P1.x,P1.y,...
+    var path = [];
+    for (p in points) {
+      console.log('p = ', p);
+      console.log('path.push[p.x] = ', points[p].x);
+      path.push(points[p].x);
+      console.log('path.push[p.y] = ', points[p].y);
+      path.push(points[p].y);
+    }
+    console.log('path = ', path);
+    var STEPS = 1000; // > precision
+    var t = 1 / STEPS;
+    var aX=0, aY=0;
+    var bX=path[0], bY=path[1];
+    var dX=0, dY=0;
+    var dS = 0;
+    var sumArc = 0;
+    console.log('STEPS, t = ', STEPS, t);
+    console.log('bX, bY = ', bX, bY);
+    var j = 0;
+    for (var i=0; i<STEPS; j = j + t) {
+        aX = bezierPoint(j, path[0], path[2], path[4], path[6]);
+        aY = bezierPoint(j, path[1], path[3], path[5], path[7]);
+        dX = aX - bX;
+        dY = aY - bY;
+        // deltaS. Pitagora
+        dS = Math.sqrt((dX * dX) + (dY * dY));
+        sumArc = sumArc + dS;
+        bX = aX;
+        bY = aY;
+        i++;
+    }
+    return sumArc;
+}
+
+function bezierPoint(t, o1, c1, c2, e1) {
+    //console.log('bezierPoint(', t, o1, c1, c2, e1,')');
+    var C1 = (e1 - (3.0 * c2) + (3.0 * c1) - o1);
+    var C2 = ((3.0 * c2) - (6.0 * c1) + (3.0 * o1));
+    var C3 = ((3.0 * c1) - (3.0 * o1));
+    var C4 = (o1);
+
+    return ((C1*t*t*t) + (C2*t*t) + (C3*t) + C4)
 }
 
 /////////////////////////////////////////
