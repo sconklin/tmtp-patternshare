@@ -16,9 +16,12 @@
         "neck_width" : 8.0,
 
         "shoulder_length" : 7.5,
+
         "front_shoulder_balance" : 10.0,
+        "back_shoulder_balance" : 10.5,
 
         "front_upperchest_width" : 15.5,
+        "back_upperchest_width" : 19.5,
 
         "underarm_girth" : 0.0,
         "front_underarm_width" : 24.0,
@@ -45,19 +48,17 @@
         "back_neck_balance" : 23.0,
 
         "side_waist_length":  12.75,
+        "side_hip_height": 9.5,
         "side_underarm_to_bust" : 2.0,
-
-        "back_shoulder_balance" : 10.5,
-        "back_upperchest_width" : 19.5,
 
         "hip_girth" : 52.5,
         "front_hip_width" : 25.25,
         "front_hip_height" : 0.0,
         "back_hip_width" : 27.25,
         "back_hip_height" : 0.0,
-        "side_hip_height": 9.5,
 
-        "arm_length" : 29.5,
+        "armscye_girth": 21.5,
+        "overarm_length" : 29.5,
         "bicep_girth" : 17.0,
         "underarm_length" : 23.5,
         "armcap_height" : 9.0,
