@@ -14,37 +14,45 @@ function calcPoints() {
   minx = 0;
   miny = 0;
   for (i in window.patternData.pattern.points) {
-    console.log('calculating ', i);
+    console.log(i);
+    var point = 'false';
     var ltr = i;
     pt[ltr] = {};
     if (window.patternData.pattern.points[i].x && window.patternData.pattern.points[i].y) {
-        console.log('point ', i, 'has x & y');
-        console.log('evalx = ' + window.patternData.pattern.points[i].x);
-        console.log('evaly = ' + window.patternData.pattern.points[i].y);
+        // points[i] is a dictionary with formulas for x & y
         // the + unary removes leading zeroes
+        point = 'true';
         var evalx = +eval(window.patternData.pattern.points[i].x);
         var evaly = +eval(window.patternData.pattern.points[i].y);
+        pt[ltr].x = evalx;
+        pt[ltr].y = evaly;
+        console.log(ltr + ".x: " + window.patternData.pattern.points[i].x + " = " + pt[ltr].x);
+        console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
     } else {
-        // console.log('evalpnt = ' + window.patternData.pattern.points[i])
-        var evaldict = eval(window.patternData.pattern.points[i]);
-        console.log('evaldict = ', evaldict);
-        console.log('evaldict.x = ', evaldict.x, 'evaldict.y = ', evaldict.y);
-        var evalx = evaldict.x;
-        var evaly = evaldict.y;
-        console.log('evalx, evaly = ', evalx, evaly);
+        //points[i] is a formula that returns a dictionary with values for x & y
+        var eval_obj = eval(window.patternData.pattern.points[i]);
+        if (typeof eval_obj === 'object') {
+            point = 'true';
+            var evalx = eval_obj.x;
+            var evaly = eval_obj.y;
+            pt[ltr].x = evalx;
+            pt[ltr].y = evaly;
+            console.log(ltr + " : " + window.patternData.pattern.points[i] + " = " + pt[ltr].x + ', ' + pt[ltr].y);
+        } else {
+            //points[i] is a string or number for use in calculating points
+            point = 'false';
+            pt[ltr] = eval_obj;
+            console.log(ltr + " is a string or number : ", window.patternData.pattern.points[i] + ' = ' + pt[ltr]);
+        }
     }
-    pt[ltr].x = evalx;
-    pt[ltr].y = evaly;
-
-    maxx = Math.max(maxx, pt[ltr].x);
-    minx = Math.min(minx, pt[ltr].x);
-    maxy = Math.max(maxy, pt[ltr].y);
-    miny = Math.min(miny, pt[ltr].y);
-    console.log(ltr + ".x: " + window.patternData.pattern.points[i].x + " = " + pt[ltr].x);
-    console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
-    console.log("Point "+ltr+" maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
+    if (point == 'true') {
+        maxx = Math.max(maxx, pt[ltr].x);
+        minx = Math.min(minx, pt[ltr].x);
+        maxy = Math.max(maxy, pt[ltr].y);
+        miny = Math.min(miny, pt[ltr].y);
+        console.log("Point "+ ltr + " maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
+    }
   }
-  //console.log(pt);
 }
 
 var measValid;
@@ -515,6 +523,7 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
     } else {
         console.log("F");
         // intersections=2 or intersections=1
+        console.log('r1 = ', r1, 'r2 = ', r2, 'd = ', d);
         a = (r1*r1 - r2*r2 + d*d)/(2*d);
         x_2 = x_0 + (dx*a/d);
         y_2 = y_0 + (dy*a/d);
@@ -526,12 +535,15 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
         y1 = y_2 + ry;
         x2 = x_2 - rx;
         y2 = y_2 - ry;
+        console.log('a = ',a, 'x_2 = ', x_2, 'y_2 = ', y_2, 'h = ', h, 'rx = ', rx, 'ry = ', ry, '(', x1, y1, ') or (', x2, y2, ')');
         console.log(test_str , ' = ', +eval(test_str) );
         if ( +eval(test_str) ) {
           console.log("H");
+          console.log(x1, y1);
           return {"x" : x1, "y" : y1 };
         } else {
           console.log("I");
+          console.log(x1, y1);
           return {"x" : x2, "y" : y2 };
         }
     }
