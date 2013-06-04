@@ -277,7 +277,7 @@ function drawpattern(){
                   // if item has x & y values then display item coordinates on pattern
                   var ltr = i;
                   var x = pt[ltr].x * unitscayl;
-                  var y = pt[ltr].y * unitscayl;cd src/
+                  var y = pt[ltr].y * unitscayl;
 
                   constptstr += "<ellipse id=\"" + ltr + "\" ";
                   constptstr += "cx=\"" + x + "\" cy=\"" + y + "\" ";
