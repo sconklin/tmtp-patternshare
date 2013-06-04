@@ -5,6 +5,9 @@ vers    date        changes
 0.1.2   03.19.13    added more math, added construction options/grid
 */
 
+var PX_per_IN = 90; //  90px/1in -- Inkscape's default pixel per inch, change to 72 if your favorite svg viewer uses 72 (e.g. GIMP)
+var PX_per_CM = PX_per_IN/2.54;   // 90px/2.54cm
+
 var maxx, maxy, minx, miny;
 var pt = {};
 
@@ -13,6 +16,7 @@ function calcPoints() {
   maxy = 0;
   minx = 0;
   miny = 0;
+
   for (i in window.patternData.pattern.points) {
     console.log(i);
     var point = 'false';
@@ -73,7 +77,6 @@ function getMeas() {
   console.log("measValid is " + measValid);
 }
 
-
 var reformedsvg = "";
 var svgnohead = "";
 var svgsaveheader = "";
@@ -107,8 +110,7 @@ function drawpattern(){
     constopt = document.getElementById("constopt").checked;
     constptopt = document.getElementById("constptopt").checked;
     gridopt = document.getElementById("gridopt").checked;
-    IN = 72;
-    CM = 28.346;
+
 
     if ( measValid ) {
 
@@ -118,7 +120,7 @@ function drawpattern(){
         //if ( document.getElementById("cmradio").checked == true ) { unitscayl = 90/2.54; }
         //else if ( document.getElementById("inradio").checked == true ) { unitscayl = 90; }
         //else { unitscayl = 1; };
-        unitscayl = 90;
+        unitscayl = PX_per_IN;
 
         console.log("unitscayl = " + unitscayl);
 
@@ -270,22 +272,25 @@ function drawpattern(){
 
         if (constptopt){
             constptstr += "<g>";
-            for (i in pt){
-                var ltr = i;
-                var x = pt[ltr].x * unitscayl;
-                var y = pt[ltr].y * unitscayl;
+            for (i in pt) {
+                if (pt[i].x && pt[i].y) {
+                  // if item has x & y values then display item coordinates on pattern
+                  var ltr = i;
+                  var x = pt[ltr].x * unitscayl;
+                  var y = pt[ltr].y * unitscayl;cd src/
 
-                constptstr += "<ellipse id=\"" + ltr + "\" ";
-                constptstr += "cx=\"" + x + "\" cy=\"" + y + "\" ";
-                constptstr += "rx=\"5\" ry=\"5\" ";
-                constptstr += "fill=\"#ff0000\" ";
-                constptstr += "/>";
+                  constptstr += "<ellipse id=\"" + ltr + "\" ";
+                  constptstr += "cx=\"" + x + "\" cy=\"" + y + "\" ";
+                  constptstr += "rx=\"5\" ry=\"5\" ";
+                  constptstr += "fill=\"#ff0000\" ";
+                  constptstr += "/>";
 
-                constptstr += "<text style=\"font-family:arial;color:#ff0000;font-size:35px;\" ";
-                constptstr += "x=\"" + x + "\" y=\"" + y + "\"";
-                constptstr += " >" + ltr + ": (" + pt[ltr].x.toFixed(3) + ", " + pt[ltr].y.toFixed(3) + ")";
-                constptstr += "</text>";
-                //console.log(ltr + ": (" + x + ", " + y + ")");
+                  constptstr += "<text style=\"font-family:arial;color:#ff0000;font-size:35px;\" ";
+                  constptstr += "x=\"" + x + "\" y=\"" + y + "\"";
+                  constptstr += " >" + ltr + ": (" + pt[ltr].x.toFixed(3) + ", " + pt[ltr].y.toFixed(3) + ")";
+                  constptstr += "</text>";
+                  //console.log(ltr + ": (" + x + ", " + y + ")");
+                }
             }
             constptstr += "</g>";
         }
@@ -319,6 +324,33 @@ function drawpattern(){
 /////////////////////////////////////////
 //////////////    MATH    ///////////////
 /////////////////////////////////////////
+
+function convertUnit(n, patternunits, measunits) {
+  //converts n given in pattern units (in or cm) into current units of measurement file (in or cm)
+  console.log('n = ', n, 'patternunits = ', patternunits, ' measunits = ', measunits);
+  if (patternunits === measunits) {
+    console.log( 'patternunits === measunits ');
+    converted_n = n;
+  } else {
+    if (patternunits === 'cm') {
+      //convert cm to in
+      console.log('patternunits === "cm"');
+      converted_n = n / 2.54;
+    } else {
+      //convert in to cm
+      console.log('patternunits === "in"');
+      converted_n = n * 2.54;
+    }
+  }
+  console.log('converted_n = ', converted_n);
+  return converted_n;
+}
+
+function copy(p1) {
+  var x = p1.x;
+  var y = p1.y;
+  return { "x" : x, "y" : y };
+}
 
 function angleBetween(pt1, pt2){
     var dy = pt2.y - pt1.y;
@@ -488,7 +520,7 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
     and eval_str which tests for which of the 2 intersections to return.
     Returns a dictionary { "x" : x, "y" : y}
     */
-    console.log("A");
+    console.log("intersectCircles() - A");
     x_0 = C1.x,
     y_0 = C1.y;
     x_1 = C2.x
