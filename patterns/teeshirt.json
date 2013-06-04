@@ -23,7 +23,8 @@
       "19.5",
       "19.75",
       "54.0",
-      "52.0"
+      "52.0",
+      "23.5"
   ],
   "measurements": [
       "neck_base_girth",
@@ -34,7 +35,7 @@
       "back_upperchest_width",
       "front_upperchest_width",
       "armscye_girth",
-      "back_underarm_height",
+      "back_highbust_height",
       "back_waist_length",
       "back_hip_height",
       "shoulder_length",
@@ -47,7 +48,8 @@
       "front_waist_length",
       "back_waist_length",
       "front_bust_width",
-      "back_bust_width"
+      "back_bust_width",
+      "underarm_length"
   ],
   "main": [
     {
@@ -83,11 +85,28 @@
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Sleeve C",
+      "type": "path",
+      "d": [
+        ["m", ["pt.c1.x","pt.c1.y"] ],
+        ["L", ["pt.c3.x","pt.c3.y"] ],
+        ["L", ["pt.c5.x","pt.c5.y"] ],
+        ["L", ["pt.c4.x","pt.c4.y"] ],
+        ["C", ["pt.c4out.x","pt.c4out.y"], ["pt.c8in.x","pt.c8in.y"], ["pt.c8.x","pt.c8.y"] ],
+        ["C", ["pt.c8out.x","pt.c8out.y"], ["pt.c6in.x","pt.c6in.y"], ["pt.c6.x","pt.c6.y"] ],
+        ["C", ["pt.c6out.x","pt.c6out.y"], ["pt.c9in.x","pt.c9in.y"], ["pt.c9.x","pt.c9.y"] ],
+        ["C", ["pt.c9out.x","pt.c9out.y"], ["pt.c1in.x","pt.c1in.y"], ["pt.c1.x","pt.c1.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
     }
   ],
   "construction": [
     {
-      "id": "Underarm Line",
+      "id": "highbust Line",
       "type": "path",
       "d": [
         ["m", ["pt.a4.x","pt.a4.y"] ],
@@ -142,7 +161,7 @@
     "a1": { "x": "0", "y": "0" },
     "a2": "down(pt.a1, 1*meas.back_waist_length)",
     "a3": "down(pt.a2, 1*meas.back_hip_height)",
-    "a4": "down(pt.a1, 1*meas.back_underarm_height)",
+    "a4": "down(pt.a1, 1*meas.back_highbust_height)",
     "a5": "onCircleAtX(pt.a2, 1*meas.back_neck_balance, pt.a1.x + 0.5*meas.neck_width, 'y1 < y2')",
     "temp_a6": "intersectCircles(pt.a1, 1*meas.back_shoulder_balance, pt.a5, 1*meas.shoulder_length, 'y1 > y2')",
     "a6" : "right(pt.temp_a6, 0.75*pt.CM)",
@@ -178,7 +197,27 @@
     "b10out" : "right(pt.b10, dist(pt.b10, pt.b8)/3)",
     "b8in" : "polar(pt.b8, dist(pt.b10, pt.b8)/3, 0.5*(angleBetween(pt.b6, pt.b10) + angleBetween(pt.b6, pt.b8)))",
     "b8out" : "polar(pt.b8, dist(pt.b8, pt.b6)/3, angleBetween(pt.b8in, pt.b8))",
-    "b6in" : "polar(pt.b6, dist(pt.b8, pt.b6)/6, angleBetween(pt.b5, pt.b6) - radians(90))"
+    "b6in" : "polar(pt.b6, dist(pt.b8, pt.b6)/6, angleBetween(pt.b5, pt.b6) - radians(90))",
+    "c1" : "right(pt.b1, dist(pt.b6, pt.b10)+ 4*pt.CM)",
+    "c2" : "down(pt.c1, 0.5*meas.back_highbust_height)",
+    "c3" : "down(pt.c2, 0.20*meas.underarm_length)",
+    "c4" : "onCircleAtY(pt.c1, dist(pt.a6, pt.a10), pt.c2.y, 'x1 < x2')",
+    "c5" : { "x" : "pt.c4.x", "y" : "pt.c3.y" },
+    "c6" : "onLineAtLength(pt.c4, pt.c1, dist(pt.c4, pt.c1)/3)",
+    "c7" : "right(pt.c5, dist(pt.c4, pt.c6)/2)",
+    "temp_c8" : "midPoint(pt.c4, pt.c6)",
+    "c8" : "polar(pt.temp_c8, 0.75*pt.CM, radians(45))",
+    "temp_c9" : "midPoint(pt.c6, pt.c1)",
+    "c9" : "polar(pt.temp_c9, 2*pt.CM, radians(225))",
+    "c1in" : "left(pt.c1, dist(pt.c9, pt.c1)/3)",
+    "c4out" : "right(pt.c4, dist(pt.c4, pt.c8)/3)",
+    "c8in" : "polar(pt.c8, dist(pt.c4, pt.c8)/3, angleBetween(pt.c1, pt.c4))",
+    "c8out" : "polar(pt.c8, dist(pt.c8, pt.c6)/3, angleBetween(pt.c4, pt.c1))",
+    "c9in" : "polar(pt.c9, dist(pt.c6, pt.c9)/3, angleBetween(pt.c1, pt.c4))",
+    "c9out" : "polar(pt.c9, dist(pt.c9, pt.c1)/3, angleBetween(pt.c4, pt.c1))",
+    "c6in" : "polar(pt.c6, dist(pt.c8, pt.c6)/3, 0.5*(angleBetween(pt.c9in, pt.c6) + angleBetween(pt.c6, pt.c8out)))",
+    "c6out" : "polar(pt.c6, dist(pt.c6, pt.c9)/3, angleBetween(pt.c6in, pt.c6))"
+
   }
 }
 }
