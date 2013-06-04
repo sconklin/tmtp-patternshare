@@ -23,11 +23,11 @@
         "front_upperchest_width" : 15.5,
         "back_upperchest_width" : 19.5,
 
-        "underarm_girth" : 0.0,
-        "front_underarm_width" : 24.0,
-        "front_underarm_height" : 5.5,
-        "back_underarm_width" : 0,
-        "back_underarm_height" : 9.5,
+        "highbust_girth" : 0.0,
+        "front_highbust_width" : 24.0,
+        "front_highbust_height" : 5.5,
+        "back_highbust_width" : 0,
+        "back_highbust_height" : 9.5,
 
         "bust_girth" : 50.0,
         "bust_points_width" : 10.25,
@@ -49,7 +49,7 @@
 
         "side_waist_length":  12.75,
         "side_hip_height": 9.5,
-        "side_underarm_to_bust" : 2.0,
+        "side_highbust_to_bust" : 2.0,
 
         "hip_girth" : 52.5,
         "front_hip_width" : 25.25,
