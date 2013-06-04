@@ -287,7 +287,8 @@ function drawpattern(){
 
                   constptstr += "<text style=\"font-family:arial;color:#ff0000;font-size:35px;\" ";
                   constptstr += "x=\"" + x + "\" y=\"" + y + "\"";
-                  constptstr += " >" + ltr + ": (" + pt[ltr].x.toFixed(3) + ", " + pt[ltr].y.toFixed(3) + ")";
+                  constptstr += " >" + ltr;
+                  //constptstr += ": (" + pt[ltr].x.toFixed(3) + ", " + pt[ltr].y.toFixed(3) + ")";
                   constptstr += "</text>";
                   //console.log(ltr + ": (" + x + ", " + y + ")");
                 }
