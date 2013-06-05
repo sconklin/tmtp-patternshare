@@ -1,6 +1,6 @@
 {
 "pattern": {
-  "title": "Tailored Tee Shirt",
+  "title": "Close Fit T-Shirt",
   "defaults": [
       "40",
       "20.5",
@@ -102,6 +102,45 @@
         ["C", ["pt.c8out.x","pt.c8out.y"], ["pt.c6in.x","pt.c6in.y"], ["pt.c6.x","pt.c6.y"] ],
         ["C", ["pt.c6out.x","pt.c6out.y"], ["pt.c9in.x","pt.c9in.y"], ["pt.c9.x","pt.c9.y"] ],
         ["C", ["pt.c9out.x","pt.c9out.y"], ["pt.c1in.x","pt.c1in.y"], ["pt.c1.x","pt.c1.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Back Neck Band D",
+      "type": "path",
+      "d": [
+        ["m", ["pt.d1.x","pt.d1.y"] ],
+        ["L", ["pt.d2.x","pt.d2.y"] ],
+        ["L", ["pt.d3.x","pt.d3.y"] ],
+        ["L", ["pt.d4.x","pt.d4.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Front Neck Band E",
+      "type": "path",
+      "d": [
+        ["m", ["pt.e1.x","pt.e1.y"] ],
+        ["L", ["pt.e2.x","pt.e2.y"] ],
+        ["L", ["pt.e3.x","pt.e3.y"] ],
+        ["L", ["pt.e4.x","pt.e4.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Shoulder Stay Strip F",
+      "type": "path",
+      "d": [
+        ["m", ["pt.f1.x","pt.f1.y"] ],
+        ["L", ["pt.f2.x","pt.f2.y"] ],
+        ["L", ["pt.f3.x","pt.f3.y"] ],
+        ["L", ["pt.f4.x","pt.f4.y"] ],
         ["z"]
       ],
       "drawattr": {},
@@ -213,7 +252,6 @@
     "c8" : "polar(pt.temp_c8, 0.75*pt.CM, radians(45))",
     "temp_c9" : "midPoint(pt.c6, pt.c1)",
     "c9" : "polar(pt.temp_c9, 2*pt.CM, radians(225))",
-
     "c10" : "onCircleAtY(pt.c1, dist(pt.b6, pt.b10), pt.c2.y, 'x > x2')",
     "c11" : { "x" : "pt.c10.x", "y" : "pt.c3.y" },
     "c12" : "onLineAtLength(pt.c10, pt.c1, dist(pt.c10, pt.c1)/3)",
@@ -222,24 +260,17 @@
     "c14" : "polar(pt.temp_c14, 0.75*pt.CM, radians(135))",
     "temp_c15" : "midPoint(pt.c12, pt.c1)",
     "c15" : "polar(pt.temp_c15, 2*pt.CM, radians(315))",
-
     "c1in" : "left(pt.c1, dist(pt.c9, pt.c1)/3)",
     "c1out" : "right(pt.c1, dist(pt.c1, pt.c15)/3)",
-
     "c15in" : "polar(pt.c15, dist(pt.c1, pt.c15)/3, angleBetween(pt.c10, pt.c1))",
     "c15out" : "polar(pt.c15, dist(pt.c15, pt.c12)/3, angleBetween(pt.c15in, pt.c15))",
-
     "c14in" : "polar(pt.c14, dist(pt.c12, pt.c14)/3, angleBetween(pt.c10, pt.c1))",
     "c14out" : "polar(pt.c14, dist(pt.c14, pt.c10)/3, angleBetween(pt.c1, pt.c10))",
-
     "c12in" : "polar(pt.c12, dist(pt.c15, pt.c12)/3, 0.5*(angleBetween(pt.c12, pt.c15out) + angleBetween(pt.c14in, pt.c12)))",
     "c12out" : "polar(pt.c12, dist(pt.c12, pt.c14)/3, angleBetween(pt.c12in, pt.c12))",
-
     "c13in" : "up(pt.c13, dist(pt.c10, pt.c13)/3)",
-
     "c10in" : "left(pt.c10, dist(pt.c14, pt.c10)/3)",
     "c10out" : "polar(pt.c10, dist(pt.c10, pt.c13)/3, angleBetween(pt.c10, pt.c13in))",
-
     "c7out" : "up(pt.c7, dist(pt.c7, pt.c4)/3)",
     "c4in" : "polar(pt.c4, dist(pt.c7, pt.c4)/3, angleBetween(pt.c4, pt.c7out))",
     "c4out" : "right(pt.c4, dist(pt.c4, pt.c8)/3)",
@@ -248,7 +279,19 @@
     "c9in" : "polar(pt.c9, dist(pt.c6, pt.c9)/3, angleBetween(pt.c1, pt.c4))",
     "c9out" : "polar(pt.c9, dist(pt.c9, pt.c1)/3, angleBetween(pt.c4, pt.c1))",
     "c6in" : "polar(pt.c6, dist(pt.c8, pt.c6)/3, 0.5*(angleBetween(pt.c9in, pt.c6) + angleBetween(pt.c6, pt.c8out)))",
-    "c6out" : "polar(pt.c6, dist(pt.c6, pt.c9)/3, angleBetween(pt.c6in, pt.c6))"
+    "c6out" : "polar(pt.c6, dist(pt.c6, pt.c9)/3, angleBetween(pt.c6in, pt.c6))",
+    "d1" : "down(pt.c5, 6*pt.CM)",
+    "d2" : "down(pt.d1, 2*curveLength(pt.a5, pt.a5out, pt.a1in, pt.a1))",
+    "d3" : "right(pt.d2, 3.5*pt.CM)",
+    "d4" : { "x" : "pt.d3.x", "y" : "pt.d1.y" },
+    "e1" : "right(pt.d4, 6*pt.CM)",
+    "e2" : "down(pt.e1, 2*curveLength(pt.b5, pt.b5out, pt.b1in, pt.b1))",
+    "e3" : "right(pt.e2, 3.5*pt.CM)",
+    "e4" : { "x" : "pt.e3.x", "y" : "pt.e1.y" },
+    "f1" : "right(pt.e4, 6*pt.CM)",
+    "f2" : "down(pt.f1, 1*meas.shoulder_length)",
+    "f3" : "right(pt.f2, 2*pt.CM)",
+    "f4" : { "x" : "pt.f3.x", "y" : "pt.f1.y" }
   }
 }
 }
