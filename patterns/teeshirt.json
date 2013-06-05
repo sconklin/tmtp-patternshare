@@ -91,9 +91,13 @@
       "type": "path",
       "d": [
         ["m", ["pt.c1.x","pt.c1.y"] ],
-        ["L", ["pt.c3.x","pt.c3.y"] ],
-        ["L", ["pt.c5.x","pt.c5.y"] ],
-        ["L", ["pt.c4.x","pt.c4.y"] ],
+        ["C", ["pt.c1out.x","pt.c1out.y"], ["pt.c15in.x","pt.c15in.y"], ["pt.c15.x","pt.c15.y"] ],
+        ["C", ["pt.c15out.x","pt.c15out.y"], ["pt.c12in.x","pt.c12in.y"], ["pt.c12.x","pt.c12.y"] ],
+        ["C", ["pt.c12out.x","pt.c12out.y"], ["pt.c14in.x","pt.c14in.y"], ["pt.c14.x","pt.c14.y"] ],
+        ["C", ["pt.c14out.x","pt.c14out.y"], ["pt.c10in.x","pt.c10in.y"], ["pt.c10.x","pt.c10.y"] ],
+        ["C", ["pt.c10out.x","pt.c10out.y"], ["pt.c13in.x","pt.c13in.y"], ["pt.c13.x","pt.c13.y"] ],
+        ["L", ["pt.c7.x","pt.c7.y"] ],
+        ["C", ["pt.c7out.x","pt.c7out.y"], ["pt.c4in.x","pt.c4in.y"], ["pt.c4.x","pt.c4.y"] ],
         ["C", ["pt.c4out.x","pt.c4out.y"], ["pt.c8in.x","pt.c8in.y"], ["pt.c8.x","pt.c8.y"] ],
         ["C", ["pt.c8out.x","pt.c8out.y"], ["pt.c6in.x","pt.c6in.y"], ["pt.c6.x","pt.c6.y"] ],
         ["C", ["pt.c6out.x","pt.c6out.y"], ["pt.c9in.x","pt.c9in.y"], ["pt.c9.x","pt.c9.y"] ],
@@ -209,7 +213,35 @@
     "c8" : "polar(pt.temp_c8, 0.75*pt.CM, radians(45))",
     "temp_c9" : "midPoint(pt.c6, pt.c1)",
     "c9" : "polar(pt.temp_c9, 2*pt.CM, radians(225))",
+
+    "c10" : "onCircleAtY(pt.c1, dist(pt.b6, pt.b10), pt.c2.y, 'x > x2')",
+    "c11" : { "x" : "pt.c10.x", "y" : "pt.c3.y" },
+    "c12" : "onLineAtLength(pt.c10, pt.c1, dist(pt.c10, pt.c1)/3)",
+    "c13" : "left(pt.c11, dist(pt.c5, pt.c7))",
+    "temp_c14" : "midPoint(pt.c10, pt.c12)",
+    "c14" : "polar(pt.temp_c14, 0.75*pt.CM, radians(135))",
+    "temp_c15" : "midPoint(pt.c12, pt.c1)",
+    "c15" : "polar(pt.temp_c15, 2*pt.CM, radians(315))",
+
     "c1in" : "left(pt.c1, dist(pt.c9, pt.c1)/3)",
+    "c1out" : "right(pt.c1, dist(pt.c1, pt.c15)/3)",
+
+    "c15in" : "polar(pt.c15, dist(pt.c1, pt.c15)/3, angleBetween(pt.c10, pt.c1))",
+    "c15out" : "polar(pt.c15, dist(pt.c15, pt.c12)/3, angleBetween(pt.c15in, pt.c15))",
+
+    "c14in" : "polar(pt.c14, dist(pt.c12, pt.c14)/3, angleBetween(pt.c10, pt.c1))",
+    "c14out" : "polar(pt.c14, dist(pt.c14, pt.c10)/3, angleBetween(pt.c1, pt.c10))",
+
+    "c12in" : "polar(pt.c12, dist(pt.c15, pt.c12)/3, 0.5*(angleBetween(pt.c12, pt.c15out) + angleBetween(pt.c14in, pt.c12)))",
+    "c12out" : "polar(pt.c12, dist(pt.c12, pt.c14)/3, angleBetween(pt.c12in, pt.c12))",
+
+    "c13in" : "up(pt.c13, dist(pt.c10, pt.c13)/3)",
+
+    "c10in" : "left(pt.c10, dist(pt.c14, pt.c10)/3)",
+    "c10out" : "polar(pt.c10, dist(pt.c10, pt.c13)/3, angleBetween(pt.c10, pt.c13in))",
+
+    "c7out" : "up(pt.c7, dist(pt.c7, pt.c4)/3)",
+    "c4in" : "polar(pt.c4, dist(pt.c7, pt.c4)/3, angleBetween(pt.c4, pt.c7out))",
     "c4out" : "right(pt.c4, dist(pt.c4, pt.c8)/3)",
     "c8in" : "polar(pt.c8, dist(pt.c4, pt.c8)/3, angleBetween(pt.c1, pt.c4))",
     "c8out" : "polar(pt.c8, dist(pt.c8, pt.c6)/3, angleBetween(pt.c4, pt.c1))",
@@ -217,7 +249,6 @@
     "c9out" : "polar(pt.c9, dist(pt.c9, pt.c1)/3, angleBetween(pt.c4, pt.c1))",
     "c6in" : "polar(pt.c6, dist(pt.c8, pt.c6)/3, 0.5*(angleBetween(pt.c9in, pt.c6) + angleBetween(pt.c6, pt.c8out)))",
     "c6out" : "polar(pt.c6, dist(pt.c6, pt.c9)/3, angleBetween(pt.c6in, pt.c6))"
-
   }
 }
 }
