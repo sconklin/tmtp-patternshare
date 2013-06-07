@@ -6,7 +6,7 @@ vers    date        changes
 */
 
 var PX_per_IN = 90; //  90px/1in -- Inkscape's default pixel per inch, change to 72 if your favorite svg viewer uses 72 (e.g. GIMP)
-var PX_per_CM = PX_per_IN/2.54;   // 90px/2.54cm
+var PX_per_CM = PX_per_IN/2.54;   // 90px/1in * 1in/2.54cm = 90px/2.54cm
 
 var maxx, maxy, minx, miny;
 var pt = {};
@@ -120,7 +120,13 @@ function drawpattern(){
         //if ( document.getElementById("cmradio").checked == true ) { unitscayl = 90/2.54; }
         //else if ( document.getElementById("inradio").checked == true ) { unitscayl = 90; }
         //else { unitscayl = 1; };
-        unitscayl = PX_per_IN;
+        if ( window.measurementData.clientdata.units === 'in' ) {
+          unitscayl = PX_per_IN;
+        } else if ( window.measurementData.clientdata.units === 'cm' ) {
+          unitscayl = PX_per_CM;
+        } else {
+          unitscayl = 1;
+        }
 
         console.log("unitscayl = " + unitscayl);
 
