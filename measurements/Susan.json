@@ -1,0 +1,68 @@
+{
+  "clientdata": {
+    "customername": "Susan",
+    "units": "cm",
+    "measurements": {
+
+        "height" : 166.5,
+        "nape_to_floor" : 0.0,
+        "waist_to_floor" : 0.0,
+        "hip_to_floor" : 0.0,
+        "knee_to_floor" : 0.0,
+        "ankle_to_floor" : 0.0,
+
+        "head_and_neck_length" : 0,
+        "neck_base_girth" : 0.0,
+        "neck_width" : 16.5,
+
+        "shoulder_length" : 14.0,
+
+        "front_shoulder_balance" : 20,
+        "back_shoulder_balance" : 22,
+
+        "front_upperchest_width" : 37,
+        "back_upperchest_width" : 35,
+
+        "highbust_girth" : 101.0,
+        "front_highbust_width" : 55.5,
+        "front_highbust_height" : 9,
+        "back_highbust_width" : 50.5,
+        "back_highbust_height" : 24,
+
+        "bust_girth" : 102.0,
+        "bust_points_width" : 20.5,
+        "front_bust_width" : 51.5,
+        "front_bust_height" : 18.0,
+        "back_bust_width" : 26.0,
+        "back_bust_height" : 13.5,
+        "back_bust_width" : 47.5,
+        "back_bust_height" : 29.0,
+
+        "waist_girth" : 92.5,
+        "front_waist_width" : 48,
+        "front_waist_length" : 39,
+        "back_waist_width" : 45.5,
+        "back_waist_length" : 43.5,
+
+        "front_neck_balance" : 51,
+        "back_neck_balance" : 45,
+
+        "side_waist_length":  21.5,
+        "side_highbust_to_bust" : 2.0,
+
+        "hip_girth" : 116,
+        "front_hip_width" : 51,
+        "front_hip_height" : 21,
+        "back_hip_width" : 65,
+        "back_hip_height" : 26,
+        "side_hip_height": 23,
+
+        "armscye_girth": 0,
+        "overarm_length" : 0,
+        "bicep_girth" : 0,
+        "underarm_length" : 55.0,
+        "armcap_height" : 0,
+        "hand_length" : 0
+      }
+    }
+}
