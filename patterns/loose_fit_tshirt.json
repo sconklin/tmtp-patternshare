@@ -1,0 +1,330 @@
+{
+"pattern": {
+  "title": "Loose Fit T-Shirt",
+  "defaults": [
+      "40",
+      "20.5",
+      "106",
+      "98",
+      "106",
+      "40",
+      "40",
+      "54",
+      "26",
+      "50",
+      "20.75",
+      "17",
+      "74",
+      "64.75",
+      "58.5",
+      "25.4",
+      "26.75",
+      "66.0",
+      "19.5",
+      "19.75",
+      "54.0",
+      "52.0",
+      "55.0",
+      "65.0"
+  ],
+  "measurements": [
+      "neck",
+      "neck_width",
+      "bust",
+      "waist",
+      "hip",
+      "across_back",
+      "across_chest",
+      "armscye",
+      "back_upperbust_height",
+      "back_waist_length",
+      "back_hip_height",
+      "shoulder_length",
+      "overarm_length",
+      "front_neckheight_balance",
+      "back_neckheight_balance",
+      "front_shoulderwidth_balance",
+      "back_shoulderwidth_balance",
+      "back_bust_width",
+      "front_waist_length",
+      "back_waist_length",
+      "front_bust_width",
+      "back_bust_width",
+      "underarm_length",
+      "overarm_length"
+  ],
+  "main": [
+    {
+      "id": "Back A",
+      "type": "path",
+      "d": [
+        ["M", ["pt.a1.x","pt.a1.y"] ],
+        ["L", ["pt.a3.x","pt.a3.y"] ],
+        ["L", ["pt.a18.x","pt.a18.y"] ],
+        ["L", ["pt.a17.x","pt.a17.y"] ],
+        ["C", ["pt.a17out.x","pt.a17out.y"], ["pt.a16in.x","pt.a16in.y"], ["pt.a16.x","pt.a16.y"] ],
+        ["C", ["pt.a16out.x","pt.a16out.y"], ["pt.a15in.x","pt.a15in.y"], ["pt.a15.x","pt.a15.y"] ],
+        ["L", ["pt.a14.x","pt.a14.y"] ],
+        ["C", ["pt.a14out.x","pt.a14out.y"], ["pt.a1in.x","pt.a1in.y"], ["pt.a1.x","pt.a1.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Front B",
+      "type": "path",
+      "d": [
+        ["M", ["pt.b13.x","pt.b13.y"] ],
+        ["L", ["pt.b3.x","pt.b3.y"] ],
+        ["L", ["pt.b18.x","pt.b18.y"] ],
+        ["L", ["pt.b17.x","pt.b17.y"] ],
+        ["C", ["pt.b17out.x","pt.b17out.y"], ["pt.b16in.x","pt.b16in.y"], ["pt.b16.x","pt.b16.y"] ],
+        ["C", ["pt.b16out.x","pt.b16out.y"], ["pt.b15in.x","pt.b15in.y"], ["pt.b15.x","pt.b15.y"] ],
+        ["L", ["pt.b14.x","pt.b14.y"] ],
+        ["C", ["pt.b14out.x","pt.b14out.y"], ["pt.b13in.x","pt.b13in.y"], ["pt.b13.x","pt.b13.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Sleeve C",
+      "type": "path",
+      "d": [
+        ["M", ["pt.c1.x","pt.c1.y"] ],
+        ["C", ["pt.c1out.x","pt.c1out.y"], ["pt.c15in.x","pt.c15in.y"], ["pt.c15.x","pt.c15.y"] ],
+        ["C", ["pt.c15out.x","pt.c15out.y"], ["pt.c10in.x","pt.c10in.y"], ["pt.c10.x","pt.c10.y"] ],
+        ["C", ["pt.c10out.x","pt.c10out.y"], ["pt.c13in.x","pt.c13in.y"], ["pt.c13.x","pt.c13.y"] ],
+        ["L", ["pt.c7.x","pt.c7.y"] ],
+        ["C", ["pt.c7out.x","pt.c7out.y"], ["pt.c4in.x","pt.c4in.y"], ["pt.c4.x","pt.c4.y"] ],
+        ["C", ["pt.c4out.x","pt.c4out.y"], ["pt.c9in.x","pt.c9in.y"], ["pt.c9.x","pt.c9.y"] ],
+        ["C", ["pt.c9out.x","pt.c9out.y"], ["pt.c1in.x","pt.c1in.y"], ["pt.c1.x","pt.c1.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Back Neck Band D",
+      "type": "path",
+      "d": [
+        ["M", ["pt.d1.x","pt.d1.y"] ],
+        ["L", ["pt.d2.x","pt.d2.y"] ],
+        ["L", ["pt.d3.x","pt.d3.y"] ],
+        ["L", ["pt.d4.x","pt.d4.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Front Neck Band E",
+      "type": "path",
+      "d": [
+        ["M", ["pt.e1.x","pt.e1.y"] ],
+        ["L", ["pt.e2.x","pt.e2.y"] ],
+        ["L", ["pt.e3.x","pt.e3.y"] ],
+        ["L", ["pt.e4.x","pt.e4.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    },
+    {
+      "id": "Shoulder Stay Strip F",
+      "type": "path",
+      "d": [
+        ["M", ["pt.f1.x","pt.f1.y"] ],
+        ["L", ["pt.f2.x","pt.f2.y"] ],
+        ["L", ["pt.f3.x","pt.f3.y"] ],
+        ["L", ["pt.f4.x","pt.f4.y"] ],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+    }
+  ],
+  "construction": [
+    {
+      "id": "upperbust Line",
+      "type": "path",
+      "d": [
+        ["M", ["pt.a4.x","pt.a4.y"] ],
+        ["L", ["pt.b4.x","pt.b4.y"] ]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Waist Line",
+      "type": "path",
+      "d": [
+        ["m", ["pt.a2.x","pt.a2.y"] ],
+        ["L", ["pt.b2.x","pt.b2.y"] ]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Hip Line",
+      "type": "path",
+      "d": [
+        ["m", ["pt.a3.x","pt.a3.y"] ],
+        ["L", ["pt.b3.x","pt.b3.y"] ]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Back Center Line",
+      "type": "path",
+      "d": [
+        ["m", ["pt.a1.x","pt.a1.y"] ],
+        ["L", ["pt.a3.x","pt.a3.y"] ]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Front Center Line line",
+      "type": "path",
+      "d": [
+        ["m", ["pt.b1.x","pt.b1.y"] ],
+        ["L", ["pt.b3.x","pt.b3.y"] ]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+    }
+  ],
+  "points": {
+    "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
+    "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.units)",
+    "seamAllowance" : "(5/8)*pt.IN",
+    "a1": { "x": "0.5", "y": "0.5" },
+    "a2": "down(pt.a1, 1*meas.back_waist_length)",
+    "a3": "down(pt.a2, 1*meas.back_hip_height)",
+    "a4": "down(pt.a1, 1*meas.back_upperbust_height)",
+    "a5": "onCircleAtX(pt.a2, 1*meas.back_neckheight_balance, pt.a1.x + 0.5*meas.neck_width, 'y1 < y2')",
+    "temp_a6": "intersectCircles(pt.a1, 1*meas.back_shoulderwidth_balance, pt.a5, 1*meas.shoulder_length, 'y1 > y2')",
+    "a6" : "right(pt.temp_a6, 0.75*pt.CM)",
+    "a7": "down(pt.a1, 0.5*dist(pt.a1, pt.a4))",
+    "a8": "right(pt.a7, 0.25*meas.across_back + 0.5*pt.a6.x + 1*pt.CM)",
+    "a9": { "x" : "pt.a8.x", "y" : "pt.a4.y" },
+    "a10": "right(pt.a4, 0.5*meas.back_bust_width + 2.5*pt.CM)",
+    "a11": { "x": "pt.a10.x", "y": "pt.a2.y" },
+    "a12": { "x": "pt.a10.x", "y": "pt.a3.y" },
+
+    "a13" : "down(pt.a1, 1*pt.IN)",
+    "a14" : "onLineAtLength(pt.a5, pt.a6, 1*pt.IN)",
+    "a15" : "onCircleAtY(pt.a14, dist(pt.a5, pt.a6), pt.a6.y, 'x1 > x2')",
+    "a16" : "right(pt.a8, dist(pt.a6, pt.a15))",
+    "a17" : "right(pt.a10, dist(pt.a6, pt.a15))",
+    "a18" : "right(pt.a12, dist(pt.a6, pt.a15))",
+
+    "b1": { "x" : "2*pt.a17.x + 6*pt.CM", "y" : "pt.a2.y - 1*meas.front_waist_length" },
+    "b2": { "x" : "pt.b1.x", "y" : "pt.a2.y" },
+    "b3": { "x" : "pt.b1.x", "y" : "pt.a3.y" },
+    "b4": { "x" : "pt.b1.x", "y" : "pt.a4.y" },
+    "b5": "onCircleAtX(pt.b2, 1*meas.front_neckheight_balance, pt.b1.x - 0.5*meas.neck_width,'y1 < y2')",
+    "temp_b6" : "intersectCircles(pt.b1, 1*meas.front_shoulderwidth_balance, pt.b5, 1*meas.shoulder_length, 'y1 > y2')",
+    "b6": "left(pt.temp_b6, 0.75*pt.CM)",
+    "b7": "down(pt.b1, 0.5*dist(pt.b1, pt.b4))",
+    "temp_b8_a" : "left(pt.b7, 0.5*meas.across_chest)",
+    "temp_b8_b" : { "x" : "pt.b6.x", "y" : "pt.b7.y" },
+    "b8": { "x" : "0.5*(pt.temp_b8_a.x + pt.temp_b8_b.x) - 1*pt.CM", "y" : "pt.b7.y" },
+    "b9": { "x": "pt.b8.x", "y": "pt.b4.y" },
+    "b10" : "left(pt.b4, 0.5*meas.front_bust_width + 2.5*pt.CM)",
+    "b11" : { "x" : "pt.b10.x", "y" : "pt.b2.y" },
+    "b12" : { "x" : "pt.b10.x", "y" : "pt.b3.y" },
+
+    "b13" : "down(pt.b1, 1*pt.IN)",
+    "b14" : "onLineAtLength(pt.b5, pt.b6, 1*pt.IN)",
+    "b15" : "onCircleAtY(pt.b14, dist(pt.a5, pt.a6), pt.b6.y, 'x1 < x2')",
+    "b16" : "left(pt.b8, dist(pt.a6, pt.a15))",
+    "b17" : "left(pt.b10, dist(pt.a6, pt.a15))",
+    "b18" : "left(pt.b12, dist(pt.a6, pt.a15))",
+
+    "a1in" : "right(pt.a1, dist(pt.a1, pt.a5)/2)",
+    "a5out" : "polar(pt.a5, dist(pt.a1, pt.a5)/6, angleBetween(pt.a5, pt.a6) + radians(90))",
+    "a10out" : "left(pt.a10, dist(pt.a10, pt.a8)/3)",
+    "a8in" : "polar(pt.a8, dist(pt.a10, pt.a8)/3, 0.5*(angleBetween(pt.a6, pt.a10) + angleBetween(pt.a6, pt.a8)))",
+    "a8out" : "polar(pt.a8, dist(pt.a8, pt.a6)/3, angleBetween(pt.a8in, pt.a8))",
+    "a6in" : "polar(pt.a6, dist(pt.a8, pt.a6)/6, angleBetween(pt.a5, pt.a6) + radians(90))",
+    "a14out" : "polar(pt.a14, dist(pt.a1, pt.a14)/6, angleBetween(pt.a14, pt.a6) + radians(90))",
+    "a13in" : "right(pt.a13, dist(pt.a13, pt.a14)/2)",
+    "a15in" : "polar(pt.a15, dist(pt.a15, pt.a16)/6, angleBetween(pt.a14, pt.a15) + radians(90))",
+    "a16out" : "right(pt.a8out, dist(pt.a6, pt.a15))",
+    "a16in" : "right(pt.a8in, dist(pt.a6, pt.a15))",
+    "a17out" : "right(pt.a10out, dist(pt.a6, pt.a15))",
+
+
+    "b1in" : "left(pt.b1, dist(pt.b1, pt.b5)/2)",
+    "b5out" : "polar(pt.b5, dist(pt.b1, pt.b5)/6, angleBetween(pt.b5, pt.b6) - radians(90))",
+    "b10out" : "right(pt.b10, dist(pt.b10, pt.b8)/3)",
+    "b8in" : "polar(pt.b8, dist(pt.b10, pt.b8)/3, 0.5*(angleBetween(pt.b6, pt.b10) + angleBetween(pt.b6, pt.b8)))",
+    "b8out" : "polar(pt.b8, dist(pt.b8, pt.b6)/3, angleBetween(pt.b8in, pt.b8))",
+    "b6in" : "polar(pt.b6, dist(pt.b8, pt.b6)/6, angleBetween(pt.b5, pt.b6) - radians(90))",
+    "b13in" : "left(pt.b13, dist(pt.b13, pt.b14)/2)",
+    "b14out" : "polar(pt.b14, dist(pt.b13, pt.b14)/6, angleBetween(pt.b14, pt.b13in))",
+    "b15in" : "polar(pt.b15, dist(pt.b15, pt.b16)/6, angleBetween(pt.b14, pt.b15) - radians(90))",
+    "b16out" : "left(pt.b8out, dist(pt.a6, pt.a15))",
+    "b16in" : "left(pt.b8in, dist(pt.a6, pt.a15))",
+    "b17out" : "left(pt.b10out, dist(pt.a6, pt.a15))",
+
+
+    "c1" : "right(pt.b1, dist(pt.b15, pt.b17)+ 2*pt.seamAllowance + 4*pt.CM)",
+    "c2" : "down(pt.c1, 1*meas.overarm_length - 1*meas.underarm_length)",
+    "c3" : "down(pt.c2, 0.20*meas.underarm_length)",
+    "c4" : "onCircleAtY(pt.c1, dist(pt.a15, pt.a17), pt.c2.y, 'x1 < x2')",
+    "c5" : { "x" : "pt.c4.x", "y" : "pt.c3.y" },
+    "c6" : "onLineAtLength(pt.c4, pt.c1, dist(pt.c4, pt.c1)/3)",
+    "c7" : "right(pt.c5, dist(pt.c4, pt.c6)/3)",
+    "temp_c8" : "midPoint(pt.c4, pt.c6)",
+    "c8" : "polar(pt.temp_c8, 0.75*pt.CM, radians(45))",
+    "temp_c9" : "midPoint(pt.c6, pt.c1)",
+    "c9" : "polar(pt.temp_c9, 2*pt.CM, radians(225))",
+    "c10" : "onCircleAtY(pt.c1, dist(pt.b15, pt.b17), pt.c2.y, 'x > x2')",
+    "c11" : { "x" : "pt.c10.x", "y" : "pt.c3.y" },
+    "c12" : "onLineAtLength(pt.c10, pt.c1, dist(pt.c10, pt.c1)/3)",
+    "c13" : "left(pt.c11, dist(pt.c10, pt.c12)/3)",
+    "temp_c14" : "midPoint(pt.c10, pt.c12)",
+    "c14" : "polar(pt.temp_c14, 0.75*pt.CM, radians(135))",
+    "temp_c15" : "midPoint(pt.c12, pt.c1)",
+    "c15" : "polar(pt.temp_c15, 2*pt.CM, radians(315))",
+    "c1in" : "left(pt.c1, dist(pt.c9, pt.c1)/3)",
+    "c1out" : "right(pt.c1, dist(pt.c1, pt.c15)/3)",
+    "c15in" : "polar(pt.c15, dist(pt.c1, pt.c15)/3, angleBetween(pt.c10, pt.c1))",
+    "c15out" : "polar(pt.c15, dist(pt.c15, pt.c10)/3, angleBetween(pt.c15in, pt.c15))",
+    "c14in" : "polar(pt.c14, dist(pt.c12, pt.c14)/3, angleBetween(pt.c10, pt.c1))",
+    "c14out" : "polar(pt.c14, dist(pt.c14, pt.c10)/3, angleBetween(pt.c1, pt.c10))",
+    "c12in" : "polar(pt.c12, dist(pt.c15, pt.c12)/3, 0.5*(angleBetween(pt.c12, pt.c15out) + angleBetween(pt.c14in, pt.c12)))",
+    "c12out" : "polar(pt.c12, dist(pt.c12, pt.c14)/3, angleBetween(pt.c12in, pt.c12))",
+    "c13in" : "up(pt.c13, dist(pt.c10, pt.c13)/3)",
+    "c10in" : "polar(pt.c10, dist(pt.c10, pt.c15)/3, angleBetween(pt.c10, pt.c1))",
+    "c10out" : "polar(pt.c10, dist(pt.c10, pt.c13)/3, angleBetween(pt.c10, pt.c13in))",
+    "c7out" : "up(pt.c7, dist(pt.c7, pt.c4)/3)",
+    "c4in" : "polar(pt.c4, dist(pt.c7, pt.c4)/3, angleBetween(pt.c4, pt.c7out))",
+    "c8in" : "polar(pt.c8, dist(pt.c4, pt.c8)/3, angleBetween(pt.c1, pt.c4))",
+    "c8out" : "polar(pt.c8, dist(pt.c8, pt.c6)/3, angleBetween(pt.c4, pt.c1))",
+    "c9in" : "polar(pt.c9, dist(pt.c4, pt.c9)/3, angleBetween(pt.c1, pt.c4))",
+    "c4out" : "polar(pt.c4, dist(pt.c4, pt.c9)/3, angleBetween(pt.c4, pt.c1))",
+    "c9out" : "polar(pt.c9, dist(pt.c9, pt.c1)/3, angleBetween(pt.c4, pt.c1))",
+    "c6in" : "polar(pt.c6, dist(pt.c8, pt.c6)/3, 0.5*(angleBetween(pt.c9in, pt.c6) + angleBetween(pt.c6, pt.c8out)))",
+    "c6out" : "polar(pt.c6, dist(pt.c6, pt.c9)/3, angleBetween(pt.c6in, pt.c6))",
+
+    "d1" : "down(pt.c5, 3*pt.seamAllowance)",
+    "d2" : "down(pt.d1, 2*curveLength(pt.a5, pt.a5out, pt.a1in, pt.a1))",
+    "d3" : "right(pt.d2, 3.5*pt.CM)",
+    "d4" : { "x" : "pt.d3.x", "y" : "pt.d1.y" },
+    "e1" : "right(pt.d4, 6*pt.CM)",
+    "e2" : "down(pt.e1, 2*curveLength(pt.b5, pt.b5out, pt.b1in, pt.b1))",
+    "e3" : "right(pt.e2, 3.5*pt.CM)",
+    "e4" : { "x" : "pt.e3.x", "y" : "pt.e1.y" },
+    "f1" : "right(pt.e4, 6*pt.CM)",
+    "f2" : "down(pt.f1, 1*meas.shoulder_length)",
+    "f3" : "right(pt.f2, 2*pt.CM)",
+    "f4" : { "x" : "pt.f3.x", "y" : "pt.f1.y" }
+  }
+}
+}
