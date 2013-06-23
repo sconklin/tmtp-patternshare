@@ -11,20 +11,20 @@
         "ankle_to_floor" : 4.0,
 
         "head_and_neck_length" : 10.125,
-        "neck_base_girth" : 19.625,
+        "neck" : 19.625,
         "neck_width" : 8.0,
 
         "shoulder_length" : 6.625,
         "side_waist_length":  9.125,
         "side_underarm_to_bust" : 1.0,
 
-        "front_shoulder_balance" : 9.5,
-        "back_shoulder_balance" : 11.0,
-        "front_neck_balance" : 21.0,
-        "back_neck_balance" : 23.0,
+        "front_shoulderwidth_balance" : 9.5,
+        "back_shoulderwidth_balance" : 11.0,
+        "front_neckheight_balance" : 21.0,
+        "back_neckheight_balance" : 23.0,
 
-        "front_upperchest_width" : 17.0,
-        "back_upperchest_width" : 19.625,
+        "across_chest" : 17.0,
+        "across_back" : 19.625,
 
         "underarm_girth" : 0.0,
         "front_underarm_width" : 0.0,
@@ -32,20 +32,20 @@
         "back_underarm_width" : 0.0,
         "back_underarm_height" : 8.125,
 
-        "bust_girth" : 52.0,
+        "bust" : 52.0,
         "bust_points_width" : 0.0,
         "front_bust_width" : 26.0,
         "front_bust_height" : 9.25,
         "back_bust_width" : 26.0,
         "back_bust_height" : 10.625,
 
-        "waist_girth" : 48.5,
+        "waist" : 48.5,
         "front_waist_width" : 25.0,
         "front_waist_length" : 17.375,
         "back_waist_width" : 23.5,
         "back_waist_length" : 19.75,
 
-        "hip_girth" : 49.0,
+        "hip" : 49.0,
         "front_hip_width" : 24.5,
         "front_hip_height" : 0.0,
         "back_hip_width" : 24.5,

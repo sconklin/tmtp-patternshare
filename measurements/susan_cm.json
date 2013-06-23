@@ -42,11 +42,11 @@
 
         "side": { "value":"21.5", "type":"float", "gui_text":"Side Length"},
 
-        "front_neck_balance": { "value":"51", "type":"float", "gui_text":"Front Waist to Side Neck"},
-        "front_shoulder_balance": { "value":"48.5", "type":"float", "gui_text":"Front Waist to Shoulder Tip"},
+        "front_neckheight_balance": { "value":"51", "type":"float", "gui_text":"Front Waist to Side Neck"},
+        "front_shoulderwidth_balance": { "value":"48.5", "type":"float", "gui_text":"Front Waist to Shoulder Tip"},
         "front_waist_balance": { "value":"41.5", "type":"float", "gui_text":"Front Neck to Side Waist"},
-        "back_neck_balance": { "value":"45", "type":"float", "gui_text":"Back Waist to Side Neck"},
-        "back_shoulder_balance": { "value":"44.5", "type":"float", "gui_text":"Back Waist to Shoulder Tip"},
+        "back_neckheight_balance": { "value":"45", "type":"float", "gui_text":"Back Waist to Side Neck"},
+        "back_shoulderwidth_balance": { "value":"44.5", "type":"float", "gui_text":"Back Waist to Shoulder Tip"},
         "back_waist_balance": { "value":"51", "type":"float", "gui_text":"Nape to Side Waist"},
 
         "waist_circumference": { "value":"92.7", "type":"float", "gui_text":"Waist Circumference"},
