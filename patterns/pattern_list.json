@@ -1,8 +1,11 @@
 [
+    "Blouse_with_Tie.json",
     "mensshirtblock.json",
+    "mens_upper_body_block.json",
     "womensbasicbodice.json",
     "womensbasicskirt.json",
     "womensshirtwaist1917.json",
-    "xaldintrenchcoat.json",
-    "teeshirt.json"
+    "close_fit_tshirt.json",
+    "loose_fit_tshirt.json",
+    "xaldintrenchcoat.json"
 ]
