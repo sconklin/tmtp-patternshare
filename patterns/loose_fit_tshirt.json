@@ -36,7 +36,7 @@
       "across_back",
       "across_chest",
       "armscye",
-      "back_upperbust_height",
+      "back_highbust_height",
       "back_waist_length",
       "back_hip_height",
       "shoulder_length",
@@ -147,7 +147,7 @@
   ],
   "construction": [
     {
-      "id": "upperbust Line",
+      "id": "highbust Line",
       "type": "path",
       "d": [
         ["M", ["pt.a4.x","pt.a4.y"] ],
@@ -204,7 +204,7 @@
     "a1": { "x": "0.5", "y": "0.5" },
     "a2": "down(pt.a1, 1*meas.back_waist_length)",
     "a3": "down(pt.a2, 1*meas.back_hip_height)",
-    "a4": "down(pt.a1, 1*meas.back_upperbust_height)",
+    "a4": "down(pt.a1, 1*meas.back_highbust_height)",
     "a5": "onCircleAtX(pt.a2, 1*meas.back_neckheight_balance, pt.a1.x + 0.5*meas.neck_width, 'y1 < y2')",
     "temp_a6": "intersectCircles(pt.a1, 1*meas.back_shoulderwidth_balance, pt.a5, 1*meas.shoulder_length, 'y1 > y2')",
     "a6" : "right(pt.temp_a6, 0.75*pt.CM)",

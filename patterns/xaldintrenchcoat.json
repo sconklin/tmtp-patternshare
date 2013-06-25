@@ -46,8 +46,8 @@
         "shoulder_length",
         "side_waist_length",
         "side_underarm_to_bust_height",
-        "front_upperbust_height",
-        "back_upperbust_height",
+        "front_highbust_height",
+        "back_highbust_height",
         "side_hip_height",
         "hip_to_floor",
         "ankle_to_floor",
@@ -271,8 +271,8 @@
         { "id": "Back Highbust line",
           "type": "path",
           "d": [
-            ["M", ["pt.a1.x","pt.a1.y + 1*meas.back_upperbust_height"] ],
-            ["L", ["pt.a11.x","pt.a1.y + 1*meas.back_upperbust_height"] ]
+            ["M", ["pt.a1.x","pt.a1.y + 1*meas.back_highbust_height"] ],
+            ["L", ["pt.a11.x","pt.a1.y + 1*meas.back_highbust_height"] ]
           ],
           "drawattr": {},
           "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
@@ -280,8 +280,8 @@
         { "id": "Front Highbust line",
           "type": "path",
           "d": [
-            ["M", ["pt.b1.x","pt.b1.y + 1*meas.front_upperbust_height"] ],
-            ["L", ["pt.b11.x","pt.b1.y + 1*meas.front_upperbust_height"] ]
+            ["M", ["pt.b1.x","pt.b1.y + 1*meas.front_highbust_height"] ],
+            ["L", ["pt.b11.x","pt.b1.y + 1*meas.front_highbust_height"] ]
           ],
           "drawattr": {},
           "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
@@ -341,7 +341,7 @@
       "a5" : "onCircleAtX(pt.a2, 1*meas.back_neckheight_balance, 0.5*meas.neck_width, 'y1 < y2')" ,
       "a6": "intersectCircles(pt.a5, 1*meas.shoulder_length, pt.a1, 1*meas.back_shoulderwidth_balance, 'y1 > y2')",
       "a7": { "x": "0.55*meas.across_back", "y": "(pt.a6.y + 1*meas.back_bust_height)/2" },
-      "temp_a8" : { "x": "0.55*meas.back_bust_width", "y": "1.0*meas.back_upperbust_height" },
+      "temp_a8" : { "x": "0.55*meas.back_bust_width", "y": "1.0*meas.back_highbust_height" },
       "temp_a9" : { "x": "pt.temp_a8.x", "y" : "pt.a2.y" },
       "a8": { "x": "0.55*meas.back_bust_width", "y": "1.0*meas.back_bust_height" },
       "a9" : "intersectCircles(pt.temp_a8, 1.0*meas.side_waist_length, pt.a2, 0.55*meas.back_waist_width, 'y1 > y2')",
@@ -371,8 +371,8 @@
       "b4" : "polar(pt.b2, 1*meas.side_hip_height, angleBetween(pt.b2, pt.b3))",
       "b5" : "onCircleAtX(pt.b2, 1*meas.front_neckheight_balance, pt.b1.x - 0.5*meas.neck_width, 'y1 < y2')" ,
       "b6" : "intersectCircles(pt.b5, 1*meas.shoulder_length, pt.b1, 1*meas.front_shoulderwidth_balance, 'y1 > y2')",
-      "b7" : { "x": "pt.b1.x - (0.6*meas.across_chest)", "y": "(pt.b1.y + 0.75*meas.front_upperbust_height)" },
-      "temp_b8" : { "x": "pt.b1.x - 0.55*meas.front_bust_width", "y": "(pt.b1.y + 1.0*meas.front_upperbust_height)" },
+      "b7" : { "x": "pt.b1.x - (0.6*meas.across_chest)", "y": "(pt.b1.y + 0.75*meas.front_highbust_height)" },
+      "temp_b8" : { "x": "pt.b1.x - 0.55*meas.front_bust_width", "y": "(pt.b1.y + 1.0*meas.front_highbust_height)" },
       "temp_b9" : { "x": "pt.temp_b8.x", "y" : "pt.b2.y" },
       "b8": { "x": "pt.temp_b8.x", "y": "(pt.b6.y + 1.0*meas.front_bust_height)" },
       "b9" : "intersectCircles(pt.temp_b8, 1.0*meas.side_waist_length, pt.b2, 0.5*meas.front_waist_width, 'y1 > y2')",
