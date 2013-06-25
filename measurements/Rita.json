@@ -42,11 +42,11 @@
         "across_chest" : 14.5,
         "across_back" : 16.0,
 
-        "upperbust" : 42.325,
-        "front_upperbust_width" : 21.325,
-        "front_upperbust_height" : 4,
-        "back_upperbust_width" : 21.0,
-        "back_upperbust_height" : 7.625,
+        "highbust" : 42.325,
+        "front_highbust_width" : 21.325,
+        "front_highbust_height" : 4,
+        "back_highbust_width" : 21.0,
+        "back_highbust_height" : 7.625,
 
         "bust_points_width" : 8.75,
         "bust_points_length" : 0,
