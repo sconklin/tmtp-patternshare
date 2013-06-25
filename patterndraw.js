@@ -832,7 +832,7 @@ function onBezierAtT(p0, p1, p2, p3, t) {
     //Returns a dictionary with x & y found on the curve at percent t
     console.log('onBezierAtT(', p0, p1, p2, p3, t, ')');
     //function keeps naming consistent
-    return bezierPoint(p0, p1, p2, p3, t);
+    return curvePoint(p0, p1, p2, p3, t);
 }
 
 function onBezierAtLength(p0, c1, c2, p1, length) {
@@ -840,7 +840,7 @@ function onBezierAtLength(p0, c1, c2, p1, length) {
     //Returns a dictionary of x & y found on the curve at length
     console.log('onBezierAtLength(', p0, p1, p2, p3, length, ')');
     var percent = length/curveLength(p0, c1, c2, p1);
-    return bezierPoint(p0, c1, c2, p1, percent);
+    return curvePoint(p0, c1, c2, p1, percent);
 }
 
 function onBezierAtX(p0, p1, p2, p3, X) {
