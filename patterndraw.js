@@ -775,7 +775,7 @@ function curveLength(P0, P1, P2, P3) {
     return sumArc;
 }
 
-/*function bezierPoint(t, o1, c1, c2, e1) {
+function bezierPoint(t, o1, c1, c2, e1) {
     //from Claudio Ferraro & bchurchill
     //http://stackoverflow.com/questions/15489520/calculate-the-arclength-curve-length-of-a-cubic-bezier-curve-why-is-not-workin
     //Accepts percent ( 0 <= t <=1 ) and 4 x or y values of the points defining a cubic bezier curve.
@@ -788,10 +788,10 @@ function curveLength(P0, P1, P2, P3) {
     var C4 = (o1);
 
     return ((C1*t*t*t) + (C2*t*t) + (C3*t) + C4)
-}*/
+}
 
 
-/*function bezierTangent(t, a, b, c, d) {
+function bezierTangent(t, a, b, c, d) {
     //from http://stackoverflow.com/questions/4089443/find-the-tangent-of-a-point-on-a-cubic-bezier-curve-on-an-iphone?rq=1
     //Accepts percent (0 <= t <= 1) and 4 coefficients?? defining a cubic bezier curve
     //Returns the derivative of the point at percent t
@@ -802,11 +802,12 @@ function curveLength(P0, P1, P2, P3) {
     var C4 = ( a );
 
     return ( ( 3.0 * C1 * t* t ) + ( 2.0 * C2 * t ) + C3 );
-}*/
+}
 
 function lerp(a, b, t) {
   //Simple linear interpolation. Accepts two points a & b, and percentage t where 0 <= t <= 1.
   //Returns dictionary of the point found at percent t between the two points
+  console.log('lerp(', a, b, t, ')');
   var x = a.x + (b.x - a.x)*t;
   var y = a.y + (b.y - a.y)*t;
   return {"x": x, "y": y};
@@ -816,6 +817,7 @@ function curvePoint(p0, p1, p2, p3, t) {
     //accepts 4 points of bezier curve, and a percent t.
     //Finds the point on the curve at that percent length of the curve
     //Returns the point on the curve at percent t
+    console.log('curvePoint(', p0, p1, p2, p3, t, ')');
     var p4 = lerp(p0, p1, t);
     var p5 = lerp(p1, p2, t);
     var p6 = lerp(p2, p3, t);
@@ -825,22 +827,25 @@ function curvePoint(p0, p1, p2, p3, t) {
     return p9;
 }
 
-function onCurveAtPercent(p0, p1, p2, p3, t) {
+function onBezierAtT(p0, p1, p2, p3, t) {
     //accepts 4 points of bezier curve, and a percent t where 0 <= t <= 1
     //Returns a dictionary with x & y found on the curve at percent t
+    console.log('onBezierAtT(', p0, p1, p2, p3, t, ')');
     //function keeps naming consistent
-    return curvePoint(p0, p1, p2, p3, t);
+    return bezierPoint(p0, p1, p2, p3, t);
 }
 
-function onCurveAtLength(p0, c1, c2, p1, length) {
+function onBezierAtLength(p0, c1, c2, p1, length) {
     //accepts 4 points of bezier curve, and a length
     //Returns a dictionary of x & y found on the curve at length
+    console.log('onBezierAtLength(', p0, p1, p2, p3, length, ')');
     var percent = length/curveLength(p0, c1, c2, p1);
-    return curvePoint(p0, c1, c2, p1, percent);
+    return bezierPoint(p0, c1, c2, p1, percent);
 }
 
-function onCurveAtX(p0, p1, p2, p3, X) {
+function onBezierAtX(p0, p1, p2, p3, X) {
     //assumes that there is only one point p on curve where p.x = X
+    console.log('onBezierAtX(', p0, p1, p2, p3, X, ')');
     if (((X >= p0.x) && (X <= p3.x)) || ((X >= p3.x) && (X <= p0.x))) {
         //X is between p0.x & p3.x
         if (Math.abs(X - p0.x) < 0.001) {
@@ -848,20 +853,21 @@ function onCurveAtX(p0, p1, p2, p3, X) {
         } else if (Math.abs(X - p3.x) < 0.001) {
             return p3;
         } else {
-            splitCurve = splitCurveAtPercent(p0, p1, p2, p3, 0.5);
-            var b1 = splitCurve.b1;
-            var b2 = splitCurve.b2;
+            splitBezier = splitBezierAtT(p0, p1, p2, p3, 0.5);
+            var b1 = splitBezier.b1;
+            var b2 = splitBezier.b2;
             if ((X >= b1[0].x) && (X <= b1[3].x)) {
-                return onCurveAtX(b1[0], b1[1], b1[2], b1[3], X);
+                return onBezierAtX(b1[0], b1[1], b1[2], b1[3], X);
             } else if (( X >= b1[3].x && X <= b1[0].x)) {
-                return onCurveAtX(b2[0], b2[1], b2[2], b2[3], X);
+                return onBezierAtX(b2[0], b2[1], b2[2], b2[3], X);
             }
         }
     }
 }
 
-function onCurveAtY(p0, p1, p2, p3, Y) {
+function onBezierAtY(p0, p1, p2, p3, Y) {
     //assumes that there is only one point p on curve where p.y = Y
+    console.log('onBezierAtY(', p0, p1, p2, p3, Y, ')');
     if (((Y >= p0.y) && (Y <= p3.y)) || ((Y >= p3.y) && (Y <= p0.y))) {
         //Y is between p0.y & p3.y
         //accept margin of 0.001 as close enough
@@ -870,21 +876,22 @@ function onCurveAtY(p0, p1, p2, p3, Y) {
         } else if (Math.abs(Y - p3.y) < 0.001) {
             return p3;
         } else {
-            splitCurve = splitCurveAtPercent(p0, p1, p2, p3, 0.5);
-            var b1 = splitCurve.b1;
-            var b2 = splitCurve.b2;
+            splitBezier = splitBezierAtT(p0, p1, p2, p3, 0.5);
+            var b1 = splitBezier.b1;
+            var b2 = splitBezier.b2;
             if ((Y >= b1[0].y) && (Y <= b1[3].y)) {
-                return onCurveAtY(b1[0], b1[1], b1[2], b1[3], Y);
+                return onBezierAtY(b1[0], b1[1], b1[2], b1[3], Y);
             } else if ((Y >= b1[3].y) && (Y <= b1[0].y)) {
-                return onCurveAtY(b2[0], b2[1], b2[2], b2[3], Y);
+                return onBezierAtY(b2[0], b2[1], b2[2], b2[3], Y);
             }
         }
     }
 }
 
-function splitCurveAtPercent(p0, p1, p2, p3, t) {
+function splitBezierAtT(p0, p1, p2, p3, t) {
     //accepts 4 points of bezier curve, and a percent t where 0 <= t <= 1
     //Returns a dictionary with two bezier curves in arrays b1 & b2
+    console.log('splitBezierAtT(', p0, p1, p2, p3, t, ')');
     var p4 = lerp(p0, p1, t);
     var p5 = lerp(p1, p2, t);
     var p6 = lerp(p2, p3, t);
@@ -894,11 +901,12 @@ function splitCurveAtPercent(p0, p1, p2, p3, t) {
     return { "b1" : [p0, p4, p7, p9], "b2" : [p9, p8, p6, p3] };
 }
 
-function splitCurveAtLength(p0, p1, p2, p3, length) {
+function splitBezierAtLength(p0, p1, p2, p3, length) {
     //accepts 4 points of bezier curve, and a length.
     //Returns a dictionary with two bezier curves in arrays b1 & b2
+    console.log('splitBezierAtLength(', p0, p1, p2, p3, length, ')');
     var percent = length/bezierCurveLength(p0, c1, c2, p1);
-    return splitCurveAtPercent(p0, c1, c2, p1, percent);
+    return splitBezierAtT(p0, c1, c2, p1, percent);
 }
 
 /////////////////////////////////////////
