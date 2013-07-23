@@ -476,6 +476,16 @@ function onLineAtY(p1, p2, y) {
     return { "x" : x, "y" : y };
 }
 
+function onLineAtLength(p1, p2, length) {
+    //Accepts points p1 and p2, length, and letter 'x' or 'y'
+    //Returns x or y of point on the line at length measured from p1 towards p2
+    //If length is negative, returns point found at length measured from p1 in opposite direction from p2
+    console.log('length = ', length);
+    var lineangle = angleBetween(p1, p2);
+    var x = (length * Math.cos(lineangle)) + p1.x;
+    var y  = (length * Math.sin(lineangle)) + p1.y;
+    return { "x" : x, "y" : y };
+}
 
 function intersectLines(p1,p2,p3,p4) {
     /*
@@ -528,6 +538,9 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
     Returns a dictionary { "x" : x, "y" : y}
     */
     console.log("intersectCircles() - A");
+    console.log("C1=", C1);
+    console.log("C2=", C2);
+    console.log("C1=(", C1.x, C1.y, ")  r1=", r1, "C2=(", C2.x, C2.y, ")  r2=", r2, "test_str=>> ", test_str);
     x_0 = C1.x,
     y_0 = C1.y;
     x_1 = C2.x
@@ -588,16 +601,7 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
     }
 }
 
-function onLineAtLength(p1, p2, length) {
-    //Accepts points p1 and p2, length, and letter 'x' or 'y'
-    //Returns x or y of point on the line at length measured from p1 towards p2
-    //If length is negative, returns point found at length measured from p1 in opposite direction from p2
-    console.log('length = ', length);
-    var lineangle = angleBetween(p1, p2);
-    var x = (length * Math.cos(lineangle)) + p1.x;
-    var y  = (length * Math.sin(lineangle)) + p1.y;
-    return { "x" : x, "y" : y };
-}
+
 
 function midPoint(p1, p2) {
     //Accepts p1 & p2. Returns dictionary {"x": x, "y":y} of midpoint between p1 & p2
@@ -634,6 +638,7 @@ function polar(p1, length, angle) {
 
 function right(p1, n) {
     //Accepts point p1 and float n. Returns p2 to the right of p1 at (p1.x+n, p1.y)
+    console.log("function right(", p1, ',', n,")");
     return { "x" : p1.x + n, "y" : p1.y};
 }
 
