@@ -186,7 +186,7 @@
 
     "fWD1_leg1": {"x": "pt.frontApex.x", "y": "pt.frontWaistCenter.y"},
     "fWD1_leg2": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.fWD1_leg1), pt.frontWaistSide, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.fWD1_leg1))",
-    "fWD1_point": "polar(pt.frontApex, dist(pt.frontApex, pt.fWD1_leg1)/7, angleBetween(pt.frontApex, pt.fWD1_leg1) + 0.5*cd srcangleBetween3pts(pt.fWD1_leg1, pt.frontApex, pt.fWD1_leg2))",
+    "fWD1_point": "polar(pt.frontApex, dist(pt.frontApex, pt.fWD1_leg1)/7, angleBetween(pt.frontApex, pt.fWD1_leg1) + 0.5* angleBetween3pts(pt.fWD1_leg1, pt.frontApex, pt.fWD1_leg2))",
 
     "fNC_in": "left(pt.frontNeckCenter, 0.6*dist(pt.frontNeckSide, pt.frontNeckCenter))",
     "fNS_out": "down(pt.frontNeckSide, 0.15*dist(pt.frontNeckSide, pt.frontNeckCenter))",
