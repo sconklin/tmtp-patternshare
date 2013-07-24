@@ -1,0 +1,188 @@
+{
+"pattern": {
+  "title": "Bodice Block 2",
+  "defaults": [
+      "20.5",
+      "106",
+      "98",
+      "106",
+      "40",
+      "40",
+      "54",
+      "26",
+      "9",
+      "18",
+      "20.5",
+      "50",
+      "20.75",
+      "17",
+      "74",
+      "64.75",
+      "58.5",
+      "25.4",
+      "26.75",
+      "66.0",
+      "19.5",
+      "19.75",
+      "54.0",
+      "52.0",
+      "51",
+      "65",
+      "65",
+      "21",
+      "23.5",
+      "36.5",
+      "21.5",
+      "48",
+      "23",
+      "55.5",
+      "41.5",
+      "51",
+      "29",
+      "45.5"
+  ],
+
+  "measurements": [
+      "neck_diameter",
+      "bust",
+      "waist",
+      "hip",
+      "across_back",
+      "across_chest",
+      "armscye",
+      "front_hibust_height",
+      "back_hibust_height",
+      "front_bust_height",
+      "bust_point_distance",
+      "back_waist_length",
+      "back_hip_height",
+      "shoulder_length",
+      "overarm_length",
+      "front_neckheight_balance",
+      "back_neckheight_balance",
+      "front_shoulderwidth_balance",
+      "back_shoulderwidth_balance",
+      "back_bust_width",
+      "front_waist_length",
+      "back_waist_length",
+      "front_bust_width",
+      "back_bust_width",
+      "front_hip_width",
+      "back_hip_width",
+      "front_hip_height",
+      "underarm_length",
+      "bicep",
+      "side_waist_length",
+      "front_waist_width",
+      "side_hip_height",
+      "front_hibust_width",
+      "front_waist_balance",
+      "back_waist_balance",
+      "back_bust_height",
+      "back_waist_width"
+  ],
+
+  "main": [
+    {
+      "id": "Front Bodice Block A",
+      "type": "path",
+      "d": [
+        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
+        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ]
+      ],
+      "drawattr": {},
+      "appearanceattr": {"stroke-width":"2", "stroke":"#111111", "fill":"none"}
+    }
+  ],
+
+  "construction": [
+    {
+      "id": "Front Bodice Block Lines",
+      "type": "path",
+      "d": [
+        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
+        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
+        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
+        ["L", ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
+        ["L", ["pt.frontArmscye1.x","pt.frontArmscye1.y"] ],
+        ["L", ["pt.frontArmscye2.x","pt.frontArmscye2.y"] ],
+        ["L", ["pt.frontHibustSide.x","pt.frontHibustSide.y"] ],
+        ["L", ["pt.frontBustSide2.x","pt.frontBustSide2.y"] ],
+        ["M", ["pt.frontBustSide1.x","pt.frontBustSide1.y"] ],
+        ["L", ["pt.frontWaistSide1.x","pt.frontWaistSide1.y"] ],
+        ["L", ["pt.frontWaistSide3.x","pt.frontWaistSide3.y"] ],
+        ["M", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+        ["L", ["pt.frontWaistSide2.x","pt.frontWaistSide2.y"] ]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Front Bodice Block Measurement Lines",
+      "type": "path",
+      "d": [
+        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
+        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
+        ["L", ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
+        ["M", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
+        ["M", ["pt.acrossChestCenter.x","pt.acrossChestCenter.y"] ],
+        ["L", ["pt.acrossChestSide.x","pt.acrossChestSide.y"] ],
+        ["M", ["pt.frontHibustCenter.x","pt.frontHibustCenter.y"] ],
+        ["L", ["pt.frontHibustSide.x","pt.frontHibustSide.y"] ],
+        ["M", ["pt.frontBustCenter.x","pt.frontBustCenter.y"] ],
+        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
+        ["L", ["pt.frontBustSide1.x","pt.frontBustSide1.y"] ],
+        ["M", ["pt.frontApex.x","pt.frontApex.y"] ],
+        ["L", ["pt.frontBustSide2.x","pt.frontBustSide2.y"] ],
+        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
+        ["L", ["pt.frontBustSide3.x","pt.frontBustSide3.y"] ],
+        ["M", ["pt.frontBustSide4.x","pt.frontBustSide4.y"] ],
+        ["L", ["pt.frontWaistSide1.x","pt.frontWaistSide1.y"] ],
+        ["M", ["pt.frontWaistSide2.x","pt.frontWaistSide2.y"] ],
+        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
+        ["L", ["pt.frontWaistSide3.x","pt.frontWaistSide3.y"] ]
+
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#11FF11", "fill":"none" }
+    }
+  ],
+
+  "points": {
+    "CM": "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
+    "IN": "convertUnit(1, 'in', window.measurementData.clientdata.units)",
+    "seamAllowance": "(5/8)*pt.IN",
+    "pattern_offset": "1*pt.IN",
+
+    "frontNeckCenter": {"x":"0 + pt.pattern_offset", "y":"0 + pt.pattern_offset"},
+    "frontWaistCenter": "down(pt.frontNeckCenter, 1*meas.front_waist_length)",
+    "frontHibustCenter": "down(pt.frontNeckCenter, 1*meas.front_hibust_height)",
+    "acrossChestCenter": "down(pt.frontNeckCenter, 0.5*dist(pt.frontNeckCenter, pt.frontHibustCenter))",
+    "frontBustCenter": "down(pt.frontNeckCenter, 1*meas.front_bust_height)",
+
+    "frontNeckSide": "onCircleAtX(pt.frontWaistCenter, 1*meas.front_neckheight_balance, pt.frontNeckCenter.x - 0.5*meas.neck_diameter, 'y1 < y2')",
+    "frontShoulderTip":"intersectCircles(pt.frontNeckCenter,1*meas.front_shoulderwidth_balance,pt.frontNeckSide,1*meas.shoulder_length,'y1 > y2')",
+    "acrossChestSide": "left(pt.acrossChestCenter, 0.5*meas.across_chest)",
+    "frontHibustSide": "left(pt.frontHibustCenter, 0.5*meas.front_hibust_width)",
+    "frontApex": "left(pt.frontBustCenter, 0.5*meas.bust_point_distance)",
+    "frontArmscye1": {"x": "pt.frontShoulderTip.x + 0.05*(pt.frontNeckCenter.x - pt.frontShoulderTip.x)", "y": "0.5*(pt.frontHibustCenter.y - pt.frontShoulderTip.y)"},
+    "frontArmscye2": {"x": "pt.frontShoulderTip.x", "y": "pt.frontHibustCenter.y"},
+
+    "frontBustSide1": "left(pt.frontBustCenter, 0.5*meas.front_bust_width)",
+    "frontBustSide2": "intersectCircles(pt.frontHibustSide, 0.75*dist(pt.frontHibustSide, pt.frontBustSide1), pt.frontApex, 0.5*meas.front_bust_width - dist(pt.frontApex, pt.frontBustCenter), 'y1 > y2')",
+
+    "temp_frontWaistSide": "intersectLineCircle(pt.frontHibustSide, pt.frontBustSide2, pt.frontNeckCenter, 1*meas.front_waist_balance, 'y1 > y2')",
+    "frontBustSide3": "intersectLines(pt.frontNeckCenter, pt.temp_frontWaistSide, pt.frontApex, pt.frontBustSide2)",
+    "frontBustSide4": "left(pt.frontApex, dist(pt.frontApex, pt.frontBustSide3))",
+    "frontWaistSide1": "intersectCircles(pt.frontBustSide4, 1*meas.front_waist_balance - dist(pt.frontNeckCenter, pt.frontBustSide3), pt.frontBustSide1, 1*meas.side_waist_length - dist(pt.frontHibustSide, pt.frontBustSide2))",
+    "frontWaistSide2": {"x": "pt.frontApex.x", "y": "pt.frontWaistCenter.y"},
+    "frontWaistSide3": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.frontWaistSide2), pt.frontWaistSide1, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.frontWaistSide2))"
+  }
+
+}
+}
+
+
