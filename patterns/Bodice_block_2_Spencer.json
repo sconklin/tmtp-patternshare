@@ -88,7 +88,9 @@
       "type": "path",
       "d": [
         ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ]
+        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+        ["M", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
+        ["C", ["pt.fNS_out.x","pt.fNS_out.y"], ["pt.fNC_in.x","pt.fNC_in.y"], ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ]
       ],
       "drawattr": {},
       "appearanceattr": {"stroke-width":"2", "stroke":"#111111", "fill":"none"}
@@ -102,18 +104,20 @@
       "d": [
         ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
         ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
-        ["L", ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
-        ["L", ["pt.frontArmscye1.x","pt.frontArmscye1.y"] ],
-        ["L", ["pt.frontArmscye2.x","pt.frontArmscye2.y"] ],
+        ["L", ["pt.fWD1_leg1.x","pt.fWD1_leg1.y"] ],
+        ["L", ["pt.fWD1_point.x","pt.fWD1_point.y"] ],
+        ["L", ["pt.fWD1_leg2.x","pt.fWD1_leg2.y"] ],
+        ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
+        ["L", ["pt.fBD1_leg1.x","pt.fBD1_leg1.y"] ],
+        ["L", ["pt.fBD1_point.x","pt.fBD1_point.y"] ],
+        ["L", ["pt.fBD1_leg2.x","pt.fBD1_leg2.y"] ],
         ["L", ["pt.frontHibustSide.x","pt.frontHibustSide.y"] ],
-        ["L", ["pt.frontBustSide2.x","pt.frontBustSide2.y"] ],
-        ["M", ["pt.frontBustSide1.x","pt.frontBustSide1.y"] ],
-        ["L", ["pt.frontWaistSide1.x","pt.frontWaistSide1.y"] ],
-        ["L", ["pt.frontWaistSide3.x","pt.frontWaistSide3.y"] ],
-        ["M", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.frontWaistSide2.x","pt.frontWaistSide2.y"] ]
+        ["C", ["pt.fHBS_out.x","pt.fHBS_out.y"], ["pt.fAS2_in.x","pt.fAS2_in.y"],["pt.frontArmscye2.x","pt.frontArmscye2.y"] ],
+        ["C", ["pt.fAS2_out.x","pt.fAS2_out.y"], ["pt.fAS1_in.x","pt.fAS1_in.y"], ["pt.frontArmscye1.x","pt.frontArmscye1.y"] ],
+        ["C", ["pt.fAS1_out.x","pt.fAS1_out.y"], ["pt.fST_in.x","pt.fST_in.y"], ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
+        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
+        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
+        ["C", ["pt.fNS_out.x","pt.fNS_out.y"], ["pt.fNC_in.x","pt.fNC_in.y"], ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
@@ -133,18 +137,16 @@
         ["M", ["pt.frontHibustCenter.x","pt.frontHibustCenter.y"] ],
         ["L", ["pt.frontHibustSide.x","pt.frontHibustSide.y"] ],
         ["M", ["pt.frontBustCenter.x","pt.frontBustCenter.y"] ],
-        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.frontBustSide1.x","pt.frontBustSide1.y"] ],
-        ["M", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.frontBustSide2.x","pt.frontBustSide2.y"] ],
+        ["L", ["pt.frontBustSide.x","pt.frontBustSide.y"] ],
         ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.frontBustSide3.x","pt.frontBustSide3.y"] ],
-        ["M", ["pt.frontBustSide4.x","pt.frontBustSide4.y"] ],
-        ["L", ["pt.frontWaistSide1.x","pt.frontWaistSide1.y"] ],
-        ["M", ["pt.frontWaistSide2.x","pt.frontWaistSide2.y"] ],
+        ["L", ["pt.frontWaistBalance_mid1.x","pt.frontWaistBalance_mid1.y"] ],
+        ["M", ["pt.frontWaistBalance_mid2.x","pt.frontWaistBalance_mid2.y"] ],
+        ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
+        ["M", ["pt.frontApex.x","pt.frontApex.y"] ],
+        ["L", ["pt.fBD1_leg2.x","pt.fBD1_leg2.y"] ],
+        ["M", ["pt.fWD1_leg1.x","pt.fWD1_leg1.y"] ],
         ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.frontWaistSide3.x","pt.frontWaistSide3.y"] ]
-
+        ["L", ["pt.fWD1_leg2.x","pt.fWD1_leg2.y"] ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#11FF11", "fill":"none" }
@@ -168,18 +170,35 @@
     "acrossChestSide": "left(pt.acrossChestCenter, 0.5*meas.across_chest)",
     "frontHibustSide": "left(pt.frontHibustCenter, 0.5*meas.front_hibust_width)",
     "frontApex": "left(pt.frontBustCenter, 0.5*meas.bust_point_distance)",
-    "frontArmscye1": {"x": "pt.frontShoulderTip.x + 0.05*(pt.frontNeckCenter.x - pt.frontShoulderTip.x)", "y": "0.5*(pt.frontHibustCenter.y - pt.frontShoulderTip.y)"},
-    "frontArmscye2": {"x": "pt.frontShoulderTip.x", "y": "pt.frontHibustCenter.y"},
+    "frontArmscye1": {"x": "pt.frontShoulderTip.x + 0.05*(pt.frontNeckCenter.x - pt.frontShoulderTip.x)", "y": "pt.frontShoulderTip.y + 0.66*(pt.frontHibustCenter.y - pt.frontShoulderTip.y)"},
+    "frontArmscye2": {"x": "pt.frontShoulderTip.x - 0.25*(pt.frontShoulderTip.x - pt.frontHibustSide.x)", "y": "pt.frontHibustCenter.y"},
 
-    "frontBustSide1": "left(pt.frontBustCenter, 0.5*meas.front_bust_width)",
-    "frontBustSide2": "intersectCircles(pt.frontHibustSide, 0.75*dist(pt.frontHibustSide, pt.frontBustSide1), pt.frontApex, 0.5*meas.front_bust_width - dist(pt.frontApex, pt.frontBustCenter), 'y1 > y2')",
+    "frontBustSide": "left(pt.frontBustCenter, 0.5*meas.front_bust_width)",
+    "fBD1_leg2": "intersectCircles(pt.frontHibustSide, 0.75*dist(pt.frontHibustSide, pt.frontBustSide), pt.frontApex, 0.5*meas.front_bust_width - dist(pt.frontApex, pt.frontBustCenter), 'y1 > y2')",
+    "fBD1_leg1": "copy(pt.frontBustSide)",
+    "fBD1_point": "polar(pt.frontApex, dist(pt.frontApex, pt.fBD1_leg1)/7, radians(180) + 0.5*angleBetween3pts(pt.fBD1_leg1, pt.frontApex, pt.fBD1_leg2))",
 
-    "temp_frontWaistSide": "intersectLineCircle(pt.frontHibustSide, pt.frontBustSide2, pt.frontNeckCenter, 1*meas.front_waist_balance, 'y1 > y2')",
-    "frontBustSide3": "intersectLines(pt.frontNeckCenter, pt.temp_frontWaistSide, pt.frontApex, pt.frontBustSide2)",
-    "frontBustSide4": "left(pt.frontApex, dist(pt.frontApex, pt.frontBustSide3))",
-    "frontWaistSide1": "intersectCircles(pt.frontBustSide4, 1*meas.front_waist_balance - dist(pt.frontNeckCenter, pt.frontBustSide3), pt.frontBustSide1, 1*meas.side_waist_length - dist(pt.frontHibustSide, pt.frontBustSide2))",
-    "frontWaistSide2": {"x": "pt.frontApex.x", "y": "pt.frontWaistCenter.y"},
-    "frontWaistSide3": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.frontWaistSide2), pt.frontWaistSide1, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.frontWaistSide2))"
+    "temp_fWS": "intersectLineCircle(pt.frontHibustSide, pt.fBD1_leg2, pt.frontNeckCenter, 1*meas.front_waist_balance, 'y1 > y2')",
+
+    "frontWaistBalance_mid1": "intersectLines(pt.frontNeckCenter, pt.temp_fWS, pt.fBD1_point, pt.fBD1_leg2)",
+    "frontWaistBalance_mid2": "left(pt.frontApex, dist(pt.frontApex, pt.frontWaistBalance_mid1))",
+    "frontWaistSide": "intersectCircles(pt.frontWaistBalance_mid2, 1*meas.front_waist_balance - dist(pt.frontNeckCenter, pt.frontWaistBalance_mid1), pt.frontBustSide, 1*meas.side_waist_length - dist(pt.frontHibustSide, pt.fBD1_leg2), 'y1 > y2')",
+
+    "fWD1_leg1": {"x": "pt.frontApex.x", "y": "pt.frontWaistCenter.y"},
+    "fWD1_leg2": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.fWD1_leg1), pt.frontWaistSide, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.fWD1_leg1))",
+    "fWD1_point": "polar(pt.frontApex, dist(pt.frontApex, pt.fWD1_leg1)/7, angleBetween(pt.frontApex, pt.fWD1_leg1) + 0.5*cd srcangleBetween3pts(pt.fWD1_leg1, pt.frontApex, pt.fWD1_leg2))",
+
+    "fNC_in": "left(pt.frontNeckCenter, 0.6*dist(pt.frontNeckSide, pt.frontNeckCenter))",
+    "fNS_out": "down(pt.frontNeckSide, 0.15*dist(pt.frontNeckSide, pt.frontNeckCenter))",
+
+    "fHBS_out": "polar(pt.frontHibustSide, dist(pt.frontHibustSide, pt.frontArmscye2)/3, angleBetween(pt.frontHibustSide, pt.fBD1_leg2) - radians(90))",
+    "fAS2_in": "polar(pt.frontArmscye2, dist(pt.frontHibustSide, pt.frontArmscye2)/3, angleBetween(pt.frontArmscye1, pt.frontHibustSide))",
+
+    "fAS2_out": "polar(pt.frontArmscye2, dist(pt.frontArmscye2, pt.frontArmscye1)/3, angleBetween(pt.frontHibustSide, pt.frontArmscye1))",
+    "fAS1_in": "polar(pt.frontArmscye1, dist(pt.frontArmscye2, pt.frontArmscye1)/3, angleBetween(pt.frontShoulderTip, pt.frontArmscye2))",
+
+    "fAS1_out": "polar(pt.frontArmscye1, dist(pt.frontArmscye1, pt.frontShoulderTip)/3, angleBetween(pt.frontArmscye2, pt.frontShoulderTip))",
+    "fST_in": "polar(pt.frontShoulderTip, dist(pt.frontArmscye1, pt.frontShoulderTip)/6,angleBetween(pt.frontNeckSide, pt.frontShoulderTip) - radians(90))"
   }
 
 }
