@@ -541,14 +541,14 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
     console.log("C1=", C1);
     console.log("C2=", C2);
     console.log("C1=(", C1.x, C1.y, ")  r1=", r1, "C2=(", C2.x, C2.y, ")  r2=", r2, "test_str=>> ", test_str);
-    x_0 = C1.x,
-    y_0 = C1.y;
-    x_1 = C2.x
-    y_1 = C2.y;
-    d = dist(C1, C2); // distance b/w circle centers
-    dx = (x_1 - x_0);
-    dy = (y_1 - y_0); // negate y b/c canvas increases top to bottom
-    P = [];
+    var x_0 = C1.x;
+    var y_0 = C1.y;
+    var x_1 = C2.x;
+    var y_1 = C2.y;
+    var d = dist(C1, C2); // distance b/w circle centers
+    var dx = (x_1 - x_0);
+    var dy = (y_1 - y_0); // negate y b/c canvas increases top to bottom
+    var P = [];
     console.log("B");
     if (d === 0) {
         //intersections=0
@@ -563,7 +563,7 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
         console.log('d =', d);
         console.log('C1 =', C1.x, C1.y, 'radius1 =', r1);
         console.log('C2 =', C2.x, C2.y, 'radius2 =', r2);
-    } else if (d>(r1+r2)) {
+    } else if (d > (r1 + r2)) {
         console.log("E");
         //intersections=0
         console.log('circles do not intersect . d > r1+r2..patterndraw.intersectCircles()');
@@ -576,17 +576,17 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
         console.log("F");
         // intersections=2 or intersections=1
         console.log('r1 = ', r1, 'r2 = ', r2, 'd = ', d);
-        a = (r1*r1 - r2*r2 + d*d)/(2*d);
-        x_2 = x_0 + (dx*a/d);
-        y_2 = y_0 + (dy*a/d);
-        h = Math.sqrt(r1*r1 - a*a);
+        var a = (r1*r1 - r2*r2 + d*d)/(2*d);
+        var x_2 = x_0 + (dx*a/d);
+        var y_2 = y_0 + (dy*a/d);
+        var h = Math.sqrt(r1*r1 - a*a);
         console.log("G");
-        rx = -dy*(h/d);
-        ry = dx*(h/d);
-        x1 = x_2 + rx;
-        y1 = y_2 + ry;
-        x2 = x_2 - rx;
-        y2 = y_2 - ry;
+        var rx = -dy*(h/d);
+        var ry = dx*(h/d);
+        var x1 = x_2 + rx;
+        var y1 = y_2 + ry;
+        var x2 = x_2 - rx;
+        var y2 = y_2 - ry;
         console.log('a = ',a, 'x_2 = ', x_2, 'y_2 = ', y_2, 'h = ', h, 'rx = ', rx, 'ry = ', ry, '(', x1, y1, ') or (', x2, y2, ')');
         console.log(test_str , ' = ', +eval(test_str) );
         if ( +eval(test_str) ) {
@@ -595,12 +595,86 @@ function intersectCircles(C1, r1, C2, r2, test_str) {
           return {"x" : x1, "y" : y1 };
         } else {
           console.log("I");
-          console.log(x1, y1);
+          console.log(x2, y2);
           return {"x" : x2, "y" : y2 };
         }
     }
 }
 
+function intersectLineCircle(P1, P2, C, r, test_str) {
+    /*
+    Finds intersection of a line and a circle.
+    Accepts circle center C, radius r, two points P1 & P2, and a test string test_str to determine which intersection (if any) to return
+    Returns an object P with number of intersection points,and up to two coordinate pairs as P.intersections,P.p1,P.p2
+    Based on paulbourke.net/geometry/sphereline/sphere_line_intersection.py,written in Python 3.2 by Campbell Barton
+    */
+    console.log('intersectLineCircle(', P1, P2, C, r, test_str, ')' );
+    if (P1.x === P2.x) {
+          //vertical line
+          console.log('vertical line');
+          if (Math.abs(P1.x - C.x) > r) {
+              console.log('no intersections');
+              return undefined;
+          } else {
+              console.log('found 2 intersections with vertical line');
+              var x1 = P1.x;
+              var x2 = P1.x;
+              var y1 = C.y + Math.sqrt(r*r - Math.pow(P1.x - C.x, 2));
+              var y2 = C.y - Math.sqrt(r*r - Math.pow(P1.x - C.x, 2));
+          }
+    } else if (P1.y === P2.y) {
+          //horizontal line
+          console.log('horizontal line');
+          if (Math.abs(P1.y - C.y) > r) {
+              console.log('no intersections');
+              return null;
+          } else {
+              console.log('found 2 intersections with horizontal line');
+              var x1 = C.x + Math.sqrt(r*r - Math.pow(P1.y - C.y, 2));
+              var x2 = C.x - Math.sqrt(r*r - Math.pow(P1.y - C.y, 2));
+              var y1 = P1.y;
+              var y2 = P1.y;
+          }
+    } else {
+        var a = (P2.x - P1.x)*(P2.x - P1.x) + (P2.y - P1.y)*(P2.y - P1.y);
+        var b = 2.0*((P2.x - P1.x)*P1.x - C.x) + (P2.y - P1.y)*(P1.y - C.y);
+        var c = C.x*C.x + 82*C.y + P1.x*P1.x + P1.y*P1.y - 2.0*(C.x*P1.x + C.y*P1.y) - r*r;
+        var i = b*b - 4*a*c;
+        if (i < 0) {
+            console.log(      'no intersections');
+            return undefined;
+        } else {
+            if (i == 0) {
+                //one intersection
+                console.log('found 1 intersection');
+                var mu = -b/(2.0*a);
+                var x = P1.x + mu*(P2.x - P1.x);
+                var y = P1.y + mu*(P2.y - P1.y);
+            } else {
+                console.log('found 2 intersections');
+                //two intersections
+                //first intersection
+                var mu1 = ( -b + Math.sqrt(i))/(2*a);
+                var x1 = P1.x + mu1*(P2.x-P1.x);
+                var y1 = P1.y + mu1*(P2.y-P1.y);
+                //second intersection
+                var mu2 = ( -b - Math.sqrt(i))/(2*a);
+                var x2 = P1.x + mu2*(P2.x - P1.x);
+                var y2 = P1.y + mu2*(P2.y - P1.y);
+                if ( +eval(test_str) ) {
+                    console.log(x1, y1);
+                    var x = x1;
+                    var y = y1;
+                } else {
+                    console.log(x2, y2);
+                    var x = x2;
+                    var y = y2;
+                }
+                return {"x": x, "y": y};
+            }
+        }
+    }
+}
 
 
 function midPoint(p1, p2) {
