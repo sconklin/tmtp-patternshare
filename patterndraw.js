@@ -381,6 +381,10 @@ function angleBetween3pts(a, b, c){
     return(alpha);
 }
 
+function radians(deg){
+    return deg*Math.PI/180;
+}
+
 function slope(p1, p2) {
     //Accepts two points and returns the slope
     if ( p2.x === p1.x ) {
@@ -412,9 +416,7 @@ function rotate(p, o, theta, ltr){
     if (ltr == 'y'){ return p0.y; }
 }
 
-function radians(deg){
-    return deg*Math.PI/180;
-}
+
 
 function bezierLength(start, c1, c2, end){
     var t;
