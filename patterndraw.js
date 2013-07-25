@@ -446,17 +446,19 @@ function bezierLength(start, c1, c2, end){
 
 function onLineAtX(p1, p2, x) {
     //on line p1-p2, given x find y
+    console.log('onLineAtX(', p1, p2, x, ')');
     if (p1.x === p2.x) {
         //vertical line
         console.log('vertical line  at ', p1.x, '- no unique y for patterndraw.onLineAtX()');
         return NaN;
     } else if (p1.y === p2.y) {
         //horizontal line
+        console.log('horizontal line');
         var y = p1.y;
     } else {
         var m = (p1.y - p2.y)/(p1.x - p2.x);
         var b = p2.y - (m*p2.x);
-        var y = (x*m) - b;
+        var y = (m*x) + b;
     }
     return { "x": x, "y" : y };
 }
