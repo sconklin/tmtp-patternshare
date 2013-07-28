@@ -1,0 +1,107 @@
+{
+  "clientdata": {
+    "customername": "DressForm",
+    "units": "cm",
+    "measurements": {
+
+      "height" : "166",
+
+      "nape_to_floor" : "0.0",
+      "waist_to_floor" : "0.0",
+      "hip_to_floor" : "0.0",
+      "knee_to_floor" : "0.0",
+      "ankle_to_floor" : "0.0",
+
+      "head_and_neck_length" : "12",
+
+      "midneck" : "0.0",
+      "neck" : "0.0",
+      "neck_diameter": "15",
+      "front_neck_width": "26",
+      "back_neck_width": "20.5",
+      "neck_height" : "0",
+
+      "shoulder_length": "12.5",
+
+      "across_chest": "35",
+      "across_back": "33",
+
+      "highbust": "103",
+      "front_highbust_width": "51",
+      "front_highbust_height": "9",
+      "back_highbust_width": "52",
+      "back_highbust_height": "18.5",
+
+      "bust": "105.5",
+      "front_bust_width": "56",
+      "front_bust_height": "18.5",
+      "back_bust_width": "49.5",
+      "back_bust_height": "21.75",
+      "bust_point_distance": "20.5",
+      "side_bust_height": "2.54",
+
+      "lowbust": "90.5",
+      "front_lowbust_width": "48",
+      "front_lowbust_height": "26.5",
+      "front_lowbust_length": "10",
+      "back_lowbust_width": "42.5",
+
+      "waist": "88",
+      "front_waist_width": "47",
+      "front_waist_length": "35.5",
+      "back_waist_width": "41",
+      "back_waist_length": "38",
+      "side_waist_length": "19",
+
+      "front_neck_balance": "45",
+      "back_neck_balance": "43",
+      "front_shoulder_balance": "45.5",
+      "back_shoulder_balance": "42",
+      "front_waist_balance": "42.5",
+      "back_waist_balance": "44.4",
+
+      "overarm_length": "0",
+      "underarm_length": "0",
+      "arm_sleeve_top_offset": "0",
+      "arm_sleevecap_width": "0",
+      "arm": "0",
+      "elbow": "0",
+      "wrist": "0",
+      "hand": "0",
+
+      "hip": "0",
+      "front_hip": "0",
+      "front_hip_width": "0",
+      "front_hip_height": "0",
+      "back_hip": "0",
+      "back_hip_width": "54",
+      "back_hip_height": "6.5",
+      "side_hip_height": "0",
+
+      "rise": "0",
+      "front_rise": "0",
+      "side_rise": "0",
+      "back_rise": "0",
+
+      "crotch_length": "0",
+      "front_crotch_length": "0",
+      "back_crotch_length": "0",
+      "front_crotch_extension": "0",
+      "back_crotch_extension": "0",
+
+      "outseam": "0",
+      "inseam": "0",
+
+      "thigh": "0",
+      "front_thigh_width": "0",
+      "back_thigh_width": "0",
+
+      "knee": "0",
+      "calve": "0",
+
+      "hand": "0",
+      "ankle": "0",
+      "foot": "0"
+    }
+  }
+}
