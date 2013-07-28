@@ -16,10 +16,10 @@
 
         "midneck" : 0.0,
         "neck" : 0.0,
-        "neck_diameter" : 16.5,
-        "neck_height" : 0,
         "front_neck_width" : 0,
         "back_neck_width" : 0,
+        "neck_diameter" : 16.5,
+        "neck_height" : 0,
 
         "shoulder_length" : 14.0,
 
