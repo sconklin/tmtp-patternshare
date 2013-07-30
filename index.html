@@ -36,10 +36,13 @@
 			<br>
 			<form>
 			
-			<input type="checkbox" id="gridopt" onclick="drawPatternIfReady()"/> : Grid <br />
-			<input type="checkbox" id="constopt" onclick="drawPatternIfReady()"/> : Construction Lines <br />
-			<input type="checkbox" id="constptopt" onclick="drawPatternIfReady()"/> : Construction Points <br />
-
+				<input type="checkbox" id="gridopt" onclick="drawPatternIfReady()"/> : Grid <br />
+				<input type="checkbox" id="constopt" onclick="drawPatternIfReady()"/> : Construction Lines <br />
+				<input type="checkbox" id="constptopt" onclick="drawPatternIfReady()"/> : Construction Points
+				<div id="savebuttondiv" class="measurements">
+					<button id="savebutton" type="button" onclick="savesvg()"> Save as SVG! </button>
+				</div>
+			 <br />
 			</form>
 		</div>
 	
@@ -78,9 +81,6 @@
 			</form>
 		</div>
 
-		<div id="savebuttondiv" class="measurements">
-			<button id="savebutton" type="button" onclick="savesvg()"> Save as SVG! </button>
-		</div>
 	</div>
 	
 	<div id="drawarea" class="drawarea">
