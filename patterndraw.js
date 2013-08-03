@@ -404,15 +404,12 @@ function numdist(num1, num2){
     return Math.sqrt((num1*num1) + (num2*num2));
 }
 
-function rotate(p, o, theta, ltr){
-    var p0 = new Object();
-    p0.x = Math.cos(theta) * (p.x-o.x) - Math.sin(theta) * (p.y-o.y) + o.x;
-    p0.y = Math.sin(theta) * (p.x-o.x) + Math.cos(theta) * (p.y-o.y) + o.y;
-    console.log("ltr: " + ltr);
-    if (ltr == 'x'){ return p0.x; }
-    if (ltr == 'y'){ return p0.y; }
+function rotate(p, o, theta){
+    //accepts pivot p, object to rotate o, and theta the angle to rotate, returns dictionary with x & y of new location
+    var x = Math.cos(theta) * (p.x-o.x) - Math.sin(theta) * (p.y-o.y) + o.x;
+    var y = Math.sin(theta) * (p.x-o.x) + Math.cos(theta) * (p.y-o.y) + o.y;
+    return { "x": x, "y": y }
 }
-
 
 
 function bezierLength(start, c1, c2, end){
