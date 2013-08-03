@@ -195,7 +195,7 @@
       "d": [
         ["M", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
         ["L", ["pt.backNeckSide.x","pt.backNeckSide.y"] ],
-        ["L", ["pt.t1_backShoulderTip.x","pt.t1_backShoulderTip.y"] ],
+        ["L", ["pt.t1_bST.x","pt.t1_bST.y"] ],
         ["L", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
 
         ["M", ["pt.bWD_mid4.x","pt.bWD_mid3.y"] ],
@@ -309,13 +309,13 @@
     "backBustCenter": "down(pt.backNeckCenter, 1*meas.back_bust_height)",
 
     "backNeckSide": "onCircleAtX(pt.backWaistCenter, 1*meas.back_neck_balance, pt.backNeckCenter.x + 0.5*meas.neck_diameter, 'y1 < y2')",
-    "t1_backShoulderTip":"intersectCircles(pt.backWaistCenter, 1*meas.back_shoulder_balance, pt.backNeckSide, 1*meas.shoulder_length, 'y1 > y2')",
+    "t1_bST":"intersectCircles(pt.backWaistCenter, 1*meas.back_shoulder_balance, pt.backNeckSide, 1*meas.shoulder_length, 'y1 > y2')",
     "acrossBackSide": "right(pt.acrossBackCenter, 0.5*meas.across_back)",
     "backHighbustSide": "right(pt.backHighbustCenter, 0.5*meas.back_highbust_width)",
     "backBustSide": "right(pt.backBustCenter, 0.5*meas.back_bust_width)",
     "backApex1": {"x": "0.5*(pt.backHighbustCenter.x + pt.acrossBackSide.x)", "y": "pt.backHighbustCenter.y"},
 
-    "backArmscye1": {"x": "pt.t1_backShoulderTip.x - 0.8*Math.abs(pt.t1_backShoulderTip.x - pt.acrossBackSide.x)", "y": "pt.t1_backShoulderTip.y + 0.66*(pt.backHighbustCenter.y - pt.t1_backShoulderTip.y)"},
+    "backArmscye1": {"x": "pt.t1_bST.x - 0.8*Math.abs(pt.t1_bST.x - pt.acrossBackSide.x)", "y": "pt.t1_bST.y + 0.66*(pt.backHighbustCenter.y - pt.t1_bST.y)"},
     "backArmscye2": {"x": "pt.acrossBackSide.x + 0.5*Math.abs(pt.acrossBackSide.x - pt.backHighbustSide.x)", "y": "pt.backHighbustCenter.y"},
 
     "back_dart_width": "(1*meas.back_waist_width)/12",
@@ -330,14 +330,14 @@
     "bWD_point": "copy(pt.backApex1)",
     "backWaistSide": "intersectCircles(pt.backHighbustSide, 1*meas.side_waist_length, pt.bWD_leg2, 0.5*meas.back_waist_width - dist(pt.backWaistCenter, pt.bWD_leg1), 'y1 > y2')",
 
-    "bWD_mid3": "intersectLines(pt.backWaistCenter, pt.t1_backShoulderTip, pt.backApex1, pt.bWD_leg1)",
+    "bWD_mid3": "intersectLines(pt.backWaistCenter, pt.t1_bST, pt.backApex1, pt.bWD_leg1)",
     "bWD_mid4": "onLineAtLength(pt.backApex1, pt.bWD_leg2, dist(pt.backApex1, pt.bWD_mid3))",
-    "t2_bST": "intersectCircles(pt.bWD_mid4, dist(pt.bWD_mid4, pt.t1_backShoulderTip), pt.backNeckSide, 1*meas.shoulder_length, 'x1 > x2')",
+    "t2_bST": "right(pt.t1_bST, dist(pt.bWD_mid3, pt.bWD_mid4))",
 
     "bSD_mid": "onLineAtLength(pt.backNeckSide, pt.t2_bST, dist(pt.backNeckSide, pt.t2_bST)/6)",
     "backApex2": "polar(pt.bSD_mid, 0.5*dist(pt.backNeckSide, pt.acrossBackCenter), angleBetween(pt.backNeckSide, pt.bSD_mid) + radians(90))",
-    "t1_bSD_leg2": "onLineAtLength(pt.bSD_mid, pt.backNeckSide, dist(pt.bSD_mid, pt.backNeckSide)/5)",
-    "t1_bSD_leg1": "onLineAtLength(pt.bSD_mid, pt.t2_bST, dist(pt.bSD_mid, pt.backNeckSide)/5)",
+    "t1_bSD_leg2": "onLineAtLength(pt.bSD_mid, pt.backNeckSide, dist(pt.bWD_mid3, pt.bWD_mid4)/2)",
+    "t1_bSD_leg1": "onLineAtLength(pt.bSD_mid, pt.t2_bST, dist(pt.bWD_mid3, pt.bWD_mid4)/2)",
     "bSD_point": "polar(pt.backApex2, dist(pt.backApex2, pt.bSD_mid)/5, angleBetween(pt.backApex2, pt.bSD_mid))",
 
     "bSD_extension_theta": "radians(90) - angleBetween3pts(pt.t1_bSD_leg1, pt.t1_bSD_leg2, pt.backApex2)",
