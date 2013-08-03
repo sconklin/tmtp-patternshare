@@ -133,23 +133,29 @@
         ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
         ["L", ["pt.t1_fWS.x","pt.t1_fWS.y"] ],
 
-
-        ["M", ["pt.fBD_leg2.x", "pt.fBD_leg2.y"] ],
+        ["M", ["pt.fBD_leg1.x", "pt.fBD_leg1.y"] ],
         ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.fBD_leg1.x", "pt.fBD_leg1.y"] ],
+        ["L", ["pt.fBD_leg2.x", "pt.fBD_leg2.y"] ],
 
         ["M", ["pt.p1.x", "pt.p1.y"] ],
         ["L", ["pt.frontWaistSide.x", "pt.frontWaistSide.y"] ],
 
-        ["M", ["pt.fWD_leg2.x", "pt.fWD_leg2.y"] ],
+        ["M", ["pt.fWD_leg1.x", "pt.fWD_leg1.y"] ],
         ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.fWD_leg1.x", "pt.fWD_leg1.y"] ],
+        ["L", ["pt.fWD_leg2.x", "pt.fWD_leg2.y"] ],
 
         ["M", ["pt.fBD_leg2.x", "pt.fBD_leg2.y"] ],
         ["L", ["pt.t1_fWS.x","pt.t1_fWS.y"] ],
         ["L", ["pt.t1_fWD_leg2.x","pt.t1_fWD_leg2.y"] ],
         ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
         ["L", ["pt.t1_fWD_leg1.x","pt.t1_fWD_leg1.y"] ],
+        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+
+        ["M", ["pt.fBD_leg2.x", "pt.fBD_leg2.y"] ],
+        ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
+        ["L", ["pt.fWD_leg2.x","pt.fWD_leg2.y"] ],
+        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
+        ["L", ["pt.fWD_leg1.x","pt.fWD_leg1.y"] ],
         ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ]
       ],
       "drawattr": {},
@@ -260,13 +266,18 @@
     "p1": "onLineAtX(pt.frontApex, pt.fBD_leg1, pt.p2.x)",
     "frontWaistSide": "intersectCircles(pt.fBD_leg1, dist(pt.fBD_leg2, pt.t1_fWS), pt.p1, dist(pt.p2, pt.t1_fWS), 'y1 > y2')",
 
-    "t2_fWD_leg2": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.t1_fWD_leg1), pt.frontWaistSide, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.t1_fWD_leg1), 'y1 > y2')",
-
-    "front_waist_dart_angle": "angleBetween3pts(pt.t1_fWD_leg1, pt.frontApex, pt.t2_fWD_leg2)",
+    "front_waist_dart_angle": "0.5*pt.total_dart_width",
 
     "p3": "polar(pt.frontApex, 1*pt.IN, radians(90) - 0.5*pt.front_waist_dart_angle)",
-    "fWD_leg1": "onLineAtY(pt.frontApex, pt.p3, pt.frontWaistCenter.y)",
-    "fWD_leg2": "onLineAtLength(pt.t2_fWD_leg2, pt.frontWaistSide, -dist(pt.t1_fWD_leg1, pt.fWD_leg1))",
+    "p4": "polar(pt.frontApex, 1*pt.IN, radians(90) + 0.5*pt.front_waist_dart_angle)",
+    "t2_fWD_leg1": "onLineAtY(pt.frontApex, pt.p3, pt.frontWaistCenter.y)",
+    "t2_fWD_leg2": "onLineAtY(pt.frontApex, pt.p4, pt.frontWaistCenter.y)",
+    "t2_front_waist_width": "dist(pt.frontWaistCenter, pt.t2_fWD_leg1) + dist(pt.t2_fWD_leg2, pt.frontWaistSide)",
+
+    "adjust_waist_amount": "0.5*meas.front_waist_width - pt.t2_front_waist_width",
+
+    "fWD_leg1": "onLineAtLength(pt.t2_fWD_leg1, pt.frontWaistCenter, -0.5*pt.adjust_waist_amount)",
+    "fWD_leg2": "polar(pt.frontApex, dist(pt.frontApex, pt.fWD_leg1), radians(90) + angleBetween3pts(pt.fWD_leg1, pt.frontApex, pt.t1_fWD_leg1))",
     "fWD_point": "down(pt.frontApex, dist(pt.frontApex, pt.fWD_leg1)/7)",
 
     "pattern_waist": {"x": "pt.frontWaistCenter.x - dist(pt.frontWaistCenter, pt.fWD_leg1) - dist(pt.fWD_leg2, pt.frontWaistSide)", "y": "pt.frontWaistCenter.y + 2*pt.IN"},
