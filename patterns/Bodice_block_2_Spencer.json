@@ -260,18 +260,22 @@
     "t1_fWS": "intersectCircles(pt.frontNeckCenter, 1*meas.front_waist_balance, pt.fBD_leg2, 1*meas.side_waist_length - dist(pt.frontHighbustSide, pt.fBD_leg2), 'y1 > y2')",
 
     "t1_fWD_leg1": {"x": "pt.frontApex.x", "y": "pt.frontWaistCenter.y"},
-    "t1_fWD_leg2": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.t1_fWD_leg1), pt.t1_fWS, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.t1_fWD_leg1))",
+    "t1_fWD_leg2": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.t1_fWD_leg1), pt.t1_fWS, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.t1_fWD_leg1), 'y1 > y2')",
 
-    "total_dart_width": "angleBetween3pts(pt.t1_fWD_leg1, pt.frontApex, pt.t1_fWD_leg2)",
+    "total_dart_angle": "angleBetween3pts(pt.t1_fWD_leg1, pt.frontApex, pt.t1_fWD_leg2)",
 
-    "fBD_leg1": "polar(pt.frontApex, dist(pt.frontApex, pt.fBD_leg2), angleBetween(pt.frontApex, pt.fBD_leg2) - 0.5*pt.total_dart_width)",
+
+    "fBD_leg1": "rotate(pt.frontApex, pt.fBD_leg2, -0.5*pt.total_dart_angle)",
+
+
+
     "fBD_point": "polar(pt.frontApex, dist(pt.frontApex, pt.fBD_leg1)/7, angleBetween(pt.frontApex, pt.fBD_leg1) + 0.5*angleBetween3pts(pt.fBD_leg1, pt.frontApex, pt.fBD_leg2))",
 
     "p2": "intersectLines(pt.frontNeckCenter, pt.t1_fWS, pt.frontApex, pt.fBD_leg2)",
     "p1": "onLineAtX(pt.frontApex, pt.fBD_leg1, pt.p2.x)",
     "frontWaistSide": "intersectCircles(pt.fBD_leg1, dist(pt.fBD_leg2, pt.t1_fWS), pt.p1, dist(pt.p2, pt.t1_fWS), 'y1 > y2')",
 
-    "front_waist_dart_angle": "0.5*pt.total_dart_width",
+    "front_waist_dart_angle": "0.5*pt.total_dart_angle",
 
     "p3": "polar(pt.frontApex, 1*pt.IN, radians(90) - 0.5*pt.front_waist_dart_angle)",
     "p4": "polar(pt.frontApex, 1*pt.IN, radians(90) + 0.5*pt.front_waist_dart_angle)",
