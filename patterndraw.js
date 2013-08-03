@@ -6,7 +6,7 @@ vers    date        changes
 */
 
 var PX_per_IN = 90; //  90px/1in -- Inkscape's default pixel per inch, change to 72 if your favorite svg viewer uses 72 (e.g. GIMP)
-var PX_per_CM = PX_per_IN/2.54;   // 90px/1in * 1in/2.54cm = 90px/2.54cm
+var PX_per_CM = PX_per_IN/2.54;   // 90px/2.54cm , change PX_per_CM if PX_per_IN is changed
 
 var maxx, maxy, minx, miny;
 var pt = {};
@@ -227,20 +227,17 @@ function drawpattern(){
             }
         }
         console.log("A maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
-        maxx *= unitscayl;
-        maxy *= unitscayl;
-        minx *= unitscayl;
-        miny *= unitscayl;
-        minx -= 20;
-        miny -= 20;
-        maxx += 20;
-        maxy += 20;
+        //add in 5% margins and convert measurements to unitscayl (cm or in)
+        maxx *= 1.05*unitscayl;
+        maxy *= 1.05*unitscayl;
+        minx *= 1.05*unitscayl;
+        miny *= 1.05*unitscayl;
         console.log("B maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
         var txtshift = 30;
         var svgw = maxx - minx;
-        var svgh = maxy - miny + txtshift;
+        var svgh = maxy - miny;
         var xshift = -minx;
-        var yshift = -miny + txtshift;
+        var yshift = -miny;
 
         if (gridopt){
             gridsvgstr += "<g>";
