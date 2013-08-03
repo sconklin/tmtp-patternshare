@@ -534,6 +534,20 @@ function intersectLines(p1,p2,p3,p4) {
     return { "x" : x, "y" : y };
 }
 
+function intersectVectorLine(V1, vAngle, P1, P2) {
+    //accepts a vector point and angle, and two points of a line.  Returns the point of intersection or null
+    var V2 = polar(V1, 1*pt.IN, vAngle);
+    var P3 = intersectLines(V1, V2, P1, P2);
+    return P3;
+}
+
+function intersectVectors(V1_P1, v1Angle, V2_P1, v2Angle) {
+    //accepts a point and angle for two 2D vectors. Returns the point of intersection or null
+    var V1_P2 = polar(V1, 1*pt.IN, v1Angle);
+    var V2_P2 = polar(V2, 1*pt.IN, v2Angle);
+    var P3 = intersectLines(V1_P1, V1_P2, V2_P1, V2_P2);
+    return P3;
+}
 
 function intersectCircles(C1, r1, C2, r2, test_str) {
     /*
@@ -612,6 +626,34 @@ function intersectLineCircle(P1, P2, C, r, test_str) {
     Returns an object P with number of intersection points,and up to two coordinate pairs as P.intersections,P.p1,P.p2
     Based on paulbourke.net/geometry/sphereline/sphere_line_intersection.py,written in Python 3.2 by Campbell Barton
     */
+float dx = x2 - x1;
+  float dy = y2 - y1;
+  float a = dx * dx + dy * dy;
+  float b = 2 * (dx * (x1 - cx) + dy * (y1 - cy));
+  float c = cx * cx + cy * cy;
+  c += x1 * x1 + y1 * y1;
+  c -= 2 * (cx * x1 + cy * y1);
+  c -= cr * cr;
+  float bb4ac = b * b - 4 * a * c;
+
+  //println(bb4ac);
+
+  if (bb4ac < 0) {  // Not intersecting
+    return false;
+  }
+  else {
+
+    float mu = (-b + sqrt( b*b - 4*a*c )) / (2*a);
+    float ix1 = x1 + mu*(dx);
+    float iy1 = y1 + mu*(dy);
+    mu = (-b - sqrt(b*b - 4*a*c )) / (2*a);
+    float ix2 = x1 + mu*(dx);
+    float iy2 = y1 + mu*(dy);
+
+    // The intersection points
+    //ellipse(ix1, iy1, 10, 10);
+    //ellipse(ix2, iy2, 10, 10);
+
     console.log('intersectLineCircle(', P1, P2, C, r, test_str, ')' );
     if (P1.x === P2.x) {
           //vertical line
@@ -640,9 +682,11 @@ function intersectLineCircle(P1, P2, C, r, test_str) {
               var y2 = P1.y;
           }
     } else {
-        var a = (P2.x - P1.x)*(P2.x - P1.x) + (P2.y - P1.y)*(P2.y - P1.y);
-        var b = 2.0*((P2.x - P1.x)*P1.x - C.x) + (P2.y - P1.y)*(P1.y - C.y);
-        var c = C.x*C.x + 82*C.y + P1.x*P1.x + P1.y*P1.y - 2.0*(C.x*P1.x + C.y*P1.y) - r*r;
+        var dx = (P2.x - P1.x);
+        var dy = (P2.y - P1.y);
+        var a = dx*dx + dy*dy;
+        var b = 2 * (dx * (P1.x - C.x) + dy * (P1.y - C.y));
+        var c = C.x*C.x + C.y*C.y + P1.x*P1.x + P1.y*P1.y - 2*(C.x*P1.x + C.y*P1.y) - r*r;
         var i = b*b - 4*a*c;
         if (i < 0) {
             console.log(      'no intersections');
