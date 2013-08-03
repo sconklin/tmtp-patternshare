@@ -285,8 +285,8 @@
     "fWD_leg2": "polar(pt.frontApex, dist(pt.frontApex, pt.fWD_leg1), radians(90) + angleBetween3pts(pt.fWD_leg1, pt.frontApex, pt.t1_fWD_leg1))",
     "fWD_point": "down(pt.frontApex, dist(pt.frontApex, pt.fWD_leg1)/7)",
 
-    "pattern_waist": {"x": "pt.frontWaistCenter.x - dist(pt.frontWaistCenter, pt.fWD_leg1) - dist(pt.fWD_leg2, pt.frontWaistSide)", "y": "pt.frontWaistCenter.y + 2*pt.IN"},
-    "measured_waist": {"x": "pt.frontWaistCenter.x - 0.5*meas.front_waist_width", "y": "pt.frontWaistCenter.y + 3*pt.IN"},
+    "front_pattern_waist": {"x": "pt.frontWaistCenter.x - dist(pt.frontWaistCenter, pt.fWD_leg1) - dist(pt.fWD_leg2, pt.frontWaistSide)", "y": "pt.frontWaistCenter.y + 2*pt.IN"},
+    "front_measured_waist": {"x": "pt.frontWaistCenter.x - 0.5*meas.front_waist_width", "y": "pt.frontWaistCenter.y + 3*pt.IN"},
 
 
 
@@ -335,11 +335,19 @@
     "backShoulderTip": "right(pt.temp1_backShoulderTip, dist(pt.bWD_mid3, pt.bWD_mid4))",
 
     "back_shoulder_dart_angle": "radians(7)",
-    "bSD_leg2": "onLineAtLength(pt.backNeckSide, pt.backShoulderTip, dist(pt.backNeckSide, pt.backShoulderTip)/6)",
-    "bSD_leg1": "onLineAtLength(pt.bSD_leg2, pt.backShoulderTip, Math.abs(1*meas.shoulder_length - dist(pt.backNeckSide, pt.backShoulderTip)))",
-    "bSD_mid": "midPoint(pt.bSD_leg1, pt.bSD_leg2)",
+    "t1_bSD_leg2": "onLineAtLength(pt.backNeckSide, pt.backShoulderTip, dist(pt.backNeckSide, pt.backShoulderTip)/6)",
+    "t1_bSD_leg1": "onLineAtLength(pt.t1_bSD_leg2, pt.backShoulderTip, Math.abs(1*meas.shoulder_length - dist(pt.backNeckSide, pt.backShoulderTip)))",
+    "bSD_mid": "midPoint(pt.t1_bSD_leg1, pt.t1_bSD_leg2)",
     "backApex2": "polar(pt.bSD_mid, 0.5*dist(pt.backNeckSide, pt.acrossBackCenter), angleBetween(pt.backNeckSide, pt.bSD_mid) + radians(90))",
     "bSD_point": "polar(pt.backApex2, dist(pt.backApex2, pt.bSD_mid)/5, angleBetween(pt.backApex2, pt.bSD_mid))",
+
+    "bSD_extension_theta": "radians(90) - angleBetween3pts(pt.t1_bSD_leg1, pt.t1_bSD_leg2, pt.backApex2)",
+    "bSD_extension_opposite": "Math.sin(pt.bSD_extension_theta) * dist(pt.backNeckSide, pt.t1_bSD_leg2)",
+    "bSD_leg2": "onLineAtLength(pt.t1_bSD_leg2, pt.backApex2, -pt.bSD_extension_opposite)",
+    "bSD_leg1": "onLineAtLength(pt.t1_bSD_leg1, pt.backApex2, -pt.bSD_extension_opposite)",
+
+    "back_pattern_waist": {"x": "pt.backWaistCenter.x + dist(pt.backWaistCenter, pt.bWD_leg1) + dist(pt.bWD_leg2, pt.backWaistSide)", "y": "pt.backWaistCenter.y + 2*pt.IN"},
+    "back_measured_waist": {"x": "pt.backWaistCenter.x + 0.5*meas.front_waist_width", "y": "pt.backWaistCenter.y + 3*pt.IN"},
 
     "bNC_in": "right(pt.backNeckCenter, 0.6*dist(pt.backNeckSide, pt.backNeckCenter))",
     "bNS_out": "polar(pt.backNeckSide, 0.15*dist(pt.backNeckSide, pt.backNeckCenter), angleBetween(pt.backNeckSide, pt.bNC_in))",
