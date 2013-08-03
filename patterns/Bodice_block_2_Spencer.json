@@ -151,6 +151,11 @@
         ["L", ["pt.t1_fWD_leg1.x","pt.t1_fWD_leg1.y"] ],
         ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
 
+        ["M", ["pt.t2_fWD_leg2.x","pt.fWD_leg2.y"] ],
+        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
+        ["L", ["pt.t2_fWD_leg1.x","pt.fWD_leg1.y"] ],
+        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+
         ["M", ["pt.fBD_leg2.x", "pt.fBD_leg2.y"] ],
         ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
         ["L", ["pt.fWD_leg2.x","pt.fWD_leg2.y"] ],
@@ -315,7 +320,7 @@
 
     "back_dart_width": "(1*meas.back_waist_width)/12",
     "temp_bWS": "intersectCircles(pt.backHighbustSide, 1*meas.side_waist_length, pt.backWaistCenter,  0.5*meas.back_waist_width + pt.back_dart_width, 'y1 > y2')",
-    "temp_bWD_leg1": "onLineAtX(pt.backWaistCenter, pt.temp_bWS, pt.backApex1.x)",
+    "temp_bWD_leg1": {"x": "pt.backApex1.x", "y": "pt.backWaistCenter.y"},
     "temp_bWD_leg2": "intersectCircles(pt.backApex1, dist(pt.backApex1, pt.temp_bWD_leg1), pt.temp_bWS, 0.5*meas.back_waist_width - dist(pt.backWaistCenter, pt.temp_bWD_leg1), 'y1 > y2')",
     "back_dart_angle": "angleBetween3pts(pt.temp_bWD_leg2, pt.backApex1, pt.temp_bWD_leg1)",
     "bWD_mid1": "polar(pt.backApex1, 1*pt.IN, radians(90) + 0.5*(pt.back_dart_angle))",
