@@ -404,8 +404,9 @@ function numdist(num1, num2){
     return Math.sqrt((num1*num1) + (num2*num2));
 }
 
-function rotate(p, o, theta){
+function rotate(o, p, theta){
     //accepts pivot p, object to rotate o, and theta the angle to rotate, returns dictionary with x & y of new location
+    console.log('rotate(', p, o, theta);
     var x = Math.cos(theta) * (p.x-o.x) - Math.sin(theta) * (p.y-o.y) + o.x;
     var y = Math.sin(theta) * (p.x-o.x) + Math.cos(theta) * (p.y-o.y) + o.y;
     return { "x": x, "y": y }
