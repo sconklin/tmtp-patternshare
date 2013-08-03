@@ -264,11 +264,7 @@
 
     "total_dart_angle": "angleBetween3pts(pt.t1_fWD_leg1, pt.frontApex, pt.t1_fWD_leg2)",
 
-
-    "fBD_leg1": "rotate(pt.frontApex, pt.fBD_leg2, -0.5*pt.total_dart_angle)",
-
-
-
+    "fBD_leg1": "rotate(pt.fBD_leg2, pt.frontApex, -0.5*pt.total_dart_angle)",
     "fBD_point": "polar(pt.frontApex, dist(pt.frontApex, pt.fBD_leg1)/7, angleBetween(pt.frontApex, pt.fBD_leg1) + 0.5*angleBetween3pts(pt.fBD_leg1, pt.frontApex, pt.fBD_leg2))",
 
     "p2": "intersectLines(pt.frontNeckCenter, pt.t1_fWS, pt.frontApex, pt.fBD_leg2)",
@@ -277,22 +273,18 @@
 
     "front_waist_dart_angle": "0.5*pt.total_dart_angle",
 
-    "p3": "polar(pt.frontApex, 1*pt.IN, radians(90) - 0.5*pt.front_waist_dart_angle)",
-    "p4": "polar(pt.frontApex, 1*pt.IN, radians(90) + 0.5*pt.front_waist_dart_angle)",
-    "t2_fWD_leg1": "onLineAtY(pt.frontApex, pt.p3, pt.frontWaistCenter.y)",
-    "t2_fWD_leg2": "onLineAtY(pt.frontApex, pt.p4, pt.frontWaistCenter.y)",
+    "t2_fWD_leg1": "intersectVectorLine(pt.frontApex, radians(90) - 0.5*pt.front_waist_dart_angle, pt.frontWaistCenter, pt.t1_fWD_leg1)",
+    "t2_fWD_leg2": "intersectVectorLine(pt.frontApex, radians(90) + 0.5*pt.front_waist_dart_angle, pt.frontWaistCenter, pt.t1_fWD_leg1)",
     "t2_front_waist_width": "dist(pt.frontWaistCenter, pt.t2_fWD_leg1) + dist(pt.t2_fWD_leg2, pt.frontWaistSide)",
 
     "adjust_waist_amount": "0.5*meas.front_waist_width - pt.t2_front_waist_width",
 
     "fWD_leg1": "onLineAtLength(pt.t2_fWD_leg1, pt.frontWaistCenter, -0.5*pt.adjust_waist_amount)",
-    "fWD_leg2": "polar(pt.frontApex, dist(pt.frontApex, pt.fWD_leg1), radians(90) + angleBetween3pts(pt.fWD_leg1, pt.frontApex, pt.t1_fWD_leg1))",
+    "fWD_leg2": "rotate(pt.t1_fWD_leg1, pt.frontApex, angleBetween3pts(pt.fWD_leg1, pt.frontApex, pt.t1_fWD_leg1))",
     "fWD_point": "down(pt.frontApex, dist(pt.frontApex, pt.fWD_leg1)/7)",
 
     "front_pattern_waist": {"x": "pt.frontWaistCenter.x - dist(pt.frontWaistCenter, pt.fWD_leg1) - dist(pt.fWD_leg2, pt.frontWaistSide)", "y": "pt.frontWaistCenter.y + 2*pt.IN"},
     "front_measured_waist": {"x": "pt.frontWaistCenter.x - 0.5*meas.front_waist_width", "y": "pt.frontWaistCenter.y + 3*pt.IN"},
-
-
 
     "fNC_in": "left(pt.frontNeckCenter, 0.6*dist(pt.frontNeckSide, pt.frontNeckCenter))",
     "fNS_out": "down(pt.frontNeckSide, 0.15*dist(pt.frontNeckSide, pt.frontNeckCenter))",
