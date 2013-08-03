@@ -227,13 +227,12 @@ function drawpattern(){
             }
         }
         console.log("A maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
-        //add in 5% margins and convert measurements to unitscayl (cm or in)
+        //add in 5% margin to create larger grid around pattern pieces, and convert measurements to unitscayl (cm or in)
         maxx *= 1.05*unitscayl;
         maxy *= 1.05*unitscayl;
         minx *= 1.05*unitscayl;
         miny *= 1.05*unitscayl;
         console.log("B maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
-        var txtshift = 30;
         var svgw = maxx - minx;
         var svgh = maxy - miny;
         var xshift = -minx;
