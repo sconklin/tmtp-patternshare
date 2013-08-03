@@ -69,6 +69,7 @@ function getMeas() {
   var pmd = window.patternData.pattern.measurements;
   pmd.map( function(item) {
     var measnum = $("#"+item).val();
+    console.log("meas.",item);
     if ( measnum !== "" && isNaN(measnum) == false ) {
         meas[item] = measnum;
         console.log("meas."+item+": " + measnum);
@@ -626,33 +627,6 @@ function intersectLineCircle(P1, P2, C, r, test_str) {
     Returns an object P with number of intersection points,and up to two coordinate pairs as P.intersections,P.p1,P.p2
     Based on paulbourke.net/geometry/sphereline/sphere_line_intersection.py,written in Python 3.2 by Campbell Barton
     */
-float dx = x2 - x1;
-  float dy = y2 - y1;
-  float a = dx * dx + dy * dy;
-  float b = 2 * (dx * (x1 - cx) + dy * (y1 - cy));
-  float c = cx * cx + cy * cy;
-  c += x1 * x1 + y1 * y1;
-  c -= 2 * (cx * x1 + cy * y1);
-  c -= cr * cr;
-  float bb4ac = b * b - 4 * a * c;
-
-  //println(bb4ac);
-
-  if (bb4ac < 0) {  // Not intersecting
-    return false;
-  }
-  else {
-
-    float mu = (-b + sqrt( b*b - 4*a*c )) / (2*a);
-    float ix1 = x1 + mu*(dx);
-    float iy1 = y1 + mu*(dy);
-    mu = (-b - sqrt(b*b - 4*a*c )) / (2*a);
-    float ix2 = x1 + mu*(dx);
-    float iy2 = y1 + mu*(dy);
-
-    // The intersection points
-    //ellipse(ix1, iy1, 10, 10);
-    //ellipse(ix2, iy2, 10, 10);
 
     console.log('intersectLineCircle(', P1, P2, C, r, test_str, ')' );
     if (P1.x === P2.x) {
