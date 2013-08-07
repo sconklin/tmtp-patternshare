@@ -393,6 +393,7 @@ function slope(p1, p2) {
 }
 
 function dist(pt1, pt2){
+    console.log('dist(', pt1, pt2);
     var dy = pt2.y - pt1.y;
     var dx = pt2.x - pt1.x;
     var d = Math.sqrt(dy*dy + dx*dx);
