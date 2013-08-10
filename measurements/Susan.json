@@ -56,12 +56,13 @@
 
         "front_neck_balance" : 49.5,
         "back_neck_balance" : 46.5,
-        "front_underarm_balance" : 30,
-        "back_underarm_balance" : 32,
         "front_shoulder_balance": 48.5,
         "back_shoulder_balance": 44.5,
         "front_waist_balance" : 41.5,
         "back_waist_balance" : 51,
+        "front_underarm_balance" : 30,
+        "back_underarm_balance" : 32,
+        "bust_balance" : 0,
 
         "highhip" : 0,
         "front_highhip_width" : 50.0,
