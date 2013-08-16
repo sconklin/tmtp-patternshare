@@ -53,7 +53,7 @@
         ["z"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
     },
     {
       "id": "Front B",
@@ -67,7 +67,7 @@
         ["z"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
     },
     {
       "id": "Sleeve C",
@@ -82,7 +82,7 @@
         ["z"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
     },
     {
       "id": "Back Neck Band D",
@@ -93,7 +93,7 @@
         ["z"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
     },
     {
       "id": "Front Neck Band E",
@@ -104,7 +104,7 @@
         ["z"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
     },
     {
       "id": "Shoulder Stay Strip F",
@@ -115,7 +115,7 @@
         ["z"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"3", "stroke":"#0000dd", "fill":"none" }
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
     }
   ],
   "construction": [
@@ -126,43 +126,37 @@
         ["M", "pt.backNape"],
         ["L", "pt.backHipCenter", "pt.backHipSide", "pt.backHighbustSide","pt.backAcrossSide"],
         ["L", "pt.backShoulderTip", "pt.backNeckSide", "pt.backNape"],
-
-        ["M", "pt.backAcrossCenter"],
-        ["L", "pt.backAcrossSide"],
-
-        ["M", "pt.backHighbustCenter"],
-        ["L", "pt.backHighbustSide"],
-
-        ["M", "pt.backBustCenter"],
-        ["L", "pt.backBustSide"],
-
         ["M", "pt.backWaistCenter"],
-        ["L", "pt.backWaistSide"],
-
-        ["M", "pt.backHipCenter"],
-        ["L", "pt.backHipSide"]
+        ["L", "pt.backWaistSide"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
     },
     {
       "id": "Back Measurement Lines",
       "type": "path",
       "d": [
-        ["M", "pt.backWaistCenter"],
-        ["L", "pt.backNeckSide"],
-        ["M", "pt.backWaistCenter"],
-        ["L", "pt.backShoulderTip"],
         ["M", "pt.backAcrossCenter"],
         ["L", "pt.backAcrossSide"],
         ["M", "pt.backHighbustCenter"],
         ["L", "pt.backHighbustSide"],
         ["M", "pt.backBustCenter"],
         ["L", "pt.backBustSide"]
-
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#FF0000", "fill":"none" }
+    },
+    {
+      "id": "Back Balance Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backNeckSide"],
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backShoulderTip"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
     },
     {
       "id": "Front Construction Lines",
@@ -171,28 +165,16 @@
         ["M", "pt.frontNeckCenter"],
         ["L", "pt.frontHipCenter", "pt.frontHipSide", "pt.frontHighbustSide", "pt.frontAcrossSide"],
         ["L", "pt.frontShoulderTip", "pt.frontNeckSide", "pt.frontNeckCenter"],
-        ["M", "pt.frontAcrossCenter"],
-        ["L", "pt.frontAcrossSide"],
-        ["M", "pt.frontHighbustCenter"],
-        ["L", "pt.frontHighbustSide"],
-        ["M", "pt.frontBustCenter"],
-        ["L", "pt.frontBustSide"],
         ["M", "pt.frontWaistCenter"],
-        ["L", "pt.frontWaistSide"],
-        ["M", "pt.frontHipCenter"],
-        ["L", "pt.frontHipSide"]
+        ["L", "pt.frontWaistSide"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
     },
     {
       "id": "Front Measurement Lines",
       "type": "path",
       "d": [
-        ["M", "pt.frontWaistCenter"],
-        ["L", "pt.frontNeckSide"],
-        ["M", "pt.frontWaistCenter"],
-        ["L", "pt.frontShoulderTip"],
         ["M", "pt.frontAcrossCenter"],
         ["L", "pt.frontAcrossSide"],
         ["M", "pt.frontHighbustCenter"],
@@ -201,7 +183,19 @@
         ["L", "pt.frontBustSide"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#11FF11", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#FF0000", "fill":"none" }
+    },
+    {
+      "id": "Front Balance Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontNeckSide"],
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontShoulderTip"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
     },
     {
       "id": "Sleeve Construction Lines",
@@ -212,13 +206,12 @@
         ["M", "pt.c4"],
         ["L", "pt.c6"],
         ["M", "pt.c4"],
-        ["L", "pt.c8"],
-        ["L", "pt.c6"],
+        ["L", "pt.c8", "pt.c6"],
         ["M", "pt.c9"],
         ["L", "pt.c10"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
     }
   ],
   "points": {
@@ -226,7 +219,7 @@
       "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.units)",
       "seamAllowance" : "(5/8)*pt.IN",
 
-      "backNape": { "x": "0.5", "y": "0.5" },
+      "backNape": { "x": "4*pt.seamAllowance", "y": "2*(1*meas.back_neck_balance - 1*meas.back_waist_length)" },
       "backHighbustCenter" : "down(pt.backNape, 1*meas.back_highbust_height)",
       "backAcrossCenter" : "down(pt.backNape, 0.66*dist(pt.backNape, pt.backHighbustCenter))",
       "backBustCenter": "down(pt.backNape, 1*meas.back_bust_height)",
