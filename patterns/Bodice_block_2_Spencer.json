@@ -35,28 +35,19 @@
       "back_shoulder_balance",
       "front_waist_balance",
       "back_waist_balance"
-
   ],
-
   "main": [
     {
       "id": "Front Bodice Block A",
       "type": "path",
       "d": [
-        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.fWD_leg1.x","pt.fWD_leg1.y"] ],
-        ["L", ["pt.fWD_point.x","pt.fWD_point.y"] ],
-        ["L", ["pt.fWD_leg2.x","pt.fWD_leg2.y"] ],
-        ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
-        ["L", ["pt.fBD_leg1.x","pt.fBD_leg1.y"] ],
-        ["L", ["pt.fBD_point.x","pt.fBD_point.y"] ],
-        ["L", ["pt.fBD_leg2.x","pt.fBD_leg2.y"] ],
-        ["L", ["pt.frontHighbustSide.x","pt.frontHighbustSide.y"] ],
-        ["C", ["pt.fHBS_out.x","pt.fHBS_out.y"], ["pt.fAS1_in.x","pt.fAS1_in.y"], ["pt.frontArmscye1.x","pt.frontArmscye1.y"] ],
-        ["C", ["pt.fAS1_out.x","pt.fAS1_out.y"], ["pt.fST_in.x","pt.fST_in.y"], ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
-        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
-        ["C", ["pt.fNS_out.x","pt.fNS_out.y"], ["pt.fNC_in.x","pt.fNC_in.y"], ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
+        ["M", "pt.frontNeckCenter"  ],
+        ["L", "pt.frontWaistCenter", "pt.fWD_leg1", "pt.fWD_point", "pt.fWD_leg2" ],
+        ["L", "pt.frontWaistSide", "pt.fBD_leg1", "pt.fBD_point", "pt.fBD_leg2","pt.frontHighbustSide" ],
+        ["C", "pt.fHBS_out", "pt.fAS1_in", "pt.frontArmscye1" ],
+        ["C", "pt.fAS1_out", "pt.fST_in", "pt.frontShoulderTip" ],
+        ["L", "pt.frontNeckSide" ],
+        ["C", "pt.fNS_out", "pt.fNC_in", "pt.frontNeckCenter" ],
         ["z"]
       ],
       "drawattr": {},
@@ -66,20 +57,12 @@
       "id": "Back Bodice Block B",
       "type": "path",
       "d": [
-        ["M", ["pt.backNeckCenter.x","pt.backNeckCenter.y"] ],
-        ["L", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
-        ["L", ["pt.bWD_leg1.x","pt.bWD_leg1.y"] ],
-        ["L", ["pt.bWD_point.x","pt.bWD_point.y"] ],
-        ["L", ["pt.bWD_leg2.x","pt.bWD_leg2.y"] ],
-        ["L", ["pt.backWaistSide.x","pt.backWaistSide.y"] ],
-        ["L", ["pt.backHighbustSide.x","pt.backHighbustSide.y"] ],
-        ["C", ["pt.bHBS_out.x","pt.bHBS_out.y"], ["pt.bAS1_in.x","pt.bAS1_in.y"],["pt.backArmscye1.x","pt.backArmscye1.y"] ],
-        ["C", ["pt.bAS1_out.x","pt.bAS1_out.y"], ["pt.bST_in.x","pt.bST_in.y"], ["pt.backShoulderTip.x","pt.backShoulderTip.y"] ],
-        ["L", ["pt.bSD_leg1.x","pt.bSD_leg1.y"] ],
-        ["L", ["pt.bSD_point.x","pt.bSD_point.y"] ],
-        ["L", ["pt.bSD_leg2.x","pt.bSD_leg2.y"] ],
-        ["L", ["pt.backNeckSide.x","pt.backNeckSide.y"] ],
-        ["C", ["pt.bNS_out.x","pt.bNS_out.y"], ["pt.bNC_in.x","pt.bNC_in.y"], ["pt.backNeckCenter.x","pt.backNeckCenter.y"] ],
+        ["M", "pt.backNeckCenter" ],
+        ["L", "pt.backWaistCenter","pt.bWD_leg1", "pt.bWD_point", "pt.bWD_leg2", "pt.backWaistSide", "pt.backHighbustSide" ],
+        ["C", "pt.bHBS_out", "pt.bAS1_in", "pt.backArmscye1" ],
+        ["C", "pt.bAS1_out", "pt.bST_in", "pt.backShoulderTip" ],
+        ["L", "pt.bSD_leg1", "pt.bSD_point", "pt.bSD_leg2", "pt.backNeckSide" ],
+        ["C", "pt.bNS_out", "pt.bNC_in", "pt.backNeckCenter" ],
         ["z"]
       ],
       "drawattr": {},
@@ -92,20 +75,13 @@
       "id": "Front Bodice Block Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.fWD_leg1.x","pt.fWD_leg1.y"] ],
-        ["L", ["pt.fWD_point.x","pt.fWD_point.y"] ],
-        ["L", ["pt.fWD_leg2.x","pt.fWD_leg2.y"] ],
-        ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
-        ["L", ["pt.fBD_leg1.x","pt.fBD_leg1.y"] ],
-        ["L", ["pt.fBD_point.x","pt.fBD_point.y"] ],
-        ["L", ["pt.fBD_leg2.x","pt.fBD_leg2.y"] ],
-        ["L", ["pt.frontHighbustSide.x","pt.frontHighbustSide.y"] ],
-        ["C", ["pt.fHBS_out.x","pt.fHBS_out.y"], ["pt.fAS1_in.x","pt.fAS1_in.y"], ["pt.frontArmscye1.x","pt.frontArmscye1.y"] ],
-        ["C", ["pt.fAS1_out.x","pt.fAS1_out.y"], ["pt.fST_in.x","pt.fST_in.y"], ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
-        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
-        ["C", ["pt.fNS_out.x","pt.fNS_out.y"], ["pt.fNC_in.x","pt.fNC_in.y"], ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ]
+        ["M", "pt.frontNeckCenter" ],
+        ["L", "pt.frontWaistCenter",  "pt.fWD_leg1", "pt.fWD_point", "pt.fWD_leg2", "pt.frontWaistSide" ],
+        ["L", "pt.fBD_leg1", "pt.fBD_point", "pt.fBD_leg2", "pt.frontHighbustSide" ],
+        ["C", "pt.fHBS_out", "pt.fAS1_in", "pt.frontArmscye1" ],
+        ["C", "pt.fAS1_out", "pt.fST_in", "pt.frontShoulderTip" ],
+        ["L", "pt.frontNeckSide" ],
+        ["C", "pt.fNS_out", "pt.fNC_in", "pt.frontNeckCenter" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
@@ -114,39 +90,22 @@
       "id": "Front Bodice Block Construction Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.fBD_leg1.x", "pt.fBD_leg1.y"] ],
-        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.fBD_leg2.x", "pt.fBD_leg2.y"] ],
+        ["M", "pt.fBD_leg1" ],
+        ["L", "pt.frontApex", "pt.fBD_leg2" ],
+        ["M", "pt.fWD_leg1" ],
+        ["L", "pt.frontApex", "pt.fWD_leg2" ],
+        ["M", "pt.fBD_leg2" ],
+        ["L", "pt.t1_fWS", "pt.t1_fWD_leg2", "pt.frontApex", "pt.t1_fWD_leg1", "pt.frontWaistCenter" ],
 
-        ["M", ["pt.fWD_leg1.x", "pt.fWD_leg1.y"] ],
-        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.fWD_leg2.x", "pt.fWD_leg2.y"] ],
+        ["M", "pt.frontWaistSide" ],
+        ["L", "pt.t2_fWD_leg2", "pt.frontApex" ],
+        ["L", "pt.t1_fWD_leg1", "pt.frontWaistCenter" ],
 
-        ["M", ["pt.fBD_leg2.x", "pt.fBD_leg2.y"] ],
-        ["L", ["pt.t1_fWS.x","pt.t1_fWS.y"] ],
-        ["L", ["pt.t1_fWD_leg2.x","pt.t1_fWD_leg2.y"] ],
-        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.t1_fWD_leg1.x","pt.t1_fWD_leg1.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
+        ["M", "pt.frontWaistSide" ],
+        ["L", "pt.t3_fWD_leg2", "pt.frontApex", "pt.t3_fWD_leg1", "pt.frontWaistCenter" ],
 
-        ["M", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
-        ["L", ["pt.t2_fWD_leg2.x","pt.t2_fWD_leg2.y"] ],
-        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.t1_fWD_leg1.x","pt.t1_fWD_leg1.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-
-        ["M", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
-        ["L", ["pt.t3_fWD_leg2.x","pt.t3_fWD_leg2.y"] ],
-        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.t3_fWD_leg1.x","pt.t3_fWD_leg1.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-
-        ["M", ["pt.fBD_leg1.x", "pt.fBD_leg1.y"] ],
-        ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
-        ["L", ["pt.fWD_leg2.x","pt.fWD_leg2.y"] ],
-        ["L", ["pt.frontApex.x","pt.frontApex.y"] ],
-        ["L", ["pt.fWD_leg1.x","pt.fWD_leg1.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ]
+        ["M", "pt.fBD_leg1" ],
+        ["L", "pt.frontWaistSide", "pt.fWD_leg2", "pt.frontApex", "pt.fWD_leg1", "pt.frontWaistCenter" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
@@ -155,14 +114,14 @@
       "id": "Front Bodice Block Measurement Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["M", ["pt.frontAcrossCenter.x","pt.frontAcrossCenter.y"] ],
-        ["L", ["pt.frontAcrossSide.x","pt.frontAcrossSide.y"] ],
-        ["M", ["pt.frontHighbustCenter.x","pt.frontHighbustCenter.y"] ],
-        ["L", ["pt.frontHighbustSide.x","pt.frontHighbustSide.y"] ],
-        ["M", ["pt.frontBustCenter.x","pt.frontBustCenter.y"] ],
-        ["L", ["pt.frontBustSide.x","pt.frontBustSide.y"] ]
+        ["M", "pt.frontNeckCenter" ],
+        ["L", "pt.frontWaistCenter" ],
+        ["M", "pt.frontAcrossCenter" ],
+        ["L", "pt.frontAcrossSide" ],
+        ["M", "pt.frontHighbustCenter" ],
+        ["L", "pt.frontHighbustSide" ],
+        ["M", "pt.frontBustCenter" ],
+        ["L", "pt.frontBustSide" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
@@ -171,15 +130,14 @@
       "id": "Front Bodice Block Balance Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
-        ["M", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
-        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.t1_fWS.x","pt.t1_fWS.y"] ],
-
-        ["M", ["pt.p1.x", "pt.p1.y"] ],
-        ["L", ["pt.frontWaistSide.x", "pt.frontWaistSide.y"] ]
+        ["M", "pt.frontWaistCenter" ],
+        ["L", "pt.frontNeckSide" ],
+        ["M", "pt.frontWaistCenter" ],
+        ["L", "pt.frontShoulderTip" ],
+        ["M", "pt.frontNeckCenter" ],
+        ["L", "pt.t1_fWS" ],
+        ["M", "pt.p1" ],
+        ["L", "pt.frontWaistSide" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
@@ -188,21 +146,21 @@
       "id": "Back Bodice Block Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.backNeckCenter.x","pt.backNeckCenter.y"] ],
-        ["L", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
-        ["L", ["pt.bWD_leg1.x","pt.bWD_leg1.y"] ],
-        ["L", ["pt.bWD_point.x","pt.bWD_point.y"] ],
-        ["L", ["pt.bWD_leg2.x","pt.bWD_leg2.y"] ],
-        ["L", ["pt.backWaistSide.x","pt.backWaistSide.y"] ],
-        ["L", ["pt.backHighbustSide.x","pt.backHighbustSide.y"] ],
-        ["C", ["pt.bHBS_out.x","pt.bHBS_out.y"], ["pt.bAS1_in.x","pt.bAS1_in.y"], ["pt.backArmscye1.x","pt.backArmscye1.y"] ],
-        ["C", ["pt.bAS1_out.x","pt.bAS1_out.y"], ["pt.bST_in.x","pt.bST_in.y"], ["pt.backShoulderTip.x","pt.backShoulderTip.y"] ],
-        ["L", ["pt.bSD_leg1.x","pt.bSD_leg1.y"] ],
-        ["L", ["pt.bSD_point.x","pt.bSD_point.y"] ],
-        ["L", ["pt.bSD_leg2.x","pt.bSD_leg2.y"] ],
-        ["L", ["pt.backNeckSide.x","pt.backNeckSide.y"] ],
-        ["L", ["pt.backNeckSide.x","pt.backNeckSide.y"] ],
-        ["C", ["pt.bNS_out.x","pt.bNS_out.y"], ["pt.bNC_in.x","pt.bNC_in.y"], ["pt.backNeckCenter.x","pt.backNeckCenter.y"] ]
+        ["M", "pt.backNeckCenter" ],
+        ["L", "pt.backWaistCenter" ],
+        ["L", "pt.bWD_leg1" ],
+        ["L", "pt.bWD_point" ],
+        ["L", "pt.bWD_leg2" ],
+        ["L", "pt.backWaistSide" ],
+        ["L", "pt.backHighbustSide" ],
+        ["C", "pt.bHBS_out", "pt.bAS1_in", "pt.backArmscye1" ],
+        ["C", "pt.bAS1_out", "pt.bST_in", "pt.backShoulderTip" ],
+        ["L", "pt.bSD_leg1" ],
+        ["L", "pt.bSD_point" ],
+        ["L", "pt.bSD_leg2" ],
+        ["L", "pt.backNeckSide" ],
+        ["L", "pt.backNeckSide" ],
+        ["C", "pt.bNS_out", "pt.bNC_in", "pt.backNeckCenter" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
@@ -211,20 +169,14 @@
       "id": "Back Bodice Block Construction Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.bSD_leg1.x","pt.bSD_leg1.y"] ],
-        ["L", ["pt.backApex2.x","pt.backApex2.y"] ],
-        ["L", ["pt.bSD_leg2.x","pt.bSD_leg2.y"] ],
-
-        ["M", ["pt.bWD_leg1.x","pt.bWD_leg1.y"] ],
-        ["L", ["pt.backApex1.x","pt.backApex1.y"] ],
-        ["L", ["pt.bWD_leg2.x","pt.bWD_leg2.y"] ],
-
-        ["M", ["pt.backHighbustSide.x","pt.backHighbustSide.y"] ],
-        ["L", ["pt.t1_bWS.x","pt.t1_bWS.y"] ],
-        ["L", ["pt.t1_bWD_leg2.x","pt.t1_bWD_leg2.y"] ],
-        ["L", ["pt.backApex1.x","pt.backApex1.y"] ],
-        ["L", ["pt.t1_bWD_leg1.x","pt.t1_bWD_leg1.y"] ],
-        ["L", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ]
+        ["M", "pt.bSD_leg1" ],
+        ["L", "pt.backApex2", "pt.bSD_leg2" ],
+        ["M", "pt.bWD_leg1" ],
+        ["L", "pt.backApex1", "pt.bWD_leg2" ],
+        ["M", "pt.backHighbustSide" ],
+        ["L", "pt.t1_bWS", "pt.t1_bWD_leg2", "pt.backApex1", "pt.t1_bWD_leg1", "pt.backWaistCenter" ],
+        ["M", "pt.t1_bWS" ],
+        ["L", "pt.t2_bWD_leg2", "pt.backApex1", "pt.t2_bWD_leg1", "pt.backWaistCenter" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
@@ -233,12 +185,12 @@
       "id": "Back Bodice Block Measurement Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.backAcrossCenter.x","pt.backAcrossCenter.y"] ],
-        ["L", ["pt.backAcrossSide.x","pt.backAcrossSide.y"] ],
-        ["M", ["pt.backHighbustCenter.x","pt.backHighbustCenter.y"] ],
-        ["L", ["pt.backHighbustSide.x","pt.backHighbustSide.y"] ],
-        ["M", ["pt.backBustCenter.x","pt.backBustCenter.y"] ],
-        ["L", ["pt.backBustSide.x","pt.backBustSide.y"] ]
+        ["M", "pt.backAcrossCenter" ],
+        ["L", "pt.backAcrossSide" ],
+        ["M", "pt.backHighbustCenter" ],
+        ["L", "pt.backHighbustSide" ],
+        ["M", "pt.backBustCenter" ],
+        ["L", "pt.backBustSide" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
@@ -247,14 +199,12 @@
       "id": "Back Bodice Block Balance Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
-        ["L", ["pt.backNeckSide.x","pt.backNeckSide.y"] ],
-
-        ["M", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
-        ["L", ["pt.t1_bST.x","pt.t1_bST.y"] ],
-
-        ["M", ["pt.p4.x","pt.p3.y"] ],
-        ["L", ["pt.backShoulderTip.x","pt.backShoulderTip.y"] ]
+        ["M", "pt.backWaistCenter" ],
+        ["L", "pt.backNeckSide" ],
+        ["M", "pt.backWaistCenter" ],
+        ["L", "pt.t1_bST" ],
+        ["M", "pt.p4" ],
+        ["L", "pt.backShoulderTip" ]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
@@ -383,15 +333,12 @@
     "back_pattern_waist": {"x": "pt.backWaistCenter.x + dist(pt.backWaistCenter, pt.bWD_leg1) + dist(pt.bWD_leg2, pt.backWaistSide)", "y": "pt.backWaistCenter.y + 2*pt.IN"},
     "back_measured_waist": {"x": "pt.backWaistCenter.x + 0.5*meas.back_waist_width", "y": "pt.backWaistCenter.y + 3*pt.IN"},
 
-
-
     "bNC_in": "right(pt.backNeckCenter, 0.6*dist(pt.backNeckSide, pt.backNeckCenter))",
     "bNS_out": "polar(pt.backNeckSide, 0.15*dist(pt.backNeckSide, pt.backNeckCenter), angleBetween(pt.backNeckSide, pt.bNC_in))",
     "bHBS_out": "polar(pt.backHighbustSide, dist(pt.backHighbustSide, pt.backArmscye1)/2, angleBetween(pt.backHighbustSide, pt.backWaistSide) + radians(90))",
     "bAS1_in": "polar(pt.backArmscye1, dist(pt.backHighbustSide, pt.backArmscye1)/3, angleBetween(pt.backShoulderTip, pt.backArmscye2))",
     "bAS1_out": "polar(pt.backArmscye1, dist(pt.backArmscye1, pt.backShoulderTip)/3, angleBetween(pt.bAS1_in, pt.backArmscye1))",
     "bST_in": "polar(pt.backShoulderTip, dist(pt.backArmscye1, pt.backShoulderTip)/6, angleBetween(pt.backNeckSide, pt.backShoulderTip) + radians(90))"
-
 
   }
 
