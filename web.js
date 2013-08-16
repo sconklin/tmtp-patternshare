@@ -151,19 +151,19 @@ function patternChangeHandler(){
     $("#SelectP option[value='dummy']").remove();
 
     $.getJSON(pFileName)
-  .done(function(pdata) {
-      // Now we have measurement data
-      window.patternData = pdata;
-      $("#patterntitle").html(window.patternData.pattern.title);
+    .done(function(pdata) {
+        // Now we have measurement data
+        window.patternData = pdata;
+        $("#patterntitle").html(window.patternData.pattern.title);
 
-      // See whether we're ready to draw
-      drawPatternIfReady();
-  })
-  .fail(function( jqxhr, textStatus, error ) {
-      var err = textStatus + ', ' + error;
-      console.log( "Pattern Request Failed: " + err);
-      alert("An error was encountered while parsing the Pattern data file")
-  });
+        // See whether we're ready to draw
+        drawPatternIfReady();
+    })
+    .fail(function( jqxhr, textStatus, error ) {
+        var err = textStatus + ', ' + error;
+        console.log( "Pattern Request Failed: " + err);
+        alert("An error was encountered while parsing the Pattern data file")
+    });
 }
 
 // Triggered when the user selects a pattern file from the select
