@@ -147,11 +147,17 @@ function drawpattern(){
                 if (window.patternData.pattern.construction[i].type == "path"){
                     svgconststr += " d=\" ";
                     for (j in window.patternData.pattern.construction[i].d){
+                        console.log('     command: ', window.patternData.pattern.construction[i].d[j][0]);
                         svgconststr += window.patternData.pattern.construction[i].d[j][0];
                         for (var k=1; k<window.patternData.pattern.construction[i].d[j].length; k++){
-                            //console.log(window.patternData.pattern.construction[i].d[j][k][0]);
-                            var eval0 = eval(window.patternData.pattern.construction[i].d[j][k][0]);
-                            var eval1 = eval(window.patternData.pattern.construction[i].d[j][k][1]);
+                            this_point = eval(window.patternData.pattern.construction[i].d[j][k]);
+                            console.log(' this_point:', this_point);
+                            console.log('          x: ', this_point.x);
+                            console.log('          y: ', this_point.y);
+                            //var eval0 = eval(window.patternData.pattern.construction[i].d[j][k][0]);
+                            //var eval1 = eval(window.patternData.pattern.construction[i].d[j][k][1]);
+                            eval0 = this_point.x;
+                            eval1 = this_point.y;
                             eval0 *= unitscayl;
                             eval1 *= unitscayl;
                             //console.log("j[0]: " + window.patternData.pattern.construction[i].d[j][0]);
@@ -178,10 +184,8 @@ function drawpattern(){
         for (i in window.patternData.pattern.main){
             console.log(i, ' A');
             svgobjstring += "<";
-            console.log(i, 'A', window.patternData.pattern.main[i].type);
-            console.log(i, 'A', window.patternData.pattern.main[i].id);
-            svgobjstring += window.patternData.pattern.main[i].type
-                            + " " + "id=\"" + window.patternData.pattern.main[i].id + "\" ";
+            console.log(i, 'A', window.patternData.pattern.main[i].type, ', id = ', window.patternData.pattern.main[i].id);
+            svgobjstring += window.patternData.pattern.main[i].type + " " + "id=\"" + window.patternData.pattern.main[i].id + "\" ";
             for (j in window.patternData.pattern.main[i].drawattr){
                 console.log(i, 'B', j);
                 var evaled = eval(window.patternData.pattern.main[i].drawattr[j]);
@@ -191,16 +195,22 @@ function drawpattern(){
             }
 
             if (window.patternData.pattern.main[i].type == "path"){
-                console.log(i, 'C');
+                console.log(i, 'C - create svg path');
                 svgobjstring += " d=\" ";
                 for (j in window.patternData.pattern.main[i].d){
-                    console.log(i, 'C', j);
+                    console.log('     command: ', window.patternData.pattern.main[i].d[j][0]);
                     svgobjstring += window.patternData.pattern.main[i].d[j][0];
                     for (var k=1; k<window.patternData.pattern.main[i].d[j].length; k++){
-                        console.log(i, 'C', j, k, window.patternData.pattern.main[i].d[j]);
-                        console.log(window.patternData.pattern.main[i].d[j][k][0]);
-                        var eval0 = eval(window.patternData.pattern.main[i].d[j][k][0]);
-                        var eval1 = eval(window.patternData.pattern.main[i].d[j][k][1]);
+
+                        this_point = eval(window.patternData.pattern.main[i].d[j][k]);
+                        console.log(' this_point:', this_point);
+                        console.log('          x: ', this_point.x);
+                        console.log('          y: ', this_point.y);
+                        //var eval0 = eval(window.patternData.pattern.main[i].d[j][k][0]);
+                        //var eval1 = eval(window.patternData.pattern.main[i].d[j][k][1]);
+                        eval0 = this_point.x;
+                        eval1 = this_point.y;
+
                         eval0 *= unitscayl;
                         eval1 *= unitscayl;
                         //console.log("j[0]: " + window.patternData.pattern.main[i].d[j][0]);
@@ -227,11 +237,15 @@ function drawpattern(){
             }
         }
         console.log("A maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
-        //add in 5% margin to create larger grid around pattern pieces, and convert measurements to unitscayl (cm or in)
-        maxx *= 1.05*unitscayl;
-        maxy *= 1.05*unitscayl;
-        minx *= 1.05*unitscayl;
-        miny *= 1.05*unitscayl;
+        //increase maxs & mins by 5% to create margin around pattern, then convert measurements to unitscayl (cm or in)
+        maxx += 0.05*maxx;
+        maxy += 0.05*maxy;
+        minx -= 0.05*minx;
+        miny -= 0.05*miny;
+        maxx *= unitscayl;
+        maxy *= unitscayl;
+        minx *= unitscayl;
+        miny *= unitscayl;
         console.log("B maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
         var svgw = maxx - minx;
         var svgh = maxy - miny;
