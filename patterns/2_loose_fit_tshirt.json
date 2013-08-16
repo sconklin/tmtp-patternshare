@@ -45,14 +45,11 @@
       "id": "Back A",
       "type": "path",
       "d": [
-        ["M", ["pt.a1.x","pt.a1.y"] ],
-        ["L", ["pt.a3.x","pt.a3.y"] ],
-        ["L", ["pt.a8.x","pt.a8.y"] ],
-        ["L", ["pt.a6.x","pt.a6.y"] ],
-        ["C", ["pt.a6out.x","pt.a6out.y"], ["pt.a11in.x","pt.a11in.y"], ["pt.a11.x","pt.a11.y"] ],
-        ["L", ["pt.a10.x","pt.a10.y"] ],
-        ["L", ["pt.a9.x","pt.a9.y"] ],
-        ["C", ["pt.a9out.x","pt.a9out.y"], ["pt.a1in.x","pt.a1in.y"], ["pt.a1.x","pt.a1.y"] ],
+        ["M", "pt.a1"],
+        ["L", "pt.a3", "pt.a8", "pt.a6"],
+        ["C", "pt.a6out", "pt.a11in", "pt.a11"],
+        ["L", "pt.a10", "pt.a9"],
+        ["C", "pt.a9out", "pt.a1in", "pt.a1"],
         ["z"]
       ],
       "drawattr": {},
@@ -62,14 +59,11 @@
       "id": "Front B",
       "type": "path",
       "d": [
-        ["M", ["pt.b1.x","pt.b1.y"] ],
-        ["L", ["pt.b3.x","pt.b3.y"] ],
-        ["L", ["pt.b8.x","pt.b8.y"] ],
-        ["L", ["pt.b6.x","pt.b6.y"] ],
-        ["C", ["pt.b6out.x","pt.b6out.y"], ["pt.b11in.x","pt.b11in.y"], ["pt.b11.x","pt.b11.y"] ],
-        ["L", ["pt.b10.x","pt.b10.y"] ],
-        ["L", ["pt.b9.x","pt.b9.y"] ],
-        ["C", ["pt.b9out.x","pt.b9out.y"], ["pt.b1in.x","pt.b1in.y"], ["pt.b1.x","pt.b1.y"] ],
+        ["M", "pt.b1"],
+        ["L", "pt.b3", "pt.b8", "pt.b6"],
+        ["C", "pt.b6out", "pt.b11in", "pt.b11"],
+        ["L", "pt.b10", "pt.b9"],
+        ["C", "pt.b9out", "pt.b1in", "pt.b1"],
         ["z"]
       ],
       "drawattr": {},
@@ -79,14 +73,12 @@
       "id": "Sleeve C",
       "type": "path",
       "d": [
-        ["M", ["pt.c8.x","pt.c8.y"] ],
-        ["C", ["pt.c8out.x","pt.c8out.y"], ["pt.c7in.x","pt.c7in.y"], ["pt.c7.x","pt.c7.y"] ],
-        ["C", ["pt.c7out.x","pt.c7out.y"], ["pt.c6in.x","pt.c6in.y"], ["pt.c6.x","pt.c6.y"] ],
-        ["L", ["pt.c12.x","pt.c12.y"] ],
-        ["L", ["pt.c11.x","pt.c11.y"] ],
-        ["L", ["pt.c4.x","pt.c4.y"] ],
-        ["C", ["pt.c4out.x","pt.c4out.y"], ["pt.c5in.x","pt.c5in.y"], ["pt.c5.x","pt.c5.y"] ],
-        ["C", ["pt.c5out.x","pt.c5out.y"], ["pt.c8in.x","pt.c8in.y"], ["pt.c8.x","pt.c8.y"] ],
+        ["M", "pt.c8"],
+        ["C", "pt.c8out", "pt.c7in", "pt.c7"],
+        ["C", "pt.c7out", "pt.c6in", "pt.c6"],
+        ["L", "pt.c12", "pt.c11", "pt.c4"],
+        ["C", "pt.c4out", "pt.c5in","pt.c5"],
+        ["C", "pt.c5out", "pt.c8in", "pt.c8"],
         ["z"]
       ],
       "drawattr": {},
@@ -96,10 +88,8 @@
       "id": "Back Neck Band D",
       "type": "path",
       "d": [
-        ["M", ["pt.d1.x","pt.d1.y"] ],
-        ["L", ["pt.d2.x","pt.d2.y"] ],
-        ["L", ["pt.d3.x","pt.d3.y"] ],
-        ["L", ["pt.d4.x","pt.d4.y"] ],
+        ["M", "pt.d1"],
+        ["L", "pt.d2", "pt.d3", "pt.d4"],
         ["z"]
       ],
       "drawattr": {},
@@ -109,10 +99,8 @@
       "id": "Front Neck Band E",
       "type": "path",
       "d": [
-        ["M", ["pt.e1.x","pt.e1.y"] ],
-        ["L", ["pt.e2.x","pt.e2.y"] ],
-        ["L", ["pt.e3.x","pt.e3.y"] ],
-        ["L", ["pt.e4.x","pt.e4.y"] ],
+        ["M", "pt.e1"],
+        ["L", "pt.e2", "pt.e3", "pt.e4"],
         ["z"]
       ],
       "drawattr": {},
@@ -122,10 +110,8 @@
       "id": "Shoulder Stay Strip F",
       "type": "path",
       "d": [
-        ["M", ["pt.f1.x","pt.f1.y"] ],
-        ["L", ["pt.f2.x","pt.f2.y"] ],
-        ["L", ["pt.f3.x","pt.f3.y"] ],
-        ["L", ["pt.f4.x","pt.f4.y"] ],
+        ["M", "pt.f1"],
+        ["L", "pt.f2", "pt.f3", "pt.f4"],
         ["z"]
       ],
       "drawattr": {},
@@ -137,29 +123,24 @@
       "id": "Back Construction Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.backNape.x","pt.backNape.y"] ],
-        ["L", ["pt.backHipCenter.x","pt.backHipCenter.y"] ],
-        ["L", ["pt.backHipSide.x","pt.backHipSide.y"] ],
-        ["L", ["pt.backHighbustSide.x","pt.backHighbustSide.y"] ],
-        ["L", ["pt.backAcrossSide.x","pt.backAcrossSide.y"] ],
-        ["L", ["pt.backShoulderTip.x","pt.backShoulderTip.y"] ],
-        ["L", ["pt.backNeckSide.x","pt.backNeckSide.y"] ],
-        ["L", ["pt.backNape.x","pt.backNape.y"] ],
+        ["M", "pt.backNape"],
+        ["L", "pt.backHipCenter", "pt.backHipSide", "pt.backHighbustSide","pt.backAcrossSide"],
+        ["L", "pt.backShoulderTip", "pt.backNeckSide", "pt.backNape"],
 
-        ["M", ["pt.backAcrossCenter.x","pt.backAcrossCenter.y"] ],
-        ["L", ["pt.backAcrossSide.x","pt.backAcrossSide.y"] ],
+        ["M", "pt.backAcrossCenter"],
+        ["L", "pt.backAcrossSide"],
 
-        ["M",["pt.backHighbustCenter.x","pt.backHighbustCenter.y"] ],
-        ["L", ["pt.backHighbustSide.x","pt.backHighbustSide.y"] ],
+        ["M", "pt.backHighbustCenter"],
+        ["L", "pt.backHighbustSide"],
 
-        ["M",["pt.backBustCenter.x","pt.backBustCenter.y"] ],
-        ["L", ["pt.backBustSide.x","pt.backBustSide.y"] ],
+        ["M", "pt.backBustCenter"],
+        ["L", "pt.backBustSide"],
 
-        ["M",["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
-        ["L", ["pt.backWaistSide.x","pt.backWaistSide.y"] ],
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backWaistSide"],
 
-        ["M",["pt.backHipCenter.x","pt.backHipCenter.y"] ],
-        ["L", ["pt.backHipSide.x","pt.backHipSide.y"] ]
+        ["M", "pt.backHipCenter"],
+        ["L", "pt.backHipSide"]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
@@ -168,50 +149,38 @@
       "id": "Back Measurement Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
-        ["L", ["pt.backNeckSide.x","pt.backNeckSide.y"] ],
-
-        ["M", ["pt.backWaistCenter.x","pt.backWaistCenter.y"] ],
-        ["L", ["pt.backShoulderTip.x","pt.backShoulderTip.y"] ],
-
-        ["M", ["pt.backAcrossCenter.x","pt.backAcrossCenter.y"] ],
-        ["L", ["pt.backAcrossSide.x","pt.backAcrossSide.y"] ],
-        ["M", ["pt.backHighbustCenter.x","pt.backHighbustCenter.y"] ],
-        ["L", ["pt.backHighbustSide.x","pt.backHighbustSide.y"] ],
-        ["M", ["pt.backBustCenter.x","pt.backBustCenter.y"] ],
-        ["L", ["pt.backBustSide.x","pt.backBustSide.y"] ]
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backNeckSide"],
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backShoulderTip"],
+        ["M", "pt.backAcrossCenter"],
+        ["L", "pt.backAcrossSide"],
+        ["M", "pt.backHighbustCenter"],
+        ["L", "pt.backHighbustSide"],
+        ["M", "pt.backBustCenter"],
+        ["L", "pt.backBustSide"]
 
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#11FF11", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#FF0000", "fill":"none" }
     },
     {
       "id": "Front Construction Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-        ["L", ["pt.frontHipCenter.x","pt.frontHipCenter.y"] ],
-        ["L", ["pt.frontHipSide.x","pt.frontHipSide.y"] ],
-        ["L", ["pt.frontHighbustSide.x","pt.frontHighbustSide.y"] ],
-        ["L", ["pt.frontAcrossSide.x","pt.frontAcrossSide.y"] ],
-        ["L", ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
-        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
-        ["L", ["pt.frontNeckCenter.x","pt.frontNeckCenter.y"] ],
-
-        ["M", ["pt.frontAcrossCenter.x","pt.frontAcrossCenter.y"] ],
-        ["L", ["pt.frontAcrossSide.x","pt.frontAcrossSide.y"] ],
-
-        ["M",["pt.frontHighbustCenter.x","pt.frontHighbustCenter.y"] ],
-        ["L", ["pt.frontHighbustSide.x","pt.frontHighbustSide.y"] ],
-
-        ["M",["pt.frontBustCenter.x","pt.frontBustCenter.y"] ],
-        ["L", ["pt.frontBustSide.x","pt.frontBustSide.y"] ],
-
-        ["M",["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.frontWaistSide.x","pt.frontWaistSide.y"] ],
-
-        ["M",["pt.frontHipCenter.x","pt.frontHipCenter.y"] ],
-        ["L", ["pt.frontHipSide.x","pt.frontHipSide.y"] ]
+        ["M", "pt.frontNeckCenter"],
+        ["L", "pt.frontHipCenter", "pt.frontHipSide", "pt.frontHighbustSide", "pt.frontAcrossSide"],
+        ["L", "pt.frontShoulderTip", "pt.frontNeckSide", "pt.frontNeckCenter"],
+        ["M", "pt.frontAcrossCenter"],
+        ["L", "pt.frontAcrossSide"],
+        ["M", "pt.frontHighbustCenter"],
+        ["L", "pt.frontHighbustSide"],
+        ["M", "pt.frontBustCenter"],
+        ["L", "pt.frontBustSide"],
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontWaistSide"],
+        ["M", "pt.frontHipCenter"],
+        ["L", "pt.frontHipSide"]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
@@ -220,19 +189,16 @@
       "id": "Front Measurement Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.frontNeckSide.x","pt.frontNeckSide.y"] ],
-
-        ["M", ["pt.frontWaistCenter.x","pt.frontWaistCenter.y"] ],
-        ["L", ["pt.frontShoulderTip.x","pt.frontShoulderTip.y"] ],
-
-        ["M", ["pt.frontAcrossCenter.x","pt.frontAcrossCenter.y"] ],
-        ["L", ["pt.frontAcrossSide.x","pt.frontAcrossSide.y"] ],
-        ["M", ["pt.frontHighbustCenter.x","pt.frontHighbustCenter.y"] ],
-        ["L", ["pt.frontHighbustSide.x","pt.frontHighbustSide.y"] ],
-        ["M", ["pt.frontBustCenter.x","pt.frontBustCenter.y"] ],
-        ["L", ["pt.frontBustSide.x","pt.frontBustSide.y"] ]
-
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontNeckSide"],
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontShoulderTip"],
+        ["M", "pt.frontAcrossCenter"],
+        ["L", "pt.frontAcrossSide"],
+        ["M", "pt.frontHighbustCenter"],
+        ["L", "pt.frontHighbustSide"],
+        ["M", "pt.frontBustCenter"],
+        ["L", "pt.frontBustSide"]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#11FF11", "fill":"none" }
@@ -241,15 +207,15 @@
       "id": "Sleeve Construction Lines",
       "type": "path",
       "d": [
-        ["M", ["pt.c8.x","pt.c8.y"] ],
-        ["L", ["pt.c3.x","pt.c3.y"] ],
-        ["M", ["pt.c4.x","pt.c4.y"] ],
-        ["L", ["pt.c6.x","pt.c6.y"] ],
-        ["M", ["pt.c4.x","pt.c4.y"] ],
-        ["L", ["pt.c8.x","pt.c8.y"] ],
-        ["L", ["pt.c6.x","pt.c6.y"] ],
-        ["M", ["pt.c9.x","pt.c9.y"] ],
-        ["L", ["pt.c10.x","pt.c10.y"] ]
+        ["M", "pt.c8"],
+        ["L", "pt.c3"],
+        ["M", "pt.c4"],
+        ["L", "pt.c6"],
+        ["M", "pt.c4"],
+        ["L", "pt.c8"],
+        ["L", "pt.c6"],
+        ["M", "pt.c9"],
+        ["L", "pt.c10"]
       ],
       "drawattr": {},
       "appearanceattr": { "stroke-width":"1", "stroke":"#555555", "fill":"none" }
@@ -326,7 +292,7 @@
       "b6out" : "right(pt.b6, dist(pt.b6, pt.b11)/3)",
       "b11in" : "polar(pt.b11, dist(pt.b6, pt.b11)/3, angleBetween(pt.b10, pt.b11))",
 
-      "c1": {"x":"pt.frontNeckCenter.x + 2*pt.seamAllowance + 4*pt.IN", "y":"pt.a10.y"},
+      "c1": {"x":"pt.frontNeckCenter.x + 2*pt.seamAllowance + 4*pt.IN", "y":"pt.frontBustCenter.y"},
       "c2": {"x":"pt.c1.x + Math.abs(pt.a6.x - pt.a10.x)", "y":"pt.c1.y"},
       "c3": "right(pt.c2, 0.4*meas.underarm_length)",
       "c4": "down(pt.c2, Math.abs(pt.a10.y - pt.a6.y))",
