@@ -36,9 +36,7 @@
       "overarm_length",
       "underarm_length",
       "bicep",
-      "armcap_height",
-      "side_underarm_to_bust_height"
-
+      "armcap_height"
   ],
   "main": [
     {
@@ -130,7 +128,7 @@
         ["L", "pt.backWaistSide"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
     },
     {
       "id": "Back Measurement Lines",
@@ -144,7 +142,7 @@
         ["L", "pt.backBustSide"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#FF0000", "fill":"none" }
+      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
     },
     {
       "id": "Back Balance Lines",
@@ -156,7 +154,7 @@
         ["L", "pt.backShoulderTip"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
+      "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
     },
     {
       "id": "Front Construction Lines",
@@ -169,7 +167,7 @@
         ["L", "pt.frontWaistSide"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
     },
     {
       "id": "Front Measurement Lines",
@@ -183,7 +181,7 @@
         ["L", "pt.frontBustSide"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#FF0000", "fill":"none" }
+      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
     },
     {
       "id": "Front Balance Lines",
@@ -195,7 +193,7 @@
         ["L", "pt.frontShoulderTip"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
+      "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
     },
     {
       "id": "Sleeve Construction Lines",
@@ -211,7 +209,7 @@
         ["L", "pt.c10"]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
     }
   ],
   "points": {
@@ -230,7 +228,7 @@
       "backShoulderTip": "intersectCircles(pt.backWaistCenter, 1*meas.back_shoulder_balance + 1*pt.CM, pt.backNeckSide, 1*meas.shoulder_length, 'x1 > x2')",
       "backAcrossSide": "right(pt.backAcrossCenter, 0.5*meas.across_back)",
       "backHighbustSide": "right(pt.backHighbustCenter, 0.5*meas.back_bust_width)",
-      "backBustSide": "down(pt.backHighbustSide, 1*meas.side_underarm_to_bust_height)",
+      "backBustSide": "right(pt.backBustCenter, 0.5*meas.back_bust_width)",
       "backWaistSide": "down(pt.backHighbustSide, 1*meas.side_waist_length)",
       "backHipSide": {"x":"pt.backWaistSide.x", "y":"pt.backHipCenter.y"},
 
@@ -303,10 +301,10 @@
       "c8in" : "down(pt.c8, dist(pt.c5, pt.c8)/3)",
       "c8out" : "up(pt.c8, dist(pt.c8, pt.c7)/3)",
       "c6in": "down(pt.c6, dist(pt.c6, pt.c7)/6)",
-      "c5in" : "polar(pt.c5, dist(pt.c4, pt.c5)/3, angleBetween(pt.c8in, pt.c4out))",
-      "c5out" : "polar(pt.c5, dist(pt.c5, pt.c8)/3, angleBetween(pt.c4out, pt.c8in))",
-      "c7in" : "polar(pt.c7, dist(pt.c8, pt.c7)/3, angleBetween(pt.c6in, pt.c8out))",
-      "c7out" : "polar(pt.c7, dist(pt.c7, pt.c6)/3, angleBetween(pt.c8out, pt.c6in))",
+      "c5in" : "polar(pt.c5, dist(pt.c4, pt.c5)/3, angleBetween(pt.c8, pt.c4))",
+      "c5out" : "polar(pt.c5, dist(pt.c5, pt.c8)/3, angleBetween(pt.c4, pt.c8))",
+      "c7in" : "polar(pt.c7, dist(pt.c8, pt.c7)/3, angleBetween(pt.c6, pt.c8))",
+      "c7out" : "polar(pt.c7, dist(pt.c7, pt.c6)/3, angleBetween(pt.c8, pt.c6))",
 
       "d1" : "down(pt.c4, 2*pt.seamAllowance + 2*pt.IN)",
       "d2" : "down(pt.d1, 0.75*(2*curveLength(pt.a9, pt.a9out, pt.a1in, pt.a1)))",
