@@ -87,7 +87,7 @@
         ["L", "pt.frontWaistSide", "pt.fWD_leg2", "pt.frontApex", "pt.fWD_leg1", "pt.frontWaistCenter" ]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
     },
       {
       "id": "Front Bodice Block Measurement Lines",
@@ -115,7 +115,7 @@
         ["L", "pt.t1_fWS" ]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#FF0000", "fill":"none" }
     },
       {
       "id": "Front Bodice Block Balance Lines",
@@ -131,7 +131,7 @@
         ["L", "pt.frontWaistSide" ]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
     },
     {
       "id": "Back Bodice Block Construction Lines",
@@ -147,7 +147,7 @@
         ["L", "pt.t2_bWD_leg2", "pt.backApex1", "pt.t2_bWD_leg1", "pt.backWaistCenter" ]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
     },
     {
       "id": "Back Bodice Block Measurement Lines",
@@ -173,7 +173,7 @@
         ["L", "pt.t1_bWS" ]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#FF0000", "fill":"none" }
     },
     {
       "id": "Back Bodice Block Balance Lines",
@@ -187,7 +187,7 @@
         ["L", "pt.backShoulderTip" ]
       ],
       "drawattr": {},
-      "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
+      "appearanceattr": { "stroke-width":"1", "stroke":"#0000FF", "fill":"none" }
     }
   ],
 
