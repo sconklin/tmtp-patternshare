@@ -122,10 +122,10 @@ function measurementChangeHandler(){
       var md = mdata.clientdata.measurements
       var measElTxt="";
       for(var mname in md){
-    //console.log(mname + ': ' + md[mname])
-    measElTxt += "<input type=\"text\" size=\"8\" class=\"measbox\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + "<div id=\"" + mname + "-label\" class=\"measlabel\">" + mname + "<br/>" + "</div>";
+        //console.log(mname + ': ' + md[mname])
+        measElTxt += "<input type=\"text\" size=\"8\" class=\"measbox\" id=\"" + mname + "\" value=\"" + md[mname] + "\" />" + "<div id=\"" + mname + "-label\" class=\"measlabel\">" + mname + "<br/>" + "</div>";
       }
-      measElTxt += "</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
+      //measElTxt += "</br><button type=\"button\" onclick=\"drawpattern()\"> Draw! </button>";
       $("#measurements").html(measElTxt);
 
       // See whether we're ready to draw
