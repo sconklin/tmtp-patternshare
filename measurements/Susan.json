@@ -82,7 +82,7 @@
         "overarm_length" : 65.0,
         "underarm_length" : 55.0,
         "bicep" : 35,
-        "armcap_height" : 0,
+        "armcap_height" : 10,
         "hand_length" : 7
       }
     }
