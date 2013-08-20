@@ -33,6 +33,7 @@
         "hip",
         "front_hip_width",
         "back_hip_width",
+        "back_hip_height",
         "side_hip_height",
         "hip_to_floor",
 
@@ -53,6 +54,7 @@
           "d" : [
             ["M", "pt.backNeckCenter" ],
             ["L", "pt.backWaistCenter" ],
+            ["C", "pt.bWC_out", "pt.bHipC_in", "pt.backHipCenter" ],
             ["L", "pt.backHemCenter" ],
             ["C", "pt.bHemC_out", "pt.bHemS_in", "pt.backHemSide" ],
             ["L", "pt.backHipSide" ],
@@ -188,88 +190,67 @@
     ],
 
     "construction": [
-        { "id" : "Center Back line",
+        { "id" : "Back Construction Lines",
           "type": "path",
           "d" : [
             ["M", "pt.backNeckCenter" ],
+            ["L", "pt.backNeckSide" ],
+            ["L", "pt.t1_bST" ],
+            ["L", "pt.backAcrossSide" ],
+            ["L", "pt.t1_bHS" ],
+            ["L", "pt.t1_bWS" ],
+            ["L", "pt.t1_bHipS"],
+            ["L", "pt.t1_bHipC"],
             ["L", "pt.backNeckCenter" ]
+
           ],
           "drawattr": {},
-          "appearanceattr": { "stroke-width":"f", "stroke":"#ff0000", "fill":"none" }
+          "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
         },
-        { "id" : "Center Front line",
+        { "id" : "Back Measurement Lines",
           "type": "path",
           "d" : [
-            ["M", "pt.frontNeckCenter" ],
-            ["L", "pt.t1_frontHemCenter" ]
-          ],
-          "drawattr": {},
-          "appearanceattr": { "stroke-width":"f", "stroke":"#ff0000", "fill":"none" }
-        },
-        { "id": "Back Cervicale line",
-          "type": "path",
-          "d": [
-            ["M", "pt.backNeckCenter" ],
-            ["L", "pt.backHemSide" ]
-          ],
-          "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
-        },
-        { "id": "Front Neck line",
-          "type": "path",
-          "d": [
-            ["M", "pt.frontNeckCenter" ],
-            ["L", "pt.b11" ]
-          ],
-          "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
-        },
-        { "id": "Back Upperchest line",
-          "type": "path",
-          "d": [
-            ["M", "pt.backNeckCenter" ],
-            ["L", "pt.backHemSide" ]
-          ],
-          "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
-        },
-        { "id": "Front Upperchest line",
-          "type": "path",
-          "d": [
-            ["M", "pt.frontNeckCenter" ],
-            ["L", "pt.b11" ]
-          ],
-          "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
-        },
-        { "id": "Waist line",
-          "type": "path",
-          "d": [
+            ["M", "pt.backNeckCore" ],
+            ["L", "pt.backNeckSide" ],
+            ["M", "pt.backAcrossCenter" ],
+            ["L", "pt.backAcrossSide" ],
+            ["M", "pt.backHighbustCenter" ],
+            ["L", "pt.backHighbustSide" ],
+            ["M", "pt.backBustCenter" ],
+            ["L", "pt.backBustSide" ],
             ["M", "pt.backWaistCenter" ],
-            ["L", "pt.c2" ]
-          ],
-          "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
-        },
-        { "id": "Hip line",
-          "type": "path",
-          "d": [
+            ["L", "pt.t1_bWS" ],
             ["M", "pt.backHipCenter" ],
-            ["L", "pt.frontHipCenter" ]
+            ["L", "pt.backHipSide" ]
+
           ],
           "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
+          "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
         },
-        { "id": "Floor line",
+        { "id" : "Back Balance Lines",
+          "type": "path",
+          "d" : [
+            ["M", "pt.backWaistCenter" ],
+            ["L", "pt.backNeckSide" ],
+            ["M", "pt.backWaistCenter" ],
+            ["L", "pt.t1_bST" ]
+
+          ],
+          "drawattr": {},
+          "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
+        },
+        { "id": "Front Construction Lines",
           "type": "path",
           "d": [
-            ["M", "pt.backNeckCenter" ],
-            ["L", "pt.frontNeckCenter" ]
+            ["M", "pt.frontNeckCenter" ],
+            ["L", "pt.t1_frontHemCenter" ],
+            ["M", "pt.frontNeckCenter" ],
+            ["L", "pt.b11" ]
           ],
           "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
+          "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
         },
-        { "id": "Sleeve Grid",
+        { "id": "Sleeve Construction Lines",
           "type": "path",
           "d": [
             ["M", "pt.f1" ],
@@ -283,7 +264,7 @@
             ["L", "pt.f7" ]
           ],
           "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#ff0000", "fill":"none" }
+          "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
         }
     ],
 
@@ -299,23 +280,28 @@
         "backBustCenter": "down(pt.backNeckCenter, 1*meas.back_bust_height)",
         "backWaistCenter": "down(pt.backNeckCenter, 1*meas.back_waist_length)",
         "backNeckSide" : "onCircleAtX(pt.backWaistCenter, 1*meas.back_neck_balance, pt.backNeckCenter.x + 0.5*meas.neck_diameter, 'y1 < y2')" ,
+        "backNeckCore" : "up(pt.backNeckCenter, Math.abs(pt.backNeckCenter.y - pt.backNeckSide.y))",
         "t1_bST": "intersectCircles(pt.backNeckSide, 1*meas.shoulder_length, pt.backWaistCenter, 1*meas.back_shoulder_balance, 'y1 > y2')",
-        "t2_bST" : "polar(pt.t1_bST, 0.2*meas.shoulder_length, radians(315))",
-        "backShoulderTip" : "up(pt.t2_bST, 0.2*meas.shoulder_length)",
-        "backArmscye": { "x": "pt.backNeckCenter.x + 0.55*meas.across_back", "y": "pt.backNeckCenter.y + 0.75*meas.back_highbust_height" },
-        "backAcrossSide": "right(pt.backAcrossCenter, 0.55*meas.across_back)",
+        "t2_bST" : "right(pt.t1_bST, 0.1*meas.shoulder_length)",
+        "backShoulderTip" : "polar(pt.t2_bST, 0.2*meas.shoulder_length, radians(315))",
+
+        "backArmscye": "right(pt.backAcrossCenter, 0.55*meas.across_back)",
+        "backAcrossSide": "right(pt.backAcrossCenter, 0.5*meas.across_back)",
+        "t1_bHS" : "right(pt.backHighbustCenter, 0.5*meas.back_bust_width)",
         "backHighbustSide" : "right(pt.backHighbustCenter, 0.55*meas.back_bust_width)",
+        "t1_bBS" : "right(pt.backBustCenter, 0.5*meas.back_bust_width)",
         "backBustSide": "right(pt.backBustCenter, 0.55*meas.back_bust_width)",
-        "t1_bWS" : { "x": "pt.backHighbustSide.x", "y" : "pt.backWaistCenter.y" },
-        "t2_bWS" : "intersectCircles(pt.backHighbustSide, 1.0*meas.side_waist_length, pt.backWaistCenter, 0.55*meas.back_waist_width, 'y1 > y2')",
-        "backWaistSide" : "right(pt.t2_bWS, 0.05*dist(pt.backWaistCenter, pt.t2_bWS))",
+        "t1_bWS" : "intersectCircles(pt.backHighbustSide, 1.0*meas.side_waist_length, pt.backWaistCenter, 0.5*meas.back_waist_width, 'y1 > y2')",
+        "backWaistSide" : "right(pt.t1_bWS, 0.07*dist(pt.backWaistCenter, pt.t1_bWS))",
 
         "t1_backHemCenter" : "down(pt.backNeckCenter, 1*meas.height - 1*meas.head_and_neck_length)",
         "backHemCenter" : "polar(pt.backWaistCenter, dist(pt.backWaistCenter, pt.t1_backHemCenter), radians(105))",
-        "backHipCenter" : "onLineAtLength(pt.backWaistCenter, pt.backHemCenter, 1*meas.side_hip_height)" ,
+        "t1_bHipC": "down(pt.backWaistCenter, 1*meas.back_hip_height)",
+        "backHipCenter" : "onLineAtLength(pt.backWaistCenter, pt.backHemCenter, 1*meas.back_hip_height)" ,
 
         "backHemSide" : "polar(pt.t1_bWS, dist(pt.backWaistCenter, pt.t1_backHemCenter), radians(70))",
-        "backHipSide" : "onLineAtLength(pt.t2_bWS, pt.backHemSide, 1*meas.side_hip_height)",
+        "t1_bHipS": "intersectCircles(pt.t1_bHipC, 0.5*meas.back_hip_width, pt.t1_bWS, 1*meas.side_hip_height, 'y1 > y2')",
+        "backHipSide" : "onLineAtLength(pt.t1_bWS, pt.backHemSide, 1*meas.side_hip_height)",
 
         "bNC_in" : "right(pt.backNeckCenter, dist(pt.backNeckCenter, pt.backNeckSide)/2)",
         "bHemC_out" : "polar(pt.backHemCenter, dist(pt.backHemCenter, pt.backHemSide)/3, angleBetween(pt.backHipCenter, pt.backHemCenter) - radians(90) )",
@@ -325,10 +311,13 @@
         "bBS_out" : "left(pt.backBustSide, dist(pt.backBustSide, pt.backArmscye)/3)",
         "bArm_in"  : "polar(pt.backArmscye, dist(pt.backBustSide,pt.backArmscye)/3.0, 0.5*(angleBetween(pt.bSTin,pt.backArmscye) + angleBetween(pt.backArmscye,pt.bBS_out)))",
         "bArm_out" : "polar(pt.backArmscye, dist(pt.backArmscye,pt.backShoulderTip)/3.0, angleBetween(pt.bArm_in, pt.backArmscye))",
-        "bHipS_out" : "polar(pt.backHipSide, dist(pt.backHipSide, pt.backWaistSide)/3, angleBetween(pt.backHipSide, pt.backWaistSide) )",
+
+        "bWC_out": "down(pt.backWaistCenter, dist(pt.backHipCenter, pt.backWaistCenter)/6)",
+        "bHipC_in" : "polar(pt.backHipCenter, dist(pt.backHipCenter, pt.backWaistCenter)/6, angleBetween(pt.backHemCenter,pt.backHipCenter))",
+        "bHipS_out" : "polar(pt.backHipSide, dist(pt.backHipSide, pt.backWaistSide)/3, angleBetween(pt.backHemSide, pt.backHipSide) )",
         "bHemS_in" : "polar(pt.backHemSide, dist(pt.backHemSide, pt.backHemCenter)/3, angleBetween(pt.backHipSide, pt.backHemSide) + radians(90))",
-        "bWS_in" : "down(pt.backWaistSide, dist(pt.backWaistSide, pt.backHipSide)/6)",
-        "bWS_out" : "up(pt.backWaistSide, dist(pt.backBustSide, pt.backWaistSide)/3)",
+        "bWS_in" : "polar(pt.backWaistSide, dist(pt.backWaistSide, pt.backHipSide)/6, 0.5*(angleBetween(pt.backHipSide, pt.backHemSide) + angleBetween(pt.backBustSide, pt.backWaistSide)))",
+        "bWS_out" : "polar(pt.backWaistSide, dist(pt.backBustSide, pt.backWaistSide)/6, angleBetween(pt.bWS_in, pt.backWaistSide))",
 
         "frontWaistCenter" : "right(pt.backWaistCenter, 1*meas.hip)",
         "frontNeckCenter" : "up(pt.frontWaistCenter, 1*meas.front_waist_length)",
