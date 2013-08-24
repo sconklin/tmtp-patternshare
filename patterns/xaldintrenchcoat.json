@@ -198,6 +198,7 @@
             ["L", "pt.t1_bST" ],
             ["L", "pt.backAcrossSide" ],
             ["L", "pt.t1_bHS" ],
+            ["L", "pt.t1_bBS" ],
             ["L", "pt.t1_bWS" ],
             ["L", "pt.t1_bHipS"],
             ["L", "pt.t1_bHipC"],
@@ -245,10 +246,11 @@
             ["M", "pt.frontNeckCenter" ],
             ["L", "pt.t1_frontHemCenter" ],
             ["M", "pt.frontNeckCenter" ],
-            ["L", "pt.b11" ]
+            ["L", "pt.frontNeckSide" ],
+            ["L", "pt.t1_bST" ]
           ],
           "drawattr": {},
-          "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
+          "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
         },
         { "id": "Sleeve Construction Lines",
           "type": "path",
