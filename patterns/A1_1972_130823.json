@@ -1,10 +1,13 @@
 {
 "pattern": {
-    "title": "A1_1972_130823",
+    "pattern_number": "A1_1972_130823",
+    "title": "Short puffed-sleeved dress, design c1972.",
     "Summary": {
-        "Description": "Short dress with puffed sleeves, gathered skirt, self-tied at waist, with back ziper. Circa 1972.",
-        "Year": "1972",
-        "Recommended": {
+        "category": "Retro/Vintage",
+        "subCategory": "1972",
+        "type": "Dress",
+        "description": "Short dress with puffed sleeves, gathered skirt, Wide self-tie at waist, with back zipper.",
+        "recommended": {
             "Fabric": "Gingham or light-weight woven fabric",
             "Notions": "21 inch invisible zipper. 1/2-inch lace hem tape."
         }
@@ -48,8 +51,7 @@
             "type": "path",
             "d": [
             ["M", "pt.a1" ],
-            ["L", "pt.a2", "pt.fWD_leg1", "pt.fWD_point", "pt.fWD_leg2" ],
-            ["L", "pt.a4", "pt.a5" ],
+            ["L", "pt.a2", "pt.fWD_leg1", "pt.fWD_point", "pt.fWD_leg2", "pt.a4", "pt.a5" ],
             ["C", "pt.a5_out", "pt.a6_in", "pt.a6", "pt.a6_out", "pt.a7_in", "pt.a7" ],
             ["L", "pt.a9" ],
             ["C", "pt.a9_out", "pt.a1_in", "pt.a1" ],
@@ -62,11 +64,11 @@
             "id": "Back Bodice B",
             "type": "path",
             "d": [
-                ["M", "pt.backNeckCenter" ],
-                ["L", "pt.backWaistCenter","pt.bWD_leg1", "pt.bWD_point", "pt.bWD_leg2", "pt.backWaistSide", "pt.backHighbustSide" ],
-                ["C", "pt.bHBS_out", "pt.bAS1_in", "pt.backArmscye1", "pt.bAS1_out", "pt.bST_in", "pt.backShoulderTip" ],
-                ["L", "pt.bSD_leg1", "pt.bSD_point", "pt.bSD_leg2", "pt.backNeckSide" ],
-                ["C", "pt.bNS_out", "pt.bNC_in", "pt.backNeckCenter" ],
+                ["M", "pt.b1" ],
+                ["L", "pt.b2","pt.bWD_leg1", "pt.bWD_point", "pt.bWD_leg2", "pt.b4", "pt.b5" ],
+                ["C", "pt.b5_out", "pt.b6_in", "pt.b6", "pt.b6_out", "pt.b7_in", "pt.b7" ],
+                ["L", "pt.b9" ],
+                ["C", "pt.b9_out", "pt.b1_in", "pt.b1" ],
                 ["z"]
             ],
             "drawattr": {},
@@ -140,14 +142,15 @@
             "id": "Back Bodice Block Construction Lines",
             "type": "path",
             "d": [
-                ["M", "pt.bSD_leg1" ],
-                ["L", "pt.backApex2", "pt.bSD_leg2" ],
-                ["M", "pt.bWD_leg1" ],
-                ["L", "pt.backApex1", "pt.bWD_leg2" ],
-                ["M", "pt.backHighbustSide" ],
-                ["L", "pt.t1_bWS", "pt.t1_bWD_leg2", "pt.backApex1", "pt.t1_bWD_leg1", "pt.backWaistCenter" ],
-                ["M", "pt.t1_bWS" ],
-                ["L", "pt.t2_bWD_leg2", "pt.backApex1", "pt.t2_bWD_leg1", "pt.backWaistCenter" ]
+                ["M", "pt.backNeckCenter" ],
+                ["L", "pt.backWaistCenter", "pt.bWD_leg1", "pt.backApex1", "pt.bWD_leg2", "pt.backWaistSide", "pt.backHighbustSide" ],
+                ["C", "pt.bHBS_out", "pt.bAS1_in", "pt.backArmscye1", "pt.bAS1_out", "pt.bST_in", "pt.backShoulderTip" ],
+                ["L", "pt.backNeckSide" ],
+                ["C", "pt.bNS_out", "pt.bNC_in", "pt.backNeckCenter"],
+                ["M", "pt.backWaistCenter" ],
+                ["L", "pt.t1_bWD_leg1", "pt.backApex1", "pt.t1_bWD_leg2", "pt.t1_bWS", "pt.backHighbustSide" ],
+                ["M", "pt.backWaistCenter" ],
+                ["L", "pt.t2_bWD_leg1", "pt.backApex1", "pt.t2_bWD_leg2", "pt.t1_bWS" ]
             ],
             "drawattr": {},
             "appearanceattr": { "stroke-width":"1", "stroke":"#00FF00", "fill":"none" }
@@ -228,7 +231,7 @@
         "t1_fWD_leg2": "intersectCircles(pt.frontApex, dist(pt.frontApex, pt.t1_fWD_leg1), pt.frontWaistSide, 0.5*meas.front_waist_width - dist(pt.frontWaistCenter, pt.t1_fWD_leg1), 'y1 > y2')",
         "t1_fWD_angle": "angleBetween3pts(pt.t1_fWD_leg1, pt.frontApex, pt.t1_fWD_leg2)",
 
-        "t2_fWD_leg1": "intersectVectorLine(pt.frontApex, radians(90) - 0.20*pt.t1_fWD_angle, pt.frontWaistCenter, pt.t1_fWD_leg1)",
+        "t2_fWD_leg1": "intersectVectorLine(pt.frontApex, radians(90) - 0.10*pt.t1_fWD_angle, pt.frontWaistCenter, pt.t1_fWD_leg1)",
         "t2_fWD_leg2": "rotate(pt.t2_fWD_leg1, pt.frontApex, pt.t1_fWD_angle)",
 
         "fWD_extension_angle": "radians(90) - angleBetween3pts(pt.t2_fWD_leg2, pt.t2_fWD_leg1, pt.frontApex)",
@@ -240,8 +243,6 @@
         "fWD_leg1": "onLineAtLength(pt.t3_fWD_leg1, pt.frontWaistCenter, -0.5*pt.front_waist_delta)",
         "fWD_leg2": "onLineAtLength(pt.t3_fWD_leg2, pt.frontWaistSide, -0.5*pt.front_waist_delta)",
         "fWD_point": "polar(pt.frontApex, dist(pt.frontApex, pt.fWD_leg1)/7, 0.5*(angleBetween(pt.frontApex, pt.fWD_leg1) + angleBetween(pt.frontApex, pt.fWD_leg2)))",
-
-
 
         "fNC_in": "left(pt.frontNeckCenter, 0.6*dist(pt.frontNeckSide, pt.frontNeckCenter))",
         "fNS_out": "down(pt.frontNeckSide, 0.15*dist(pt.frontNeckSide, pt.frontNeckCenter))",
@@ -263,8 +264,8 @@
 
         "backAcrossSide": "right(pt.backAcrossCenter, 0.5*meas.across_back)",
         "backHighbustSide": "right(pt.backHighbustCenter, 0.5*meas.back_highbust_width)",
-        "backBustSide": "right(pt.backBustCenter, (0.5 + 0.083)*meas.back_bust_width)",
-        "backApex1": {"x": "0.5*(pt.backHighbustCenter.x + pt.backAcrossSide.x)", "y": "pt.backHighbustCenter.y"},
+        "backBustSide": "right(pt.backBustCenter, 0.5*meas.back_bust_width)",
+        "backApex1": "right(pt.backHighbustCenter, 0.25*meas.across_back)",
 
         "back_dart_width": "(1*meas.back_waist_width)/12",
         "t1_bWS": "intersectCircles(pt.backHighbustSide, 1*meas.side_waist_length, pt.backWaistCenter,  0.5*meas.back_waist_width + pt.back_dart_width, 'y1 > y2')",
@@ -303,8 +304,7 @@
         "backArmscye1": {"x": "pt.backShoulderTip.x - 0.6*Math.abs(pt.backShoulderTip.x - pt.backAcrossSide.x)", "y": "pt.backAcrossSide.y"},
         "backArmscye2": {"x": "pt.backAcrossSide.x + 0.5*Math.abs(pt.backAcrossSide.x - pt.backHighbustSide.x)", "y": "pt.backHighbustSide.y"},
 
-        "back_pattern_waist": {"x": "pt.backWaistCenter.x + dist(pt.backWaistCenter, pt.bWD_leg1) + dist(pt.bWD_leg2, pt.backWaistSide)", "y": "pt.backWaistCenter.y + 2*pt.IN"},
-        "back_measured_waist": {"x": "pt.backWaistCenter.x + 0.5*meas.back_waist_width", "y": "pt.backWaistCenter.y + 3*pt.IN"},
+
 
         "bNC_in": "right(pt.backNeckCenter, 0.6*dist(pt.backNeckSide, pt.backNeckCenter))",
         "bNS_out": "polar(pt.backNeckSide, 0.15*dist(pt.backNeckSide, pt.backNeckCenter), angleBetween(pt.backNeckSide, pt.bNC_in))",
@@ -314,10 +314,14 @@
         "bST_in": "polar(pt.backShoulderTip, dist(pt.backArmscye1, pt.backShoulderTip)/6, angleBetween(pt.backNeckSide, pt.backShoulderTip) + radians(90))",
 
         "front_bust_ease": "(0.083*meas.front_bust_width)/4",
-        "front_waist_ease": "((0.063*meas.front_waist_width) - 2*pt.front_bust_ease)/2",
+        "front_waist_ease": "Math.max(0, 0.063*meas.front_waist_width - 2*pt.front_bust_ease)/2",
+        "frontSideAngle": "angleBetween(pt.frontHighbustSide, pt.frontWaistSide)",
+        "back_bust_ease": "(0.083*meas.back_bust_width)/4",
+        "back_waist_ease": "Math.max(0, 0.063*meas.back_waist_width - 2*pt.back_bust_ease)/2",
+        "backSideAngle": "angleBetween(pt.backHighbustSide, pt.backWaistSide)",
+
         "a1": { "x": "pt.frontNeckCenter.x + pt.front_bust_ease", "y": "pt.frontNeckCenter.y + 0.1*meas.front_waist_length"},
         "a2": "right(pt.frontWaistCenter, pt.front_bust_ease)",
-        "frontSideAngle": "angleBetween(pt.frontHighbustSide, pt.frontWaistSide)",
         "a3": "polar(pt.t1_fBD_leg2, pt.front_bust_ease, pt.frontSideAngle + radians(90))",
         "a4": "polar(pt.frontWaistSide, pt.front_waist_ease, pt.frontSideAngle + radians(90))",
         "a5": "onLineAtLength(pt.a4, pt.a3, 0.9*meas.side_waist_length)",
@@ -332,8 +336,27 @@
         "a7_in": "polar(pt.a7, dist(pt.a6, pt.a7)/6, angleBetween(pt.a7, pt.a8) + radians(90))",
         "a9_out": "polar(pt.a9, 0.8*Math.abs(pt.a9.y - pt.a1_in.y), angleBetween(pt.a9, pt.a1_in))",
 
+        "b1": { "x": "pt.backNeckCenter.x - pt.back_bust_ease", "y": "pt.backNeckCenter.y + 0.025*meas.back_waist_length"},
+        "b2": "left(pt.backWaistCenter, pt.back_bust_ease)",
+        "b3": "polar(pt.backHighbustSide, pt.back_bust_ease, pt.backSideAngle - radians(90))",
+        "b4": "polar(pt.backWaistSide, pt.back_waist_ease, pt.backSideAngle - radians(90))",
+        "b5": "onLineAtLength(pt.b4, pt.b3, 0.9*meas.side_waist_length)",
+        "b6": "copy(pt.backArmscye1)",
+        "b7": "onLineAtLength(pt.backWaistCenter, pt.backShoulderTip, 1.02*meas.back_shoulder_balance)",
+        "b8": "onLineAtLength(pt.backWaistCenter, pt.backNeckSide, 1.02*meas.back_neck_balance)",
+        "b9": "onLineAtLength(pt.b8, pt.b7, 0.1*meas.shoulder_length)",
+        "b1_in": "right(pt.b1, 0.5*Math.abs(pt.b1.x - pt.b9.x))",
+        "b5_out": "polar(pt.b5, dist(pt.b5, pt.b6)/3, pt.backSideAngle + radians(90))",
+        "b6_in": "polar(pt.b6, dist(pt.b5, pt.b6)/2, angleBetween(pt.b7, pt.backArmscye2))",
+        "b6_out": "polar(pt.b6, dist(pt.b6, pt.b7)/3, angleBetween(pt.b6_in, pt.b6))",
+        "b7_in": "polar(pt.b7, dist(pt.b6, pt.b7)/6, angleBetween(pt.b7, pt.b8) - radians(90))",
+        "b9_out": "polar(pt.b9, 0.8*Math.abs(pt.b9.y - pt.b1_in.y), angleBetween(pt.b7, pt.b8) - radians(90))",
+
         "front_pattern_waist": {"x": "pt.a2.x - (dist(pt.a2, pt.fWD_leg1) + dist(pt.fWD_leg2, pt.a4))", "y": "pt.a2.y + 2*pt.IN"},
-        "front_measured_waist": {"x": "pt.a2.x - 0.5*meas.front_waist_width", "y": "pt.a2.y + 3*pt.IN"}
+        "front_measured_waist": {"x": "pt.a2.x - 0.5*meas.front_waist_width", "y": "pt.a2.y + 3*pt.IN"},
+
+        "back_pattern_waist": {"x": "pt.b2.x + dist(pt.b2, pt.bWD_leg1) + dist(pt.bWD_leg2, pt.b4)", "y": "pt.b2.y + 2*pt.IN"},
+        "back_measured_waist": {"x": "pt.b2.x + 0.5*meas.back_waist_width", "y": "pt.b2.y + 3*pt.IN"}
     }
 
 }
