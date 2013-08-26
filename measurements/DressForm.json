@@ -60,15 +60,6 @@
       "front_waist_balance": "42.5",
       "back_waist_balance": "44.4",
 
-      "overarm_length": "0",
-      "underarm_length": "0",
-      "arm_sleeve_top_offset": "0",
-      "arm_sleevecap_width": "0",
-      "arm": "0",
-      "elbow": "0",
-      "wrist": "0",
-      "hand": "0",
-
       "hip": "0",
       "front_hip": "0",
       "front_hip_width": "0",
@@ -77,6 +68,13 @@
       "back_hip_width": "54",
       "back_hip_height": "6.5",
       "side_hip_height": "0",
+
+      "armscye": 0,
+      "overarm_length" : 65.0,
+      "underarm_length" : 55.0,
+      "bicep" : 35,
+      "armcap_height" : 10,
+      "hand_length" : 7,
 
       "rise": "0",
       "front_rise": "0",
@@ -98,8 +96,6 @@
 
       "knee": "0",
       "calve": "0",
-
-      "hand": "0",
       "ankle": "0",
       "foot": "0"
     }
