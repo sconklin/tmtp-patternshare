@@ -42,7 +42,10 @@
         "front_shoulder_balance",
         "back_shoulder_balance",
         "front_waist_balance",
-        "back_waist_balance"
+        "back_waist_balance",
+
+        "overarm_length",
+        "underarm_length"
     ],
 
     "main": [
@@ -69,6 +72,21 @@
                 ["C", "pt.b5_out", "pt.b6_in", "pt.b6", "pt.b6_out", "pt.b7_in", "pt.b7" ],
                 ["L", "pt.b9" ],
                 ["C", "pt.b9_out", "pt.b1_in", "pt.b1" ],
+                ["z"]
+            ],
+            "drawattr": {},
+            "appearanceattr": {"stroke-width":"3", "stroke":"#000000", "fill":"none"}
+        },
+        {
+            "id": "Sleeve CB",
+            "type": "path",
+            "d": [
+                ["M", "pt.c4" ],
+                ["C", "pt.c4_out", "pt.c5_in", "pt.c5", "pt.c5_out", "pt.c9_in", "pt.c9" ],
+                ["C", "pt.c9_out", "pt.c7_in", "pt.c7", "pt.c7_out", "pt.c6_in", "pt.c6" ],
+                ["L", "pt.c12"],
+                ["C", "pt.c12_out", "pt.c10_in", "pt.c10", "pt.c10_out", "pt.c11_in", "pt.c11" ],
+                ["L", "pt.c4"],
                 ["z"]
             ],
             "drawattr": {},
@@ -351,6 +369,32 @@
         "b6_out": "polar(pt.b6, dist(pt.b6, pt.b7)/3, angleBetween(pt.b6_in, pt.b6))",
         "b7_in": "polar(pt.b7, dist(pt.b6, pt.b7)/6, angleBetween(pt.b7, pt.b8) - radians(90))",
         "b9_out": "polar(pt.b9, 0.8*Math.abs(pt.b9.y - pt.b1_in.y), angleBetween(pt.b7, pt.b8) - radians(90))",
+
+        "c1": "right(pt.a1, Math.abs(pt.b5.y - pt.b7.y) + 1*pt.patternOffset + 2*pt.seamAllowance)",
+        "c2": "down(pt.c1, Math.abs(pt.b5.x - pt.b7.x))",
+        "c3": "down(pt.c1, 1*meas.overarm_length - 1*meas.underarm_length)",
+        "c4": "left(pt.c2, Math.abs(pt.b5.y - pt.b7.y))",
+        "c6": "right(pt.c2, Math.abs(pt.a5.y - pt.a7.y))",
+        "c5": {"x": "pt.c1.x - Math.abs(pt.b6.y - pt.b7.y)", "y": "pt.c1.y + Math.abs(pt.b6.x - pt.b7.x)"},
+        "c7": {"x": "pt.c1.x + Math.abs(pt.a6.y - pt.a7.y)", "y": "pt.c1.y + Math.abs(pt.a6.x - pt.a7.x)"},
+        "c8": {"x":"pt.c1.x", "y":"pt.c1.y - Math.abs(pt.c1.y - Math.min(pt.c5.y, pt.c7.y))"},
+        "c9": "up(pt.c8, 0.33*dist(pt.c1, pt.c2))",
+        "c10": "down(pt.c3, 0.2*dist(pt.c1, pt.c2) + 0.1*meas.side_waist_length)",
+        "c11": "down(pt.c4, 0.1*meas.side_waist_length)",
+        "c12": "down(pt.c6, 0.1*meas.side_waist_length)",
+        "c4_out": "right(pt.c4, dist(pt.c4, pt.c5)/3)",
+        "c6_in": "left(pt.c6, dist(pt.c6, pt.c7)/3)",
+        "c9_in": "left(pt.c9, dist(pt.c5, pt.c9)/3)",
+        "c9_out": "right(pt.c9, dist(pt.c9, pt.c7)/3)",
+        "c5_in": "polar(pt.c5, dist(pt.c4, pt.c5)/3, angleBetween(pt.c9_in, pt.c4_out))",
+        "c5_out": "polar(pt.c5, dist(pt.c5, pt.c9)/3, angleBetween(pt.c4_out, pt.c9_in))",
+        "c7_in": "polar(pt.c7, dist(pt.c9, pt.c7)/3, angleBetween(pt.c6_in, pt.c9_out))",
+        "c7_out": "polar(pt.c7, dist(pt.c7, pt.c6)/3, angleBetween(pt.c9_out, pt.c6_in))",
+        "c12_out": "left(pt.c12, dist(pt.c12, pt.c10)/3)",
+        "c10_in": "right(pt.c10, dist(pt.c12, pt.c10)/3)",
+        "c10_out": "left(pt.c10, dist(pt.c10, pt.c11)/3)",
+        "c11_in": "right(pt.c11, dist(pt.c10, pt.c11)/3)",
+
 
         "front_pattern_waist": {"x": "pt.a2.x - (dist(pt.a2, pt.fWD_leg1) + dist(pt.fWD_leg2, pt.a4))", "y": "pt.a2.y + 2*pt.IN"},
         "front_measured_waist": {"x": "pt.a2.x - 0.5*meas.front_waist_width", "y": "pt.a2.y + 3*pt.IN"},
