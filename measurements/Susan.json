@@ -7,9 +7,9 @@
         "height" : 166.5,
 
         "nape_to_floor" : 0.0,
-        "waist_to_floor" : 0.0,
-        "hip_to_floor" : 0.0,
-        "knee_to_floor" : 0.0,
+        "waist_to_floor" : 96.5,
+        "hip_to_floor" : 81.5,
+        "knee_to_floor" : 38.0,
         "ankle_to_floor" : 0.0,
 
         "head_and_neck_length" : 12,
@@ -65,11 +65,11 @@
         "bust_balance" : 0,
 
         "highhip" : 0,
-        "front_highhip_width" : 50.0,
+        "front_highhip_width" : 0.0,
         "front_highhip_height" : 0,
         "back_highhip_width" : 0,
         "back_highhip_height" : 0,
-        "side_highhip_height": 10,
+        "side_highhip_height": 0,
 
         "hip" : 116,
         "front_hip_width" : 51,
