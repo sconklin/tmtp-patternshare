@@ -1,0 +1,132 @@
+Streetwear A
+Historical B
+Cosplay C
+Retro D
+Block
+
+Block
+    Bodice
+        Front Waist Dart
+        Front Bust Dart
+        Front Waist Dart & Front Bust Dart
+        Back Waist Dart & Back Shoulder dart
+    Skirt
+        A Line
+            1 Front Waist Dart
+            2 Front Waist Darts
+            1 Back Waist Dart
+            2 Back Waist Darts
+        Wrap
+        Circle
+
+A Streetwear
+    Dresses - 1
+        Type
+            Short - 1
+            Mid-Length - 2
+            Long - 3
+        Fit
+            Loose - 1
+            Fitted -2
+        Sleeve
+            Short - 1
+            Long - 2
+            Both - 3
+        Number
+            Next - 1,2
+
+    Shirts/TShirts/Blouses - 2
+        Type
+            Tshirt - 1
+            Shirt - 2
+            Blouse - 3
+        Fit
+            Loose - 1
+            Fitted - 2
+        Number
+            Next - 1,2
+
+    Pants/Jeans/Shorts - 3
+        Type
+            Long
+            Short
+            Both
+        Fit
+            Loose
+            Fitted
+        Number
+            Next - 1,
+
+B Historical
+    Year
+    Culture
+        European - E
+        Asian - A
+        Indian - I
+        MiddleEastern - I
+        Other - O
+    Person
+        Royalty/Courtier
+        Peasant
+        Tradesman
+        Soldier
+        Religious
+    Type
+        Robe - 1
+        Dress - 2
+        Tunic - 3
+        Jacket - 4
+        Pants - 5
+        Skirt - 6
+        Underwear - 7
+        Shoe/Hat/Glove - 8
+        Other
+    Number
+        Next - 1,
+
+C Cosplay
+    Anime Show
+        Kingdom Hearts - KH
+    Character
+        Xaldin - X
+    Number
+        Next - 2,
+
+D Retro
+    Year
+    Dresses - 1
+        Fit
+            Loose - 1
+            Fitted - 2
+        Sleeve
+            Short - 1
+            Long - 2
+            Both - 3
+        Number
+            Next - 1,2
+
+    Blouses/Tops/Shirts - 2
+        Type
+            Tshirt - 1
+            Shirt - 2
+            Blouse - 3
+        Fit
+            Loose - 1
+            Fitted - 2
+        Sleeve
+            Short - 1
+            Long  - 2
+            Both - 3
+        Number
+            Next - 1,2
+
+    Pants/Jeans/Shorts - 3
+        Type
+            Long
+            Short
+            Both
+        Fit
+            Loose
+            Fitted
+        Number
+            Next - 1,
