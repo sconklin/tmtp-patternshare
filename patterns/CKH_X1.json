@@ -1,12 +1,16 @@
 {
   "pattern": {
-    "pattern_number": "C_KH_Xaldin",
+    "pattern_number": "C_KH_X1",
     "title": "Xaldin Trench Coat",
     "summary": {
         "category": "Cosplay",
-        "subCategory": "Kingdom Hearts",
-        "type": "Robe",
-        "description": "Long-sleeved robe with front zipper closing, inset hip-level pockets, oversized hood, and sleeves widened towards wrists. Design based on Xaldin character in Kingdom Hearts.",
+        "anime": "Kingdom Hearts",
+        "tags": [
+            "Kingdom Hearts",
+            "Xaldin",
+            "Robe"
+        ],
+        "description": "Long-sleeved robe with front zipper closing, inset hip-level pockets, oversized hood, and sleeves widened towards wrists. Based on Xaldin character from Kingdom Hearts.",
         "recommended": {
             "fabric": "Leather, pleather, sweatshirt fabric, or any heavy-weight tightly woven fabric with good drape characteristics.",
             "notions": "Oversized #30 molded plastic zipper specially made by YKK for Nobody characters in Kingdom Hearts."
