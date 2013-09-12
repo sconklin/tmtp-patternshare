@@ -1,12 +1,5 @@
-/*
-vers    date        changes
-0.1     02.27.13    1st release
-0.1.1   02.28.13    added some math
-0.1.2   03.19.13    added more math, added construction options/grid
-*/
-
 var PX_per_IN = 90; //  90px/1in -- Inkscape's default pixel per inch, change to 72 if your favorite svg viewer uses 72 (e.g. GIMP)
-var PX_per_CM = PX_per_IN/2.54;   // 90px/2.54cm , change PX_per_CM if PX_per_IN is changed
+var PX_per_CM = PX_per_IN/2.54;   // 90px/2.54cm
 
 var maxx, maxy, minx, miny;
 var pt = {};

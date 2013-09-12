@@ -1,6 +1,6 @@
 body, select, input, textarea {
-    font-family: "Lucida Grande", Geneva, Verdana, Arial, sans-serif;
-    color: #777;
+    font-family: "DejaVu Serif", "Lucida Grande", Geneva, Verdana, Arial, sans-serif;
+    color: #fff;
 }
 
 a:link {
@@ -40,14 +40,14 @@ body{
     padding-top: 3px;
     padding-left:30px;
     color: #fff;
-    background-color: #78C0A8;
+    background-color: #457D97;
     -moz-border-radius: 1em 4em 1em 4em;
     border-radius: 1em 4em 1em 4em;
 }
 
 .footer{
     color: #fff;
-    background-color: #78C0A8;
+    background-color: #457D97;
     height: 30px;
     width: 950px;
     margin: 0 auto;
@@ -114,10 +114,10 @@ body{
     width: 220px;
     float: left;
     margin-right:5px;
-    background-color: #5E412F;
+    background-color: #2B4E5F;
     -moz-border-radius: 10px 10px / 10px 10px;
     border-radius: 10px 10px / 10px 10px;
-    padding: 0px 0;
+    padding: 5px 0px 5px 5px;
 
 }
 
@@ -140,6 +140,7 @@ select{
     padding: 3px;
     border: none;
     min-width:100px;
+    color: #000;
 }
 
 .disabledmeaslabel {
@@ -163,6 +164,7 @@ select{
     font-size: 16px;
     color: #fff;
     font-weight:bold;
+    padding: 5px;
 }
 
 .selectDiv {
@@ -174,8 +176,8 @@ select{
 }
 
 .measurements {
-    font-size: 10px;
-    margin: 3px;
+    font-size: 12px;
+    margin: 5px;
     padding: 3px;
     color: #fff;
 }
@@ -204,7 +206,7 @@ select{
 
 .headnav{
     float: right;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 200;
     color: #fff;
     padding-top: 12px;
@@ -220,7 +222,7 @@ select{
 #options{
     border: 2px solid #fff;
     margin-top:10px;
-    margin-left:10px;
+    margin-left:5px;
     margin-right:10px;
     -moz-border-radius: 10px 10px / 10px 10px;
     border-radius: 10px 10px / 10px 10px;
@@ -231,8 +233,8 @@ select{
     }
 
 button{
-    background-color:#F07818;
-    border:none;
+    background-color:#457D97;
+    border: 1px solid #000;
     padding:5px;
     color:#fff;
 }

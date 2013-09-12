@@ -1,17 +1,9 @@
 <!DOCTYPE html>
 
-<!--
-.  .                 .  .                    .               
-|- |-. ,-.   ,-. ,-. |- |- ,-. ,-. ,-.   ,-. |-. ,-. ,-. ,-. 
-|  | | |-'   | | ,-| |  |  |-' |   | |   `-. | | ,-| |   |-' 
-`' ' ' `-'   |-' `-^ `' `' `-' '   ' '   `-' ' ' `-^ '   `-' 
-             |                                               
--->
-
 <html>
 
 <head>
-	<title>The Pattern Share</title>
+	<title>Measurements</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="shortcut icon" href="fav.png" type="image/x-icon" />
 </head>
@@ -19,10 +11,10 @@
 
 <div class="header-holder">
 	<div class="header">
-		<a href="http://www.sewbuzzed.com/sharedemo/"><img src="images/headerlogo.png"/></a> (with TMTP)
+        <a href="http://localhost:8000"><img src="images/SeamlyName.png"/></a>
 		<div class="headnav">
+			<a id="menu_a" href="measurements.html">Measurements</a>		
 			<a id="menu" href="index.html">Home</a>
-			<a id="menu_a" href="measurements.html">Measurements</a>
 			<a id="menu" href="patterns.html">Patterns</a>
 			<a id="menu" href="about.html">About</a>
 		</div>
@@ -30,30 +22,41 @@
 </div>
 
 <div class="draw-wrapper">
-	<div class="measwrapper">
-		<div class="pmtitle">
-		  Measurements
+    <div class="measwrapper">
+		<div id="savebuttondiv" class="measurements">
+			<button id="savebutton" type="button" onclick="saveMeasurements()"> Save Measurements</button>
 		</div>
 		
-		<div id="measurements" class="measurements">
-			
-		</div>
+	    <div class="pmtitle">
+          Measurements
+        </div>
+        
+       <div id="selectMeasurementsDiv" class="selectDiv">
+          <select id="SelectM">
+            <option value="dummy"></option>
+          </select>
+        </div>    
+            
+		<article class="accordion">
 
-		<div id="savebuttondiv" class="measurements">
-			<button id="savebutton" type="button" onclick="savesvg()"> Save as SVG! </button>
-		</div>
-	</div>
+			<section id="measurements">
+			  <h2><a href="#measurements"></a></h2>
+			</section>
 	
-	<div id="drawarea" class="drawarea">
-	</div>
+		</article>	
+	
+    </div>
+    <div id="drawarea" class="drawarea">
+    </div>    
 </div>
 <div class="footer">
-	We're Sew Buzzed
+    We're Sew Buzzed
 </div>
 
 <script type="text/javascript" src="jquery-1.9.1.js"></script>
 <script type="text/javascript" src="patterndraw.js"></script>
 <script type="text/javascript" src="web.js"></script>
+<script type="text/javascript" src="measurements.js"></script>
 </body>
 
 </html>
