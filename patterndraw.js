@@ -11,6 +11,34 @@ function calcPoints() {
   miny = 0;
 
   for (i in window.patternData.pattern.points) {
+    //
+    // This must be reworked for the following reasons:
+    //
+    // 1. Dictionary ordering is not preserved in most languages, so data read from or written to the json file
+    //    may be reordered, and this program depends on preservation of order.
+    // 2. Three types of objects are represented in this one 'points' dictionary, and differentiated by structure.
+    //    This should be more explicit.
+    // 3. This data should be easy to manage in a relational database.
+    //
+    // Possible fixes:
+    //
+    // (1)
+    // * Store these as an array of dictionaries
+    // * order is preserved in the array
+    // * Dictionary fields:
+    //    'type' = [point|point_xy|formula]
+    //    'name' and 'x' and 'y' for point_xy
+    //    'name' and 'formula' for point and formula
+    //
+    // (2)
+    // * store these as a dictionary (as they are now) with some changes
+    // * It's now a dictionary of dictionaries
+    // * make the dictionary key an integer index which determines evaluation order
+    // * Dictionary fields:
+    //    'type' = [point|point_formula|formula]
+    //    'name' and 'x' and 'y' for point
+    //    'name' and 'formula' for point_formula and formula
+    //
     console.log(i);
     var point = 'false';
     var ltr = i;
@@ -18,6 +46,7 @@ function calcPoints() {
     if (window.patternData.pattern.points[i].x && window.patternData.pattern.points[i].y) {
         // points[i] is a dictionary with formulas for x & y
         // the + unary removes leading zeroes
+	// "backNape": { "x": "4*pt.seamAllowance", "y": "2*(1*meas.back_neck_balance - 1*meas.back_waist_length)" },
         point = 'true';
         var evalx = +eval(window.patternData.pattern.points[i].x);
         var evaly = +eval(window.patternData.pattern.points[i].y);
@@ -27,6 +56,7 @@ function calcPoints() {
         console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
     } else {
         //points[i] is a formula that returns a dictionary with values for x & y
+	// "a9" : "onLineAtLength(pt.backNeckSide, pt.backShoulderTip, 0.1*meas.neck_diameter)",
         var eval_obj = eval(window.patternData.pattern.points[i]);
         if (typeof eval_obj === 'object') {
             point = 'true';
@@ -37,6 +67,8 @@ function calcPoints() {
             console.log(ltr + " : " + window.patternData.pattern.points[i] + " = " + pt[ltr].x + ', ' + pt[ltr].y);
         } else {
             //points[i] is a string or number for use in calculating points
+	    //  "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
+
             point = 'false';
             pt[ltr] = eval_obj;
             console.log(ltr + " is a string or number : ", window.patternData.pattern.points[i] + ' = ' + pt[ltr]);

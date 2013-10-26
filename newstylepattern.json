@@ -1,0 +1,337 @@
+{
+"pattern": {
+  "pattern_number": "A2121",
+  "title": "Loose Fit T-Shirt",
+  "Summary": {
+      "category": "Streetwear",
+      "subCategory": "Shirts/TShirts/Blouses",
+      "tags": [
+        "TShirt",
+        "Loose",
+        "Shortsleeves",
+        "Crewneck"
+      ],
+      "description": "Loose fitted t-shirt with hip-length hem and short sleeves ending just above the elbow",
+      "recommended": {
+          "Fabric": "Lightweight cotton jersey knit",
+          "Notions": ""
+      }
+  },
+  "measurements": [
+      "neck",
+      "neck_diameter",
+
+      "shoulder_length",
+
+      "across_chest",
+      "across_back",
+
+      "front_highbust_height",
+      "back_highbust_height",
+
+      "bust",
+      "front_bust_width",
+      "front_bust_height",
+      "back_bust_width",
+      "back_bust_height",
+
+      "waist",
+      "front_waist_length",
+      "back_waist_length",
+      "side_waist_length",
+
+      "front_neck_balance",
+      "back_neck_balance",
+      "front_shoulder_balance",
+      "back_shoulder_balance",
+
+      "hip",
+      "back_hip_height",
+
+      "overarm_length",
+      "underarm_length",
+      "bicep",
+      "armcap_height"
+  ],
+  "main": [
+    {
+      "id": "Back A",
+      "type": "path",
+      "d": [
+        ["M", "pt.a1"],
+        ["L", "pt.a3", "pt.a8", "pt.a6"],
+        ["C", "pt.a6out", "pt.a11in", "pt.a11"],
+        ["L", "pt.a10", "pt.a9"],
+        ["C", "pt.a9out", "pt.a1in", "pt.a1"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Front B",
+      "type": "path",
+      "d": [
+        ["M", "pt.b1"],
+        ["L", "pt.b3", "pt.b8", "pt.b6"],
+        ["C", "pt.b6out", "pt.b11in", "pt.b11"],
+        ["L", "pt.b10", "pt.b9"],
+        ["C", "pt.b9out", "pt.b1in", "pt.b1"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Sleeve C",
+      "type": "path",
+      "d": [
+        ["M", "pt.c8"],
+        ["C", "pt.c8out", "pt.c6in", "pt.c6"],
+        ["L", "pt.c12", "pt.c11", "pt.c4"],
+        ["C", "pt.c4out", "pt.c8in","pt.c8"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Back Neck Band D",
+      "type": "path",
+      "d": [
+        ["M", "pt.d1"],
+        ["L", "pt.d2", "pt.d3", "pt.d4"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Front Neck Band E",
+      "type": "path",
+      "d": [
+        ["M", "pt.e1"],
+        ["L", "pt.e2", "pt.e3", "pt.e4"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Shoulder Stay Strip F",
+      "type": "path",
+      "d": [
+        ["M", "pt.f1"],
+        ["L", "pt.f2", "pt.f3", "pt.f4"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    }
+  ],
+  "construction": [
+    {
+      "id": "Back Construction Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.backNape"],
+        ["L", "pt.backHipCenter", "pt.backHipSide", "pt.backHighbustSide","pt.backAcrossSide"],
+        ["L", "pt.backShoulderTip", "pt.backNeckSide", "pt.backNape"],
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backWaistSide"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+    },
+    {
+      "id": "Back Measurement Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.backAcrossCenter"],
+        ["L", "pt.backAcrossSide"],
+        ["M", "pt.backHighbustCenter"],
+        ["L", "pt.backHighbustSide"],
+        ["M", "pt.backBustCenter"],
+        ["L", "pt.backBustSide"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
+    },
+    {
+      "id": "Back Balance Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backNeckSide"],
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backShoulderTip"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
+    },
+    {
+      "id": "Front Construction Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.frontNeckCenter"],
+        ["L", "pt.frontHipCenter", "pt.frontHipSide", "pt.frontHighbustSide", "pt.frontAcrossSide"],
+        ["L", "pt.frontShoulderTip", "pt.frontNeckSide", "pt.frontNeckCenter"],
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontWaistSide"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+    },
+    {
+      "id": "Front Measurement Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.frontAcrossCenter"],
+        ["L", "pt.frontAcrossSide"],
+        ["M", "pt.frontHighbustCenter"],
+        ["L", "pt.frontHighbustSide"],
+        ["M", "pt.frontBustCenter"],
+        ["L", "pt.frontBustSide"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
+    },
+    {
+      "id": "Front Balance Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontNeckSide"],
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontShoulderTip"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#0000FF", "fill":"none" }
+    },
+    {
+      "id": "Sleeve Construction Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.c8"],
+        ["L", "pt.c3"],
+        ["M", "pt.c4"],
+        ["L", "pt.c6"],
+        ["M", "pt.c4"],
+        ["L", "pt.c8", "pt.c6"],
+        ["M", "pt.c9"],
+        ["L", "pt.c10"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+    }
+  ],
+  "points": [
+      { "type" : "formula", "name" : "CM" , "formula" : "convertUnit(1, 'cm', window.measurementData.clientdata.units)"},
+      { "type" : "formula", "name" : "IN" , "formula" : "convertUnit(1, 'in', window.measurementData.clientdata.units)"},
+      { "type" : "formula", "name" : "seamAllowance", "formula" : "(5/8)*pt.IN"},
+
+      { "type" : "point_xy", "name" : "backNape", "x": "4*pt.seamAllowance", "y": "2*(1*meas.back_neck_balance - 1*meas.back_waist_length)"},
+      { "type" : "point", "name" : "backHighbustCenter", "formula" : "down(pt.backNape, 1*meas.back_highbust_height)"},
+      { "type" : "point", "name" : "backAcrossCenter", "formula" : "down(pt.backNape, 0.66*dist(pt.backNape, pt.backHighbustCenter))"},
+      { "type" : "point", "name" : "backBustCenter", "formula" : "down(pt.backNape, 1*meas.back_bust_height)"},
+      { "type" : "point", "name" : "backWaistCenter", "formula" : "down(pt.backNape, 1*meas.back_waist_length)",
+      { "type" : "point", "name" : "backHipCenter", "formula" : "down(pt.backWaistCenter, 1.4*meas.back_hip_height)"},
+
+      { "type" : "point", "name" : "backNeckSide", "formula" : "onCircleAtX(pt.backWaistCenter, 1*meas.back_neck_balance + 1*pt.CM, pt.backNape.x + 0.5*meas.neck_diameter, 'y1 < y2')"},
+      { "type" : "point", "name" : "backShoulderTip", "formula" : "intersectCircles(pt.backWaistCenter, 1*meas.back_shoulder_balance + 1*pt.CM, pt.backNeckSide, 1*meas.shoulder_length, 'x1 > x2')"},
+      { "type" : "point", "name" : "backAcrossSide", "formula" : "right(pt.backAcrossCenter, 0.5*meas.across_back)"},
+      { "type" : "point", "name" : "backHighbustSide", "formula" : "right(pt.backHighbustCenter, 0.5*meas.back_bust_width)"},
+      { "type" : "point", "name" : "backBustSide", "formula" : "right(pt.backBustCenter, 0.5*meas.back_bust_width)"},
+      { "type" : "point", "name" : "backWaistSide", "formula" : "down(pt.backHighbustSide, 1*meas.side_waist_length)"},
+      { "type" : "point_xy", "name" : "backHipSide", "x":"pt.backWaistSide.x", "y":"pt.backHipCenter.y"},
+
+      { "type" : "point", "name" : "frontHighbustCenter", "formula" : "right(pt.backHighbustSide, 2*pt.seamAllowance + 3*pt.IN + 0.6*meas.front_bust_width)"},
+      { "type" : "point", "name" : "frontNeckCenter", "formula" : "up(pt.frontHighbustCenter, 1*meas.front_highbust_height)"},
+      { "type" : "point", "name" : "frontBustCenter", "formula" : "down(pt.frontNeckCenter, 1*meas.front_bust_height)"},
+      { "type" : "point", "name" : "frontAcrossCenter", "formula" : "down(pt.frontNeckCenter, 0.66*dist(pt.frontNeckCenter, pt.frontHighbustCenter))"},
+      { "type" : "point", "name" : "frontWaistCenter", "formula" : "down(pt.frontNeckCenter, 1*meas.front_waist_length)"},
+      { "type" : "point_xy", "name" : "frontHipCenter", "x":"pt.frontNeckCenter.x", "y":"pt.backHipCenter.y"},
+
+      { "type" : "point", "name" : "frontNeckSide", "formula" : "onCircleAtX(pt.frontWaistCenter, 1*meas.front_neck_balance + 1*pt.CM, pt.frontNeckCenter.x - 0.5*meas.neck_diameter, 'y1 < y2')"},
+      { "type" : "point", "name" : "frontShoulderTip", "formula" : "intersectCircles(pt.frontWaistCenter, 1*meas.front_shoulder_balance + 1*pt.CM, pt.frontNeckSide, 1*meas.shoulder_length, 'x1 < x2')"},
+      { "type" : "point", "name" : "frontAcrossSide", "formula" : "left(pt.frontAcrossCenter, 0.5*meas.across_chest)"},
+      { "type" : "point", "name" : "frontHighbustSide", "formula" : "left(pt.frontHighbustCenter, 0.5*meas.front_bust_width)"},
+      { "type" : "point", "name" : "frontBustSide", "formula" : "left(pt.frontBustCenter, 0.5*meas.front_bust_width)"},
+      { "type" : "point", "name" : "frontWaistSide", "formula" : "down(pt.frontHighbustSide, 1*meas.side_waist_length)"},
+      { "type" : "point_xy", "name" : "frontHipSide", "x":"pt.frontWaistSide.x", "y":"pt.frontHipCenter.y"},
+
+      { "type" : "point", "name" : "a1", "formula" : "up(pt.backNape, 0.5*(Math.abs(pt.backNape.y - pt.backNeckSide.y)))"},
+      { "type" : "point", "name" : "a2", "formula" : "copy(pt.backWaistCenter)"},
+      { "type" : "point", "name" : "a3", "formula" : "copy(pt.backHipCenter)"},
+      { "type" : "point", "name" : "a4", "formula" : "copy(pt.backBustCenter)"},
+      { "type" : "point", "name" : "a5", "formula" : "copy(pt.backAcrossCenter)"},
+      { "type" : "point", "name" : "temp_a6", "formula" : "right(pt.backBustSide, 0.08*meas.back_bust_width)"},
+      { "type" : "point", "name" : "a6", "formula" : "down(pt.temp_a6,0.12*meas.side_waist_length)"},
+      { "type" : "point_xy", "name" : "a7", "x":"pt.a6.x", "y":"pt.backWaistSide.y"},
+      { "type" : "point_xy", "name" : "a8", "x":"pt.a6.x", "y":"pt.backHipSide.y" },
+      { "type" : "point", "name" : "a9", "formula" : "onLineAtLength(pt.backNeckSide, pt.backShoulderTip, 0.1*meas.neck_diameter)"},
+      { "type" : "point", "name" : "a10", "formula" : "right(pt.backShoulderTip, 0.2*meas.armcap_height)"},
+      { "type" : "point_xy", "name" : "a11", "x":"pt.a10.x", "y":"pt.backAcrossCenter.y"},
+
+      { "type" : "point", "name" : "a1in", "formula" : "right(pt.a1, dist(pt.a1, pt.a9)/2)"},
+      { "type" : "point", "name" : "a9out", "formula" : "polar(pt.a9, dist(pt.a1, pt.a9)/6, angleBetween(pt.a9, pt.a1in))"},
+      { "type" : "point", "name" : "a6out", "formula" : "left(pt.a6, dist(pt.a6, pt.a11)/3)"},
+      { "type" : "point", "name" : "a11in", "formula" : "polar(pt.a11, dist(pt.a6, pt.a11)/3, angleBetween(pt.a10, pt.a11))"},
+
+      { "type" : "point", "name" : "b1", "formula" : "down(pt.frontNeckCenter, 0.1*meas.neck_diameter)"},
+      { "type" : "point", "name" : "b2", "formula" : "copy(pt.frontWaistCenter)"},
+      { "type" : "point", "name" : "b3", "formula" : "copy(pt.frontHipCenter)"},
+      { "type" : "point", "name" : "b4", "formula" : "copy(pt.frontBustCenter)"},
+      { "type" : "point", "name" : "b5", "formula" : "copy(pt.frontAcrossCenter)"},
+      { "type" : "point", "name" : "temp_b6", "formula" : "left(pt.frontBustSide, 0.08*meas.front_bust_width)"},
+      { "type" : "point_xy", "name" : "b6", "x":"pt.temp_b6.x", "y":"pt.a6.y"},
+      { "type" : "point", "name" : "b7", "formula" : "down(pt.b6, dist(pt.a6, pt.a7))"},
+      { "type" : "point", "name" : "b8", "formula" : "down(pt.b6, dist(pt.a6, pt.a8))"},
+      { "type" : "point", "name" : "b9", "formula" : "onLineAtLength(pt.frontNeckSide, pt.frontShoulderTip, 0.1*meas.neck_diameter)"},
+      { "type" : "point", "name" : "b10", "formula" : "onCircleAtY(pt.b9, dist(pt.a9, pt.a10), pt.frontShoulderTip.y, 'x1 < x2')"},
+      { "type" : "point_xy", "name" : "b11", "x":"pt.b10.x", "y":"pt.frontAcrossCenter.y"},
+
+      { "type" : "point", "name" : "b1in", "formula", "left(pt.b1, 0.85*Math.abs(pt.b9.x - pt.b1.x))"},
+      { "type" : "point", "name" : "b9out", "formula" : "down(pt.b9, dist(pt.b1, pt.b9)/6)"},
+      { "type" : "point", "name" : "b6out", "formula" : "right(pt.b6, dist(pt.b6, pt.b11)/3)"},
+      { "type" : "point", "name" : "b11in", "formula" : "polar(pt.b11, dist(pt.b6, pt.b11)/3, angleBetween(pt.b10, pt.b11))"},
+      { "type" : "point_xy", "name" : "c1",  "x":"pt.frontNeckCenter.x + 2*pt.seamAllowance + 4*pt.IN", "y":"pt.frontBustCenter.y"},
+      { "type" : "point_xy", "name" : "c2",  "x":"pt.c1.x + Math.abs(pt.a6.x - pt.a10.x)", "y":"pt.c1.y"},
+      { "type" : "point", "name" : "c3", "formula" : "right(pt.c2, 0.4*meas.underarm_length)"},
+      { "type" : "point", "name" : "c4", "formula" : "down(pt.c2, Math.abs(pt.a10.y - pt.a6.y))"},
+      { "type" : "point_xy", "name" : "c5", "x":"pt.c1.x - Math.abs(pt.a10.x - pt.a11.x)", "y":"pt.c1.y + Math.abs(pt.a10.y - pt.a11.y)"},
+      { "type" : "point", "name" : "c6", "formula" : "up(pt.c2, Math.abs(pt.b10.y - pt.b6.y))"},
+      { "type" : "point_xy", "name" : "c7", "x":"pt.c1.x - Math.abs(pt.b10.x - pt.b11.x)", "y":"pt.c2.y - Math.abs(pt.b10.y - pt.b11.y)"},
+      { "type" : "formula", "name" : "temp_c8x", "formula" : "Math.min(pt.c5.x, pt.c7.x)"},
+      { "type" : "point_xy", "name" : "c8", "x":"pt.temp_c8x - Math.abs(pt.temp_c8x - pt.c1.x)", "y":"pt.c1.y"},
+      { "type" : "point", "name" : "c9", "formula" : "midPoint(pt.c4, pt.c6)"},
+      { "type" : "point_xy", "name" : "c10", "x":"pt.c3.x", "y":"pt.c9.y"},
+      { "type" : "point", "name" : "c11", "formula" : "down(pt.c10, 0.52*meas.bicep)"},
+      { "type" : "point", "name" : "c12", "formula" : "up(pt.c10, 0.52*meas.bicep)"},
+
+      { "type" : "point", "name" : "c4out", "formula" : "up(pt.c4, dist(pt.c4, pt.c8)/6)"},
+      { "type" : "point", "name" : "c8in", "formula" : "down(pt.c8, dist(pt.c4, pt.c8)/1.5)"},
+      { "type" : "point", "name" : "c8out", "formula" : "up(pt.c8, dist(pt.c8, pt.c6)/1.5)"},
+      { "type" : "point", "name" : "c6in", "formula" : "down(pt.c6, dist(pt.c8, pt.c6)/6)"},
+      { "type" : "point", "name" : "c5in", "formula" : "polar(pt.c5, dist(pt.c4, pt.c5)/4, angleBetween(pt.c8, pt.c4))"},
+      { "type" : "point", "name" : "c5out", "formula" : "polar(pt.c5, dist(pt.c5, pt.c8)/4, angleBetween(pt.c4, pt.c8))"},
+      { "type" : "point", "name" : "c7in", "formula" : "polar(pt.c7, dist(pt.c8, pt.c7)/4, angleBetween(pt.c6, pt.c8))"},
+      { "type" : "point", "name" : "c7out", "formula" : "polar(pt.c7, dist(pt.c7, pt.c6)/4, angleBetween(pt.c8, pt.c6))"},
+
+      { "type" : "point", "name" : "d1", "formula" : "down(pt.c4, 2*pt.seamAllowance + 2*pt.IN)"},
+      { "type" : "point", "name" : "d2", "formula" : "down(pt.d1, 0.8*(2*curveLength(pt.a9, pt.a9out, pt.a1in, pt.a1)))"},
+      { "type" : "point", "name" : "d3", "formula" : "right(pt.d2, 0.2*meas.shoulder_length)"},
+      { "type" : "point_xy", "name" : "d4", "x" : "pt.d3.x", "y" : "pt.d1.y" },
+
+      { "type" : "point", "name" : "e1", "formula" : "right(pt.d4, 2*pt.seamAllowance + 2*pt.IN)"},
+      { "type" : "point", "name" : "e2", "formula" : "down(pt.e1, 0.8*(2*curveLength(pt.b9, pt.b9out, pt.b1in, pt.b1)))"},
+      { "type" : "point", "name" : "e3", "formula" : "right(pt.e2, 0.2*meas.shoulder_length)"},
+      { "type" : "point_xy", "name" : "e4", "x" : "pt.e3.x", "y" : "pt.e1.y" },
+
+      { "type" : "point", "name" : "f1", "formula" : "right(pt.e4, 2*pt.seamAllowance + 2*pt.IN)"},
+      { "type" : "point", "name" : "f2", "formula" : "down(pt.f1, dist(pt.a9, pt.a10))"},
+      { "type" : "point", "name" : "f3", "formula" : "right(pt.f2, 0.1*meas.shoulder_length)"},
+      { "type" : "point_xy", "name" : "f4", "x" : "pt.f3.x", "y" : "pt.f1.y" }
+  ]
+}
+}
