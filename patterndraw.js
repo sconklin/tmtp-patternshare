@@ -10,7 +10,9 @@ function calcPoints() {
   minx = 0;
   miny = 0;
 
-  for (i in window.patternData.pattern.points) {
+  var ispoint = false;
+  var wppp = window.patternData.pattern.points;
+  for (index in wppp) {
     //
     // This must be reworked for the following reasons:
     //
@@ -39,47 +41,48 @@ function calcPoints() {
     //    'name' and 'x' and 'y' for point
     //    'name' and 'formula' for point_formula and formula
     //
-    console.log(i);
-    var point = 'false';
-    var ltr = i;
-    pt[ltr] = {};
-    if (window.patternData.pattern.points[i].x && window.patternData.pattern.points[i].y) {
-        // points[i] is a dictionary with formulas for x & y
-        // the + unary removes leading zeroes
-	// "backNape": { "x": "4*pt.seamAllowance", "y": "2*(1*meas.back_neck_balance - 1*meas.back_waist_length)" },
-        point = 'true';
-        var evalx = +eval(window.patternData.pattern.points[i].x);
-        var evaly = +eval(window.patternData.pattern.points[i].y);
-        pt[ltr].x = evalx;
-        pt[ltr].y = evaly;
-        console.log(ltr + ".x: " + window.patternData.pattern.points[i].x + " = " + pt[ltr].x);
-        console.log(ltr + ".y: " + window.patternData.pattern.points[i].y + " = " + pt[ltr].y);
+    console.log(index);
+    
+    // Parse each of the point items
+    ispoint = false;
+      var pitem = wppp[index];
+    if (pitem.type == 'formula') {
+      console.log("Got a formula");
+      //pt[pitem.name] = {};
+      var eval_obj = eval(pitem.formula);
+      pt[pitem.name] = eval_obj;
+      console.log(pitem.name + " is a string or number : " + pitem.name + ' = ' + pitem.formula);
+    } else if (pitem.type == 'point_xy') {
+      ispoint = true;
+      console.log("Got a point_xy");
+      pt[pitem.name] = {};
+      var evalx = +eval(pitem.x);
+      var evaly = +eval(pitem.y);
+      pt[pitem.name].x = evalx;
+      pt[pitem.name].y = evaly;
+      console.log(pitem.name + ".x: " + pt[pitem.name].x);
+      console.log(pitem.name + ".y: " + pt[pitem.name].y);
+    } else if (pitem.type == 'object') {
+      ispoint = true;
+      console.log("Got an object: ", pitem.object);
+      pt[pitem.name] = {};
+      var eval_obj = eval(pitem.object);
+      var evalx = eval_obj.x;
+      var evaly = eval_obj.y;
+      pt[pitem.name].x = evalx;
+      pt[pitem.name].y = evaly;
+      console.log(pitem.name + " : " + pitem.object + " = " + pt[pitem.name].x + ', ' + pt[pitem.name].y);
     } else {
-        //points[i] is a formula that returns a dictionary with values for x & y
-	// "a9" : "onLineAtLength(pt.backNeckSide, pt.backShoulderTip, 0.1*meas.neck_diameter)",
-        var eval_obj = eval(window.patternData.pattern.points[i]);
-        if (typeof eval_obj === 'object') {
-            point = 'true';
-            var evalx = eval_obj.x;
-            var evaly = eval_obj.y;
-            pt[ltr].x = evalx;
-            pt[ltr].y = evaly;
-            console.log(ltr + " : " + window.patternData.pattern.points[i] + " = " + pt[ltr].x + ', ' + pt[ltr].y);
-        } else {
-            //points[i] is a string or number for use in calculating points
-	    //  "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
-
-            point = 'false';
-            pt[ltr] = eval_obj;
-            console.log(ltr + " is a string or number : ", window.patternData.pattern.points[i] + ' = ' + pt[ltr]);
-        }
+      console.log("ERROR: Ignoring unknown type of point item in pattern file");
+      continue;
     }
-    if (point == 'true') {
-        maxx = Math.max(maxx, pt[ltr].x);
-        minx = Math.min(minx, pt[ltr].x);
-        maxy = Math.max(maxy, pt[ltr].y);
-        miny = Math.min(miny, pt[ltr].y);
-        console.log("Point "+ ltr + " maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
+
+    if (ispoint == true) {
+      maxx = Math.max(maxx, pt[pitem.name].x);
+      minx = Math.min(minx, pt[pitem.name].x);
+      maxy = Math.max(maxy, pt[pitem.name].y);
+      miny = Math.min(miny, pt[pitem.name].y);
+      console.log("Point "+ pitem.name + " maxx: " + maxx + ", maxy: " + maxy + ", minx: " + minx + ", miny: " + miny);
     }
   }
 }
