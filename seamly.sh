@@ -1,2 +1,2 @@
 ./startWebServer.sh &
-./startTmtp.sh
+./startSeamly.sh
