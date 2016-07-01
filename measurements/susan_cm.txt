@@ -1,0 +1,64 @@
+     
+    Height: 167.5
+    Nape to Floor:	
+    Front Waist Length: 	
+    Back Waist Length: 	
+    Shoulder: 
+        Front Shoulder Width (shoulder tip to shoulder tip across front):     	
+        Front Shoulder Height (side neck straight down front to waist): 	
+        Front Shoulder Balance (shoulder tip to center waist across front): 	
+            Back Shoulder Height (side neck straight down back to waist): 	
+            Back Shoulder Width (shoulder tip to shoulder tip across back):
+            Back Shoulder Balance (shoulder tip to center waist across back:
+    Bust: 	
+        Front Bust:
+        Bust Length (Front Neck to bustline): 	
+        Bust Point Distance: 
+            Back Bust (Bust - Front Bust):             
+    Neck: 
+        Front Neck (Neck - Back Neck):	
+        Back Neck: 	
+    Side: 		
+    Underarm: 
+        Front Underarm: 
+        Across Chest (Armfold to Armfold across front chest):
+            Back Underarm (Underam - Front Underarm):
+            Across Back (Armfold to Armfold across back chest):        
+    Waist: 	
+        Front Waist:
+        Front Waist Balance (Front Neck to Side Waist across Front):	
+            Back Waist (Back Center Waist to Front Waist):
+            Back Waist Balance (Back Neck to Side Waist across Back): 
+ ____________________________________________________________________________           	
+    Hip: 	
+        Front Hip: 	
+        Front Hip Height (Front Waist Center down to hipline): 	
+            Back Hip (Hip - Front Hip): 	
+            Back Hip Height (Back Waist Center down to hipline):
+            Hip To Floor (hipline to floor):
+             	Side Hip Height (Side Waist down to hipline):
+    Abdomen: 	
+        Front Abdomen:
+        Abdomen Height (Front Waist Center down to abdomen line): 	
+            Back Abdomen (Abdomen - Front Abdomen):       
+    Rise (Side Waist to chair seat while seated): 	
+    Crotch Length (Front Waist Center to Back Waist Center): 	
+    Inseam: 	
+    Outseam: 	
+    Thigh: 	
+    Knee (bent): 	
+        Knee To Floor: 	
+    Calf: 	
+    Ankle (Front Ankle diagonal to bottom of heel): 	
+        Ankle To Floor:             
+ ____________________________________________________________________________            	 	
+    Oversleeve Length (Shoulder tip to outside wrist with bent arm):
+    Elbow Length (Shoulder tip to elbow with bent arm):    
+    Elbow (bent arm):      	
+    Undersleeve Length (Underarm to inside wrist with straight arm): 	
+    Bicep (flexed): 	
+    Wrist: 	
+    Hand: 	
+    Hand Length: 	
+____________________________________________________________________________
+

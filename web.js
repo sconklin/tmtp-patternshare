@@ -34,7 +34,7 @@ function drawPatternIfReady(){
       }
 
       // Change the units selector to match what's in the measurements file
-      var clientUnits = window.measurementData.clientdata.units;
+      var clientUnits = window.measurementData.clientdata.measurement_units;
       console.log("Client Units: " + clientUnits);
       if (clientUnits == "px") {
     $("#pxradio").attr('checked', 'checked')

@@ -11,7 +11,7 @@
         "Shortsleeves",
         "Crewneck"
       ],
-      "description": "Loose fitted t-shirt with hip-length hem and short sleeves ending just above the elbow",
+      "description": "Loose fitted t-shirt with hip-length hem and sleeves ending above the elbow",
       "recommended": {
           "Fabric": "Lightweight cotton jersey knit",
           "Notions": ""
@@ -53,7 +53,7 @@
       "bicep",
       "armcap_height"
   ],
-  "main": [
+  "PatternPaths": [
     {
       "id": "Back A",
       "type": "path",
@@ -72,7 +72,7 @@
       "id": "Front B",
       "type": "path",
       "d": [
-        ["M", "pt.b1"],
+        ["M", "pt.b1", ""],
         ["L", "pt.b3", "pt.b8", "pt.b6"],
         ["C", "pt.b6out", "pt.b11in", "pt.b11"],
         ["L", "pt.b10", "pt.b9"],
@@ -129,7 +129,7 @@
       "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
     }
   ],
-  "construction": [
+  "VisualAids": [
     {
       "id": "Back Construction Lines",
       "type": "path",
@@ -226,8 +226,8 @@
     }
   ],
   "points": {
-      "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
-      "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.units)",
+      "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.measurement_units)",
+      "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.measurement_units)",
       "seamAllowance" : "(5/8)*pt.IN",
 
       "backNape": { "x": "4*pt.seamAllowance", "y": "2*(1*meas.back_neck_balance - 1*meas.back_waist_length)" },

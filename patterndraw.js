@@ -114,9 +114,9 @@ function drawpattern(){
         //if ( document.getElementById("cmradio").checked == true ) { unitscayl = 90/2.54; }
         //else if ( document.getElementById("inradio").checked == true ) { unitscayl = 90; }
         //else { unitscayl = 1; };
-        if ( window.measurementData.clientdata.units === 'in' ) {
+        if ( window.measurementData.clientdata.measurement_units === 'in' ) {
           unitscayl = PX_per_IN;
-        } else if ( window.measurementData.clientdata.units === 'cm' ) {
+        } else if ( window.measurementData.clientdata.measurement_units === 'cm' ) {
           unitscayl = PX_per_CM;
         } else {
           unitscayl = 1;

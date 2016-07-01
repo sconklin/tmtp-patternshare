@@ -272,8 +272,8 @@
 
   ],
   "points": {
-    "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
-    "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.units)",
+    "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.measurement_units)",
+    "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.measurement_units)",
     "seamAllowance" : "(5/8)*pt.IN",
 
     "backNeckCenter": { "x": "pt.seamAllowance + 2*pt.CM", "y": "pt.seamAllowance + 2*pt.CM" },

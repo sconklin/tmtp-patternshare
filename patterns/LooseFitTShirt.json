@@ -1,0 +1,320 @@
+{
+"pattern": {
+  "pattern_number": "A2121",
+  "title": "Loose Fit T-Shirt",
+  "Summary": {
+      "category": "Streetwear",
+      "subCategory": "Shirts/TShirts/Blouses",
+      "tags": [
+        "TShirt",
+        "Loose",
+        "Shortsleeves",
+        "Crewneck"
+      ],
+      "description": "Loose hip-length Tshirt with sleeves ending just above the elbow",
+      "recommended": {
+          "Fabric": "Lightweight cotton jersey knit",
+          "Notions": ""
+      }
+  },
+  "measurements": [
+
+      "front_underarm",
+      "back_underarm",
+      "front_underarm_height",
+      "back_underarm_height",
+      "bust",
+      "front_bust",
+      "back_bust",
+      "bust_length",
+      "bust_distance",
+      "bust_balance",
+      "waist",
+      "front_waist",
+      "back_waist",
+      "front_waist_length",
+      "back_waist_length",
+      "side",
+      "shoulder",
+      "front_shoulder_balance",
+      "back_shoulder_balance",
+      "front_shoulder_width",
+      "back_shoulder_width",
+      "front_shoulder_height",
+      "back_shoulder_height",
+      "front_armfold_distance",
+      "back_armfold_distance",
+      "hip",
+      "front_hip",
+      "back_hip",
+      "back_hip_length",
+      "oversleeve_length",
+      "undersleeve_length",
+      "bicep"
+  ],
+  "main": [
+    {
+      "id": "Back A",
+      "type": "path",
+      "d": [
+        ["M", "pt.a1"],
+        ["L", "pt.a3", "pt.a8", "pt.a6"],
+        ["C", "pt.a6out", "pt.a5in", "pt.a5"],
+        ["L", "pt.a10", "pt.a9"],
+        ["C", "pt.a9out", "pt.a1in", "pt.a1"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Front B",
+      "type": "path",
+      "d": [
+        ["M", "pt.b1"],
+        ["L", "pt.b3", "pt.b8", "pt.b6"],
+        ["C", "pt.b6out", "pt.b5in", "pt.b5"],
+        ["L", "pt.b10", "pt.b9"],
+        ["C", "pt.b9out", "pt.b1in", "pt.b1"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Sleeve C",
+      "type": "path",
+      "d": [
+        ["M", "pt.c8"],
+        ["C", "pt.c8out", "pt.c6in", "pt.c6"],
+        ["L", "pt.c12", "pt.c11", "pt.c4"],
+        ["C", "pt.c4out", "pt.c8in","pt.c8"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Back Neck Band D",
+      "type": "path",
+      "d": [
+        ["M", "pt.d1"],
+        ["L", "pt.d2", "pt.d3", "pt.d4"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Front Neck Band E",
+      "type": "path",
+      "d": [
+        ["M", "pt.e1"],
+        ["L", "pt.e2", "pt.e3", "pt.e4"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    },
+    {
+      "id": "Shoulder Stay Strip F",
+      "type": "path",
+      "d": [
+        ["M", "pt.f1"],
+        ["L", "pt.f2", "pt.f3", "pt.f4"],
+        ["z"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"3", "stroke":"#555555", "fill":"none" }
+    }
+  ],
+  "construction": [
+    {
+      "id": "Back Construction Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.backNape"],
+        ["L", "pt.backHipCenter", "pt.backHipSide", "pt.backUnderarmSide","pt.backArmscye1"],
+        ["L", "pt.backShoulderTip", "pt.backNeckSide", "pt.backNape"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+    },
+    {
+      "id": "Back Measurement Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.backUnderarmCenter"],
+        ["L", "pt.backUnderarmSide"],
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backWaistSide"],
+        ["M", "pt.backWaistCenter"],
+        ["L", "pt.backShoulderTip"],
+        ["M", "pt.a1"],
+        ["L", "pt.temp_shoulder_width"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
+    },
+    {
+      "id": "Front Construction Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.frontNeckCenter"],
+        ["L", "pt.frontHipCenter", "pt.frontHipSide", "pt.frontUnderarmSide", "pt.frontArmscye1"],
+        ["L", "pt.frontShoulderTip", "pt.frontNeckSide", "pt.frontNeckCenter"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+    },
+    {
+      "id": "Front Measurement Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.frontUnderarmCenter"],
+        ["L", "pt.frontUnderarmSide"],
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontWaistSide"],
+        ["M", "pt.frontWaistCenter"],
+        ["L", "pt.frontShoulderTip"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#FF0000", "fill":"none" }
+    },
+    {
+      "id": "Sleeve Construction Lines",
+      "type": "path",
+      "d": [
+        ["M", "pt.c8"],
+        ["L", "pt.c3"],
+        ["M", "pt.c4"],
+        ["L", "pt.c6"],
+        ["M", "pt.c4"],
+        ["L", "pt.c5", "pt.c8", "pt.c7", "pt.c6"],
+        ["M", "pt.c9"],
+        ["L", "pt.c10"]
+      ],
+      "drawattr": {},
+      "appearanceattr": { "stroke-width":"2", "stroke":"#00FF00", "fill":"none" }
+    }
+  ],
+  "points": {
+      "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.measurement_units)",
+      "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.measurement_units)",
+      "seamAllowance" : "(5/8)*pt.IN",
+
+      "back_offset_x": "4*pt.seamAllowance",
+      "back_offset_y": "2*(1*meas.back_shoulder_height - 1*meas.back_waist_length)",
+      "backNape": { "x": "pt.back_offset_x", "y": "pt.back_offset_y" },
+      "backUnderarmCenter" : "down(pt.backNape, 1*meas.back_underarm_height)",
+      "backWaistCenter": "down(pt.backNape, 1*meas.back_waist_length)",
+      "backHipCenter": "down(pt.backWaistCenter, 1*meas.back_hip_length)",
+      "back_half_shoulder_x": "pt.backNape.x + 0.5*meas.back_shoulder_width",
+      "backShoulderTip": "onCircleAtX(pt.backWaistCenter, 1*meas.back_shoulder_balance + 1*pt.CM, pt.back_half_shoulder_x, 'y1 < y2')",
+      "backNeckSide" : "onCircleAtY(pt.backShoulderTip, 1*meas.shoulder, pt.backWaistCenter.y -1*meas.back_shoulder_height, 'x1 < x2')",
+      "backArmscye1": {"x": "pt.backShoulderTip.x - 0.1*meas.shoulder", "y": "0.5*(pt.backShoulderTip.y + pt.backUnderarmCenter.y)"},
+      "backArmscye2": "right(pt.backUnderarmCenter, 0.5*meas.back_armfold_distance)",
+      "backUnderarmSide": "right(pt.backUnderarmCenter, 0.5*meas.back_bust)",
+      "backWaistSide": "right(pt.backWaistCenter, 0.5*meas.back_waist)",
+      "backHipSide": "right(pt.backHipCenter, 0.5*meas.back_hip)",
+
+      "front_offset_x": "2*pt.seamAllowance + 3*pt.IN + 0.7*meas.front_bust",
+      "frontUnderarmCenter": {"x": "pt.backHipSide.x + pt.front_offset_x", "y":"pt.backUnderarmCenter.y"},
+      "frontWaistCenter": {"x": "pt.frontUnderarmCenter.x", "y":"pt.backWaistCenter.y"},
+      "frontNeckCenter": "up(pt.frontWaistCenter, 1*meas.front_waist_length)",
+      "frontHipCenter": {"x": "pt.frontUnderarmCenter.x", "y":"pt.backHipCenter.y"},
+      "frontBustCenter": "up(pt.frontWaistCenter, 1*meas.bust_length)",
+      "bustPoint": "left(pt.frontBustCenter, 0.5*meas.bust_distance)",
+      "front_half_shoulder_x": "pt.frontNeckCenter.x - (0.5*meas.front_shoulder_width)",
+      "frontShoulderTip": "onCircleAtX(pt.frontWaistCenter, 1*meas.front_shoulder_balance + 1*pt.CM, pt.front_half_shoulder_x, 'y1 < y2')",
+      "frontNeckSide": "intersectCircles(pt.frontShoulderTip, 1*meas.shoulder, pt.bustPoint, 1*meas.bust_balance, 'x1 > x2')",
+      "frontArmscye1": {"x": "pt.frontShoulderTip.x + 0.1*meas.shoulder", "y": "0.5*(pt.frontUnderarmCenter.y - pt.frontShoulderTip.y)"},
+      "frontArmscye2": "left(pt.frontUnderarmCenter, .5*meas.front_armfold_distance)",
+      "frontUnderarmSide": "left(pt.frontUnderarmCenter, 0.5*meas.front_bust)",
+      "frontWaistSide": "left(pt.frontWaistCenter, 0.5*Math.max(1.08*meas.front_waist, dist(pt.frontUnderarmCenter, pt.frontUnderarmSide)))",
+      "frontHipSide": "left(pt.frontHipCenter, Math.max(dist(pt.frontWaistCenter, pt.frontWaistSide), 0.5*meas.front_hip))",
+
+      "back_width": "0.5*Math.max(meas.back_hip, Math.max(meas.back_bust, meas.back_waist))",
+      "back_ease": "0.08*pt.back_width",
+      "a1": "up(pt.backNape, 0.5*(Math.abs(pt.backNape.y - pt.backNeckSide.y)))",
+      "a2": "copy(pt.backWaistCenter)",
+      "a3": "copy(pt.backHipCenter)",
+      "a4": "copy(pt.backUnderarmCenter)",
+      "a5": "right(pt.backUnderarmSide, pt.back_ease)",
+      "a6": {"x": "pt.a5.x", "y": "pt.backUnderarmSide.y + 0.15*meas.side"},
+      "a7": "right(pt.backWaistCenter, pt.back_width + pt.back_ease)",
+      "a8": "right(pt.backHipCenter, pt.back_width + pt.back_ease)",
+      "a9": "onLineAtLength(pt.backNeckSide, pt.backShoulderTip, 0.08*meas.shoulder)",
+      "a10": {"x": "pt.backUnderarmSide.x", "y": "pt.backShoulderTip.y"},
+      "a1in": "right(pt.a1, dist(pt.a1, pt.a9)/2)",
+      "a9out": "polar(pt.a9, dist(pt.a1, pt.a9)/6, angleBetween(pt.a9, pt.a1in))",
+      "a6out" : "left(pt.a6, dist(pt.a5, pt.a6)/3)",
+      "a5in" : "down(pt.a5, dist(pt.a5, pt.a6)/3)",
+      "temp_shoulder_width": "right(pt.a1, 0.5*meas.back_shoulder_width)",
+
+      "b1": "down(pt.frontNeckCenter, 0.5*pt.IN)",
+      "b2": "copy(pt.frontWaistCenter)",
+      "b3": "copy(pt.frontHipCenter)",
+      "b4": "copy(pt.frontUnderarmCenter)",
+      "b5": "copy(pt.frontUnderarmSide)",
+      "b6": {"x": "pt.b5.x - 0.08*meas.front_bust", "y": "pt.a6.y"},
+      "b7": "left(pt.frontWaistSide, 0.08*dist(pt.frontWaistCenter, pt.frontWaistSide))",
+      "b8": "left(pt.frontHipSide, 0.08*dist(pt.frontHipCenter, pt.frontHipSide))",
+      "b9": "onLineAtLength(pt.frontNeckSide, pt.frontShoulderTip, 0.08*meas.shoulder)",
+      "b10": {"x": "pt.frontUnderarmSide.x", "y": "pt.frontShoulderTip.y"},
+      "b1in" : "left(pt.b1, 0.85*Math.abs(pt.b9.x - pt.b1.x))",
+      "b9out" : "down(pt.b9, dist(pt.b1, pt.b9)/6)",
+      "b6out" : "right(pt.b6, dist(pt.b5, pt.b6)/3)",
+      "b5in" : "down(pt.b5, dist(pt.b5, pt.b6)/3)",
+
+      "c_offset_x": "2*pt.seamAllowance + 4*pt.IN",
+      "back_armscye_width": "Math.abs(pt.a6.x - pt.a10.x)",
+      "back_armscye_height": "Math.abs(pt.a6.y - pt.a10.y)",
+      "back_armcap_height": "Math.abs(pt.a5.y - pt.a10.y)",
+      "front_armscye_width": "Math.abs(pt.b6.x - pt.b10.x)",
+      "front_armscye_height": "Math.abs(pt.b6.y - pt.b10.y)",
+      "front_armcap_height": "Math.abs(pt.b5.y - pt.b10.y)",
+      "c1": {"x": "pt.frontNeckCenter.x + pt.c_offset_x", "y": "pt.frontBustCenter.y"},
+      "c2": "right(pt.c1, pt.back_armscye_width)",
+      "c3": "right(pt.c2, 0.4*meas.undersleeve_length)",
+      "c4": "down(pt.c2, pt.back_armscye_height)",
+      "c5": {"x": "pt.c1.x - pt.back_armscye_width", "y": "pt.c1.y + pt.back_armcap_height"},
+      "c6": "up(pt.c2, pt.front_armscye_height)",
+      "c7": {"x": "pt.c1.x - pt.front_armscye_width", "y": "pt.c1.y - pt.front_armcap_height"},
+      "c8": {"x":"Math.min(pt.c5.x, pt.c7.x)", "y":"pt.c1.y"},
+      "c9": "midPoint(pt.c4, pt.c6)",
+      "c10": {"x":"pt.c3.x", "y":"pt.c9.y"},
+      "c11": "down(pt.c10, 0.52*meas.bicep)",
+      "c12": "up(pt.c10, 0.52*meas.bicep)",
+      "c4out": "up(pt.c4, dist(pt.c4, pt.c8)/6)",
+      "c8in" : "down(pt.c8, dist(pt.c4, pt.c8)/1.5)",
+      "c8out" : "up(pt.c8, dist(pt.c8, pt.c6)/1.5)",
+      "c6in": "down(pt.c6, dist(pt.c8, pt.c6)/6)",
+      "c5in" : "polar(pt.c5, dist(pt.c4, pt.c5)/4, angleBetween(pt.c8, pt.c4))",
+      "c5out" : "polar(pt.c5, dist(pt.c5, pt.c8)/4, angleBetween(pt.c4, pt.c8))",
+      "c7in" : "polar(pt.c7, dist(pt.c8, pt.c7)/4, angleBetween(pt.c6, pt.c8))",
+      "c7out" : "polar(pt.c7, dist(pt.c7, pt.c6)/4, angleBetween(pt.c8, pt.c6))",
+
+      "d_offset_y": "2*pt.seamAllowance + 2*pt.IN",
+      "back_neck_curve_length": "2*curveLength(pt.a9, pt.a9out, pt.a1in, pt.a1)",
+      "d1" : "down(pt.c4, pt.d_offset_y)",
+      "d2" : "down(pt.d1, 0.8*pt.back_neck_curve_length)",
+      "d3" : "right(pt.d2, 1.5*pt.IN)",
+      "d4" : "right(pt.d1, 1.5*pt.IN)",
+
+      "e_offset_x": "2*pt.seamAllowance + 2*pt.IN",
+      "front_neck_curve_length": "2*curveLength(pt.b9, pt.b9out, pt.b1in, pt.b1)",
+      "e1" : "right(pt.d4, pt.e_offset_x)",
+      "e2" : "down(pt.e1, 0.8*pt.front_neck_curve_length)",
+      "e3" : "right(pt.e2, 1.5*pt.IN)",
+      "e4" : "right(pt.e1, 1.5*pt.IN)",
+
+      "f_offset_x": "2*pt.seamAllowance + 2*pt.IN",
+      "shoulder_length": "dist(pt.a9, pt.a10)",
+      "f1": "right(pt.e4, pt.f_offset_x)",
+      "f2": "down(pt.f1, pt.shoulder_length)",
+      "f3": "right(pt.f2, 0.5*pt.IN)",
+      "f4": "right(pt.f1, 0.5*pt.IN)"
+  }
+}
+}

@@ -1,0 +1,87 @@
+{
+  "clientdata": {
+    "name": "DressForm",
+    "measurement_units": "cm",
+    "measurements": {
+
+      "height" : 166,
+      "head_and_neck_length" : 12,
+
+      "front_shoulder_height": 35.5,
+      "back_shoulder_height": 45,
+
+      "side": 19,
+
+      "shoulder": 12.5,
+      "front_shoulder_width": 45.5,
+      "back_shoulder_width": 42,
+      "front_shoulder_balance": 45.5,
+      "back_shoulder_balance": 42,
+
+      "underarm": 102,
+      "front_underarm": 52,
+      "back_underarm": 50,
+      "front_underarm_height": 9,
+      "back_underarm_height": 22.5,
+
+      "front_armfold_distance": 0,
+      "back_armfold_distance": 0,
+
+      "bust": 105.5,
+      "front_bust": 56,
+      "back_bust": 49.5,
+      "bust_balance": 20.5,
+      "bust_length": 18.5,
+      "bust_distance": 20.5,
+
+      "underbust": 0,
+      "front_underbust": 0,
+      "back_underbust": 0,
+      "front_underbust_length": 0,
+      "back_underbust_length": 0,
+
+      "waist": 88,
+      "front_waist": 47,
+      "back_waist": 41,
+      "front_waist_length": 35.5,
+      "back_waist_length": 35.5,
+
+      "abdomen" : 0.0,
+      "abdomen_height" : 0,
+
+      "hip" : 116,
+      "front_hip" : 51,
+      "back_hip" : 65,
+      "front_hip_length" : 21,
+      "back_hip_length" : 26,
+      "side_hip_length": 23,
+      "hip_to_floor" : 81.5,
+
+      "armscye": 0,
+      "oversleeve_length" : 65.0,
+      "undersleeve_length" : 55.0,
+      "bicep" : 35,
+      "bicep_length" : 10,
+      "elbow": 0,
+      "elbow_length" : 55.0,
+      "wrist": 0,
+      "hand": 0,
+      "hand_length" : 7,
+
+      "rise": 0,
+      "crotch_length": 0,
+      "inseam": 0,
+
+      "thigh": 0,
+      "front_thigh": 0,
+      "back_thigh": 0,
+      "knee": 0,
+      "knee_height": 38.0,
+      "calf": 0,
+      "ankle": 0,
+      "ankle_height": 0,
+      "foot": 0,
+      "foot_length": 0
+    }
+  }
+}

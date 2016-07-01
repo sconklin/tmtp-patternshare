@@ -197,8 +197,8 @@
     }
   ],
   "points": {
-    "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
-    "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.units)",
+    "CM" : "convertUnit(1, 'cm', window.measurementData.clientdata.measurement_units)",
+    "IN" : "convertUnit(1, 'in', window.measurementData.clientdata.measurement_units)",
     "seamAllowance" : "(5/8)*pt.IN",
     "a1": { "x": "pt.seamAllowance + 1*meas.front_bust_width/2", "y": "1*pt.IN" },
     "a2": "down(pt.a1, 1*meas.front_shoulder_height)",

@@ -289,8 +289,8 @@
     ],
 
     "points": {
-        "CM": "convertUnit(1, 'cm', window.measurementData.clientdata.units)",
-        "IN": "convertUnit(1, 'in', window.measurementData.clientdata.units)",
+        "CM": "convertUnit(1, 'cm', window.measurementData.clientdata.measurement_units)",
+        "IN": "convertUnit(1, 'in', window.measurementData.clientdata.measurement_units)",
         "seamAllowance": "(5/8)*pt.IN",
         "patternOffset": "1*pt.IN",
 
